@@ -1,304 +1,685 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>N.G Cooling Solution - Service Booking</title>
+    <title>N.G COOLING SOLUTION - Quick & Professional Appliance Repair Booking</title>
     <style>
         :root {
-            --primary: #0284c7;
-            --primary-dark: #0369a1;
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --border-color: #cbd5e1;
+            --primary-blue: #0056b3;
+            --secondary-blue: #007bff;
+            --light-bg: #f8f9fa;
+            --border-color: #dee2e6;
+            --text-main: #212529;
+            --text-muted: #6c757d;
+            --accent-green: #28a745;
+            --badge-offer: #ffe8e8;
+            --badge-offer-text: #dc3545;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
+            background-color: var(--light-bg);
             color: var(--text-main);
-            margin: 0;
-            padding: 20px;
+            padding-bottom: 40px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #004085, var(--primary-blue));
+            color: white;
+            padding: 24px 16px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
         }
 
         .container {
             max-width: 600px;
-            margin: 0 auto;
-            background: var(--card-bg);
-            padding: 24px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            margin: 16px auto;
+            padding: 0 12px;
         }
 
-        h2 {
+        .promo-banner {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 12px 16px;
+            border-radius: 8px;
             text-align: center;
-            color: var(--primary-dark);
-            margin-top: 0;
-            margin-bottom: 24px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--light-bg);
         }
 
         .form-group {
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
-        label {
+        .form-group label {
             display: block;
+            font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 6px;
-            font-size: 0.95rem;
+            color: var(--text-main);
         }
 
-        input[type="text"],
-        input[type="tel"],
-        textarea {
+        .form-control {
             width: 100%;
             padding: 10px 12px;
             border: 1px solid var(--border-color);
             border-radius: 6px;
-            font-size: 1rem;
-            box-sizing: border-box;
+            font-size: 0.9rem;
             outline: none;
             transition: border-color 0.2s;
         }
 
-        input:focus, textarea:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1);
-        }
-
-        .location-row {
-            display: flex;
-            gap: 8px;
-        }
-
-        .location-row input {
-            flex: 1;
+        .form-control:focus {
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
         }
 
         .btn-location {
-            background-color: #0f172a;
-            color: white;
-            border: none;
-            padding: 0 14px;
+            background-color: white;
+            color: var(--primary-blue);
+            border: 1px solid var(--secondary-blue);
+            padding: 10px;
             border-radius: 6px;
-            cursor: pointer;
+            width: 100%;
             font-weight: 600;
-            white-space: nowrap;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 6px;
             transition: background-color 0.2s;
         }
 
         .btn-location:hover {
-            background-color: #334155;
+            background-color: #f1f8ff;
         }
 
-        .services-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
-            margin-top: 8px;
-        }
-
-        .service-card {
-            border: 1px solid var(--border-color);
+        .category-header {
+            background-color: #e9ecef;
+            color: #495057;
+            padding: 8px 12px;
             border-radius: 6px;
-            padding: 12px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin: 16px 0 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .service-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            cursor: pointer;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            background: white;
             transition: all 0.2s;
+            cursor: pointer;
         }
 
-        .service-card:hover {
-            border-color: var(--primary);
-            background-color: #f0f9ff;
+        .service-item:hover {
+            border-color: var(--secondary-blue);
         }
 
-        .service-card input[type="radio"] {
-            margin-right: 10px;
-            accent-color: var(--primary);
-        }
-
-        .service-label {
+        .service-left {
             display: flex;
             align-items: center;
+            gap: 10px;
             flex: 1;
+        }
+
+        .service-left input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-blue);
             cursor: pointer;
-            font-weight: 500;
         }
 
-        .service-price {
-            font-weight: 700;
-            color: var(--primary-dark);
-            background: #e0f2fe;
-            padding: 4px 8px;
-            border-radius: 4px;
+        .service-info h4 {
             font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
         }
 
-        .btn-submit {
-            width: 100%;
-            background-color: var(--primary);
+        .service-info p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .service-right {
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .price {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .old-price {
+            font-size: 0.75rem;
+            text-decoration: line-through;
+            color: var(--text-muted);
+            margin-right: 4px;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-top: 2px;
+            text-transform: uppercase;
+        }
+
+        .badge-offer {
+            background-color: var(--badge-offer);
+            color: var(--badge-offer-text);
+        }
+
+        .badge-hot {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .badge-special {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .summary-box {
+            background-color: #e8f5e9;
+            border: 1px solid #c8e6c9;
+            padding: 14px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .summary-box span {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #2e7d32;
+        }
+
+        .summary-total {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #2e7d32;
+        }
+
+        .btn-whatsapp {
+            background-color: #25d366;
             color: white;
             border: none;
+            width: 100%;
             padding: 12px;
-            border-radius: 6px;
+            border-radius: 8px;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
-            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 6px rgba(37, 211, 102, 0.2);
             transition: background-color 0.2s;
         }
 
-        .btn-submit:hover {
-            background-color: var(--primary-dark);
+        .btn-whatsapp:hover {
+            background-color: #20ba5a;
         }
 
-        #locationStatus {
-            font-size: 0.85rem;
+        footer {
+            text-align: center;
+            font-size: 0.75rem;
             color: var(--text-muted);
-            margin-top: 4px;
+            margin-top: 20px;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>N.G Cooling Solution</h2>
-    <form id="bookingForm" onsubmit="handleBooking(event)">
+    <header>
+        <h1>N.G COOLING SOLUTION</h1>
+        <p>Quick & Professional Appliance Repair Booking</p>
+    </header>
+
+    <div class="container">
         
-        <div class="form-group">
-            <label for="customerName">Customer Name</label>
-            <input type="text" id="customerName" required placeholder="Enter your full name">
+        <div class="promo-banner">
+            🎉 বিশেষ অফার: ৫ জন বন্ধু বা পরিচিতদের রেফার করুন আর পান ₹১০০ ছাড়!
         </div>
 
-        <div class="form-group">
-            <label for="customerNumber">Phone Number</label>
-            <input type="tel" id="customerNumber" required placeholder="Enter 10-digit mobile number" pattern="[0-9]{10}">
-        </div>
-
-        <div class="form-group">
-            <label for="customerAddress">Address & Location</label>
-            <div class="location-row" style="margin-bottom: 8px;">
-                <input type="text" id="customerAddress" required placeholder="House No, Street, Landmark">
-                <button type="button" class="btn-location" onclick="getLocation()">Auto Location</button>
+        <div class="card">
+            <div class="card-title">1. Customer Information</div>
+            
+            <div class="form-group">
+                <label for="custName">Customer Name *</label>
+                <input type="text" id="custName" class="form-control" placeholder="Enter your full name">
             </div>
-            <div id="locationStatus"></div>
-        </div>
 
-        <div class="form-group">
-            <label>Select Service</label>
-            <div class="services-container">
-                
-                <label class="service-card">
-                    <div class="service-label">
-                        <input type="radio" name="serviceSelection" value="Jet Pump Deep Cleaning Service - ₹499" required>
-                        Jet Pump Deep Cleaning Service
-                    </div>
-                    <span class="service-price">₹499</span>
-                </label>
+            <div class="form-group">
+                <label for="custPhone">Phone Number *</label>
+                <input type="tel" id="custPhone" class="form-control" placeholder="Enter 10-digit mobile number" maxlength="10">
+            </div>
 
-                <label class="service-card">
-                    <div class="service-label">
-                        <input type="radio" name="serviceSelection" value="Jet Pump Deep Cleaning Service (Alt) - ₹399">
-                        Jet Pump Deep Cleaning Service
-                    </div>
-                    <span class="service-price">₹399</span>
-                </label>
+            <div class="form-group">
+                <label for="custAddress">Address / Location *</label>
+                <input type="text" id="custAddress" class="form-control" placeholder="Enter complete home address">
+            </div>
 
-                <label class="service-card">
-                    <div class="service-label">
-                        <input type="radio" name="serviceSelection" value="AC Repair - ₹199">
-                        AC Repair
-                    </div>
-                    <span class="service-price">₹199</span>
-                </label>
+            <button type="button" class="btn-location" onclick="shareLocation()">
+                📍 Share Location Automatically
+            </button>
 
-                <label class="service-card">
-                    <div class="service-label">
-                        <input type="radio" name="serviceSelection" value="Washing Machine Repair - ₹199">
-                        Washing Machine Repair
-                    </div>
-                    <span class="service-price">₹199</span>
-                </label>
+            <div class="form-group" style="margin-top: 12px;">
+                <label for="custReferred">Referred By (Optional)</label>
+                <input type="text" id="custReferred" class="form-control" placeholder="রেফার করা বন্ধুর নাম বা ফোন নম্বর লিখুন">
+            </div>
 
-                <label class="service-card">
-                    <div class="service-label">
-                        <input type="radio" name="serviceSelection" value="Microwave Repair - ₹199">
-                        Microwave Repair
-                    </div>
-                    <span class="service-price">₹199</span>
-                </label>
-
-                <label class="service-card">
-                    <div class="service-label">
-                        <input type="radio" name="serviceSelection" value="Geyser Repair - ₹199">
-                        Geyser Repair
-                    </div>
-                    <span class="service-price">₹199</span>
-                </label>
-
-                <label class="service-card">
-                    <div class="service-label">
-                        <input type="radio" name="serviceSelection" value="Fridge Repair - ₹199">
-                        Fridge Repair
-                    </div>
-                    <span class="service-price">₹199</span>
-                </label>
-
+            <div class="row">
+                <div class="form-group">
+                    <label for="serviceDate">Service Date *</label>
+                    <input type="date" id="serviceDate" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="serviceTime">Service Time *</label>
+                    <select id="serviceTime" class="form-control">
+                        <option value="">Select Time</option>
+                        <option value="Morning (9 AM - 12 PM)">Morning (9 AM - 12 PM)</option>
+                        <option value="Afternoon (12 PM - 4 PM)">Afternoon (12 PM - 4 PM)</option>
+                        <option value="Evening (4 PM - 7 PM)">Evening (4 PM - 7 PM)</option>
+                    </select>
+                </div>
             </div>
         </div>
 
-        <button type="submit" class="btn-submit">Book Service Now</button>
-    </form>
-</div>
+        <div class="card">
+            <div class="card-title">2. Select Services</div>
 
-<script>
-    function getLocation() {
-        const statusDiv = document.getElementById('locationStatus');
-        const addressInput = document.getElementById('customerAddress');
+            <!-- AC Cleaning & Servicing -->
+            <div class="category-header">❄️ AC Cleaning & Servicing</div>
+            
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Split AC Jet Pump Service" data-price="399" onchange="calculateTotal()">
+                    <div class="service-info">
+                        <h4>Split AC Jet Pump Service</h4>
+                        <p>Deep clean AC vents for efficient cooling & Free gas check</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div><span class="old-price">₹599</span><span class="price">₹399</span></div>
+                    <span class="badge badge-offer">Offer</span>
+                </div>
+            </label>
 
-        if (!navigator.geolocation) {
-            statusDiv.textContent = 'Geolocation is not supported by your browser';
-            return;
+            <!-- AC Repair, Gas Charging & PCB -->
+            <div class="category-header">⚡ AC Repair, Gas Charging & PCB</div>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="AC Checking & Repair" data-price="199" onchange="calculateTotal()">
+                    <div class="service-info">
+                        <h4>AC Checking & Repair</h4>
+                        <p>Complete check-up to identify issues before repair</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div><span class="old-price">₹299</span><span class="price">₹199</span></div>
+                    <span class="badge badge-hot">Hot</span>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="AC Gas Charging" data-price="2499" onchange="calculateTotal()">
+                    <div class="service-info">
+                        <h4>AC Gas Charging</h4>
+                        <p>Complete pressure check and eco-friendly gas refilling</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div><span class="old-price">₹2900</span><span class="price">₹2499</span></div>
+                    <span class="badge badge-special">Special</span>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Inverter AC PCB Repair" data-price="4500" onchange="calculateTotal()">
+                    <div class="service-info">
+                        <h4>Inverter AC PCB Repair</h4>
+                        <p>Expert electronic diagnostics and component repair</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹4500</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Non Inverter PCB Repair" data-price="1500" onchange="calculateTotal()">
+                    <div class="service-info">
+                        <h4>Non Inverter PCB Repair</h4>
+                        <p>Reliable circuit board testing and repair</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹1500</div>
+                </div>
+            </label>
+
+            <!-- AC Installation & Uninstallation -->
+            <div class="category-header">🔧 AC Installation & Uninstallation</div>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Split AC Installation" data-price="1500" onchange="calculateTotal()">
+                    <div class="service-info">
+                        <h4>Split AC Installation</h4>
+                        <p>Secure indoor & outdoor unit mounting</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹1500</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Split AC Uninstallation" data-price="650" onchange="calculateTotal()">
+                    <div class="service-info">
+                        <h4>Split AC Uninstallation</h4>
+                        <p>Careful removal of indoor and outdoor units</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹650</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Window AC Installation" data-price="600" onchange="calculateTotal()">
+                    <div class="service-info">
+                        <h4>Window AC Installation</h4>
+                        <p>Proper fitment and sealing support</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹600</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Window AC Uninstallation" data-price="500" onchange="calculateTotal()">
+                    <div class="service-info">
+                        <h4>Window AC Uninstallation</h4>
+                        <p>Safe uninstallation from window slot</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹500</div>
+                </div>
+            </label>
+
+            <!-- Inspection / Checking -->
+            <div class="category-header">🔍 Inspection / Checking</div>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Microwave Checking" data-price="199" onchange="calculateTotal()">
+                    <div class="service-info">
+                        <h4>Microwave Checking</h4>
+                        <p>Diagnostic inspection for heating or power issues</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹199</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Washing Machine Checking" data-price="199" onchange="calculateTotal()">
+                    <div class="service-info">
+                        <h4>Washing Machine Checking</h4>
+                        <p>Drum, spin, and drainage diagnosis</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹199</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Geyser Checking" data-price="199" onchange="calculateTotal()">
+                    <div class="service-info">
+                        <h4>Geyser Checking</h4>
+                        <p>Thermostat and heating element inspection</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹199</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Fridge Checking" data-price="199" onchange="calculateTotal()">
+                    <div class="service-info">
+                        <h4>Fridge Checking</h4>
+                        <p>Cooling and compressor troubleshooting</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹199</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Water Purifier Checking" data-price="199" onchange="calculateTotal()">
+                    <div class="service-info">
+                        <h4>Water Purifier Checking</h4>
+                        <p>Filter, pump, and electrical check</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹199</div>
+                </div>
+            </label>
+
+            <!-- Appliance Full Servicing -->
+            <div class="category-header">🛠️ Appliance Full Servicing</div>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Washing Machine Service" data-price="550" onchange="calculateTotal()">
+                    <div class="service-info">
+                        <h4>Washing Machine Service</h4>
+                        <p>Complete drum cleaning and maintenance</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹550</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Microwave Service" data-price="350" onchange="calculateTotal()">
+                    <div class="service-info">
+                        <h4>Microwave Service</h4>
+                        <p>Cavity deep cleaning and sanitation</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹350</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Geyser Deep Cleaning Service" data-price="600" onchange="calculateTotal()">
+                    <div class="service-info">
+                        <h4>Geyser Deep Cleaning Service</h4>
+                        <p>Tank descaling and sediment removal</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹600</div>
+                </div>
+            </label>
+        </div>
+
+        <div class="card">
+            <div class="summary-box">
+                <span>Estimated Total:</span>
+                <span class="summary-total" id="estimatedTotal">₹0</span>
+            </div>
+            
+            <button type="button" class="btn-whatsapp" onclick="sendWhatsAppBooking()">
+                📱 Send Booking via WhatsApp
+            </button>
+        </div>
+
+        <footer>
+            &copy; N.G COOLING SOLUTION. All Rights Reserved.
+        </div>
+
+    </div>
+
+    <script>
+        function calculateTotal() {
+            let total = 0;
+            const checkboxes = document.querySelectorAll('input[name="service"]:checked');
+            checkboxes.forEach(cb => {
+                total += parseInt(cb.getAttribute('data-price')) || 0;
+            });
+            document.getElementById('estimatedTotal').innerText = '₹' + total;
         }
 
-        statusDiv.textContent = 'Locating your GPS position...';
-
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                const lat = position.coords.latitude;
-                const lon = position.coords.longitude;
-                
-                addressInput.value = `Lat: ${lat.toFixed(4)}, Lon: ${lon.toFixed(4)}`;
-                statusDiv.textContent = 'Location captured successfully!';
-                statusDiv.style.color = '#16a34a';
-            },
-            () => {
-                statusDiv.textContent = 'Unable to retrieve your location. Please type manually.';
-                statusDiv.style.color = '#dc2626';
+        function shareLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    const mapLink = `https://maps.google.com/?q=${lat},${lon}`;
+                    const addressInput = document.getElementById('custAddress');
+                    addressInput.value = `Live Location: ${mapLink}`;
+                    alert("Location captured successfully!");
+                }, error => {
+                    alert("Unable to retrieve your location. Please enter manually.");
+                });
+            } else {
+                alert("Geolocation is not supported by your browser.");
             }
-        );
-    }
+        }
 
-    function handleBooking(event) {
-        event.preventDefault();
-        
-        const name = document.getElementById('customerName').value;
-        const phone = document.getElementById('customerNumber').value;
-        const address = document.getElementById('customerAddress').value;
-        const selectedService = document.querySelector('input[name="serviceSelection"]:checked').value;
+        function sendWhatsAppBooking() {
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const address = document.getElementById('custAddress').value.trim();
+            const referred = document.getElementById('custReferred').value.trim();
+            const date = document.getElementById('serviceDate').value;
+            const time = document.getElementById('serviceTime').value;
 
-        const summaryText = `New Service Booking:\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\nService: ${selectedService}`;
-        
-        // Target WhatsApp Number: +91743160014 (or appropriate format)
-        const whatsappNumber = "91743160014";
-        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(summaryText)}`;
-        window.open(whatsappUrl, '_blank');
-    }
-</script>
+            if (!name || !phone || !address || !date || !time) {
+                alert("Please fill in all mandatory customer information fields (*).");
+                return;
+            }
 
+            const selectedServices = [];
+            let total = 0;
+            document.querySelectorAll('input[name="service"]:checked').forEach(cb => {
+                const price = parseInt(cb.getAttribute('data-price')) || 0;
+                selectedServices.push(`- ${cb.value} (₹${price})`);
+                total += price;
+            });
+
+            if (selectedServices.length === 0) {
+                alert("Please select at least one service for booking.");
+                return;
+            }
+
+            let message = `*New Appliance Service Booking*\n\n`;
+            message += `*Customer Name:* ${name}\n`;
+            message += `*Phone Number:* ${phone}\n`;
+            message += `*Address:* ${address}\n`;
+            if (referred) {
+                message += `*Referred By:* ${referred}\n`;
+            }
+            message += `*Service Date:* ${date}\n`;
+            message += `*Service Time:* ${time}\n\n`;
+            message += `*Selected Services:*\n${selectedServices.join('\n')}\n\n`;
+            message += `*Estimated Total:* ₹${total}`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/917439160014?text=${encodedMessage}`;
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
 </body>
 </html>
