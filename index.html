@@ -194,8 +194,16 @@
                 
                 <label class="service-card">
                     <div class="service-label">
-                        <input type="radio" name="serviceSelection" value="Split AC Jet Pump Service - ₹399" required>
-                        Split AC Jet Pump Service
+                        <input type="radio" name="serviceSelection" value="Jet Pump Deep Cleaning Service - ₹499" required>
+                        Jet Pump Deep Cleaning Service
+                    </div>
+                    <span class="service-price">₹499</span>
+                </label>
+
+                <label class="service-card">
+                    <div class="service-label">
+                        <input type="radio" name="serviceSelection" value="Jet Pump Deep Cleaning Service (Alt) - ₹399">
+                        Jet Pump Deep Cleaning Service
                     </div>
                     <span class="service-price">₹399</span>
                 </label>
@@ -285,11 +293,12 @@
 
         const summaryText = `New Service Booking:\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\nService: ${selectedService}`;
         
-        const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(summaryText)}`;
+        // Target WhatsApp Number: +91743160014 (or appropriate format)
+        const whatsappNumber = "91743160014";
+        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(summaryText)}`;
         window.open(whatsappUrl, '_blank');
     }
 </script>
 
 </body>
 </html>
-
