@@ -349,12 +349,23 @@
                     <input type="date" id="serviceDate" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="serviceTime">Service Time *</label>
+                    <label for="serviceTime">Service Time * (8 AM - 10 PM)</label>
                     <select id="serviceTime" class="form-control">
-                        <option value="">Select Time</option>
-                        <option value="Morning (9 AM - 12 PM)">Morning (9 AM - 12 PM)</option>
-                        <option value="Afternoon (12 PM - 4 PM)">Afternoon (12 PM - 4 PM)</option>
-                        <option value="Evening (4 PM - 7 PM)">Evening (4 PM - 7 PM)</option>
+                        <option value="">Select Time Slot</option>
+                        <option value="8:00 AM - 9:00 AM">8:00 AM - 9:00 AM</option>
+                        <option value="9:00 AM - 10:00 AM">9:00 AM - 10:00 AM</option>
+                        <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
+                        <option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM</option>
+                        <option value="12:00 PM - 1:00 PM">12:00 PM - 1:00 PM</option>
+                        <option value="1:00 PM - 2:00 PM">1:00 PM - 2:00 PM</option>
+                        <option value="2:00 PM - 3:00 PM">2:00 PM - 3:00 PM</option>
+                        <option value="3:00 PM - 4:00 PM">3:00 PM - 4:00 PM</option>
+                        <option value="4:00 PM - 5:00 PM">4:00 PM - 5:00 PM</option>
+                        <option value="5:00 PM - 6:00 PM">5:00 PM - 6:00 PM</option>
+                        <option value="6:00 PM - 7:00 PM">6:00 PM - 7:00 PM</option>
+                        <option value="7:00 PM - 8:00 PM">7:00 PM - 8:00 PM</option>
+                        <option value="8:00 PM - 9:00 PM">8:00 PM - 9:00 PM</option>
+                        <option value="9:00 PM - 10:00 PM">9:00 PM - 10:00 PM</option>
                     </select>
                 </div>
             </div>
@@ -381,45 +392,29 @@
                 </div>
             </label>
 
-            <!-- AC Repair, Gas Charging & PCB -->
-            <div class="category-header">⚡ AC Repair, Gas Charging & PCB</div>
+            <!-- Electrical Parts -->
+            <div class="category-header">⚡ Electrical Parts</div>
 
             <label class="service-item">
                 <div class="service-left">
-                    <input type="checkbox" name="service" value="AC Checking & Repair" data-price="199" onchange="calculateTotal()">
-                    <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=150&q=80" alt="AC Checking & Repair" class="service-img">
+                    <input type="checkbox" name="service" value="Non-Inverter PCB repaired" data-price="1500" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?auto=format&fit=crop&w=150&q=80" alt="Non-Inverter PCB repaired" class="service-img">
                     <div class="service-info">
-                        <h4>AC Checking & Repair</h4>
-                        <p>Complete check-up to identify issues before repair</p>
+                        <h4>Non-Inverter PCB repaired</h4>
+                        <p>Reliable circuit board testing and repair</p>
                     </div>
                 </div>
                 <div class="service-right">
-                    <div><span class="old-price">₹299</span><span class="price">₹199</span></div>
-                    <span class="badge badge-hot">Hot</span>
+                    <div class="price">₹1500</div>
                 </div>
             </label>
 
             <label class="service-item">
                 <div class="service-left">
-                    <input type="checkbox" name="service" value="AC Gas Charging" data-price="2499" onchange="calculateTotal()">
-                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=150&q=80" alt="AC Gas Charging" class="service-img">
+                    <input type="checkbox" name="service" value="Inverter PCB repaired" data-price="4500" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=150&q=80" alt="Inverter PCB repaired" class="service-img">
                     <div class="service-info">
-                        <h4>AC Gas Charging</h4>
-                        <p>Complete pressure check and eco-friendly gas refilling</p>
-                    </div>
-                </div>
-                <div class="service-right">
-                    <div><span class="old-price">₹2900</span><span class="price">₹2499</span></div>
-                    <span class="badge badge-special">Special</span>
-                </div>
-            </label>
-
-            <label class="service-item">
-                <div class="service-left">
-                    <input type="checkbox" name="service" value="Inverter AC PCB Repair" data-price="4500" onchange="calculateTotal()">
-                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=150&q=80" alt="Inverter AC PCB Repair" class="service-img">
-                    <div class="service-info">
-                        <h4>Inverter AC PCB Repair</h4>
+                        <h4>Inverter PCB repaired</h4>
                         <p>Expert electronic diagnostics and component repair</p>
                     </div>
                 </div>
@@ -430,174 +425,218 @@
 
             <label class="service-item">
                 <div class="service-left">
-                    <input type="checkbox" name="service" value="Non Inverter PCB Repair" data-price="1500" onchange="calculateTotal()">
-                    <img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?auto=format&fit=crop&w=150&q=80" alt="Non Inverter PCB Repair" class="service-img">
+                    <input type="checkbox" name="service" value="LVT (Transformer)" data-price="900" data-labour="349" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=150&q=80" alt="LVT (Transformer)" class="service-img">
                     <div class="service-info">
-                        <h4>Non Inverter PCB Repair</h4>
-                        <p>Reliable circuit board testing and repair</p>
+                        <h4>LVT (Transformer)</h4>
+                        <p>Transformer replacement</p>
                     </div>
                 </div>
                 <div class="service-right">
-                    <div class="price">₹1500</div>
-                </div>
-            </label>
-
-            <!-- AC Installation & Uninstallation -->
-            <div class="category-header">🔧 AC Installation & Uninstallation</div>
-
-            <label class="service-item">
-                <div class="service-left">
-                    <input type="checkbox" name="service" value="Split AC Installation" data-price="1500" onchange="calculateTotal()">
-                    <img src="https://images.unsplash.com/photo-1615873968403-89e067629765?auto=format&fit=crop&w=150&q=80" alt="Split AC Installation" class="service-img">
-                    <div class="service-info">
-                        <h4>Split AC Installation</h4>
-                        <p>Secure indoor & outdoor unit mounting</p>
-                    </div>
-                </div>
-                <div class="service-right">
-                    <div class="price">₹1500</div>
+                    <div class="price">₹900</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">+₹349 Labour</div>
                 </div>
             </label>
 
             <label class="service-item">
                 <div class="service-left">
-                    <input type="checkbox" name="service" value="Split AC Uninstallation" data-price="650" onchange="calculateTotal()">
-                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Split AC Uninstallation" class="service-img">
+                    <input type="checkbox" name="service" value="Replace sensor" data-price="350" data-labour="499" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Replace sensor" class="service-img">
                     <div class="service-info">
-                        <h4>Split AC Uninstallation</h4>
-                        <p>Careful removal of indoor and outdoor units</p>
+                        <h4>Replace sensor</h4>
+                        <p>Temperature sensor replacement</p>
                     </div>
                 </div>
                 <div class="service-right">
-                    <div class="price">₹650</div>
+                    <div class="price">₹350</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">+₹499 Labour</div>
                 </div>
             </label>
 
             <label class="service-item">
                 <div class="service-left">
-                    <input type="checkbox" name="service" value="Window AC Installation" data-price="600" onchange="calculateTotal()">
-                    <img src="https://images.unsplash.com/photo-1542013936693-84d4b66f33d2?auto=format&fit=crop&w=150&q=80" alt="Window AC Installation" class="service-img">
+                    <input type="checkbox" name="service" value="Contactor replaced" data-price="500" data-labour="499" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=150&q=80" alt="Contactor replaced" class="service-img">
                     <div class="service-info">
-                        <h4>Window AC Installation</h4>
-                        <p>Proper fitment and sealing support</p>
-                    </div>
-                </div>
-                <div class="service-right">
-                    <div class="price">₹600</div>
-                </div>
-            </label>
-
-            <label class="service-item">
-                <div class="service-left">
-                    <input type="checkbox" name="service" value="Window AC Uninstallation" data-price="500" onchange="calculateTotal()">
-                    <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=150&q=80" alt="Window AC Uninstallation" class="service-img">
-                    <div class="service-info">
-                        <h4>Window AC Uninstallation</h4>
-                        <p>Safe uninstallation from window slot</p>
+                        <h4>Contactor replaced</h4>
+                        <p>Standard contactor replacement</p>
                     </div>
                 </div>
                 <div class="service-right">
                     <div class="price">₹500</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">+₹499 Labour</div>
                 </div>
             </label>
 
-            <!-- Inspection / Checking -->
-            <div class="category-header">🔍 Inspection / Checking</div>
-
             <label class="service-item">
                 <div class="service-left">
-                    <input type="checkbox" name="service" value="Microwave Checking" data-price="199" onchange="calculateTotal()">
-                    <img src="https://images.unsplash.com/photo-1585515320310-259814833e62?auto=format&fit=crop&w=150&q=80" alt="Microwave Checking" class="service-img">
+                    <input type="checkbox" name="service" value="Contactor Daikin/ O-General" data-price="1500" data-labour="449" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=150&q=80" alt="Contactor Daikin/ O-General" class="service-img">
                     <div class="service-info">
-                        <h4>Microwave Checking</h4>
-                        <p>Diagnostic inspection for heating or power issues</p>
+                        <h4>Contactor Daikin/ O-General</h4>
+                        <p>Heavy duty brand contactor replacement</p>
                     </div>
                 </div>
                 <div class="service-right">
-                    <div class="price">₹199</div>
+                    <div class="price">₹1500</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">+₹449 Labour</div>
                 </div>
             </label>
 
             <label class="service-item">
                 <div class="service-left">
-                    <input type="checkbox" name="service" value="Washing Machine Checking" data-price="199" onchange="calculateTotal()">
-                    <img src="https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=150&q=80" alt="Washing Machine Checking" class="service-img">
+                    <input type="checkbox" name="service" value="Convert PCB with remote" data-price="1500" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=150&q=80" alt="Convert PCB with remote" class="service-img">
                     <div class="service-info">
-                        <h4>Washing Machine Checking</h4>
-                        <p>Drum, spin, and drainage diagnosis</p>
+                        <h4>Convert PCB with remote</h4>
+                        <p>Universal PCB conversion kit with remote</p>
                     </div>
                 </div>
                 <div class="service-right">
-                    <div class="price">₹199</div>
+                    <div class="price">₹1500</div>
                 </div>
             </label>
 
             <label class="service-item">
                 <div class="service-left">
-                    <input type="checkbox" name="service" value="Geyser Checking" data-price="199" onchange="calculateTotal()">
-                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=150&q=80" alt="Geyser Checking" class="service-img">
+                    <input type="checkbox" name="service" value="Fan Capacitor - 2.5 to 10 mfd" data-price="250" data-labour="449" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?auto=format&fit=crop&w=150&q=80" alt="Fan Capacitor" class="service-img">
                     <div class="service-info">
-                        <h4>Geyser Checking</h4>
-                        <p>Thermostat and heating element inspection</p>
+                        <h4>Fan Capacitor - 2.5 to 10 mfd</h4>
+                        <p>Fan capacitor replacement</p>
                     </div>
                 </div>
                 <div class="service-right">
-                    <div class="price">₹199</div>
+                    <div class="price">₹250</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">+₹449 Labour</div>
                 </div>
             </label>
 
             <label class="service-item">
                 <div class="service-left">
-                    <input type="checkbox" name="service" value="Fridge Checking" data-price="199" onchange="calculateTotal()">
-                    <img src="https://images.unsplash.com/photo-1584568694244-14fbdf82bd3b?auto=format&fit=crop&w=150&q=80" alt="Fridge Checking" class="service-img">
+                    <input type="checkbox" name="service" value="Comp Capacitor - 25 to 60 mfd" data-price="400" data-labour="449" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?auto=format&fit=crop&w=150&q=80" alt="Comp Capacitor" class="service-img">
                     <div class="service-info">
-                        <h4>Fridge Checking</h4>
-                        <p>Cooling and compressor troubleshooting</p>
+                        <h4>Comp Capacitor - 25 to 60 mfd</h4>
+                        <p>Compressor capacitor replacement</p>
                     </div>
                 </div>
                 <div class="service-right">
-                    <div class="price">₹199</div>
+                    <div class="price">₹400</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">+₹449 Labour</div>
                 </div>
             </label>
 
             <label class="service-item">
                 <div class="service-left">
-                    <input type="checkbox" name="service" value="Water Purifier Checking" data-price="199" onchange="calculateTotal()">
-                    <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=150&q=80" alt="Water Purifier Checking" class="service-img">
+                    <input type="checkbox" name="service" value="Combo Capacitor (Comp+Fan)" data-price="500" data-labour="449" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?auto=format&fit=crop&w=150&q=80" alt="Combo Capacitor" class="service-img">
                     <div class="service-info">
-                        <h4>Water Purifier Checking</h4>
-                        <p>Filter, pump, and electrical check</p>
+                        <h4>Combo Capacitor (Comp+Fan)</h4>
+                        <p>Dual run capacitor replacement</p>
                     </div>
                 </div>
                 <div class="service-right">
-                    <div class="price">₹199</div>
+                    <div class="price">₹500</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">+₹449 Labour</div>
                 </div>
             </label>
 
-            <!-- Appliance Full Servicing -->
-            <div class="category-header">🛠️ Appliance Full Servicing</div>
-
             <label class="service-item">
                 <div class="service-left">
-                    <input type="checkbox" name="service" value="Washing Machine Service" data-price="550" onchange="calculateTotal()">
-                    <img src="https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=150&q=80" alt="Washing Machine Service" class="service-img">
+                    <input type="checkbox" name="service" value="Fuse Change in PCB" data-price="150" data-labour="299" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=150&q=80" alt="Fuse Change in PCB" class="service-img">
                     <div class="service-info">
-                        <h4>Washing Machine Service</h4>
-                        <p>Complete drum cleaning and maintenance</p>
+                        <h4>Fuse Change in PCB</h4>
+                        <p>PCB fuse replacement</p>
                     </div>
                 </div>
                 <div class="service-right">
-                    <div class="price">₹550</div>
+                    <div class="price">₹150</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">+₹299 Labour</div>
+                </div>
+            </label>
+
+            <!-- Gas Charging & Coils -->
+            <div class="category-header">💨 Gas Charging & Coils</div>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Gas Charging" data-price="3000" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=150&q=80" alt="Gas Charging" class="service-img">
+                    <div class="service-info">
+                        <h4>Gas Charging</h4>
+                        <p>Complete pressure check and eco-friendly gas refilling</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹3000</div>
                 </div>
             </label>
 
             <label class="service-item">
                 <div class="service-left">
-                    <input type="checkbox" name="service" value="Microwave Service" data-price="350" onchange="calculateTotal()">
-                    <img src="https://images.unsplash.com/photo-1585515320310-259814833e62?auto=format&fit=crop&w=150&q=80" alt="Microwave Service" class="service-img">
+                    <input type="checkbox" name="service" value="Flair nut replaced" data-price="150" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1615873968403-89e067629765?auto=format&fit=crop&w=150&q=80" alt="Flair nut replaced" class="service-img">
                     <div class="service-info">
-                        <h4>Microwave Service</h4>
-                        <p>Cavity deep cleaning and sanitation</p>
+                        <h4>Flair nut replaced</h4>
+                        <p>Copper pipe joint flare nut replacement</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹150</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Copper Coil Condensor 1 ton Split" data-price="4000" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Copper Coil Condensor 1 ton" class="service-img">
+                    <div class="service-info">
+                        <h4>Copper Coil Condensor 1 ton Split</h4>
+                        <p>Outdoor condenser coil replacement</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹4000</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Copper Coil Condensor 1.5 ton Split" data-price="4800" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Copper Coil Condensor 1.5 ton" class="service-img">
+                    <div class="service-info">
+                        <h4>Copper Coil Condensor 1.5 ton Split</h4>
+                        <p>Outdoor condenser coil replacement</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹4800</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Copper Coil Condensor 2 ton Split" data-price="5300" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Copper Coil Condensor 2 ton" class="service-img">
+                    <div class="service-info">
+                        <h4>Copper Coil Condensor 2 ton Split</h4>
+                        <p>Outdoor condenser coil replacement</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹5300</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Capillary and filter replaced" data-price="350" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=150&q=80" alt="Capillary and filter replaced" class="service-img">
+                    <div class="service-info">
+                        <h4>Capillary and filter replaced</h4>
+                        <p>Capillary tube and filter drier replacement</p>
                     </div>
                 </div>
                 <div class="service-right">
@@ -607,17 +646,858 @@
 
             <label class="service-item">
                 <div class="service-left">
-                    <input type="checkbox" name="service" value="Geyser Deep Cleaning Service" data-price="600" onchange="calculateTotal()">
-                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=150&q=80" alt="Geyser Deep Cleaning Service" class="service-img">
+                    <input type="checkbox" name="service" value="Compressor 0.8-1 ton" data-price="6500" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1584568694244-14fbdf82bd3b?auto=format&fit=crop&w=150&q=80" alt="Compressor 0.8-1 ton" class="service-img">
                     <div class="service-info">
-                        <h4>Geyser Deep Cleaning Service</h4>
-                        <p>Tank descaling and sediment removal</p>
+                        <h4>Compressor 0.8-1 ton</h4>
+                        <p>New compressor installation</p>
                     </div>
                 </div>
                 <div class="service-right">
-                    <div class="price">₹600</div>
+                    <div class="price">₹6500</div>
                 </div>
             </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Compressor 1.5 ton" data-price="8500" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1584568694244-14fbdf82bd3b?auto=format&fit=crop&w=150&q=80" alt="Compressor 1.5 ton" class="service-img">
+                    <div class="service-info">
+                        <h4>Compressor 1.5 ton</h4>
+                        <p>New compressor installation</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹8500</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Compressor 2 ton" data-price="10000" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1584568694244-14fbdf82bd3b?auto=format&fit=crop&w=150&q=80" alt="Compressor 2 ton" class="service-img">
+                    <div class="service-info">
+                        <h4>Compressor 2 ton</h4>
+                        <p>New compressor installation</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹10000</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Expansion valve replaced" data-price="1200" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=150&q=80" alt="Expansion valve replaced" class="service-img">
+                    <div class="service-info">
+                        <h4>Expansion valve replaced</h4>
+                        <p>Electronic/thermal expansion valve replacement</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹1200</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Replacement Compressor (1 Ton)" data-price="4000" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1584568694244-14fbdf82bd3b?auto=format&fit=crop&w=150&q=80" alt="Replacement Compressor 1 Ton" class="service-img">
+                    <div class="service-info">
+                        <h4>Replacement Compressor (1 Ton)</h4>
+                        <p>Customer provided or exchange compressor</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹4000</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Replacement Compressor (1.5 Ton)" data-price="4500" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1584568694244-14fbdf82bd3b?auto=format&fit=crop&w=150&q=80" alt="Replacement Compressor 1.5 Ton" class="service-img">
+                    <div class="service-info">
+                        <h4>Replacement Compressor (1.5 Ton)</h4>
+                        <p>Customer provided or exchange compressor</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹4500</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Replacement Compressor (2 Ton)" data-price="5000" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1584568694244-14fbdf82bd3b?auto=format&fit=crop&w=150&q=80" alt="Replacement Compressor 2 Ton" class="service-img">
+                    <div class="service-info">
+                        <h4>Replacement Compressor (2 Ton)</h4>
+                        <p>Customer provided or exchange compressor</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹5000</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Service valve replaced - 1/4" data-price="400" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1615873968403-89e067629765?auto=format&fit=crop&w=150&q=80" alt="Service valve replaced 1/4" class="service-img">
+                    <div class="service-info">
+                        <h4>Service valve replaced - 1/4</h4>
+                        <p>Outdoor unit service valve replacement</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹400</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Service valve replaced - 1/2" data-price="400" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1615873968403-89e067629765?auto=format&fit=crop&w=150&q=80" alt="Service valve replaced 1/2" class="service-img">
+                    <div class="service-info">
+                        <h4>Service valve replaced - 1/2</h4>
+                        <p>Outdoor unit service valve replacement</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹400</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Service valve replaced - 5/8" data-price="500" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1615873968403-89e067629765?auto=format&fit=crop&w=150&q=80" alt="Service valve replaced 5/8" class="service-img">
+                    <div class="service-info">
+                        <h4>Service valve replaced - 5/8</h4>
+                        <p>Outdoor unit service valve replacement</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹500</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Copper Cooling Coil (Split AC) - 1 Ton" data-price="5500" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Copper Cooling Coil 1 Ton" class="service-img">
+                    <div class="service-info">
+                        <h4>Copper Cooling Coil (Split AC) - 1 Ton</h4>
+                        <p>Indoor cooling evaporator coil replacement</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹5500</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Copper Cooling Coil (Split AC) - 1.5 Ton" data-price="6500" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Copper Cooling Coil 1.5 Ton" class="service-img">
+                    <div class="service-info">
+                        <h4>Copper Cooling Coil (Split AC) - 1.5 Ton</h4>
+                        <p>Indoor cooling evaporator coil replacement</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹6500</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Copper Cooling Coil (Split AC) - 2 Ton" data-price="7500" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Copper Cooling Coil 2 Ton" class="service-img">
+                    <div class="service-info">
+                        <h4>Copper Cooling Coil (Split AC) - 2 Ton</h4>
+                        <p>Indoor cooling evaporator coil replacement</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹7500</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Copper Cooling Coil (Split AC) O General & Mitsubishi - 1.5 Ton" data-price="7500" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Copper Cooling Coil O General" class="service-img">
+                    <div class="service-info">
+                        <h4>Copper Cooling Coil (Split AC) O General & Mitsubishi - 1.5 Ton</h4>
+                        <p>Specialty brand cooling coil replacement</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹7500</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Copper Cooling Coil/Condensor Coil (Window AC) - 1 Ton" data-price="4500" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1542013936693-84d4b66f33d2?auto=format&fit=crop&w=150&q=80" alt="Window AC Coil 1 Ton" class="service-img">
+                    <div class="service-info">
+                        <h4>Copper Cooling Coil/Condensor Coil (Window AC) - 1 Ton</h4>
+                        <p>Window AC copper coil replacement</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹4500</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Copper Cooling Coil/Condensor Coil (Window AC) - 1.5 Ton" data-price="5000" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1542013936693-84d4b66f33d2?auto=format&fit=crop&w=150&q=80" alt="Window AC Coil 1.5 Ton" class="service-img">
+                    <div class="service-info">
+                        <h4>Copper Cooling Coil/Condensor Coil (Window AC) - 1.5 Ton</h4>
+                        <p>Window AC copper coil replacement</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹5000</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Copper Cooling Coil/Condensor Coil (Window AC) - 2 Ton" data-price="5500" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1542013936693-84d4b66f33d2?auto=format&fit=crop&w=150&q=80" alt="Window AC Coil 2 Ton" class="service-img">
+                    <div class="service-info">
+                        <h4>Copper Cooling Coil/Condensor Coil (Window AC) - 2 Ton</h4>
+                        <p>Window AC copper coil replacement</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹5500</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Cooling coil repair with Anti rust coating" data-price="899" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Cooling coil repair with Anti rust coating" class="service-img">
+                    <div class="service-info">
+                        <h4>Cooling coil repair with Anti rust coating</h4>
+                        <p>Leak repair and anti-rust protection spray</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹899</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Left side U band replacement" data-price="1500" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Left side U band replacement" class="service-img">
+                    <div class="service-info">
+                        <h4>Left side U band replacement</h4>
+                        <p>U-bend brazing and replacement</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹1500</div>
+                </div>
+            </label>
+
+            <!-- Fan Motors -->
+            <div class="category-header">🌀 Fan Motors & Blowers</div>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Fan motor - Split AC" data-price="1800" data-labour="499" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=150&q=80" alt="Fan motor Split AC" class="service-img">
+                    <div class="service-info">
+                        <h4>Fan motor - Split AC</h4>
+                        <p>Outdoor fan motor replacement</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹1800</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">+₹499 Labour</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Blower motor - Split AC" data-price="2200" data-labour="499" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=150&q=80" alt="Blower motor Split AC" class="service-img">
+                    <div class="service-info">
+                        <h4>Blower motor - Split AC</h4>
+                        <p>Indoor blower motor replacement</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹2200</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">+₹499 Labour</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Blower replaced" data-price="1100" data-labour="499" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Blower replaced" class="service-img">
+                    <div class="service-info">
+                        <h4>Blower replaced</h4>
+                        <p>Indoor cross-flow blower wheel replacement</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹1100</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">+₹499 Labour</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Replace Flap/Swing Motor" data-price="400" data-labour="499" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Replace Flap Swing Motor" class="service-img">
+                    <div class="service-info">
+                        <h4>Replace Flap/Swing Motor</h4>
+                        <p>Louver swing motor replacement</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹400</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">+₹499 Labour</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Motor Bearing Change" data-price="1000" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=150&q=80" alt="Motor Bearing Change" class="service-img">
+                    <div class="service-info">
+                        <h4>Motor Bearing Change</h4>
+                        <p>Motor bearing replacement & greasing</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹1000</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Fan motor - Window AC" data-price="2600" data-labour="499" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1542013936693-84d4b66f33d2?auto=format&fit=crop&w=150&q=80" alt="Fan motor Window AC" class="service-img">
+                    <div class="service-info">
+                        <h4>Fan motor - Window AC</h4>
+                        <p>Window AC dual shaft motor replacement</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹2600</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">+₹499 Labour</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Blower motor (DC) - Split AC" data-price="3800" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=150&q=80" alt="Blower motor DC Split AC" class="service-img">
+                    <div class="service-info">
+                        <h4>Blower motor (DC) - Split AC</h4>
+                        <p>Inverter DC indoor blower motor replacement</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹3800</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Fan motor (DC) - Split AC" data-price="3800" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=150&q=80" alt="Fan motor DC Split AC" class="service-img">
+                    <div class="service-info">
+                        <h4>Fan motor (DC) - Split AC</h4>
+                        <p>Inverter DC outdoor fan motor replacement</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹3800</div>
+                </div>
+            </label>
+
+            <!-- Service & Installation -->
+            <div class="category-header">🛠️ Service & Installation</div>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="1 ft copper pipe set (insulation, wire per ft)" data-price="350" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1615873968403-89e067629765?auto=format&fit=crop&w=150&q=80" alt="Copper pipe set" class="service-img">
+                    <div class="service-info">
+                        <h4>1 ft copper pipe set (insulation, wire per ft)</h4>
+                        <p>High grade copper tubing with insulation</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹350</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Split AC Wall stand" data-price="750" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Split AC Wall stand" class="service-img">
+                    <div class="service-info">
+                        <h4>Split AC Wall stand</h4>
+                        <p>Heavy duty outdoor unit mounting bracket</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹750</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Outdoor unit reinstalled" data-price="799" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Outdoor unit reinstalled" class="service-img">
+                    <div class="service-info">
+                        <h4>Outdoor unit reinstalled</h4>
+                        <p>Secure outdoor unit re-mounting</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹799</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Indoor unit reinstalled" data-price="699" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Indoor unit reinstalled" class="service-img">
+                    <div class="service-info">
+                        <h4>Indoor unit reinstalled</h4>
+                        <p>Indoor unit wall mounting and alignment</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹699</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Fastner complete set" data-price="200" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=150&q=80" alt="Fastner complete set" class="service-img">
+                    <div class="service-info">
+                        <h4>Fastner complete set</h4>
+                        <p>Heavy duty anchor bolts and screws</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹200</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Floor stand" data-price="550" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Floor stand" class="service-img">
+                    <div class="service-info">
+                        <h4>Floor stand</h4>
+                        <p>Outdoor unit floor mounting stand</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹550</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Universal back plate" data-price="300" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Universal back plate" class="service-img">
+                    <div class="service-info">
+                        <h4>Universal back plate</h4>
+                        <p>Indoor unit mounting mounting plate</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹300</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Foam-jet AC service" data-price="649" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=150&q=80" alt="Foam-jet AC service" class="service-img">
+                    <div class="service-info">
+                        <h4>Foam-jet AC service</h4>
+                        <p>Comprehensive foam-jet deep cleaning</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹649</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="AC installation" data-price="2499" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1615873968403-89e067629765?auto=format&fit=crop&w=150&q=80" alt="AC installation" class="service-img">
+                    <div class="service-info">
+                        <h4>AC installation</h4>
+                        <p>Complete split AC installation service</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹2499</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="AC uninstallation" data-price="699" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="AC uninstallation" class="service-img">
+                    <div class="service-info">
+                        <h4>AC uninstallation</h4>
+                        <p>Safe AC uninstallation with gas saving</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹699</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Anti-rust spray (avoid gas leak)" data-price="249" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=150&q=80" alt="Anti-rust spray" class="service-img">
+                    <div class="service-info">
+                        <h4>Anti-rust spray (avoid gas leak)</h4>
+                        <p>Coil protection anti-corrosion spray</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹249</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Lite AC service" data-price="499" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=150&q=80" alt="Lite AC service" class="service-img">
+                    <div class="service-info">
+                        <h4>Lite AC service</h4>
+                        <p>Basic filter and coil cleaning</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹499</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Drain Pipe replacement (1m)" data-price="100" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Drain Pipe replacement" class="service-img">
+                    <div class="service-info">
+                        <h4>Drain Pipe replacement (1m)</h4>
+                        <p>Flexible water drainage pipe per meter</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹100</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="3/4 Core Wire (per meter)" data-price="120" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?auto=format&fit=crop&w=150&q=80" alt="3/4 Core Wire" class="service-img">
+                    <div class="service-info">
+                        <h4>3/4 Core Wire (per meter)</h4>
+                        <p>Heavy duty electrical connection wire</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹120</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Outdoor/Indoor Connector" data-price="150" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?auto=format&fit=crop&w=150&q=80" alt="Outdoor/Indoor Connector" class="service-img">
+                    <div class="service-info">
+                        <h4>Outdoor/Indoor Connector</h4>
+                        <p>Signal and power connection block</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹150</div>
+                </div>
+            </label>
+
+            <!-- Minor Repairs & Miscellaneous -->
+            <div class="category-header">🔧 Minor Repairs & Miscellaneous</div>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Water Leakage Repaired- Split AC" data-price="599" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Water Leakage Split AC" class="service-img">
+                    <div class="service-info">
+                        <h4>Water Leakage Repaired- Split AC</h4>
+                        <p>Indoor unit drainage blockage and leakage fix</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹599</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Adjust Grill Locks" data-price="0" data-labour="349" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Adjust Grill Locks" class="service-img">
+                    <div class="service-info">
+                        <h4>Adjust Grill Locks</h4>
+                        <p>Panel lock alignment and repair</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹0</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">+₹349 Labour</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Adjust pipe and tight compressor screw" data-price="0" data-labour="349" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=150&q=80" alt="Adjust pipe and compressor screw" class="service-img">
+                    <div class="service-info">
+                        <h4>Adjust pipe and tight compressor screw</h4>
+                        <p>Vibration and pipe alignment adjustment</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹0</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">+₹349 Labour</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Connector wires replaced (1m)" data-price="100" data-labour="349" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?auto=format&fit=crop&w=150&q=80" alt="Connector wires replaced" class="service-img">
+                    <div class="service-info">
+                        <h4>Connector wires replaced (1m)</h4>
+                        <p>Wiring replacement per meter</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹100</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">+₹349 Labour</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Tighten/ Replace Thimble" data-price="50" data-labour="349" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?auto=format&fit=crop&w=150&q=80" alt="Tighten Replace Thimble" class="service-img">
+                    <div class="service-info">
+                        <h4>Tighten/ Replace Thimble</h4>
+                        <p>Terminal connector thimble fixing</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹50</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">+₹349 Labour</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="External Dust/stick removal" data-price="0" data-labour="399" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=150&q=80" alt="External Dust removal" class="service-img">
+                    <div class="service-info">
+                        <h4>External Dust/stick removal</h4>
+                        <p>Debris clearance from outdoor unit</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹0</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">+₹399 Labour</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Noise adjustment in motor" data-price="0" data-labour="399" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=150&q=80" alt="Noise adjustment in motor" class="service-img">
+                    <div class="service-info">
+                        <h4>Noise adjustment in motor</h4>
+                        <p>Motor mounting and vibration damping</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹0</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">+₹399 Labour</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Noise adjustment in blower" data-price="0" data-labour="399" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Noise adjustment in blower" class="service-img">
+                    <div class="service-info">
+                        <h4>Noise adjustment in blower</h4>
+                        <p>Blower balancing and sound reduction</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹0</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">+₹399 Labour</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Noise adjustment in cabinet" data-price="0" data-labour="399" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Noise adjustment in cabinet" class="service-img">
+                    <div class="service-info">
+                        <h4>Noise adjustment in cabinet</h4>
+                        <p>Panel tightening and rattling fix</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹0</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">+₹399 Labour</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Noise adjustment in swing flap" data-price="0" data-labour="399" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Noise adjustment in swing flap" class="service-img">
+                    <div class="service-info">
+                        <h4>Noise adjustment in swing flap</h4>
+                        <p>Louver rattle and noise fixing</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹0</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">+₹399 Labour</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Water Leakage Repaired- Window AC" data-price="0" data-labour="449" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1542013936693-84d4b66f33d2?auto=format&fit=crop&w=150&q=80" alt="Water Leakage Window AC" class="service-img">
+                    <div class="service-info">
+                        <h4>Water Leakage Repaired- Window AC</h4>
+                        <p>Window AC water tray and drainage correction</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹0</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">+₹449 Labour</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Drain pipe adjust" data-price="100" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Drain pipe adjust" class="service-img">
+                    <div class="service-info">
+                        <h4>Drain pipe adjust</h4>
+                        <p>Slope and drainage pipe alignment</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹100</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Insulation refix" data-price="0" data-labour="399" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Insulation refix" class="service-img">
+                    <div class="service-info">
+                        <h4>Insulation refix</h4>
+                        <p>Copper pipe thermal insulation wrapping</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹0</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">+₹399 Labour</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="AC fan blade" data-price="700" data-labour="499" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=150&q=80" alt="AC fan blade" class="service-img">
+                    <div class="service-info">
+                        <h4>AC fan blade</h4>
+                        <p>Outdoor unit propeller fan blade replacement</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹700</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">+₹499 Labour</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Grill Cover" data-price="1500" data-labour="349" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Grill Cover" class="service-img">
+                    <div class="service-info">
+                        <h4>Grill Cover</h4>
+                        <p>Outdoor unit top mesh / grill cover replacement</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹1500</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">+₹349 Labour</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Swing blade replaced" data-price="400" data-labour="349" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80" alt="Swing blade replaced" class="service-img">
+                    <div class="service-info">
+                        <h4>Swing blade replaced</h4>
+                        <p>Indoor unit louver / vertical flap replacement</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹400</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">+₹349 Labour</div>
+                </div>
+            </label>
+
+            <label class="service-item">
+                <div class="service-left">
+                    <input type="checkbox" name="service" value="Universal remote" data-price="800" onchange="calculateTotal()">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=150&q=80" alt="Universal remote" class="service-img">
+                    <div class="service-info">
+                        <h4>Universal remote</h4>
+                        <p>Universal AC remote controller</p>
+                    </div>
+                </div>
+                <div class="service-right">
+                    <div class="price">₹800</div>
+                </div>
+            </label>
+
         </div>
 
         <div class="card">
@@ -642,7 +1522,9 @@
             let total = 0;
             const checkboxes = document.querySelectorAll('input[name="service"]:checked');
             checkboxes.forEach(cb => {
-                total += parseInt(cb.getAttribute('data-price')) || 0;
+                const price = parseInt(cb.getAttribute('data-price')) || 0;
+                const labour = parseInt(cb.getAttribute('data-labour')) || 0;
+                total += price + labour;
             });
             document.getElementById('estimatedTotal').innerText = '₹' + total;
         }
@@ -681,8 +1563,15 @@
             let total = 0;
             document.querySelectorAll('input[name="service"]:checked').forEach(cb => {
                 const price = parseInt(cb.getAttribute('data-price')) || 0;
-                selectedServices.push(`- ${cb.value} (₹${price})`);
-                total += price;
+                const labour = parseInt(cb.getAttribute('data-labour')) || 0;
+                const itemTotal = price + labour;
+                let desc = `- ${cb.value} (₹${price}`;
+                if (labour > 0) {
+                    desc += ` + ₹${labour} Labour`;
+                }
+                desc += `)`;
+                selectedServices.push(desc);
+                total += itemTotal;
             });
 
             if (selectedServices.length === 0) {
