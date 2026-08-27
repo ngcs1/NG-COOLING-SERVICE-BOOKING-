@@ -1,152 +1,295 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N.G Cooling Solution - Service Booking</title>
+    <style>
+        :root {
+            --primary: #0284c7;
+            --primary-dark: #0369a1;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #cbd5e1;
+        }
 
-<title>NG Cooling Solution - Service Booking</title>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+        }
 
-<style>
-*{
-  box-sizing:border-box;
-}
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
 
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#f4f6f8;
-  color:#222;
-}
+        h2 {
+            text-align: center;
+            color: var(--primary-dark);
+            margin-top: 0;
+            margin-bottom: 24px;
+        }
 
-header{
-  background:#075e54;
-  color:white;
-  text-align:center;
-  padding:25px 15px;
-}
+        .form-group {
+            margin-bottom: 16px;
+        }
 
-header h1{
-  margin:0;
-  font-size:28px;
-}
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+        }
 
-header p{
-  margin:8px 0 0;
-}
+        input[type="text"],
+        input[type="tel"],
+        textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s;
+        }
 
-.banner{
-  text-align:center;
-  padding:35px 15px;
-  background:linear-gradient(135deg,#075e54,#128c7e);
-  color:white;
-}
+        input:focus, textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1);
+        }
 
-.container{
-  max-width:750px;
-  margin:auto;
-  padding:15px;
-}
+        .location-row {
+            display: flex;
+            gap: 8px;
+        }
 
-.box{
-  background:white;
-  padding:20px;
-  margin-bottom:20px;
-  border-radius:15px;
-  box-shadow:0 2px 10px #ddd;
-}
+        .location-row input {
+            flex: 1;
+        }
 
-h2{
-  text-align:center;
-}
+        .btn-location {
+            background-color: #0f172a;
+            color: white;
+            border: none;
+            padding: 0 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: background-color 0.2s;
+        }
 
-.service-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
+        .btn-location:hover {
+            background-color: #334155;
+        }
 
-.service{
-  background:#fff;
-  border:2px solid #ddd;
-  border-radius:12px;
-  padding:15px 10px;
-  text-align:center;
-  cursor:pointer;
-  transition:0.2s;
-}
+        .services-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-top: 8px;
+        }
 
-.service.selected{
-  border-color:#075e54;
-  background:#e8f5f2;
-}
+        .service-card {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
 
-.service h3{
-  margin:5px 0 10px;
-  font-size:15px;
-}
+        .service-card:hover {
+            border-color: var(--primary);
+            background-color: #f0f9ff;
+        }
 
-.price{
-  font-size:21px;
-  font-weight:bold;
-  color:#075e54;
-}
+        .service-card input[type="radio"] {
+            margin-right: 10px;
+            accent-color: var(--primary);
+        }
 
-input, textarea{
-  width:100%;
-  padding:14px;
-  margin:8px 0;
-  border:1px solid #ccc;
-  border-radius:8px;
-  font-size:16px;
-}
+        .service-label {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            cursor: pointer;
+            font-weight: 500;
+        }
 
-button{
-  width:100%;
-  padding:15px;
-  margin-top:10px;
-  border:0;
-  border-radius:8px;
-  font-size:17px;
-  font-weight:bold;
-  cursor:pointer;
-}
+        .service-price {
+            font-weight: 700;
+            color: var(--primary-dark);
+            background: #e0f2fe;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
 
-.location-btn{
-  background:#444;
-  color:white;
-}
+        .btn-submit {
+            width: 100%;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.2s;
+        }
 
-.book-btn{
-  background:#25D366;
-  color:white;
-}
+        .btn-submit:hover {
+            background-color: var(--primary-dark);
+        }
 
-footer{
-  background:#222;
-  color:white;
-  text-align:center;
-  padding:20px;
-}
-</style>
+        #locationStatus {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+    </style>
 </head>
-
 <body>
 
-<header>
-  <h1>❄️ NG Cooling Solution</h1>
-  <p>Professional Home Appliance Service & Repair</p>
-</header>
+<div class="container">
+    <h2>N.G Cooling Solution</h2>
+    <form id="bookingForm" onsubmit="handleBooking(event)">
+        
+        <div class="form-group">
+            <label for="customerName">Customer Name</label>
+            <input type="text" id="customerName" required placeholder="Enter your full name">
+        </div>
 
-<div class="banner">
-  <h2>Book Your Service Online</h2>
-  <p>Fast & Professional Service at Your Doorstep</p>
+        <div class="form-group">
+            <label for="customerNumber">Phone Number</label>
+            <input type="tel" id="customerNumber" required placeholder="Enter 10-digit mobile number" pattern="[0-9]{10}">
+        </div>
+
+        <div class="form-group">
+            <label for="customerAddress">Address & Location</label>
+            <div class="location-row" style="margin-bottom: 8px;">
+                <input type="text" id="customerAddress" required placeholder="House No, Street, Landmark">
+                <button type="button" class="btn-location" onclick="getLocation()">Auto Location</button>
+            </div>
+            <div id="locationStatus"></div>
+        </div>
+
+        <div class="form-group">
+            <label>Select Service</label>
+            <div class="services-container">
+                
+                <label class="service-card">
+                    <div class="service-label">
+                        <input type="radio" name="serviceSelection" value="Split AC Jet Pump Service - ₹399" required>
+                        Split AC Jet Pump Service
+                    </div>
+                    <span class="service-price">₹399</span>
+                </label>
+
+                <label class="service-card">
+                    <div class="service-label">
+                        <input type="radio" name="serviceSelection" value="AC Repair - ₹199">
+                        AC Repair
+                    </div>
+                    <span class="service-price">₹199</span>
+                </label>
+
+                <label class="service-card">
+                    <div class="service-label">
+                        <input type="radio" name="serviceSelection" value="Washing Machine Repair - ₹199">
+                        Washing Machine Repair
+                    </div>
+                    <span class="service-price">₹199</span>
+                </label>
+
+                <label class="service-card">
+                    <div class="service-label">
+                        <input type="radio" name="serviceSelection" value="Microwave Repair - ₹199">
+                        Microwave Repair
+                    </div>
+                    <span class="service-price">₹199</span>
+                </label>
+
+                <label class="service-card">
+                    <div class="service-label">
+                        <input type="radio" name="serviceSelection" value="Geyser Repair - ₹199">
+                        Geyser Repair
+                    </div>
+                    <span class="service-price">₹199</span>
+                </label>
+
+                <label class="service-card">
+                    <div class="service-label">
+                        <input type="radio" name="serviceSelection" value="Fridge Repair - ₹199">
+                        Fridge Repair
+                    </div>
+                    <span class="service-price">₹199</span>
+                </label>
+
+            </div>
+        </div>
+
+        <button type="submit" class="btn-submit">Book Service Now</button>
+    </form>
 </div>
 
-<div class="container">
+<script>
+    function getLocation() {
+        const statusDiv = document.getElementById('locationStatus');
+        const addressInput = document.getElementById('customerAddress');
 
-<div class="box">
-<h2>🔧 Choose Your Service</h2>
+        if (!navigator.geolocation) {
+            statusDiv.textContent = 'Geolocation is not supported by your browser';
+            return;
+        }
 
-<div class="service-grid">
+        statusDiv.textContent = 'Locating your GPS position...';
 
-  <div class="service"
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                
+                addressInput.value = `Lat: ${lat.toFixed(4)}, Lon: ${lon.toFixed(4)}`;
+                statusDiv.textContent = 'Location captured successfully!';
+                statusDiv.style.color = '#16a34a';
+            },
+            () => {
+                statusDiv.textContent = 'Unable to retrieve your location. Please type manually.';
+                statusDiv.style.color = '#dc2626';
+            }
+        );
+    }
+
+    function handleBooking(event) {
+        event.preventDefault();
+        
+        const name = document.getElementById('customerName').value;
+        const phone = document.getElementById('customerNumber').value;
+        const address = document.getElementById('customerAddress').value;
+        const selectedService = document.querySelector('input[name="serviceSelection"]:checked').value;
+
+        const summaryText = `New Service Booking:\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\nService: ${selectedService}`;
+        
+        const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(summaryText)}`;
+        window.open(whatsappUrl, '_blank');
+    }
+</script>
+
+</body>
+</html>
+
