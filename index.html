@@ -1,349 +1,350 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>N.G COOLING SOLUTION</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 50%,#0284c7 100%);color:#111;padding-bottom:30px;min-height:100vh}
-header{background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);color:#1e3a8a;text-align:center;padding:18px 10px;box-shadow:0 4px 15px rgba(0,0,0,0.2);border-bottom:4px solid #f59e0b}
-header h1{font-size:22px;letter-spacing:0.5px;font-weight:800}
-header p{font-size:13px;margin-top:4px;color:#475569;font-weight:600}
-.container{max-width:600px;margin:15px auto;padding:0 12px}
-.card{background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:0 8px 25px rgba(0,0,0,0.15)}
-.title{font-size:16px;font-weight:bold;color:#1e3a8a;border-bottom:2px solid #0284c7;padding-bottom:8px;margin-bottom:14px}
-label{display:block;font-size:13px;font-weight:bold;margin-bottom:6px;color:#334155}
-input,select{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:8px;font-size:14px;background:#f8fafc;color:#111;outline:none;transition:all 0.2s}
-input:focus,select:focus{border-color:#0284c7;background:#fff;box-shadow:0 0 0 3px rgba(2,132,199,0.15)}
-.form-group{margin-bottom:12px}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.location{width:100%;padding:12px;background:#fff;border:2px solid #0284c7;color:#0284c7;border-radius:8px;font-weight:bold;margin-bottom:12px;cursor:pointer;transition:all 0.2s}
-.location:hover{background:#f0f9ff}
-.offer{background:linear-gradient(135deg,#fef3c7 0%,#fde68a 100%);border:1px solid #f59e0b;padding:12px;border-radius:10px;text-align:center;font-size:13px;font-weight:bold;color:#b45309;margin-bottom:14px;box-shadow:0 4px 12px rgba(245,158,11,0.2)}
-.category{background:#e0f2fe;color:#0369a1;padding:10px 12px;border-radius:8px;margin:14px 0 10px;font-weight:bold;font-size:14px}
-.service{display:flex;align-items:center;justify-content:space-between;border:1px solid #e2e8f0;border-radius:8px;padding:12px;margin-bottom:8px;background:#fff;transition:all 0.2s}
-.service:hover{border-color:#bae6fd;background:#f8fafc}
-.service-left{display:flex;align-items:center;gap:10px;flex:1}
-.service input{width:20px;height:20px;accent-color:#0284c7}
-.service h4{font-size:14px;color:#1e293b}
-.service p{font-size:12px;color:#64748b;margin-top:3px}
-.price{font-weight:bold;color:#0284c7;white-space:nowrap;font-size:15px}
-.rate{background:linear-gradient(135deg,#0284c7 0%,#1d4ed8 100%);color:#fff;text-align:center;padding:14px;border-radius:8px;margin-top:14px;font-weight:bold;cursor:pointer;box-shadow:0 4px 12px rgba(2,132,199,0.3)}
-.rate small{display:block;margin-top:3px;font-weight:normal;opacity:0.9}
-.summary{background:#ecfdf5;border:1px solid #a7f3d0;padding:14px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.total{font-size:20px;font-weight:bold;color:#059669}
-.whatsapp{width:100%;border:0;background:linear-gradient(135deg,#22c55e 0%,#16a34a 100%);color:#fff;padding:14px;border-radius:8px;font-size:16px;font-weight:bold;cursor:pointer;box-shadow:0 4px 15px rgba(34,197,94,0.3);transition:all 0.2s}
-.whatsapp:hover{opacity:0.95;transform:translateY(-1px)}
-.back{background:#0284c7;color:#fff;border:0;padding:8px 14px;border-radius:6px;font-weight:bold;cursor:pointer}
-footer{text-align:center;color:#cbd5e1;font-size:12px;margin-top:20px;font-weight:500}
-@media(max-width:450px){.row{grid-template-columns:1fr}header h1{font-size:20px}}
-</style>
-</head>
-<body>
 
-<header>
-    <h1>N.G COOLING SOLUTION</h1>
-    <p>⚡ All Home Appliances Repair & Service</p>
-</header>
+import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-<div class="container" id="mainPage">
-    <div class="offer">
-        🎉 Download / Book Now & ₹50 OFF on Your First Service!
-    </div>
+void main() => runApp(const NGCoolingApp());
 
-    <div class="card">
-        <div class="title">1. Customer Information</div>
-        <div class="form-group">
-            <label>Customer Name *</label>
-            <input id="custName" type="text" placeholder="Enter full name">
-        </div>
-        <div class="form-group">
-            <label>Phone Number *</label>
-            <input id="custPhone" type="tel" maxlength="10" placeholder="10-digit mobile number">
-        </div>
-        <div class="form-group">
-            <label>Address / Location *</label>
-            <input id="custAddress" type="text" placeholder="Enter complete address">
-        </div>
-        <button class="location" onclick="shareLocation()">
-            📍 Share Location Automatically
-        </button>
-        <div class="form-group">
-            <label>Referred By / Referral Code (Optional)</label>
-            <input id="custReferred" type="text" placeholder="Friend name or code (e.g. AB13445)">
-        </div>
-        <div class="row">
-            <div class="form-group">
-                <label>Service Date *</label>
-                <input id="serviceDate" type="date">
-            </div>
-            <div class="form-group">
-                <label>Service Time *</label>
-                <select id="serviceTime">
-                    <option value="">Select Time</option>
-                    <option>8 AM - 9 AM</option>
-                    <option>9 AM - 10 AM</option>
-                    <option>10 AM - 11 AM</option>
-                    <option>11 AM - 12 PM</option>
-                    <option>12 PM - 1 PM</option>
-                    <option>1 PM - 2 PM</option>
-                    <option>2 PM - 3 PM</option>
-                    <option>3 PM - 4 PM</option>
-                    <option>4 PM - 5 PM</option>
-                    <option>5 PM - 6 PM</option>
-                    <option>6 PM - 7 PM</option>
-                    <option>7 PM - 8 PM</option>
-                    <option>8 PM - 9 PM</option>
-                    <option>9 PM - 10 PM</option>
-                </select>
-            </div>
-        </div>
-    </div>
+class NGCoolingApp extends StatelessWidget {
+  const NGCoolingApp({super.key});
 
-    <div class="card">
-        <div class="title">2. Select Services</div>
-        <div class="category">❄️ Popular Home Appliance Services</div>
-        
-        <div class="service">
-            <div class="service-left">
-                <input type="checkbox" name="service" value="Jet Pump Deep Cleaning Service" data-price="399" onchange="calculateTotal()">
-                <div>
-                    <h4>Jet Pump Deep Cleaning</h4>
-                    <p>High pressure cleaning + free gas check</p>
-                </div>
-            </div>
-            <div class="price">₹399</div>
-        </div>
-
-        <div class="service">
-            <div class="service-left">
-                <input type="checkbox" name="service" value="Jet Pump Deep Cleaning Foam Service" data-price="499" onchange="calculateTotal()">
-                <div>
-                    <h4>Jet Pump Foam Cleaning</h4>
-                    <p>Foam + high pressure water wash</p>
-                </div>
-            </div>
-            <div class="price">₹499</div>
-        </div>
-
-        <div class="service">
-            <div class="service-left">
-                <input type="checkbox" name="service" value="AC Repair & Check-up" data-price="199" onchange="calculateTotal()">
-                <div>
-                    <h4>AC Repair</h4>
-                    <p>Check-up & diagnosis</p>
-                </div>
-            </div>
-            <div class="price">₹199</div>
-        </div>
-
-        <div class="rate" onclick="openRateCard()">
-            📋 View Complete Rate Card <small>Parts, gas, coil, repair & installation</small>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="summary">
-            <span><b>Estimated Total</b></span>
-            <span class="total" id="estimatedTotal">₹0</span>
-        </div>
-        <button class="whatsapp" onclick="sendWhatsAppBooking()">
-            📱 Send Booking via WhatsApp
-        </button>
-    </div>
-
-    <footer>
-        © N.G COOLING SOLUTION. All Rights Reserved.
-    </footer>
-</div>
-
-<!-- RATE CARD -->
-<div class="container" id="rateCardPage" style="display:none">
-    <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-            <div class="title" style="margin:0;border:0">Complete Rate Card</div>
-            <button class="back" onclick="closeRateCard()">⬅ Back</button>
-        </div>
-        <div class="category">⚡ Complete Service Rate Card</div>
-        <div id="dynamicServices"></div>
-        <button class="whatsapp" style="background:#0284c7;margin-top:14px" onclick="closeRateCard()">✅ Done Selecting</button>
-    </div>
-</div>
-
-<script>
-const services=[
-    ["Non-Inverter PCB Repaired",1500],
-    ["Inverter PCB Repaired",4500],
-    ["LVT Transformer",900,349],
-    ["Replace Sensor",350,499],
-    ["Contactor Replaced",500,499],
-    ["Contactor Daikin / O-General",1500,449],
-    ["Convert PCB With Remote",1500],
-    ["Fan Capacitor 2.5-10 MFD",250,449],
-    ["Compressor Capacitor 25-60 MFD",400,449],
-    ["Combo Capacitor",500,449],
-    ["Fuse Change in PCB",150,299],
-    ["Gas Charging",3000],
-    ["Flair Nut Replaced",150],
-    ["Copper Condenser Coil 1 Ton",4000],
-    ["Copper Condenser Coil 1.5 Ton",4800],
-    ["Copper Condenser Coil 2 Ton",5300],
-    ["Capillary & Filter Replaced",350],
-    ["Compressor 0.8-1 Ton",6500],
-    ["Compressor 1.5 Ton",8500],
-    ["Compressor 2 Ton",10000],
-    ["Expansion Valve Replaced",1200],
-    ["Replacement Compressor 1 Ton",4000],
-    ["Replacement Compressor 1.5 Ton",4500],
-    ["Replacement Compressor 2 Ton",5000],
-    ["Service Valve 1/4",400],
-    ["Service Valve 1/2",400],
-    ["Service Valve 5/8",500],
-    ["Copper Cooling Coil Split AC 1 Ton",5500],
-    ["Copper Cooling Coil Split AC 1.5 Ton",6500],
-    ["Copper Cooling Coil Split AC 2 Ton",7500],
-    ["Copper Cooling Coil O-General/Mitsubishi 1.5 Ton",7500],
-    ["Window AC Coil 1 Ton",4500],
-    ["Window AC Coil 1.5 Ton",5000],
-    ["Window AC Coil 2 Ton",5500],
-    ["Cooling Coil Repair + Anti Rust",899],
-    ["Left Side U Band Replacement",1500],
-    ["Fan Motor Split AC",1800,499],
-    ["Blower Motor Split AC",2200,499],
-    ["Blower Replaced",1100,499],
-    ["Flap/Swing Motor",400,499],
-    ["Motor Bearing Change",1000],
-    ["Fan Motor Window AC",2600,499],
-    ["Blower Motor DC Split AC",3800],
-    ["Fan Motor DC Split AC",3800],
-    ["1 Ft Copper Pipe Set",350],
-    ["Split AC Wall Stand",750],
-    ["Outdoor Unit Reinstalled",799],
-    ["Indoor Unit Reinstalled",699],
-    ["Fastner Complete Set",200],
-    ["Floor Stand",550],
-    ["Universal Back Plate",300],
-    ["AC Installation",2499],
-    ["AC Uninstallation",699],
-    ["Anti Rust Spray",249],
-    ["Lite AC Service",499],
-    ["Drain Pipe Replacement 1m",100],
-    ["3/4 Core Wire Per Meter",120],
-    ["Outdoor/Indoor Connector",150],
-    ["Water Leakage Repair Split AC",599],
-    ["Adjust Grill Locks",0,349],
-    ["Adjust Pipe & Compressor Screw",0,349],
-    ["Connector Wire Replacement 1m",100,349],
-    ["Tighten/Replace Thimble",50,349],
-    ["External Dust Removal",0,399],
-    ["Noise Adjustment Motor",0,399],
-    ["Noise Adjustment Blower",0,399],
-    ["Noise Adjustment Cabinet",0,399],
-    ["Noise Adjustment Swing Flap",0,399],
-    ["Water Leakage Repair Window AC",0,449],
-    ["Drain Pipe Adjust",100],
-    ["Insulation Refix",0,399],
-    ["AC Fan Blade",700,499],
-    ["Grill Cover",1500,349],
-    ["Swing Blade Replaced",400,349],
-    ["Universal Remote",800]
-];
-
-function loadServices(){
-    const box=document.getElementById("dynamicServices");
-    services.forEach(s=>{
-        const labour=s[2]||0;
-        box.innerHTML+=`
-            <label class="service">
-                <div class="service-left">
-                    <input type="checkbox" name="service" value="${s[0]}" data-price="${s[1]}" data-labour="${labour}" onchange="calculateTotal()">
-                    <div>
-                        <h4>${s[0]}</h4>
-                        ${labour ? `<p>+ ₹${labour} Labour</p>` : ""}
-                    </div>
-                </div>
-                <div class="price">₹${s[1]}</div>
-            </label>
-        `;
-    });
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'NG Cooling Solution',
+      theme: ThemeData(
+        useMaterial3: true,
+        colorSchemeSeed: const Color(0xFF0284C7),
+        fontFamily: 'Arial',
+      ),
+      home: const HomePage(),
+    );
+  }
 }
 
-function calculateTotal(){
-    let total=0;
-    document.querySelectorAll('input[name="service"]:checked').forEach(x=>{
-        total+=(parseInt(x.dataset.price)||0)+(parseInt(x.dataset.labour)||0);
-    });
-    document.getElementById("estimatedTotal").innerText="₹"+total;
+const blue = Color(0xFF0284C7);
+const darkBlue = Color(0xFF075985);
+
+Future<void> openWhatsApp() async {
+  final uri = Uri.parse('https://wa.me/917439160014?text=Hello%20NG%20Cooling%20Solution%2C%20I%20want%20to%20book%20a%20service.');
+  await launchUrl(uri, mode: LaunchMode.externalApplication);
 }
 
-function openRateCard(){
-    document.getElementById("mainPage").style.display="none";
-    document.getElementById("rateCardPage").style.display="block";
-    window.scrollTo(0,0);
+Future<void> makeCall() async {
+  final uri = Uri.parse('tel:+917439160014');
+  await launchUrl(uri);
 }
 
-function closeRateCard(){
-    document.getElementById("rateCardPage").style.display="none";
-    document.getElementById("mainPage").style.display="block";
-    window.scrollTo(0,0);
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  static const services = [
+    ('AC Repair', Icons.ac_unit),
+    ('AC Installation', Icons.build_circle),
+    ('AC Service', Icons.cleaning_services),
+    ('AC Gas Charging', Icons.gas_meter),
+    ('Fridge Repair', Icons.kitchen),
+    ('Washing Machine', Icons.local_laundry_service),
+    ('Microwave Repair', Icons.microwave),
+    ('Geyser Repair', Icons.water_drop),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: blue,
+        foregroundColor: Colors.white,
+        title: const Text('NG COOLING SOLUTION',
+            style: TextStyle(fontWeight: FontWeight.w800, fontSize: 17)),
+        actions: [
+          IconButton(onPressed: openWhatsApp, icon: const Icon(Icons.chat)),
+          IconButton(onPressed: makeCall, icon: const Icon(Icons.call)),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.fromLTRB(22, 28, 22, 25),
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [Color(0xFF075985), Color(0xFF38BDF8)],
+                ),
+                borderRadius: BorderRadius.vertical(
+                  bottom: Radius.circular(28),
+                ),
+              ),
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('NG COOLING',
+                      style: TextStyle(color: Colors.white, fontSize: 29,
+                          fontWeight: FontWeight.w900)),
+                  Text('SOLUTION',
+                      style: TextStyle(color: Colors.white, fontSize: 29,
+                          fontWeight: FontWeight.w900)),
+                  SizedBox(height: 6),
+                  Text('AC REPAIR | SERVICE | INSTALLATION',
+                      style: TextStyle(color: Colors.white, fontSize: 12,
+                          fontWeight: FontWeight.w700)),
+                  SizedBox(height: 14),
+                  Text('Your Comfort, Our Priority',
+                      style: TextStyle(color: Colors.white, fontSize: 17,
+                          fontWeight: FontWeight.w700)),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Feature(Icons.verified_user, 'Trusted\\nService'),
+                  Feature(Icons.engineering, 'Expert\\nTechnician'),
+                  Feature(Icons.access_time, 'On Time\\nService'),
+                  Feature(Icons.assignment_turned_in, '100%\\nSatisfaction'),
+                ],
+              ),
+            ),
+            const SizedBox(height: 24),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Text('Our Services',
+                  style: TextStyle(fontSize: 21, fontWeight: FontWeight.w800)),
+            ),
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: services.length,
+                gridDelegate:
+                    const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 12,
+                  childAspectRatio: 1.15,
+                ),
+                itemBuilder: (context, i) {
+                  final s = services[i];
+                  return Card(
+                    elevation: 0.8,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                      side: BorderSide(color: Colors.grey.shade200),
+                    ),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(14),
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => BookingPage(service: s.$1),
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(s.$2, size: 42, color: blue),
+                          const SizedBox(height: 9),
+                          Text(s.$1, textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  color: darkBlue,
+                                  fontWeight: FontWeight.w800)),
+                          const SizedBox(height: 3),
+                          const Text('Service & Repair',
+                              style: TextStyle(fontSize: 11)),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+            const SizedBox(height: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(17),
+                decoration: BoxDecoration(
+                  color: blue,
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: const Row(
+                  children: [
+                    Icon(Icons.card_giftcard, color: Colors.white, size: 34),
+                    SizedBox(width: 13),
+                    Expanded(
+                      child: Text('Special Offer\\nRefer 5 friends and get 鈧�100 OFF',
+                          style: TextStyle(color: Colors.white,
+                              fontWeight: FontWeight.w800, fontSize: 15)),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 18),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: FilledButton.icon(
+                      onPressed: makeCall,
+                      icon: const Icon(Icons.call),
+                      label: const Text('CALL NOW'),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: FilledButton.icon(
+                      onPressed: openWhatsApp,
+                      icon: const Icon(Icons.chat),
+                      label: const Text('WHATSAPP'),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+          ],
+        ),
+      ),
+      bottomNavigationBar: const NavigationBar(
+        selectedIndex: 0,
+        destinations: [
+          NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
+          NavigationDestination(icon: Icon(Icons.calendar_month), label: 'Bookings'),
+          NavigationDestination(icon: Icon(Icons.local_offer), label: 'Offers'),
+          NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
+        ],
+      ),
+    );
+  }
 }
 
-function shareLocation(){
-    if(!navigator.geolocation){
-        alert("Location not supported.");
-        return;
-    }
-    navigator.geolocation.getCurrentPosition(p=>{
-        const link=`https://maps.google.com/?q=${p.coords.latitude},${p.coords.longitude}`;
-        document.getElementById("custAddress").value="Live Location: "+link;
-        alert("Location captured successfully!");
-    },()=>{
-        alert("Location পাওয়া যায়নি। Address manually লিখুন।");
-    });
+class Feature extends StatelessWidget {
+  final IconData icon;
+  final String text;
+  const Feature(this.icon, this.text, {super.key});
+  @override
+  Widget build(BuildContext context) => Column(
+    children: [
+      Icon(icon, color: blue, size: 28),
+      const SizedBox(height: 5),
+      Text(text, textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700)),
+    ],
+  );
 }
 
-function sendWhatsAppBooking(){
-    const name=document.getElementById("custName").value.trim();
-    const phone=document.getElementById("custPhone").value.trim();
-    const address=document.getElementById("custAddress").value.trim();
-    const referred=document.getElementById("custReferred").value.trim();
-    const date=document.getElementById("serviceDate").value;
-    const time=document.getElementById("serviceTime").value;
+class BookingPage extends StatefulWidget {
+  final String service;
+  const BookingPage({super.key, required this.service});
+  @override State<BookingPage> createState() => _BookingPageState();
+}
 
-    if(!name||!phone||!address||!date||!time){
-        alert("Please fill all mandatory fields.");
-        return;
-    }
-    if(!/^[0-9]{10}$/.test(phone)){
-        alert("Please enter a valid 10-digit mobile number.");
-        return;
+class _BookingPageState extends State<BookingPage> {
+  final name = TextEditingController();
+  final phone = TextEditingController();
+  final address = TextEditingController();
+  final problem = TextEditingController();
+  DateTime? date;
+  TimeOfDay? time;
+
+  Future<void> pickDate() async {
+    final d = await showDatePicker(
+      context: context,
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(const Duration(days: 90)),
+      initialDate: DateTime.now(),
+    );
+    if (d != null) setState(() => date = d);
+  }
+
+  Future<void> pickTime() async {
+    final t = await showTimePicker(
+      context: context, initialTime: TimeOfDay.now(),
+    );
+    if (t != null) setState(() => time = t);
+  }
+
+  Future<void> submit() async {
+    if (name.text.isEmpty || phone.text.isEmpty || address.text.isEmpty ||
+        date == null || time == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please fill Name, Phone, Address, Date and Time.')),
+      );
+      return;
     }
 
-    let list=[];
-    let total=0;
-    document.querySelectorAll('input[name="service"]:checked').forEach(x=>{
-        const price=parseInt(x.dataset.price)||0;
-        const labour=parseInt(x.dataset.labour)||0;
-        total+=price+labour;
-        list.push("- "+x.value+" ₹"+price+(labour?" + ₹"+labour+" Labour":""));
-    });
+    final msg = Uri.encodeComponent(
+      'NG Cooling Solution Booking\\n'
+      'Service: ${widget.service}\\n'
+      'Name: ${name.text}\\nPhone: ${phone.text}\\n'
+      'Problem: ${problem.text}\\n'
+      'Date: ${date!.day}/${date!.month}/${date!.year}\\n'
+      'Time: ${time!.format(context)}\\n'
+      'Location: ${address.text}',
+    );
+    final uri = Uri.parse('https://wa.me/917439160014?text=$msg');
+    await launchUrl(uri, mode: LaunchMode.externalApplication);
+  }
 
-    if(!list.length){
-        alert("Please select at least one service.");
-        return;
-    }
-
-    let msg=`*N.G COOLING SOLUTION - NEW BOOKING*\n*Customer:* ${name}\n*Phone:* ${phone}\n*Address:* ${address}\n`+(referred?`*Referred By / Code:* ${referred}\n`:"")+`*Date:* ${date}\n*Time:* ${time}\n*Services:* \n${list.join("\n")}\n*Estimated Total:* ₹${total}`;
-
-    window.open("https://wa.me/917439160014?text="+encodeURIComponent(msg),"_blank");
-}
-
-window.addEventListener("DOMContentLoaded",()=>{
-    loadServices();
-});
-</script>
-
-</body>
-</html>
-
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(
+      title: const Text('Book a Service'),
+      backgroundColor: blue, foregroundColor: Colors.white,
+    ),
+    body: SingleChildScrollView(
+      padding: const EdgeInsets.all(18),
+      child: Column(
+        children: [
+          Text('1. Service  鈫�  2. Details  鈫�  3. Schedule  鈫�  4. Confirm',
+              style: TextStyle(color: blue, fontWeight: FontWeight.w700)),
+          const SizedBox(height: 20),
+          Align(alignment: Alignment.centerLeft,
+            child: Text(widget.service,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800))),
+          const SizedBox(height: 14),
+          TextField(controller: name, decoration: const InputDecoration(
+              labelText: 'Customer Name', border: OutlineInputBorder())),
+          const SizedBox(height: 12),
+          TextField(controller: phone, keyboardType: TextInputType.phone,
+              decoration: const InputDecoration(
+                  labelText: 'Phone Number', border: OutlineInputBorder())),
+          const SizedBox(height: 12),
+          TextField(controller: problem, maxLines: 3,
+              decoration: const InputDecoration(
+                  labelText: 'Problem Description', border: OutlineInputBorder())),
+          const SizedBox(height: 12),
+          TextField(controller: address, maxLines: 3,
+              decoration: const InputDecoration(
+                  labelText: 'Customer Location / Address',
+                  border: OutlineInputBorder())),
+          const SizedBox(height: 12),
+          Row(children: [
+            Expanded(child: OutlinedButton.icon(
+              onPressed: pickDate, icon: const Icon(Icons.calendar_month),
+              label: Text(date == null ? 'Select Date' :
+                '${date!.day}/${date!.month}/${date!.year}'))),
+            const SizedBox(width: 10),
+            Expanded(child: OutlinedButton.icon(
+              onPressed: pickTime, icon: const Icon(Icons.access_time),
+              label: Text(time == null ? 'Select Time' : time!.format(context)))),
+          ]),
+          const SizedBox(height: 20),
+          SizedBox(width: double.infinity, height: 52,
+            child: FilledButton.icon(
+              onPressed: submit, icon: const Icon(Icons.chat),
+              label: const Text('BOOK ON WHATSAPP',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
+            )),
