@@ -74,7 +74,6 @@
             padding: 20px;
             border-radius: 15px;
             margin-bottom: 15px;
-            position: relative;
         }
         .hero-banner h1 {
             font-size: 20px;
@@ -125,12 +124,13 @@
             align-items: center;
             text-align: center;
             border: 1px solid #eee;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
         }
-        .service-box img {
-            width: 45px;
-            height: 45px;
-            object-fit: contain;
-            margin-bottom: 8px;
+        .service-box:hover {
+            border-color: #0056b3;
+            background: #fdfdfd;
         }
         .service-box span {
             font-size: 12px;
@@ -169,7 +169,7 @@
         .booking-services-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            gap: 8px;
             margin-bottom: 15px;
         }
         .booking-service-item {
@@ -180,6 +180,7 @@
             text-align: center;
             font-size: 11px;
             cursor: pointer;
+            transition: all 0.2s;
         }
         .booking-service-item.selected {
             border-color: #0056b3;
@@ -217,6 +218,9 @@
             cursor: pointer;
             margin-top: 10px;
         }
+        .continue-btn:hover {
+            background: #004080;
+        }
         /* Bottom Navigation Bar */
         .bottom-nav {
             height: 60px;
@@ -245,79 +249,7 @@
 </head>
 <body>
 
-    <!-- Left Screen: Home View -->
-    <div class="phone-container">
-        <div class="status-bar">
-            <span>10:30</span>
-            <span><i class="fa-solid fa-signal"></i> <i class="fa-solid fa-wifi"></i> <i class="fa-solid fa-battery-full"></i></span>
-        </div>
-        <div class="app-header">
-            <i class="fa-solid fa-bars"></i>
-            <img src="https://i.ibb.co/3s6K984/ng-logo.png" alt="NG Logo" style="height: 30px;" onerror="this.style.display='none'">
-            <h2 style="display:inline-block;">N.G COOLING</h2>
-            <i class="fa-regular fa-bell"></i>
-        </div>
-        <div class="content">
-            <div class="hero-banner">
-                <h1>NG COOLING SOLUTION</h1>
-                <p>Your Comfort, Our Priority</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card"><i class="fa-solid fa-shield-check"></i><br>Trusted Service</div>
-                <div class="feature-card"><i class="fa-solid fa-user-gear"></i><br>Expert Tech</div>
-                <div class="feature-card"><i class="fa-regular fa-clock"></i><br>On Time</div>
-                <div class="feature-card"><i class="fa-solid fa-face-smile"></i><br>100% Satisfied</div>
-            </div>
-            <div class="section-title">Our Services</div>
-            <div class="services-grid">
-                <div class="service-box">
-                    <i class="fa-solid fa-snowflake fa-2x" style="color:#0056b3; margin-bottom:8px;"></i>
-                    <span>AC Repair</span>
-                    <small>Service & Repair</small>
-                </div>
-                <div class="service-box">
-                    <i class="fa-solid fa-screwdriver-wrench fa-2x" style="color:#0056b3; margin-bottom:8px;"></i>
-                    <span>AC Installation</span>
-                    <small>New Installation</small>
-                </div>
-                <div class="service-box">
-                    <i class="fa-solid fa-gas-pump fa-2x" style="color:#0056b3; margin-bottom:8px;"></i>
-                    <span>AC Gas Charging</span>
-                    <small>Gas Refill</small>
-                </div>
-                <div class="service-box">
-                    <i class="fa-solid fa-water fa-2x" style="color:#0056b3; margin-bottom:8px;"></i>
-                    <span>Split AC Jet Pump</span>
-                    <small>₹399 Only</small>
-                </div>
-                <div class="service-box">
-                    <i class="fa-solid fa-temperature-low fa-2x" style="color:#0056b3; margin-bottom:8px;"></i>
-                    <span>Fridge Repair</span>
-                    <small>Service & Repair</small>
-                </div>
-                <div class="service-box">
-                    <i class="fa-solid fa-shirt fa-2x" style="color:#0056b3; margin-bottom:8px;"></i>
-                    <span>Washing Machine</span>
-                    <small>Repair Service</small>
-                </div>
-            </div>
-            <div class="offer-banner">
-                <div>
-                    <strong style="font-size: 13px;">Special Offer</strong>
-                    <p style="font-size: 10px; opacity: 0.9;">Refer 5 friends and get</p>
-                </div>
-                <div style="font-size: 18px; font-weight: bold; background: white; color: #0056b3; padding: 5px 10px; border-radius: 6px;">₹100 OFF</div>
-            </div>
-        </div>
-        <div class="bottom-nav">
-            <a href="#" class="nav-item active"><i class="fa-solid fa-house"></i>Home</a>
-            <a href="#" class="nav-item"><i class="fa-regular fa-calendar-days"></i>Bookings</a>
-            <a href="#" class="nav-item"><i class="fa-solid fa-tags"></i>Offers</a>
-            <a href="#" class="nav-item"><i class="fa-regular fa-user"></i>Profile</a>
-        </div>
-    </div>
-
-    <!-- Right Screen: Booking View -->
+    <!-- Booking View (Interactive Screen) -->
     <div class="phone-container">
         <div class="status-bar">
             <span>10:30</span>
@@ -338,35 +270,36 @@
 
             <div class="section-title" style="font-size: 14px;">Select Service</div>
             <div class="booking-services-grid">
-                <div class="booking-service-item selected">
+                <div class="booking-service-item selected" onclick="selectService(this, 'AC Repair')">
                     <i class="fa-solid fa-snowflake" style="font-size: 20px; margin-bottom: 5px;"></i><br>
                     AC Repair
                 </div>
-                <div class="booking-service-item">
+                <div class="booking-service-item" onclick="selectService(this, 'AC Installation')">
                     <i class="fa-solid fa-screwdriver-wrench" style="font-size: 20px; margin-bottom: 5px;"></i><br>
                     AC Installation
                 </div>
-                <div class="booking-service-item">
+                <div class="booking-service-item" onclick="selectService(this, 'AC Service')">
                     <i class="fa-solid fa-fan" style="font-size: 20px; margin-bottom: 5px;"></i><br>
                     AC Service
                 </div>
-                <div class="booking-service-item">
+                <div class="booking-service-item" onclick="selectService(this, 'Gas Charging')">
                     <i class="fa-solid fa-gas-pump" style="font-size: 20px; margin-bottom: 5px;"></i><br>
                     Gas Charging
                 </div>
-                <div class="booking-service-item">
+                <div class="booking-service-item" onclick="selectService(this, 'Fridge Repair')">
                     <i class="fa-solid fa-temperature-low" style="font-size: 20px; margin-bottom: 5px;"></i><br>
                     Fridge Repair
                 </div>
-                <div class="booking-service-item">
+                <div class="booking-service-item" onclick="selectService(this, 'Washing Machine')">
                     <i class="fa-solid fa-shirt" style="font-size: 20px; margin-bottom: 5px;"></i><br>
                     Washing Machine
                 </div>
             </div>
 
+            <!-- Dynamic Fields Based on Selection -->
             <div class="form-group">
-                <label>Problem Description</label>
-                <textarea class="form-control" rows="2" placeholder="Describe the issue..."></textarea>
+                <label id="issue-label">Problem Description</label>
+                <textarea id="issue-input" class="form-control" rows="2" placeholder="Describe the issue..."></textarea>
             </div>
 
             <div class="form-group">
@@ -390,15 +323,40 @@
                 <input type="text" class="form-control" placeholder="Enter your location">
             </div>
 
-            <button class="continue-btn">Continue &rarr;</button>
+            <button class="continue-btn" onclick="alert('Booking submitted successfully!')">Continue &rarr;</button>
         </div>
         <div class="bottom-nav">
             <a href="#" class="nav-item"><i class="fa-solid fa-house"></i>Home</a>
-            <a href="#" class="nav-item"><i class="fa-regular fa-calendar-days"></i>Bookings</a>
+            <a href="#" class="nav-item active"><i class="fa-regular fa-calendar-days"></i>Bookings</a>
             <a href="#" class="nav-item"><i class="fa-solid fa-tags"></i>Offers</a>
             <a href="#" class="nav-item"><i class="fa-regular fa-user"></i>Profile</a>
         </div>
     </div>
 
+    <script>
+        function selectService(element, serviceName) {
+            // Remove 'selected' class from all items
+            document.querySelectorAll('.booking-service-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            // Add 'selected' class to clicked item
+            element.classList.add('selected');
+
+            // Dynamically change placeholder or field label based on selection if needed
+            const label = document.getElementById('issue-label');
+            const input = document.getElementById('issue-input');
+            
+            if(serviceName === 'AC Installation') {
+                label.innerText = "Installation Details";
+                input.placeholder = "Mention brand or wall type...";
+            } else if(serviceName === 'Gas Charging') {
+                label.innerText = "Gas Type / Notes";
+                input.placeholder = "R32, R410a or cooling issue...";
+            } else {
+                label.innerText = "Problem Description";
+                input.placeholder = "Describe the issue...";
+            }
+        }
+    </script>
 </body>
 </html>
