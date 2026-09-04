@@ -1,350 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N.G Cooling Solution</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f0f4f8;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            flex-wrap: wrap;
+        }
+        .phone-container {
+            width: 380px;
+            height: 750px;
+            background: #ffffff;
+            border-radius: 40px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border: 8px solid #111;
+        }
+        .status-bar {
+            height: 30px;
+            background: #0056b3;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 12px;
+        }
+        .app-header {
+            background: #0056b3;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .app-header h2 {
+            font-size: 18px;
+        }
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            background: #f8fafc;
+        }
+        .content::-webkit-scrollbar {
+            width: 4px;
+        }
+        .content::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 4px;
+        }
+        /* Home Screen Styles */
+        .hero-banner {
+            background: linear-gradient(135deg, #0056b3, #0080ff);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .hero-banner h1 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        .hero-banner p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .feature-card {
+            background: white;
+            padding: 10px 5px;
+            border-radius: 10px;
+            font-size: 11px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .feature-card i {
+            color: #0056b3;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #222;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .service-box {
+            background: white;
+            padding: 12px;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border: 1px solid #eee;
+        }
+        .service-box img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            margin-bottom: 8px;
+        }
+        .service-box span {
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+        }
+        .service-box small {
+            font-size: 10px;
+            color: #666;
+        }
+        .offer-banner {
+            background: linear-gradient(135deg, #004080, #0066cc);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        /* Booking Screen Styles */
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 11px;
+            color: #777;
+            text-align: center;
+        }
+        .step-indicator .active {
+            color: #0056b3;
+            font-weight: bold;
+        }
+        .booking-services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .booking-service-item {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 10px 5px;
+            text-align: center;
+            font-size: 11px;
+            cursor: pointer;
+        }
+        .booking-service-item.selected {
+            border-color: #0056b3;
+            background: #eef5ff;
+            color: #0056b3;
+            font-weight: bold;
+        }
+        .form-group {
+            margin-bottom: 12px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 12px;
+            outline: none;
+            background: white;
+        }
+        .continue-btn {
+            width: 100%;
+            background: #0056b3;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        /* Bottom Navigation Bar */
+        .bottom-nav {
+            height: 60px;
+            background: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 10px;
+            color: #777;
+            text-decoration: none;
+        }
+        .nav-item.active {
+            color: #0056b3;
+        }
+        .nav-item i {
+            font-size: 16px;
+            margin-bottom: 3px;
+        }
+    </style>
+</head>
+<body>
 
-import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+    <!-- Left Screen: Home View -->
+    <div class="phone-container">
+        <div class="status-bar">
+            <span>10:30</span>
+            <span><i class="fa-solid fa-signal"></i> <i class="fa-solid fa-wifi"></i> <i class="fa-solid fa-battery-full"></i></span>
+        </div>
+        <div class="app-header">
+            <i class="fa-solid fa-bars"></i>
+            <img src="https://i.ibb.co/3s6K984/ng-logo.png" alt="NG Logo" style="height: 30px;" onerror="this.style.display='none'">
+            <h2 style="display:inline-block;">N.G COOLING</h2>
+            <i class="fa-regular fa-bell"></i>
+        </div>
+        <div class="content">
+            <div class="hero-banner">
+                <h1>NG COOLING SOLUTION</h1>
+                <p>Your Comfort, Our Priority</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card"><i class="fa-solid fa-shield-check"></i><br>Trusted Service</div>
+                <div class="feature-card"><i class="fa-solid fa-user-gear"></i><br>Expert Tech</div>
+                <div class="feature-card"><i class="fa-regular fa-clock"></i><br>On Time</div>
+                <div class="feature-card"><i class="fa-solid fa-face-smile"></i><br>100% Satisfied</div>
+            </div>
+            <div class="section-title">Our Services</div>
+            <div class="services-grid">
+                <div class="service-box">
+                    <i class="fa-solid fa-snowflake fa-2x" style="color:#0056b3; margin-bottom:8px;"></i>
+                    <span>AC Repair</span>
+                    <small>Service & Repair</small>
+                </div>
+                <div class="service-box">
+                    <i class="fa-solid fa-screwdriver-wrench fa-2x" style="color:#0056b3; margin-bottom:8px;"></i>
+                    <span>AC Installation</span>
+                    <small>New Installation</small>
+                </div>
+                <div class="service-box">
+                    <i class="fa-solid fa-gas-pump fa-2x" style="color:#0056b3; margin-bottom:8px;"></i>
+                    <span>AC Gas Charging</span>
+                    <small>Gas Refill</small>
+                </div>
+                <div class="service-box">
+                    <i class="fa-solid fa-water fa-2x" style="color:#0056b3; margin-bottom:8px;"></i>
+                    <span>Split AC Jet Pump</span>
+                    <small>₹399 Only</small>
+                </div>
+                <div class="service-box">
+                    <i class="fa-solid fa-temperature-low fa-2x" style="color:#0056b3; margin-bottom:8px;"></i>
+                    <span>Fridge Repair</span>
+                    <small>Service & Repair</small>
+                </div>
+                <div class="service-box">
+                    <i class="fa-solid fa-shirt fa-2x" style="color:#0056b3; margin-bottom:8px;"></i>
+                    <span>Washing Machine</span>
+                    <small>Repair Service</small>
+                </div>
+            </div>
+            <div class="offer-banner">
+                <div>
+                    <strong style="font-size: 13px;">Special Offer</strong>
+                    <p style="font-size: 10px; opacity: 0.9;">Refer 5 friends and get</p>
+                </div>
+                <div style="font-size: 18px; font-weight: bold; background: white; color: #0056b3; padding: 5px 10px; border-radius: 6px;">₹100 OFF</div>
+            </div>
+        </div>
+        <div class="bottom-nav">
+            <a href="#" class="nav-item active"><i class="fa-solid fa-house"></i>Home</a>
+            <a href="#" class="nav-item"><i class="fa-regular fa-calendar-days"></i>Bookings</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-tags"></i>Offers</a>
+            <a href="#" class="nav-item"><i class="fa-regular fa-user"></i>Profile</a>
+        </div>
+    </div>
 
-void main() => runApp(const NGCoolingApp());
+    <!-- Right Screen: Booking View -->
+    <div class="phone-container">
+        <div class="status-bar">
+            <span>10:30</span>
+            <span><i class="fa-solid fa-signal"></i> <i class="fa-solid fa-wifi"></i> <i class="fa-solid fa-battery-full"></i></span>
+        </div>
+        <div class="app-header" style="background: #0056b3;">
+            <i class="fa-solid fa-arrow-left"></i>
+            <h2 style="font-size: 16px;">Book a Service</h2>
+            <div style="width: 15px;"></div>
+        </div>
+        <div class="content">
+            <div class="step-indicator">
+                <div class="active">1. Service</div>
+                <div>2. Details</div>
+                <div>3. Schedule</div>
+                <div>4. Confirm</div>
+            </div>
 
-class NGCoolingApp extends StatelessWidget {
-  const NGCoolingApp({super.key});
+            <div class="section-title" style="font-size: 14px;">Select Service</div>
+            <div class="booking-services-grid">
+                <div class="booking-service-item selected">
+                    <i class="fa-solid fa-snowflake" style="font-size: 20px; margin-bottom: 5px;"></i><br>
+                    AC Repair
+                </div>
+                <div class="booking-service-item">
+                    <i class="fa-solid fa-screwdriver-wrench" style="font-size: 20px; margin-bottom: 5px;"></i><br>
+                    AC Installation
+                </div>
+                <div class="booking-service-item">
+                    <i class="fa-solid fa-fan" style="font-size: 20px; margin-bottom: 5px;"></i><br>
+                    AC Service
+                </div>
+                <div class="booking-service-item">
+                    <i class="fa-solid fa-gas-pump" style="font-size: 20px; margin-bottom: 5px;"></i><br>
+                    Gas Charging
+                </div>
+                <div class="booking-service-item">
+                    <i class="fa-solid fa-temperature-low" style="font-size: 20px; margin-bottom: 5px;"></i><br>
+                    Fridge Repair
+                </div>
+                <div class="booking-service-item">
+                    <i class="fa-solid fa-shirt" style="font-size: 20px; margin-bottom: 5px;"></i><br>
+                    Washing Machine
+                </div>
+            </div>
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'NG Cooling Solution',
-      theme: ThemeData(
-        useMaterial3: true,
-        colorSchemeSeed: const Color(0xFF0284C7),
-        fontFamily: 'Arial',
-      ),
-      home: const HomePage(),
-    );
-  }
-}
+            <div class="form-group">
+                <label>Problem Description</label>
+                <textarea class="form-control" rows="2" placeholder="Describe the issue..."></textarea>
+            </div>
 
-const blue = Color(0xFF0284C7);
-const darkBlue = Color(0xFF075985);
+            <div class="form-group">
+                <label>Select Date</label>
+                <input type="date" class="form-control">
+            </div>
 
-Future<void> openWhatsApp() async {
-  final uri = Uri.parse('https://wa.me/917439160014?text=Hello%20NG%20Cooling%20Solution%2C%20I%20want%20to%20book%20a%20service.');
-  await launchUrl(uri, mode: LaunchMode.externalApplication);
-}
+            <div class="form-group">
+                <label>Select Time Slot</label>
+                <select class="form-control">
+                    <option>Select Time Slot</option>
+                    <option>09:00 AM - 11:00 AM</option>
+                    <option>11:00 AM - 01:00 PM</option>
+                    <option>02:00 PM - 04:00 PM</option>
+                    <option>04:00 PM - 06:00 PM</option>
+                </select>
+            </div>
 
-Future<void> makeCall() async {
-  final uri = Uri.parse('tel:+917439160014');
-  await launchUrl(uri);
-}
+            <div class="form-group">
+                <label>Location</label>
+                <input type="text" class="form-control" placeholder="Enter your location">
+            </div>
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+            <button class="continue-btn">Continue &rarr;</button>
+        </div>
+        <div class="bottom-nav">
+            <a href="#" class="nav-item"><i class="fa-solid fa-house"></i>Home</a>
+            <a href="#" class="nav-item"><i class="fa-regular fa-calendar-days"></i>Bookings</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-tags"></i>Offers</a>
+            <a href="#" class="nav-item"><i class="fa-regular fa-user"></i>Profile</a>
+        </div>
+    </div>
 
-  static const services = [
-    ('AC Repair', Icons.ac_unit),
-    ('AC Installation', Icons.build_circle),
-    ('AC Service', Icons.cleaning_services),
-    ('AC Gas Charging', Icons.gas_meter),
-    ('Fridge Repair', Icons.kitchen),
-    ('Washing Machine', Icons.local_laundry_service),
-    ('Microwave Repair', Icons.microwave),
-    ('Geyser Repair', Icons.water_drop),
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: blue,
-        foregroundColor: Colors.white,
-        title: const Text('NG COOLING SOLUTION',
-            style: TextStyle(fontWeight: FontWeight.w800, fontSize: 17)),
-        actions: [
-          IconButton(onPressed: openWhatsApp, icon: const Icon(Icons.chat)),
-          IconButton(onPressed: makeCall, icon: const Icon(Icons.call)),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.fromLTRB(22, 28, 22, 25),
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [Color(0xFF075985), Color(0xFF38BDF8)],
-                ),
-                borderRadius: BorderRadius.vertical(
-                  bottom: Radius.circular(28),
-                ),
-              ),
-              child: const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('NG COOLING',
-                      style: TextStyle(color: Colors.white, fontSize: 29,
-                          fontWeight: FontWeight.w900)),
-                  Text('SOLUTION',
-                      style: TextStyle(color: Colors.white, fontSize: 29,
-                          fontWeight: FontWeight.w900)),
-                  SizedBox(height: 6),
-                  Text('AC REPAIR | SERVICE | INSTALLATION',
-                      style: TextStyle(color: Colors.white, fontSize: 12,
-                          fontWeight: FontWeight.w700)),
-                  SizedBox(height: 14),
-                  Text('Your Comfort, Our Priority',
-                      style: TextStyle(color: Colors.white, fontSize: 17,
-                          fontWeight: FontWeight.w700)),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Feature(Icons.verified_user, 'Trusted\\nService'),
-                  Feature(Icons.engineering, 'Expert\\nTechnician'),
-                  Feature(Icons.access_time, 'On Time\\nService'),
-                  Feature(Icons.assignment_turned_in, '100%\\nSatisfaction'),
-                ],
-              ),
-            ),
-            const SizedBox(height: 24),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Text('Our Services',
-                  style: TextStyle(fontSize: 21, fontWeight: FontWeight.w800)),
-            ),
-            const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: services.length,
-                gridDelegate:
-                    const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
-                  childAspectRatio: 1.15,
-                ),
-                itemBuilder: (context, i) {
-                  final s = services[i];
-                  return Card(
-                    elevation: 0.8,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14),
-                      side: BorderSide(color: Colors.grey.shade200),
-                    ),
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(14),
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => BookingPage(service: s.$1),
-                        ),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(s.$2, size: 42, color: blue),
-                          const SizedBox(height: 9),
-                          Text(s.$1, textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  color: darkBlue,
-                                  fontWeight: FontWeight.w800)),
-                          const SizedBox(height: 3),
-                          const Text('Service & Repair',
-                              style: TextStyle(fontSize: 11)),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-            const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(17),
-                decoration: BoxDecoration(
-                  color: blue,
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: const Row(
-                  children: [
-                    Icon(Icons.card_giftcard, color: Colors.white, size: 34),
-                    SizedBox(width: 13),
-                    Expanded(
-                      child: Text('Special Offer\\nRefer 5 friends and get 鈧�100 OFF',
-                          style: TextStyle(color: Colors.white,
-                              fontWeight: FontWeight.w800, fontSize: 15)),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 18),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: FilledButton.icon(
-                      onPressed: makeCall,
-                      icon: const Icon(Icons.call),
-                      label: const Text('CALL NOW'),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: FilledButton.icon(
-                      onPressed: openWhatsApp,
-                      icon: const Icon(Icons.chat),
-                      label: const Text('WHATSAPP'),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-          ],
-        ),
-      ),
-      bottomNavigationBar: const NavigationBar(
-        selectedIndex: 0,
-        destinations: [
-          NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-          NavigationDestination(icon: Icon(Icons.calendar_month), label: 'Bookings'),
-          NavigationDestination(icon: Icon(Icons.local_offer), label: 'Offers'),
-          NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
-        ],
-      ),
-    );
-  }
-}
-
-class Feature extends StatelessWidget {
-  final IconData icon;
-  final String text;
-  const Feature(this.icon, this.text, {super.key});
-  @override
-  Widget build(BuildContext context) => Column(
-    children: [
-      Icon(icon, color: blue, size: 28),
-      const SizedBox(height: 5),
-      Text(text, textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700)),
-    ],
-  );
-}
-
-class BookingPage extends StatefulWidget {
-  final String service;
-  const BookingPage({super.key, required this.service});
-  @override State<BookingPage> createState() => _BookingPageState();
-}
-
-class _BookingPageState extends State<BookingPage> {
-  final name = TextEditingController();
-  final phone = TextEditingController();
-  final address = TextEditingController();
-  final problem = TextEditingController();
-  DateTime? date;
-  TimeOfDay? time;
-
-  Future<void> pickDate() async {
-    final d = await showDatePicker(
-      context: context,
-      firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(const Duration(days: 90)),
-      initialDate: DateTime.now(),
-    );
-    if (d != null) setState(() => date = d);
-  }
-
-  Future<void> pickTime() async {
-    final t = await showTimePicker(
-      context: context, initialTime: TimeOfDay.now(),
-    );
-    if (t != null) setState(() => time = t);
-  }
-
-  Future<void> submit() async {
-    if (name.text.isEmpty || phone.text.isEmpty || address.text.isEmpty ||
-        date == null || time == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please fill Name, Phone, Address, Date and Time.')),
-      );
-      return;
-    }
-
-    final msg = Uri.encodeComponent(
-      'NG Cooling Solution Booking\\n'
-      'Service: ${widget.service}\\n'
-      'Name: ${name.text}\\nPhone: ${phone.text}\\n'
-      'Problem: ${problem.text}\\n'
-      'Date: ${date!.day}/${date!.month}/${date!.year}\\n'
-      'Time: ${time!.format(context)}\\n'
-      'Location: ${address.text}',
-    );
-    final uri = Uri.parse('https://wa.me/917439160014?text=$msg');
-    await launchUrl(uri, mode: LaunchMode.externalApplication);
-  }
-
-  @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: const Text('Book a Service'),
-      backgroundColor: blue, foregroundColor: Colors.white,
-    ),
-    body: SingleChildScrollView(
-      padding: const EdgeInsets.all(18),
-      child: Column(
-        children: [
-          Text('1. Service  鈫�  2. Details  鈫�  3. Schedule  鈫�  4. Confirm',
-              style: TextStyle(color: blue, fontWeight: FontWeight.w700)),
-          const SizedBox(height: 20),
-          Align(alignment: Alignment.centerLeft,
-            child: Text(widget.service,
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800))),
-          const SizedBox(height: 14),
-          TextField(controller: name, decoration: const InputDecoration(
-              labelText: 'Customer Name', border: OutlineInputBorder())),
-          const SizedBox(height: 12),
-          TextField(controller: phone, keyboardType: TextInputType.phone,
-              decoration: const InputDecoration(
-                  labelText: 'Phone Number', border: OutlineInputBorder())),
-          const SizedBox(height: 12),
-          TextField(controller: problem, maxLines: 3,
-              decoration: const InputDecoration(
-                  labelText: 'Problem Description', border: OutlineInputBorder())),
-          const SizedBox(height: 12),
-          TextField(controller: address, maxLines: 3,
-              decoration: const InputDecoration(
-                  labelText: 'Customer Location / Address',
-                  border: OutlineInputBorder())),
-          const SizedBox(height: 12),
-          Row(children: [
-            Expanded(child: OutlinedButton.icon(
-              onPressed: pickDate, icon: const Icon(Icons.calendar_month),
-              label: Text(date == null ? 'Select Date' :
-                '${date!.day}/${date!.month}/${date!.year}'))),
-            const SizedBox(width: 10),
-            Expanded(child: OutlinedButton.icon(
-              onPressed: pickTime, icon: const Icon(Icons.access_time),
-              label: Text(time == null ? 'Select Time' : time!.format(context)))),
-          ]),
-          const SizedBox(height: 20),
-          SizedBox(width: double.infinity, height: 52,
-            child: FilledButton.icon(
-              onPressed: submit, icon: const Icon(Icons.chat),
-              label: const Text('BOOK ON WHATSAPP',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
-            )),
+</body>
+</html>
