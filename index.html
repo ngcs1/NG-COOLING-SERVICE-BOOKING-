@@ -3,360 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>N.G Cooling Solution</title>
+    <title>NG Cooling Solution - AC & Appliance Repair</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        body {
-            background-color: #f0f4f8;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px;
-            flex-wrap: wrap;
-        }
-        .phone-container {
-            width: 380px;
-            height: 750px;
-            background: #ffffff;
-            border-radius: 40px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            border: 8px solid #111;
-        }
-        .status-bar {
-            height: 30px;
-            background: #0056b3;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            font-size: 12px;
-        }
-        .app-header {
-            background: #0056b3;
-            color: white;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .app-header h2 {
-            font-size: 18px;
-        }
-        .content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 15px;
-            background: #f8fafc;
-        }
-        .content::-webkit-scrollbar {
-            width: 4px;
-        }
-        .content::-webkit-scrollbar-thumb {
-            background: #ccc;
-            border-radius: 4px;
-        }
-        /* Home Screen Styles */
-        .hero-banner {
-            background: linear-gradient(135deg, #0056b3, #0080ff);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 15px;
-        }
-        .hero-banner h1 {
-            font-size: 20px;
-            margin-bottom: 5px;
-        }
-        .hero-banner p {
-            font-size: 13px;
-            opacity: 0.9;
-        }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .feature-card {
-            background: white;
-            padding: 10px 5px;
-            border-radius: 10px;
-            font-size: 11px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        .feature-card i {
-            color: #0056b3;
-            font-size: 16px;
-            margin-bottom: 5px;
-        }
-        .section-title {
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #222;
-        }
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        .service-box {
-            background: white;
-            padding: 12px;
-            border-radius: 12px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            border: 1px solid #eee;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-        }
-        .service-box:hover {
-            border-color: #0056b3;
-            background: #fdfdfd;
-        }
-        .service-box span {
-            font-size: 12px;
-            font-weight: 600;
-            color: #333;
-        }
-        .service-box small {
-            font-size: 10px;
-            color: #666;
-        }
-        .offer-banner {
-            background: linear-gradient(135deg, #004080, #0066cc);
-            color: white;
-            padding: 15px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        /* Booking Screen Styles */
-        .step-indicator {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            background: white;
-            padding: 10px;
-            border-radius: 10px;
-            font-size: 11px;
-            color: #777;
-            text-align: center;
-        }
-        .step-indicator .active {
-            color: #0056b3;
-            font-weight: bold;
-        }
-        .booking-services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-        .booking-service-item {
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 10px 5px;
-            text-align: center;
-            font-size: 11px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .booking-service-item.selected {
-            border-color: #0056b3;
-            background: #eef5ff;
-            color: #0056b3;
-            font-weight: bold;
-        }
-        .form-group {
-            margin-bottom: 12px;
-        }
-        .form-group label {
-            display: block;
-            font-size: 12px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .form-control {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 12px;
-            outline: none;
-            background: white;
-        }
-        .continue-btn {
-            width: 100%;
-            background: #0056b3;
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        .continue-btn:hover {
-            background: #004080;
-        }
-        /* Bottom Navigation Bar */
-        .bottom-nav {
-            height: 60px;
-            background: white;
-            border-top: 1px solid #eee;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 10px;
-            color: #777;
-            text-decoration: none;
-        }
-        .nav-item.active {
-            color: #0056b3;
-        }
-        .nav-item i {
-            font-size: 16px;
-            margin-bottom: 3px;
-        }
-    </style>
 </head>
 <body>
 
-    <!-- Booking View (Interactive Screen) -->
-    <div class="phone-container">
-        <div class="status-bar">
-            <span>10:30</span>
-            <span><i class="fa-solid fa-signal"></i> <i class="fa-solid fa-wifi"></i> <i class="fa-solid fa-battery-full"></i></span>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="menu-icon"><i class="fa-solid fa-bars"></i></div>
+            <div class="logo-container">
+                <img src="logo.png" alt="NG Cooling Solution" class="logo-img" onerror="this.style.display='none'">
+                <div class="logo-text">
+                    <h1>NG</h1>
+                    <span>COOLING SOLUTION</span>
+                    <small>AC REPAIR | SERVICE | INSTALLATION</small>
+                </div>
+            </div>
+            <div class="notif-icon"><i class="fa-regular fa-bell"></i></div>
+        </header>
+
+        <!-- Main Banner -->
+        <section class="banner">
+            <div class="banner-content">
+                <h2>NG COOLING SOLUTION</h2>
+                <p>Your Comfort, Our Priority</p>
+            </div>
+            <div class="banner-img">
+                <img src="ac-unit.png" alt="AC Unit" onerror="this.src='https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=500&q=80'">
+            </div>
+        </section>
+
+        <!-- Features Bar -->
+        <div class="features-bar">
+            <div class="feature-item">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Trusted Service</span>
+            </div>
+            <div class="feature-item">
+                <i class="fa-solid fa-user-gear"></i>
+                <span>Expert Technician</span>
+            </div>
+            <div class="feature-item">
+                <i class="fa-solid fa-clock"></i>
+                <span>On Time Service</span>
+            </div>
+            <div class="feature-item">
+                <i class="fa-solid fa-face-smile"></i>
+                <span>100% Satisfaction</span>
+            </div>
         </div>
-        <div class="app-header" style="background: #0056b3;">
-            <i class="fa-solid fa-arrow-left"></i>
-            <h2 style="font-size: 16px;">Book a Service</h2>
-            <div style="width: 15px;"></div>
+
+        <!-- Services Section -->
+        <section class="services-section">
+            <h3>Our Services</h3>
+            <div class="services-grid">
+                <div class="service-card" onclick="openBooking('AC Repair')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2602/2602392.png" alt="AC Repair">
+                    <h4>AC Repair</h4>
+                    <p>Service & Repair</p>
+                </div>
+                <div class="service-card" onclick="openBooking('AC Installation')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3665/3665935.png" alt="AC Installation">
+                    <h4>AC Installation</h4>
+                    <p>New Installation</p>
+                </div>
+                <div class="service-card" onclick="openBooking('AC Gas Charging')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/914/914441.png" alt="AC Gas">
+                    <h4>AC Gas Charging</h4>
+                    <p>Gas Refill</p>
+                </div>
+                <div class="service-card" onclick="openBooking('AC Maintenance')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3024/3024502.png" alt="AC Maintenance">
+                    <h4>AC Maintenance</h4>
+                    <p>Regular Service</p>
+                </div>
+                <div class="service-card" onclick="openBooking('Fridge Repair')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2076/2076210.png" alt="Fridge Repair">
+                    <h4>Fridge Repair</h4>
+                    <p>Service & Repair</p>
+                </div>
+                <div class="service-card" onclick="openBooking('Washing Machine')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2991/2991139.png" alt="Washing Machine">
+                    <h4>Washing Machine</h4>
+                    <p>Repair Service</p>
+                </div>
+                <div class="service-card" onclick="openBooking('Microwave Oven')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2362/2362973.png" alt="Microwave">
+                    <h4>Microwave Oven</h4>
+                    <p>Repair Service</p>
+                </div>
+                <div class="service-card" onclick="openBooking('Geyser Repair')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2827/2827265.png" alt="Geyser">
+                    <h4>Geyser Repair</h4>
+                    <p>Repair Service</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Offer Banner -->
+        <div class="offer-banner">
+            <div class="offer-icon"><i class="fa-solid fa-gift"></i></div>
+            <div class="offer-text">
+                <strong>Special Offer</strong>
+                <p>Refer 5 friends and get</p>
+            </div>
+            <div class="offer-price">₹100 OFF</div>
         </div>
-        <div class="content">
-            <div class="step-indicator">
-                <div class="active">1. Service</div>
-                <div>2. Details</div>
-                <div>3. Schedule</div>
-                <div>4. Confirm</div>
-            </div>
 
-            <div class="section-title" style="font-size: 14px;">Select Service</div>
-            <div class="booking-services-grid">
-                <div class="booking-service-item selected" onclick="selectService(this, 'AC Repair')">
-                    <i class="fa-solid fa-snowflake" style="font-size: 20px; margin-bottom: 5px;"></i><br>
-                    AC Repair
+        <!-- Booking Form Modal / Section (Hidden by default, shown on click) -->
+        <div id="bookingModal" class="booking-modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Book a Service</h4>
+                    <button onclick="closeBooking()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
-                <div class="booking-service-item" onclick="selectService(this, 'AC Installation')">
-                    <i class="fa-solid fa-screwdriver-wrench" style="font-size: 20px; margin-bottom: 5px;"></i><br>
-                    AC Installation
-                </div>
-                <div class="booking-service-item" onclick="selectService(this, 'AC Service')">
-                    <i class="fa-solid fa-fan" style="font-size: 20px; margin-bottom: 5px;"></i><br>
-                    AC Service
-                </div>
-                <div class="booking-service-item" onclick="selectService(this, 'Gas Charging')">
-                    <i class="fa-solid fa-gas-pump" style="font-size: 20px; margin-bottom: 5px;"></i><br>
-                    Gas Charging
-                </div>
-                <div class="booking-service-item" onclick="selectService(this, 'Fridge Repair')">
-                    <i class="fa-solid fa-temperature-low" style="font-size: 20px; margin-bottom: 5px;"></i><br>
-                    Fridge Repair
-                </div>
-                <div class="booking-service-item" onclick="selectService(this, 'Washing Machine')">
-                    <i class="fa-solid fa-shirt" style="font-size: 20px; margin-bottom: 5px;"></i><br>
-                    Washing Machine
-                </div>
+                <form id="serviceForm" onsubmit="submitBooking(event)">
+                    <div class="form-group">
+                        <label>Selected Service</label>
+                        <input type="text" id="selectedService" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Problem Description</label>
+                        <textarea id="problemDesc" placeholder="Describe the issue..." rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Select Date</label>
+                        <input type="date" id="serviceDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Select Time Slot</label>
+                        <select id="serviceTime" required>
+                            <option value="">Select Time Slot</option>
+                            <option value="09:00 AM - 11:00 AM">09:00 AM - 11:00 AM</option>
+                            <option value="11:00 AM - 01:00 PM">11:00 AM - 01:00 PM</option>
+                            <option value="02:00 PM - 04:00 PM">02:00 PM - 04:00 PM</option>
+                            <option value="04:00 PM - 06:00 PM">04:00 PM - 06:00 PM</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Location (Kolkata)</label>
+                        <input type="text" id="serviceLocation" placeholder="Enter your location/address" required>
+                    </div>
+                    <button type="submit" class="continue-btn">Confirm & Continue <i class="fa-solid fa-arrow-right"></i></button>
+                </form>
             </div>
-
-            <!-- Dynamic Fields Based on Selection -->
-            <div class="form-group">
-                <label id="issue-label">Problem Description</label>
-                <textarea id="issue-input" class="form-control" rows="2" placeholder="Describe the issue..."></textarea>
-            </div>
-
-            <div class="form-group">
-                <label>Select Date</label>
-                <input type="date" class="form-control">
-            </div>
-
-            <div class="form-group">
-                <label>Select Time Slot</label>
-                <select class="form-control">
-                    <option>Select Time Slot</option>
-                    <option>09:00 AM - 11:00 AM</option>
-                    <option>11:00 AM - 01:00 PM</option>
-                    <option>02:00 PM - 04:00 PM</option>
-                    <option>04:00 PM - 06:00 PM</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Location</label>
-                <input type="text" class="form-control" placeholder="Enter your location">
-            </div>
-
-            <button class="continue-btn" onclick="alert('Booking submitted successfully!')">Continue &rarr;</button>
         </div>
-        <div class="bottom-nav">
-            <a href="#" class="nav-item"><i class="fa-solid fa-house"></i>Home</a>
-            <a href="#" class="nav-item active"><i class="fa-regular fa-calendar-days"></i>Bookings</a>
-            <a href="#" class="nav-item"><i class="fa-solid fa-tags"></i>Offers</a>
-            <a href="#" class="nav-item"><i class="fa-regular fa-user"></i>Profile</a>
-        </div>
+
+        <!-- Bottom Navigation Bar -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item active">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </a>
+            <a href="#bookings" class="nav-item" onclick="alert('Booking History section')">
+                <i class="fa-regular fa-clipboard"></i>
+                <span>Bookings</span>
+            </a>
+            <a href="#offers" class="nav-item" onclick="alert('Refer & Earn: Get ₹100 OFF on referring 5 friends!')">
+                <i class="fa-solid fa-tags"></i>
+                <span>Offers</span>
+            </a>
+            <a href="#profile" class="nav-item" onclick="alert('Technician Profile: Nayan Gain | N.G Cooling Solution')">
+                <i class="fa-regular fa-user"></i>
+                <span>Profile</span>
+            </a>
+        </nav>
     </div>
 
-    <script>
-        function selectService(element, serviceName) {
-            // Remove 'selected' class from all items
-            document.querySelectorAll('.booking-service-item').forEach(item => {
-                item.classList.remove('selected');
-            });
-            // Add 'selected' class to clicked item
-            element.classList.add('selected');
-
-            // Dynamically change placeholder or field label based on selection if needed
-            const label = document.getElementById('issue-label');
-            const input = document.getElementById('issue-input');
-            
-            if(serviceName === 'AC Installation') {
-                label.innerText = "Installation Details";
-                input.placeholder = "Mention brand or wall type...";
-            } else if(serviceName === 'Gas Charging') {
-                label.innerText = "Gas Type / Notes";
-                input.placeholder = "R32, R410a or cooling issue...";
-            } else {
-                label.innerText = "Problem Description";
-                input.placeholder = "Describe the issue...";
-            }
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
