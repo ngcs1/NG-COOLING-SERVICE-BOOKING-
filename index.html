@@ -10,168 +10,561 @@
 <body>
 
     <div class="app-container">
-        <!-- Header -->
-        <header class="header">
-            <div class="menu-icon"><i class="fa-solid fa-bars"></i></div>
-            <div class="logo-container">
-                <img src="logo.png" alt="NG Cooling Solution" class="logo-img" onerror="this.style.display='none'">
-                <div class="logo-text">
-                    <h1>NG</h1>
-                    <span>COOLING SOLUTION</span>
-                    <small>AC REPAIR | SERVICE | INSTALLATION</small>
-                </div>
-            </div>
-            <div class="notif-icon"><i class="fa-regular fa-bell"></i></div>
-        </header>
-
-        <!-- Main Banner -->
-        <section class="banner">
-            <div class="banner-content">
+        
+        <!-- Login Section (Initially Shown) -->
+        <div id="loginSection" class="auth-screen">
+            <div class="auth-header">
                 <h2>NG COOLING SOLUTION</h2>
                 <p>Your Comfort, Our Priority</p>
             </div>
-            <div class="banner-img">
-                <img src="ac-unit.png" alt="AC Unit" onerror="this.src='https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=500&q=80'">
-            </div>
-        </section>
-
-        <!-- Features Bar -->
-        <div class="features-bar">
-            <div class="feature-item">
-                <i class="fa-solid fa-shield-halved"></i>
-                <span>Trusted Service</span>
-            </div>
-            <div class="feature-item">
-                <i class="fa-solid fa-user-gear"></i>
-                <span>Expert Technician</span>
-            </div>
-            <div class="feature-item">
-                <i class="fa-solid fa-clock"></i>
-                <span>On Time Service</span>
-            </div>
-            <div class="feature-item">
-                <i class="fa-solid fa-face-smile"></i>
-                <span>100% Satisfaction</span>
+            <div class="auth-box">
+                <h3>Customer Login</h3>
+                <p>Enter your mobile number to continue</p>
+                <div class="input-group">
+                    <span>+91</span>
+                    <input type="tel" id="mobileNumber" placeholder="Enter mobile number" maxlength="10">
+                </div>
+                <button class="primary-btn" onclick="sendOTP()">Get OTP</button>
+                
+                <div id="otpBox" style="display: none; margin-top: 15px;">
+                    <p>Enter 4-digit OTP (Use: 1234)</p>
+                    <input type="text" id="otpInput" placeholder="Enter OTP" maxlength="4">
+                    <button class="primary-btn" onclick="verifyOTP()">Verify & Login</button>
+                </div>
             </div>
         </div>
 
-        <!-- Services Section -->
-        <section class="services-section">
-            <h3>Our Services</h3>
-            <div class="services-grid">
-                <div class="service-card" onclick="openBooking('AC Repair')">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2602/2602392.png" alt="AC Repair">
-                    <h4>AC Repair</h4>
-                    <p>Service & Repair</p>
+        <!-- Main App Dashboard (Hidden until login) -->
+        <div id="mainApp" style="display: none;">
+            <!-- Header -->
+            <header class="header">
+                <div class="menu-icon"><i class="fa-solid fa-bars"></i></div>
+                <div class="logo-container">
+                    <div class="logo-text">
+                        <h1>NG</h1>
+                        <span>COOLING SOLUTION</span>
+                        <small>AC REPAIR | SERVICE | INSTALLATION</small>
+                    </div>
                 </div>
-                <div class="service-card" onclick="openBooking('AC Installation')">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3665/3665935.png" alt="AC Installation">
-                    <h4>AC Installation</h4>
-                    <p>New Installation</p>
-                </div>
-                <div class="service-card" onclick="openBooking('AC Gas Charging')">
-                    <img src="https://cdn-icons-png.flaticon.com/512/914/914441.png" alt="AC Gas">
-                    <h4>AC Gas Charging</h4>
-                    <p>Gas Refill</p>
-                </div>
-                <div class="service-card" onclick="openBooking('AC Maintenance')">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3024/3024502.png" alt="AC Maintenance">
-                    <h4>AC Maintenance</h4>
-                    <p>Regular Service</p>
-                </div>
-                <div class="service-card" onclick="openBooking('Fridge Repair')">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2076/2076210.png" alt="Fridge Repair">
-                    <h4>Fridge Repair</h4>
-                    <p>Service & Repair</p>
-                </div>
-                <div class="service-card" onclick="openBooking('Washing Machine')">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2991/2991139.png" alt="Washing Machine">
-                    <h4>Washing Machine</h4>
-                    <p>Repair Service</p>
-                </div>
-                <div class="service-card" onclick="openBooking('Microwave Oven')">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2362/2362973.png" alt="Microwave">
-                    <h4>Microwave Oven</h4>
-                    <p>Repair Service</p>
-                </div>
-                <div class="service-card" onclick="openBooking('Geyser Repair')">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2827/2827265.png" alt="Geyser">
-                    <h4>Geyser Repair</h4>
-                    <p>Repair Service</p>
-                </div>
-            </div>
-        </section>
+                <div class="notif-icon"><i class="fa-regular fa-bell"></i></div>
+            </header>
 
-        <!-- Special Offer Banner -->
-        <div class="offer-banner">
-            <div class="offer-icon"><i class="fa-solid fa-gift"></i></div>
-            <div class="offer-text">
-                <strong>Special Offer</strong>
-                <p>Refer 5 friends and get</p>
+            <!-- Main Banner -->
+            <section class="banner">
+                <div class="banner-content">
+                    <h2>NG COOLING SOLUTION</h2>
+                    <p>Your Comfort, Our Priority</p>
+                </div>
+            </section>
+
+            <!-- Services Grid -->
+            <section class="services-section">
+                <h3>Our Services (Starting @ ₹199)</h3>
+                <div class="services-grid">
+                    <div class="service-card" onclick="openBooking('AC Repair')">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2602/2602392.png" alt="AC Repair">
+                        <h4>AC Repair</h4>
+                        <p class="price">₹199</p>
+                    </div>
+                    <div class="service-card" onclick="openBooking('AC Installation')">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3665/3665935.png" alt="AC Installation">
+                        <h4>AC Installation</h4>
+                        <p class="price">₹499</p>
+                    </div>
+                    <div class="service-card" onclick="openBooking('AC Gas Charging')">
+                        <img src="https://cdn-icons-png.flaticon.com/512/914/914441.png" alt="AC Gas">
+                        <h4>AC Gas Charging</h4>
+                        <p class="price">₹1200</p>
+                    </div>
+                    <div class="service-card" onclick="openBooking('Fridge Repair')">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2076/2076210.png" alt="Fridge">
+                        <h4>Fridge Repair</h4>
+                        <p class="price">₹199</p>
+                    </div>
+                    <div class="service-card" onclick="openBooking('Washing Machine')">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2991/2991139.png" alt="Washing Machine">
+                        <h4>Washing Machine</h4>
+                        <p class="price">₹199</p>
+                    </div>
+                    <div class="service-card" onclick="openBooking('Microwave Oven')">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2362/2362973.png" alt="Microwave">
+                        <h4>Microwave Oven</h4>
+                        <p class="price">₹199</p>
+                    </div>
+                    <div class="service-card" onclick="openBooking('Geyser Repair')">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2827/2827265.png" alt="Geyser">
+                        <h4>Geyser Repair</h4>
+                        <p class="price">₹199</p>
+                    </div>
+                    <div class="service-card" onclick="openBooking('Water Purifier')">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2979/2979691.png" alt="Water Purifier">
+                        <h4>Water Purifier</h4>
+                        <p class="price">₹199</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Booking Modal Form -->
+            <div id="bookingModal" class="booking-modal" style="display: none;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4>Book a Service</h4>
+                        <button onclick="closeBooking()"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <form id="serviceForm" onsubmit="submitBooking(event)">
+                        <div class="form-group">
+                            <label>Selected Service</label>
+                            <input type="text" id="selectedService" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Problem Description (What is the issue?)</label>
+                            <textarea id="problemDesc" placeholder="Describe the issue..." rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Select Date</label>
+                            <input type="date" id="serviceDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Select Time Slot</label>
+                            <select id="serviceTime" required>
+                                <option value="">Select Time Slot</option>
+                                <option value="09:00 AM - 11:00 AM">09:00 AM - 11:00 AM</option>
+                                <option value="11:00 AM - 01:00 PM">11:00 AM - 01:00 PM</option>
+                                <option value="02:00 PM - 04:00 PM">02:00 PM - 04:00 PM</option>
+                                <option value="04:00 PM - 06:00 PM">04:00 PM - 06:00 PM</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Location (Auto Detect)</label>
+                            <div class="loc-wrapper">
+                                <input type="text" id="serviceLocation" placeholder="Click target to get location" required>
+                                <button type="button" onclick="getLocation()"><i class="fa-solid fa-crosshairs"></i></button>
+                            </div>
+                        </div>
+                        <button type="submit" class="continue-btn">Confirm & Book via WhatsApp <i class="fa-brands fa-whatsapp"></i></button>
+                    </form>
+                </div>
             </div>
-            <div class="offer-price">₹100 OFF</div>
+
+            <!-- Bottom Navigation Bar -->
+            <nav class="bottom-nav">
+                <a href="#" class="nav-item active"><i class="fa-solid fa-house"></i><span>Home</span></a>
+                <a href="#" class="nav-item" onclick="alert('Bookings History')"><i class="fa-regular fa-clipboard"></i><span>Bookings</span></a>
+                <a href="#" class="nav-item" onclick="alert('Offers: ₹100 OFF on referral')"><i class="fa-solid fa-tags"></i><span>Offers</span></a>
+                <a href="#" class="nav-item" onclick="alert('Technician Profile: Nayan Gain | N.G Cooling Solution')"><i class="fa-regular fa-user"></i><span>Profile</span></a>
+            </nav>
         </div>
 
-        <!-- Booking Form Modal / Section (Hidden by default, shown on click) -->
-        <div id="bookingModal" class="booking-modal" style="display: none;">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4>Book a Service</h4>
-                    <button onclick="closeBooking()"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-                <form id="serviceForm" onsubmit="submitBooking(event)">
-                    <div class="form-group">
-                        <label>Selected Service</label>
-                        <input type="text" id="selectedService" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label>Problem Description</label>
-                        <textarea id="problemDesc" placeholder="Describe the issue..." rows="3" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Select Date</label>
-                        <input type="date" id="serviceDate" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Select Time Slot</label>
-                        <select id="serviceTime" required>
-                            <option value="">Select Time Slot</option>
-                            <option value="09:00 AM - 11:00 AM">09:00 AM - 11:00 AM</option>
-                            <option value="11:00 AM - 01:00 PM">11:00 AM - 01:00 PM</option>
-                            <option value="02:00 PM - 04:00 PM">02:00 PM - 04:00 PM</option>
-                            <option value="04:00 PM - 06:00 PM">04:00 PM - 06:00 PM</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Location (Kolkata)</label>
-                        <input type="text" id="serviceLocation" placeholder="Enter your location/address" required>
-                    </div>
-                    <button type="submit" class="continue-btn">Confirm & Continue <i class="fa-solid fa-arrow-right"></i></button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Bottom Navigation Bar -->
-        <nav class="bottom-nav">
-            <a href="index.html" class="nav-item active">
-                <i class="fa-solid fa-house"></i>
-                <span>Home</span>
-            </a>
-            <a href="#bookings" class="nav-item" onclick="alert('Booking History section')">
-                <i class="fa-regular fa-clipboard"></i>
-                <span>Bookings</span>
-            </a>
-            <a href="#offers" class="nav-item" onclick="alert('Refer & Earn: Get ₹100 OFF on referring 5 friends!')">
-                <i class="fa-solid fa-tags"></i>
-                <span>Offers</span>
-            </a>
-            <a href="#profile" class="nav-item" onclick="alert('Technician Profile: Nayan Gain | N.G Cooling Solution')">
-                <i class="fa-regular fa-user"></i>
-                <span>Profile</span>
-            </a>
-        </nav>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 420px;
+    background: #ffffff;
+    min-height: 100vh;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    position: relative;
+    padding-bottom: 70px;
+}
+
+/* Auth / Login Screen */
+.auth-screen {
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #0056d2, #003380);
+    color: white;
+    text-align: center;
+}
+
+.auth-header h2 {
+    font-size: 22px;
+    margin-bottom: 5px;
+}
+
+.auth-header p {
+    font-size: 13px;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+.auth-box {
+    background: white;
+    padding: 25px 20px;
+    border-radius: 16px;
+    color: #333;
+    text-align: left;
+}
+
+.auth-box h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.auth-box p {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.input-group span {
+    background: #f1f1f1;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #444;
+}
+
+.input-group input {
+    border: none;
+    padding: 10px;
+    width: 100%;
+    outline: none;
+    font-size: 13px;
+}
+
+.primary-btn {
+    width: 100%;
+    background: #0056d2;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#otpInput {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+/* Header */
+.header {
+    background: #0056d2;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo-text h1 {
+    font-size: 18px;
+    line-height: 1;
+    font-weight: 800;
+}
+
+.logo-text span {
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.logo-text small {
+    display: block;
+    font-size: 7px;
+    opacity: 0.9;
+}
+
+/* Banner */
+.banner {
+    background: linear-gradient(135deg, #0056d2, #0088ff);
+    color: white;
+    margin: 15px;
+    padding: 20px;
+    border-radius: 16px;
+}
+
+.banner-content h2 {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.banner-content p {
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+/* Services */
+.services-section {
+    padding: 0 15px;
+}
+
+.services-section h3 {
+    font-size: 15px;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.service-card {
+    background: #fdfdfd;
+    border: 1px solid #eef2f7;
+    padding: 12px;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.service-card:hover {
+    border-color: #0056d2;
+    box-shadow: 0 4px 10px rgba(0,86,210,0.08);
+}
+
+.service-card img {
+    width: 38px;
+    height: 38px;
+    margin-bottom: 6px;
+    object-fit: contain;
+}
+
+.service-card h4 {
+    font-size: 12px;
+    color: #222;
+    margin-bottom: 2px;
+}
+
+.service-card .price {
+    font-size: 12px;
+    font-weight: bold;
+    color: #0056d2;
+}
+
+/* Bottom Nav */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-width: 420px;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-top: 1px solid #eee;
+    z-index: 100;
+}
+
+.nav-item {
+    text-align: center;
+    color: #777;
+    text-decoration: none;
+    font-size: 10px;
+}
+
+.nav-item i {
+    font-size: 18px;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.nav-item.active {
+    color: #0056d2;
+}
+
+/* Modal */
+.booking-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    width: 100%;
+    max-width: 420px;
+    padding: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.modal-header button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.form-group {
+    margin-bottom: 12px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 11px;
+    color: #555;
+    margin-bottom: 4px;
+}
+
+.form-group input, .form-group textarea, .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+.loc-wrapper {
+    display: flex;
+    gap: 5px;
+}
+
+.loc-wrapper button {
+    background: #0056d2;
+    color: white;
+    border: none;
+    padding: 0 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.continue-btn {
+    width: 100%;
+    background: #25D366;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}let userMobile = "";
+
+// Send OTP Simulation
+function sendOTP() {
+    const mobile = document.getElementById('mobileNumber').value;
+    if(mobile.length !== 10) {
+        alert("Please enter a valid 10-digit mobile number.");
+        return;
+    }
+    userMobile = mobile;
+    document.getElementById('otpBox').style.display = 'block';
+    alert("OTP sent successfully! (For testing, use OTP: 1234)");
+}
+
+// Verify OTP & Login
+function verifyOTP() {
+    const otp = document.getElementById('otpInput').value;
+    if(otp === "1234") {
+        document.getElementById('loginSection').style.display = 'none';
+        document.getElementById('mainApp').style.display = 'block';
+    } else {
+        alert("Invalid OTP! Please enter 1234.");
+    }
+}
+
+// Open Booking Modal
+function openBooking(serviceName) {
+    document.getElementById('selectedService').value = serviceName;
+    document.getElementById('bookingModal').style.display = 'flex';
+}
+
+// Close Booking Modal
+function closeBooking() {
+    document.getElementById('bookingModal').style.display = 'none';
+}
+
+// Get Auto Location
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            // Using reverse coordinates approximation or placeholder for address
+            document.getElementById('serviceLocation').value = `Lat: ${lat.toFixed(4)}, Lon: ${lon.toFixed(4)} (Kolkata Area)`;
+        }, () => {
+            alert("Unable to retrieve your location. Please type manually.");
+        });
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
+
+// Submit Booking and Redirect to WhatsApp
+function submitBooking(event) {
+    event.preventDefault();
+    
+    const service = document.getElementById('selectedService').value;
+    const desc = document.getElementById('problemDesc').value;
+    const date = document.getElementById('serviceDate').value;
+    const time = document.getElementById('serviceTime').value;
+    const location = document.getElementById('serviceLocation').value;
+
+    // Direct WhatsApp Notification to Nayan Gain's Number: 7439160014
+    const ownerWhatsApp = "917439160014";
+    const message = `*New Service Booking - N.G Cooling Solution*\n\n` +
+                    `📱 Customer: ${userMobile}\n` +
+                    `🛠️ Service: ${service}\n` +
+                    `📝 Issue: ${desc}\n` +
+                    `📅 Date: ${date}\n` +
+                    `⏰ Time Slot: ${time}\n` +
+                    `📍 Address/Location: ${location}`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappURL = `https://wa.me/${ownerWhatsApp}?text=${encodedMessage}`;
+
+    // Open WhatsApp with booking details
+    window.open(whatsappURL, '_blank');
+    
+    closeBooking();
+    document.getElementById('serviceForm').reset();
+}
+
