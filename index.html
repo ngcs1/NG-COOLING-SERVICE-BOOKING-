@@ -1,561 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>N.G Cooling Solution - Partner Portal</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NG Cooling Solution - Buy & Sell</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#f4f7fb;
+  color:#172033;
+}
+
+header{
+  background:#0b63ce;
+  color:white;
+  padding:20px;
+  text-align:center;
+}
+
+header h1{
+  font-size:25px;
+}
+
+header p{
+  margin-top:5px;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:15px;
+}
+
+.dashboard{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.card{
+  background:white;
+  border-radius:12px;
+  padding:18px;
+  box-shadow:0 2px 8px #0001;
+}
+
+.card h3{
+  font-size:14px;
+  color:#667085;
+}
+
+.card strong{
+  display:block;
+  font-size:22px;
+  margin-top:8px;
+}
+
+.form-box{
+  background:white;
+  padding:18px;
+  border-radius:12px;
+  box-shadow:0 2px 8px #0001;
+  margin-bottom:18px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  margin-bottom:6px;
+  font-size:14px;
+}
+
+input,select{
+  width:100%;
+  padding:11px;
+  border:1px solid #d0d5dd;
+  border-radius:7px;
+  font-size:15px;
+}
+
+button{
+  border:0;
+  padding:11px 16px;
+  border-radius:7px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.add-btn{
+  background:#0b63ce;
+  color:white;
+  margin-top:15px;
+}
+
+.cancel-btn{
+  background:#667085;
+  color:white;
+  margin-top:15px;
+  margin-left:5px;
+  display:none;
+}
+
+.table-box{
+  background:white;
+  border-radius:12px;
+  padding:15px;
+  overflow-x:auto;
+  box-shadow:0 2px 8px #0001;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:1100px;
+}
+
+th,td{
+  padding:11px;
+  border-bottom:1px solid #eaecf0;
+  text-align:left;
+  font-size:14px;
+}
+
+th{
+  background:#f2f4f7;
+}
+
+.profit{
+  color:#079455;
+  font-weight:bold;
+}
+
+.loss{
+  color:#d92d20;
+  font-weight:bold;
+}
+
+.status{
+  padding:5px 9px;
+  border-radius:15px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.stock{
+  background:#fff4cc;
+}
+
+.sold{
+  background:#d1fadf;
+}
+
+.action button{
+  padding:7px 10px;
+  margin:2px;
+}
+
+.edit{
+  background:#e0f2fe;
+}
+
+.delete{
+  background:#fee4e2;
+  color:#b42318;
+}
+
+.search{
+  margin-bottom:12px;
+}
+
+@media(max-width:800px){
+  .dashboard{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:450px){
+  .dashboard{
+    grid-template-columns:1fr;
+  }
+}
+</style>
 </head>
+
 <body>
 
-    <div class="app-container">
-        
-        <!-- Top Navigation Bar -->
-        <header class="header">
-            <div class="menu-icon" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></div>
-            <div class="portal-title">Partner Portal</div>
-            <div class="header-right">
-                <button class="refresh-btn" onclick="location.reload()">REFRESH</button>
-                <div class="notif-icon"><i class="fa-solid fa-bell"></i><span class="badge">151</span></div>
-                <div class="logout-icon" onclick="alert('Logged out successfully')"><i class="fa-solid fa-right-from-bracket"></i></div>
-            </div>
-        </header>
+<header>
+  <h1>NG COOLING SOLUTION</h1>
+  <p>Buy & Sell Management System</p>
+</header>
 
-        <!-- Slide Sidebar Menu -->
-        <div id="sideMenu" class="sidebar">
-            <div class="sidebar-header">
-                <h3>NG Cooling</h3>
-                <p>Partner Portal</p>
-            </div>
-            <ul class="sidebar-links">
-                <li onclick="toggleMenu()"><a href="#"><i class="fa-solid fa-house"></i> Home</a></li>
-                <li onclick="toggleMenu()"><a href="#"><i class="fa-solid fa-circle-question"></i> How it works for Partner</a></li>
-                <li onclick="toggleMenu()"><a href="#"><i class="fa-solid fa-file-contract"></i> Terms & Conditions</a></li>
-                <li onclick="toggleMenu()"><a href="#"><i class="fa-solid fa-user-plus"></i> Invite others</a></li>
-                <li onclick="alert('Logged out')"><a href="#"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
-            </ul>
-        </div>
-        <div id="sidebarOverlay" class="overlay" onclick="toggleMenu()"></div>
+<div class="container">
 
-        <!-- Main Content Area -->
-        <div class="main-content">
-            
-            <!-- Wallet Warning Alert -->
-            <div class="wallet-alert">
-                Dear Partner, Your wallet balance is less than Rs 200. Automatic leads sending has been stopped. Recharge immediately to get leads.
-            </div>
+<!-- Dashboard -->
+<div class="dashboard">
 
-            <!-- Referral Banner -->
-            <div class="referral-banner">
-                <div class="ref-img">
-                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80" alt="Partner">
-                </div>
-                <div class="ref-text">
-                    <strong>Join N.G Cooling REFER INDIA Drive</strong>
-                    <p>Refer and enjoy rewards <strong>Rs 100</strong> for each order your friend done thru N.G Cooling</p>
-                    <small>Earning opportunity for everyone.. Don't miss</small>
-                </div>
-            </div>
+  <div class="card">
+    <h3>Total Items</h3>
+    <strong id="totalItems">0</strong>
+  </div>
 
-            <!-- Order Status Grid -->
-            <div class="order-grid">
-                <div class="order-box backlog">
-                    <span>Backlog : (1)</span>
-                </div>
-                <div class="order-box todays">
-                    <span>Today's Order : (0)</span>
-                </div>
-                <div class="order-box reopened">
-                    <span>Reopened Order : (0)</span>
-                </div>
-                <div class="order-box future">
-                    <span>Future Order : (0)</span>
-                </div>
-            </div>
+  <div class="card">
+    <h3>Total Cost</h3>
+    <strong id="totalCost">₹0</strong>
+  </div>
 
-            <!-- Portal Action Buttons Grid -->
-            <div class="action-buttons-grid">
-                <div class="action-btn-card" onclick="openProfile()">
-                    <h3>My Profile</h3>
-                    <span class="sub-tag">Rating: 4.70 (55 Reviews)</span>
-                </div>
-                <div class="action-btn-card" onclick="alert('Buy Credit Portal')">
-                    <h3>Buy Credit</h3>
-                </div>
-                <div class="action-btn-card" onclick="alert('Jobs: 1 Active Job')">
-                    <h3>Jobs (1)</h3>
-                </div>
-                <div class="action-btn-card" onclick="alert('Leads: 0 Available')">
-                    <h3>Leads (0)</h3>
-                </div>
-                <div class="action-btn-card" onclick="alert('Service & Parts Rate Card')">
-                    <h3>Service/Parts Rate</h3>
-                </div>
-                <div class="action-btn-card wallet-card">
-                    <h3>Wallet</h3>
-                    <span class="sub-tag">Wallet Bal: -3940 Rs</span>
-                </div>
-                <div class="action-btn-card" onclick="window.open('https://wa.me/917439160014', '_blank')">
-                    <h3>Customer Care</h3>
-                </div>
-                <div class="action-btn-card" onclick="alert('Training & Knowledge Centre')">
-                    <h3>Training & Knowledge Centre</h3>
-                </div>
-            </div>
+  <div class="card">
+    <h3>Total Sales</h3>
+    <strong id="totalSales">₹0</strong>
+  </div>
 
-            <!-- Profile Details Section (Hidden by default, toggled via My Profile) -->
-            <div id="profileSection" class="profile-section" style="display: none;">
-                <div class="profile-top-card">
-                    <div class="cam-icon"><i class="fa-solid fa-camera"></i></div>
-                    <h3>Nayan Gain (SS ID: 1909)</h3>
-                    <p class="active-status">Your Profile is ACTIVE Now</p>
-                </div>
-                <div class="status-bar">Status : Active</div>
-                <ul class="checklist">
-                    <li><i class="fa-solid fa-circle-check"></i> My detail (Mandatory)</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Add your service location (Mandatory)</li>
-                    <li><i class="fa-solid fa-circle-check"></i> ID proof photos with address (Mandatory)</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Award and certificate photos (Optional)</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Upload photo of your work (Optional)</li>
-                </ul>
-                <button class="work-instr-btn">WORK INSTRUCTION FOR PARTNER</button>
-                
-                <h3 class="cat-title">Your Service Categories</h3>
-                <ul class="category-list">
-                    <li><i class="fa-solid fa-check"></i> Electrician</li>
-                    <li><i class="fa-solid fa-check"></i> AC Service & Repair</li>
-                    <li><i class="fa-solid fa-check"></i> Refrigerator Repair</li>
-                    <li><i class="fa-solid fa-check"></i> Washing Machine</li>
-                    <li><i class="fa-solid fa-check"></i> Microwave Repair</li>
-                </ul>
-                <button class="primary-btn" onclick="closeProfile()" style="margin-top: 15px;">Back to Dashboard</button>
-            </div>
+  <div class="card">
+    <h3>Total Profit</h3>
+    <strong id="totalProfit">₹0</strong>
+  </div>
 
-            <!-- Penalty Footer Notice -->
-            <div class="penalty-footer">
-                Penalty Charge:=> Rs.50 for delay job start (30 mins grace time) and :=> Rs.250 for Job skip (if you skip after accepting).
-            </div>
+</div>
 
-        </div>
+<!-- Form -->
+<div class="form-box">
 
-    </div>
+<h2 id="formTitle">Add New Purchase</h2>
 
-    <script src="script.js"></script>
-</body>
-</html>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+<br>
 
-body {
-    background-color: #eef2f7;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
+<div class="form-grid">
 
-.app-container {
-    width: 100%;
-    max-width: 450px;
-    background: #ffffff;
-    min-height: 100vh;
-    box-shadow: 0 0 20px rgba(0,0,0,0.15);
-    position: relative;
-    padding-bottom: 30px;
-}
+  <div>
+    <label>Date</label>
+    <input type="date" id="date">
+  </div>
 
-/* Header */
-.header {
-    background: #0B2B56;
-    color: white;
-    padding: 12px 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
+  <div>
+    <label>Product</label>
+    <select id="product">
+      <option>AC</option>
+      <option>Fridge</option>
+      <option>Washing Machine</option>
+      <option>Microwave</option>
+      <option>Geyser</option>
+    </select>
+  </div>
 
-.menu-icon {
-    font-size: 20px;
-    cursor: pointer;
-}
+  <div>
+    <label>Buy Price (₹)</label>
+    <input type="number" id="buyPrice" placeholder="8000">
+  </div>
 
-.portal-title {
-    font-size: 16px;
-    font-weight: 600;
-}
+  <div>
+    <label>Transport (₹)</label>
+    <input type="number" id="transport" value="0">
+  </div>
 
-.header-right {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
+  <div>
+    <label>Repair / Parts (₹)</label>
+    <input type="number" id="repair" value="0">
+  </div>
 
-.refresh-btn {
-    background: #00B020;
-    color: white;
-    border: none;
-    padding: 4px 8px;
-    font-size: 11px;
-    font-weight: bold;
-    border-radius: 4px;
-    cursor: pointer;
-}
+  <div>
+    <label>Sell Price (₹)</label>
+    <input type="number" id="sellPrice" placeholder="12000">
+  </div>
 
-.notif-icon {
-    position: relative;
-    font-size: 16px;
-    cursor: pointer;
-}
+  <div>
+    <label>Status</label>
+    <select id="status">
+      <option value="In Stock">In Stock</option>
+      <option value="Sold">Sold</option>
+    </select>
+  </div>
 
-.notif-icon .badge {
-    position: absolute;
-    top: -6px;
-    right: -8px;
-    background: #0056d2;
-    color: white;
-    font-size: 9px;
-    padding: 1px 4px;
-    border-radius: 50%;
-}
+</div>
 
-.logout-icon {
-    font-size: 16px;
-    cursor: pointer;
-}
-
-/* Sidebar Menu */
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: -280px;
-    width: 280px;
-    height: 100%;
-    background: white;
-    z-index: 1000;
-    transition: 0.3s ease;
-    box-shadow: 5px 0 15px rgba(0,0,0,0.2);
-}
-
-.sidebar.active {
-    left: 0;
-}
-
-.sidebar-header {
-    background: #0B2B56;
-    color: white;
-    padding: 20px;
-}
-
-.sidebar-header h3 {
-    font-size: 18px;
-}
-
-.sidebar-header p {
-    font-size: 12px;
-    opacity: 0.8;
-}
-
-.sidebar-links {
-    list-style: none;
-    padding: 15px 0;
-}
-
-.sidebar-links li {
-    padding: 12px 20px;
-    border-bottom: 1px solid #eee;
-}
-
-.sidebar-links li a {
-    text-decoration: none;
-    color: #333;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    display: none;
-    z-index: 900;
-}
-
-.overlay.active {
-    display: block;
-}
-
-/* Main Content */
-.main-content {
-    padding: 12px;
-}
-
-.wallet-alert {
-    background: #fff;
-    border: 1px solid #ddd;
-    padding: 10px;
-    font-size: 12px;
-    font-weight: bold;
-    color: #222;
-    border-radius: 6px;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-/* Referral Banner */
-.referral-banner {
-    background: linear-gradient(135deg, #1e4d8c, #0B2B56);
-    color: white;
-    border-radius: 8px;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
-}
-
-.ref-img img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid white;
-}
-
-.ref-text strong {
-    font-size: 12px;
-    display: block;
-}
-
-.ref-text p {
-    font-size: 11px;
-    opacity: 0.9;
-    margin: 2px 0;
-}
-
-.ref-text small {
-    font-size: 9px;
-    color: #ffcc00;
-}
-
-/* Order Status Grid */
-.order-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-    margin-bottom: 12px;
-}
-
-.order-box {
-    padding: 14px;
-    border-radius: 6px;
-    color: white;
-    text-align: center;
-    font-weight: bold;
-    font-size: 13px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.order-box.backlog { background: #FF7F50; }
-.order-box.todays { background: #008000; }
-.order-box.reopened { background: #DC143C; }
-.order-box.future { background: #556B2F; }
-
-/* Action Buttons Grid */
-.action-buttons-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-    margin-bottom: 12px;
-}
-
-.action-btn-card {
-    background: #3B82F6;
-    color: white;
-    padding: 16px 10px;
-    border-radius: 6px;
-    text-align: center;
-    cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    transition: 0.2s;
-}
-
-.action-btn-card:hover {
-    opacity: 0.9;
-}
-
-.action-btn-card h3 {
-    font-size: 14px;
-    margin-bottom: 4px;
-}
-
-.action-btn-card .sub-tag {
-    font-size: 10px;
-    background: rgba(255,255,255,0.2);
-    padding: 2px 6px;
-    border-radius: 4px;
-    display: inline-block;
-}
-
-/* Profile Section Styling */
-.profile-section {
-    background: white;
-    padding: 10px;
-    border-radius: 6px;
-}
-
-.profile-top-card {
-    background: #3B82F6;
-    color: white;
-    padding: 25px 15px;
-    text-align: center;
-    border-radius: 6px;
-    position: relative;
-}
-
-.profile-top-card .cam-icon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 24px;
-    background: rgba(0,0,0,0.3);
-    padding: 10px;
-    border-radius: 50%;
-}
-
-.profile-top-card h3 {
-    font-size: 16px;
-    margin-top: 30px;
-}
-
-.profile-top-card .active-status {
-    font-size: 11px;
-    color: #ffcccc;
-}
-
-.status-bar {
-    background: #f8f9fa;
-    border: 1px solid #ddd;
-    padding: 10px;
-    font-weight: bold;
-    font-size: 13px;
-    margin: 10px 0;
-    color: #008000;
-}
-
-.checklist {
-    list-style: none;
-}
-
-.checklist li {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #333;
-}
-
-.checklist li i {
-    color: #3B82F6;
-}
-
-.work-instr-btn {
-    width: 100%;
-    background: #10B981;
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 6px;
-    font-weight: bold;
-    font-size: 12px;
-    margin: 12px 0;
-    cursor: pointer;
-}
-
-.cat-title {
-    font-size: 14px;
-    margin-bottom: 8px;
-}
-
-.category-list {
-    list-style: none;
-}
-
-.category-list li {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-    font-size: 13px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 500;
-}
-
-.category-list li i {
-    color: #111;
-}
-
-/* Penalty Footer */
-.penalty-footer {
-    font-size: 11px;
-    color: #444;
-    background: #f8f9fa;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    margin-top: 10px;
-    line-height: 1.4;
-}
-
-.primary-btn {
-    width: 100%;
-    background: #0B2B56;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-}
-// Toggle Sidebar Menu
-function toggleMenu() {
-    const sidebar = document.getElementById('sideMenu');
-    const overlay = document.getElementById('sidebarOverlay');
-    sidebar.classList.toggle('active');
-    overlay.classList.toggle('active');
-}
-
-// Open My Profile Section
-function openProfile() {
-    document.querySelector('.order-grid').style.display = 'none';
-    document.querySelector('.action-buttons-grid').style.display = 'none';
-    document.querySelector('.wallet-alert').style.display = 'none';
-    document.querySelector('.referral-banner').style.display = 'none';
-    document.querySelector('.penalty-footer').style.display = 'none';
-    document.getElementById('profileSection').style.display = 'block';
-}
-
-// Close Profile Section
-function closeProfile() {
-    document.getElementById('profileSection').style.display = 'none';
-    document.querySelector('.order-grid').style.display = 'grid';
-    document.querySelector('.action-buttons-grid').style.display = 'grid';
-    document.querySelector('.wallet-alert').style.display = 'block';
-    document.querySelector('.referral-banner').style.display = 'flex';
-    document.querySelector('.penalty-footer').style.display = 'block';
-}
+<button class="add-btn" onclick="saveItem()" id="save
