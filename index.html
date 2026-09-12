@@ -457,14 +457,15 @@ th{
     </select>
   </div>
 
+  <!-- Custom Investment Input Fields -->
   <div id="nayanCustomBox" style="display:none;">
     <label>Nayan Invested (₹)</label>
-    <input type="number" id="nayanCustomAmount" placeholder="0">
+    <input type="number" id="nayanCustomAmount" placeholder="e.g. 5000">
   </div>
 
   <div id="ashidCustomBox" style="display:none;">
     <label>Ashid Invested (₹)</label>
-    <input type="number" id="ashidCustomAmount" placeholder="0">
+    <input type="number" id="ashidCustomAmount" placeholder="e.g. 3000">
   </div>
 
   <div>
@@ -569,7 +570,7 @@ function renderData() {
     let nayanItemInvest = 0;
     let ashidItemInvest = 0;
 
-    // Investor Calculation Logic
+    // Custom vs Default Logic Calculation
     if (item.investor === 'Nayan Gain') {
       nayanItemInvest = totalCost;
       ashidItemInvest = 0;
@@ -581,7 +582,7 @@ function renderData() {
       ashidItemInvest = Number(item.ashidCustomAmount) || 0;
       investorDisplay = `Custom (N: ₹${nayanItemInvest} / A: ₹${ashidItemInvest})`;
     } else {
-      // Default Both (50-50)
+      // Both (50-50)
       nayanItemInvest = totalCost / 2;
       ashidItemInvest = totalCost / 2;
     }
@@ -639,13 +640,13 @@ function renderData() {
   document.getElementById('recoveryPercent').innerText = `Capital Recovered: ${recoveryPercent}%`;
   document.getElementById('stockValue').innerText = `In-Stock Capital: ₹${inStockCostSum}`;
 
-  // Update Main Dashboard
+  // Update Dashboard
   document.getElementById('totalItems').innerText = inventory.length;
   document.getElementById('totalCost').innerText = '₹' + totalCostSum;
   document.getElementById('totalSales').innerText = '₹' + totalSalesSum;
   document.getElementById('totalProfit').innerText = '₹' + totalProfitSum;
 
-  // Update Partner Cards
+  // Update Partner Investment Analytics
   document.getElementById('nayanInvest').innerText = 'Invested: ₹' + nayanTotalInvest;
   document.getElementById('nayanProfit').innerText = 'Profit Share: ₹' + nayanTotalProfit;
 
@@ -759,5 +760,3 @@ renderData();
 
 </body>
 </html>
-
-  
