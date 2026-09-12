@@ -3,145 +3,257 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NG Cooling Solution - Buy & Sell (Partnership)</title>
+<title>NG Cooling Solution - Advanced Digital Dashboard</title>
 
 <style>
+:root {
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --nayan-color: #0284c7;
+  --ashid-color: #7c3aed;
+  --success: #10b981;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --bg: #f8fafc;
+  --card-bg: #ffffff;
+  --text: #0f172a;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+}
+
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
-  font-family:Arial,sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body{
-  background:#f4f7fb;
-  color:#172033;
+  background: var(--bg);
+  color: var(--text);
 }
 
 header{
-  background:#0b63ce;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
   color:white;
-  padding:20px;
+  padding:25px 20px;
   text-align:center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 header h1{
-  font-size:25px;
+  font-size:28px;
+  letter-spacing: 1px;
+  color: #38bdf8;
 }
 
 header p{
-  margin-top:5px;
+  margin-top:6px;
+  color: #94a3b8;
+  font-size: 14px;
 }
 
 .container{
-  max-width:1200px;
+  max-width:1250px;
   margin:auto;
-  padding:15px;
+  padding:20px 15px;
 }
 
+/* Digital Stats Grid */
+.digital-banner {
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  border-radius: 16px;
+  padding: 20px;
+  color: white;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.digital-banner h2 {
+  font-size: 16px;
+  color: #a5b4fc;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.progress-bar-bg {
+  background: rgba(255,255,255,0.1);
+  height: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-bar-fill {
+  background: linear-gradient(90deg, #38bdf8, #10b981);
+  height: 100%;
+  width: 0%;
+  transition: width 0.5s ease;
+}
+
+.progress-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #cbd5e1;
+}
+
+/* Dashboard Cards */
 .dashboard{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:12px;
-  margin-bottom:12px;
+  gap:15px;
+  margin-bottom:15px;
 }
 
 .dashboard-partner{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:12px;
-  margin-bottom:18px;
+  gap:15px;
+  margin-bottom:20px;
 }
 
 .card{
-  background:white;
-  border-radius:12px;
-  padding:18px;
-  box-shadow:0 2px 8px #0001;
+  background: var(--card-bg);
+  border-radius:14px;
+  padding:20px;
+  border: 1px solid var(--border);
+  box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
 }
 
 .card.partner-nayan{
-  border-left: 5px solid #0b63ce;
+  border-top: 5px solid var(--nayan-color);
+  background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%);
 }
 
 .card.partner-ashid{
-  border-left: 5px solid #7a5af8;
+  border-top: 5px solid var(--ashid-color);
+  background: linear-gradient(180deg, #f5f3ff 0%, #ffffff 100%);
 }
 
 .card h3{
-  font-size:14px;
-  color:#667085;
+  font-size:13px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
 .card strong{
   display:block;
-  font-size:20px;
-  margin-top:8px;
+  font-size:24px;
+  margin-top:10px;
+  color: var(--text);
 }
 
 .card .sub-text{
   font-size:13px;
-  color:#475467;
-  margin-top:6px;
+  margin-top:8px;
+  font-weight: 600;
 }
 
+/* Forms */
 .form-box{
-  background:white;
-  padding:18px;
-  border-radius:12px;
-  box-shadow:0 2px 8px #0001;
-  margin-bottom:18px;
+  background: var(--card-bg);
+  padding:22px;
+  border-radius:14px;
+  border: 1px solid var(--border);
+  box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);
+  margin-bottom:20px;
+}
+
+.form-box h2 {
+  font-size: 18px;
+  color: var(--text);
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .form-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
 }
 
 label{
   display:block;
-  font-weight:bold;
+  font-weight:600;
   margin-bottom:6px;
-  font-size:14px;
+  font-size:13px;
+  color: var(--text-muted);
 }
 
 input,select{
   width:100%;
-  padding:11px;
-  border:1px solid #d0d5dd;
-  border-radius:7px;
-  font-size:15px;
+  padding:10px 12px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  font-size:14px;
+  background: #f8fafc;
+  outline: none;
+  transition: border 0.2s;
+}
+
+input:focus, select:focus {
+  border-color: var(--primary);
+  background: #fff;
 }
 
 button{
   border:0;
-  padding:11px 16px;
-  border-radius:7px;
+  padding:12px 20px;
+  border-radius:8px;
   cursor:pointer;
   font-weight:bold;
+  transition: opacity 0.2s;
+}
+
+button:hover {
+  opacity: 0.9;
 }
 
 .add-btn{
-  background:#0b63ce;
+  background: var(--primary);
   color:white;
   margin-top:15px;
 }
 
 .cancel-btn{
-  background:#667085;
+  background: var(--text-muted);
   color:white;
   margin-top:15px;
-  margin-left:5px;
+  margin-left:8px;
   display:none;
 }
 
+/* Table */
 .table-box{
-  background:white;
-  border-radius:12px;
-  padding:15px;
+  background: var(--card-bg);
+  border-radius:14px;
+  padding:20px;
   overflow-x:auto;
-  box-shadow:0 2px 8px #0001;
+  border: 1px solid var(--border);
+  box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.search{
+  width: 300px;
+  padding: 10px;
+  border-radius: 8px;
 }
 
 table{
@@ -151,76 +263,78 @@ table{
 }
 
 th,td{
-  padding:11px;
-  border-bottom:1px solid #eaecf0;
+  padding:12px 14px;
+  border-bottom:1px solid var(--border);
   text-align:left;
-  font-size:13px;
+  font-size:14px;
 }
 
 th{
-  background:#f2f4f7;
+  background:#f1f5f9;
+  color: var(--text-muted);
+  font-weight: 600;
 }
 
 .profit{
-  color:#079455;
+  color: var(--success);
   font-weight:bold;
 }
 
 .loss{
-  color:#d92d20;
+  color: var(--danger);
   font-weight:bold;
 }
 
 .status{
-  padding:5px 9px;
-  border-radius:15px;
+  padding:4px 10px;
+  border-radius:20px;
   font-size:12px;
   font-weight:bold;
   display:inline-block;
 }
 
 .stock{
-  background:#fff4cc;
-  color:#8a6d0b;
+  background:#fef3c7;
+  color:#b45309;
 }
 
 .sold{
-  background:#d1fadf;
-  color:#027a48;
+  background:#dcfce7;
+  color:#15803d;
 }
 
 .action button{
-  padding:7px 10px;
+  padding:6px 12px;
   margin:2px;
+  font-size: 12px;
 }
 
 .edit{
   background:#e0f2fe;
-  color:#026aa7;
+  color:#0369a1;
 }
 
 .delete{
-  background:#fee4e2;
-  color:#b42318;
+  background:#fee2e2;
+  color:#b91c1c;
 }
 
-.search{
-  margin-bottom:12px;
-}
-
-@media(max-width:800px){
-  .dashboard, .dashboard-partner{
+@media(max-width:900px){
+  .dashboard, .form-grid{
     grid-template-columns:repeat(2,1fr);
   }
-
-  .form-grid{
-    grid-template-columns:1fr;
-  }
 }
 
-@media(max-width:450px){
-  .dashboard, .dashboard-partner{
+@media(max-width:500px){
+  .dashboard, .dashboard-partner, .form-grid{
     grid-template-columns:1fr;
+  }
+  .table-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .search {
+    width: 100%;
   }
 }
 </style>
@@ -230,53 +344,64 @@ th{
 
 <header>
   <h1>NG COOLING SOLUTION</h1>
-  <p>Buy & Sell Management System (50%-50% Partnership)</p>
+  <p>⚡ Digital Analytics & Partnership Management (50%-50%)</p>
 </header>
 
 <div class="container">
 
-<!-- Overall Business Dashboard -->
+<!-- Digital System Analytics Banner -->
+<div class="digital-banner">
+  <h2>📊 Digital Investment Recovery Tracker</h2>
+  <div class="progress-bar-bg">
+    <div class="progress-bar-fill" id="progressBar"></div>
+  </div>
+  <div class="progress-stats">
+    <span id="recoveryPercent">Capital Recovered: 0%</span>
+    <span id="stockValue">In-Stock Estimated Value: ₹0</span>
+  </div>
+</div>
+
+<!-- Business Dashboard -->
 <div class="dashboard">
-  <div class="card">
-    <h3>Total Items</h3>
+  <div class="card" style="border-top: 4px solid var(--primary);">
+    <h3>Total Products</h3>
     <strong id="totalItems">0</strong>
   </div>
 
-  <div class="card">
-    <h3>Total Investment (Cost)</h3>
+  <div class="card" style="border-top: 4px solid var(--warning);">
+    <h3>Total Investment</h3>
     <strong id="totalCost">₹0</strong>
   </div>
 
-  <div class="card">
-    <h3>Total Sales</h3>
+  <div class="card" style="border-top: 4px solid var(--success);">
+    <h3>Total Sales Received</h3>
     <strong id="totalSales">₹0</strong>
   </div>
 
-  <div class="card">
-    <h3>Total Business Profit</h3>
+  <div class="card" style="border-top: 4px solid #8b5cf6;">
+    <h3>Net Profit / Loss</h3>
     <strong id="totalProfit">₹0</strong>
   </div>
 </div>
 
-<!-- Partners Dashboard -->
+<!-- Partner Dashboard -->
 <div class="dashboard-partner">
   <div class="card partner-nayan">
-    <h3>👤 Nayan Gain (50% Share)</h3>
+    <h3 style="color: var(--nayan-color);">👤 Nayan Gain (50% Share)</h3>
     <strong id="nayanInvest">Invested: ₹0</strong>
-    <div class="sub-text" id="nayanProfit">Profit / Loss Share: ₹0</div>
+    <div class="sub-text profit" id="nayanProfit">Profit / Loss: ₹0</div>
   </div>
 
   <div class="card partner-ashid">
-    <h3>👤 Ashid Bose (50% Share)</h3>
+    <h3 style="color: var(--ashid-color);">👤 Ashid Bose (50% Share)</h3>
     <strong id="ashidInvest">Invested: ₹0</strong>
-    <div class="sub-text" id="ashidProfit">Profit / Loss Share: ₹0</div>
+    <div class="sub-text profit" id="ashidProfit">Profit / Loss: ₹0</div>
   </div>
 </div>
 
-<!-- Form -->
+<!-- Input Form -->
 <div class="form-box">
-<h2 id="formTitle">Add New Purchase</h2>
-<br>
+<h2 id="formTitle">➕ Product Entry & Investment</h2>
 
 <div class="form-grid">
   <div>
@@ -301,7 +426,7 @@ th{
   </div>
 
   <div>
-    <label>Transport (₹)</label>
+    <label>Transport Cost (₹)</label>
     <input type="number" id="transport" value="0">
   </div>
 
@@ -320,7 +445,7 @@ th{
   </div>
 
   <div>
-    <label>Sell Price (₹)</label>
+    <label>Selling Price (₹)</label>
     <input type="number" id="sellPrice" placeholder="12000">
   </div>
 
@@ -333,13 +458,16 @@ th{
   </div>
 </div>
 
-<button class="add-btn" onclick="saveItem()" id="saveBtn">Save Product</button>
+<button class="add-btn" onclick="saveItem()" id="saveBtn">Save Record</button>
 <button class="cancel-btn" onclick="resetForm()" id="cancelBtn">Cancel</button>
 </div>
 
-<!-- Table -->
+<!-- Data Table -->
 <div class="table-box">
-  <input type="text" class="search" id="search" placeholder="Search by product, status, investor..." onkeyup="renderData()">
+  <div class="table-header">
+    <h2 style="font-size: 18px;">📦 Inventory Records</h2>
+    <input type="text" class="search" id="search" placeholder="🔍 Search product, investor or status..." onkeyup="renderData()">
+  </div>
 
   <table>
     <thead>
@@ -349,11 +477,11 @@ th{
         <th>Investor</th>
         <th>Total Cost</th>
         <th>Sell Price</th>
-        <th>Total Profit</th>
-        <th>Nayan Profit (50%)</th>
-        <th>Ashid Profit (50%)</th>
+        <th>Net Profit</th>
+        <th>Nayan (50%)</th>
+        <th>Ashid (50%)</th>
         <th>Status</th>
-        <th>Action</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody id="inventoryList">
@@ -364,7 +492,7 @@ th{
 </div>
 
 <script>
-let inventory = JSON.parse(localStorage.getItem('ng_inventory_partner')) || [];
+let inventory = JSON.parse(localStorage.getItem('ng_digital_inventory')) || [];
 let editIndex = null;
 
 document.getElementById('date').valueAsDate = new Date();
@@ -377,6 +505,7 @@ function renderData() {
   let totalCostSum = 0;
   let totalSalesSum = 0;
   let totalProfitSum = 0;
+  let inStockCostSum = 0;
 
   let nayanTotalInvest = 0;
   let ashidTotalInvest = 0;
@@ -386,32 +515,29 @@ function renderData() {
   inventory.forEach((item, index) => {
     const totalCost = Number(item.buyPrice) + Number(item.transport) + Number(item.repair);
     const profit = item.status === 'Sold' ? Number(item.sellPrice) - totalCost : 0;
-    
-    // Profit Share (50% each)
     const partnerProfitShare = item.status === 'Sold' ? profit / 2 : 0;
 
-    // Investment Share Breakdown
+    // Investor Tracking
     if (item.investor === 'Nayan Gain') {
       nayanTotalInvest += totalCost;
     } else if (item.investor === 'Ashid Bose') {
       ashidTotalInvest += totalCost;
-    } else { // Both 50-50
+    } else {
       nayanTotalInvest += (totalCost / 2);
       ashidTotalInvest += (totalCost / 2);
     }
 
-    // Accumulate total metrics
     totalCostSum += totalCost;
 
     if (item.status === 'Sold') {
       totalSalesSum += Number(item.sellPrice);
       totalProfitSum += profit;
-
       nayanTotalProfit += partnerProfitShare;
       ashidTotalProfit += partnerProfitShare;
+    } else {
+      inStockCostSum += totalCost;
     }
 
-    // Search filter
     if (
       item.product.toLowerCase().includes(searchQuery) || 
       item.status.toLowerCase().includes(searchQuery) ||
@@ -440,21 +566,26 @@ function renderData() {
     }
   });
 
-  // Update Overall Dashboard
+  // Digital Analytics Calculations
+  const recoveryPercent = totalCostSum > 0 ? Math.min(Math.round((totalSalesSum / totalCostSum) * 100), 100) : 0;
+  document.getElementById('progressBar').style.width = recoveryPercent + '%';
+  document.getElementById('recoveryPercent').innerText = `Capital Recovered: ${recoveryPercent}%`;
+  document.getElementById('stockValue').innerText = `In-Stock Capital: ₹${inStockCostSum}`;
+
+  // Update Main Dashboard
   document.getElementById('totalItems').innerText = inventory.length;
   document.getElementById('totalCost').innerText = '₹' + totalCostSum;
   document.getElementById('totalSales').innerText = '₹' + totalSalesSum;
   document.getElementById('totalProfit').innerText = '₹' + totalProfitSum;
 
-  // Update Partner Dashboard
+  // Update Partner Cards
   document.getElementById('nayanInvest').innerText = 'Invested: ₹' + nayanTotalInvest;
-  document.getElementById('nayanProfit').innerText = 'Profit / Loss Share: ₹' + nayanTotalProfit;
+  document.getElementById('nayanProfit').innerText = 'Profit Share: ₹' + nayanTotalProfit;
 
   document.getElementById('ashidInvest').innerText = 'Invested: ₹' + ashidTotalInvest;
-  document.getElementById('ashidProfit').innerText = 'Profit / Loss Share: ₹' + ashidTotalProfit;
+  document.getElementById('ashidProfit').innerText = 'Profit Share: ₹' + ashidTotalProfit;
 
-  // Save to LocalStorage
-  localStorage.setItem('ng_inventory_partner', JSON.stringify(inventory));
+  localStorage.setItem('ng_digital_inventory', JSON.stringify(inventory));
 }
 
 function saveItem() {
@@ -468,7 +599,7 @@ function saveItem() {
   const status = document.getElementById('status').value;
 
   if (!date || !buyPrice) {
-    alert('Please enter Date and Buy Price!');
+    alert('Date and Buy Price are required!');
     return;
   }
 
@@ -492,18 +623,18 @@ function editItem(index) {
   document.getElementById('buyPrice').value = item.buyPrice;
   document.getElementById('transport').value = item.transport;
   document.getElementById('repair').value = item.repair;
-  document.getElementById('investor').value = item.investor || 'Both (50-50)';
+  document.getElementById('investor').value = item.investor;
   document.getElementById('sellPrice').value = item.sellPrice;
   document.getElementById('status').value = item.status;
 
   editIndex = index;
-  document.getElementById('formTitle').innerText = 'Edit Purchase';
-  document.getElementById('saveBtn').innerText = 'Update Product';
+  document.getElementById('formTitle').innerText = '✏️ Edit Product Record';
+  document.getElementById('saveBtn').innerText = 'Update Record';
   document.getElementById('cancelBtn').style.display = 'inline-block';
 }
 
 function deleteItem(index) {
-  if (confirm('Are you sure you want to delete this entry?')) {
+  if (confirm('Delete this product entry?')) {
     inventory.splice(index, 1);
     renderData();
   }
@@ -520,12 +651,11 @@ function resetForm() {
   document.getElementById('status').value = 'In Stock';
 
   editIndex = null;
-  document.getElementById('formTitle').innerText = 'Add New Purchase';
-  document.getElementById('saveBtn').innerText = 'Save Product';
+  document.getElementById('formTitle').innerText = '➕ Product Entry & Investment';
+  document.getElementById('saveBtn').innerText = 'Save Record';
   document.getElementById('cancelBtn').style.display = 'none';
 }
 
-// Initial Render
 renderData();
 </script>
 
