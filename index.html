@@ -126,7 +126,7 @@ button{
 table{
   width:100%;
   border-collapse:collapse;
-  min-width:1100px;
+  min-width:1000px;
 }
 
 th,td{
@@ -155,14 +155,17 @@ th{
   border-radius:15px;
   font-size:12px;
   font-weight:bold;
+  display:inline-block;
 }
 
 .stock{
   background:#fff4cc;
+  color:#8a6d0b;
 }
 
 .sold{
   background:#d1fadf;
+  color:#027a48;
 }
 
 .action button{
@@ -172,6 +175,7 @@ th{
 
 .edit{
   background:#e0f2fe;
+  color:#026aa7;
 }
 
 .delete{
@@ -252,11 +256,11 @@ th{
   <div>
     <label>Product</label>
     <select id="product">
-      <option>AC</option>
-      <option>Fridge</option>
-      <option>Washing Machine</option>
-      <option>Microwave</option>
-      <option>Geyser</option>
+      <option value="AC">AC</option>
+      <option value="Fridge">Fridge</option>
+      <option value="Washing Machine">Washing Machine</option>
+      <option value="Microwave">Microwave</option>
+      <option value="Geyser">Geyser</option>
     </select>
   </div>
 
@@ -290,4 +294,169 @@ th{
 
 </div>
 
-<button class="add-btn" onclick="saveItem()" id="save
+<button class="add-btn" onclick="saveItem()" id="saveBtn">Save Product</button>
+<button class="cancel-btn" onclick="resetForm()" id="cancelBtn">Cancel</button>
+
+</div>
+
+<!-- Table -->
+<div class="table-box">
+
+  <input type="text" class="search" id="search" placeholder="Search by product or status..." onkeyup="renderData()">
+
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Product</th>
+        <th>Buy Price</th>
+        <th>Transport</th>
+        <th>Repair</th>
+        <th>Total Cost</th>
+        <th>Sell Price</th>
+        <th>Profit / Loss</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="inventoryList">
+    </tbody>
+  </table>
+
+</div>
+
+</div>
+
+<script>
+let inventory = JSON.parse(localStorage.getItem('ng_inventory')) || [];
+let editIndex = null;
+
+// Set today's date in form by default
+document.getElementById('date').valueAsDate = new Date();
+
+function renderData() {
+  const tbody = document.getElementById('inventoryList');
+  const searchQuery = document.getElementById('search').value.toLowerCase();
+  tbody.innerHTML = '';
+
+  let totalCostSum = 0;
+  let totalSalesSum = 0;
+  let totalProfitSum = 0;
+
+  inventory.forEach((item, index) => {
+    const totalCost = Number(item.buyPrice) + Number(item.transport) + Number(item.repair);
+    const profit = item.status === 'Sold' ? Number(item.sellPrice) - totalCost : 0;
+
+    // Accumulate metrics
+    totalCostSum += totalCost;
+    if (item.status === 'Sold') {
+      totalSalesSum += Number(item.sellPrice);
+      totalProfitSum += profit;
+    }
+
+    // Filter for search
+    if (item.product.toLowerCase().includes(searchQuery) || item.status.toLowerCase().includes(searchQuery)) {
+      const statusClass = item.status === 'In Stock' ? 'stock' : 'sold';
+      const profitClass = profit >= 0 ? 'profit' : 'loss';
+
+      tbody.innerHTML += `
+        <tr>
+          <td>${item.date}</td>
+          <td><strong>${item.product}</strong></td>
+          <td>₹${item.buyPrice}</td>
+          <td>₹${item.transport}</td>
+          <td>₹${item.repair}</td>
+          <td><strong>₹${totalCost}</strong></td>
+          <td>₹${item.sellPrice || 0}</td>
+          <td class="${profitClass}">₹${item.status === 'Sold' ? profit : 0}</td>
+          <td><span class="status ${statusClass}">${item.status}</span></td>
+          <td class="action">
+            <button class="edit" onclick="editItem(${index})">Edit</button>
+            <button class="delete" onclick="deleteItem(${index})">Delete</button>
+          </td>
+        </tr>
+      `;
+    }
+  });
+
+  // Update Dashboard
+  document.getElementById('totalItems').innerText = inventory.length;
+  document.getElementById('totalCost').innerText = '₹' + totalCostSum;
+  document.getElementById('totalSales').innerText = '₹' + totalSalesSum;
+  document.getElementById('totalProfit').innerText = '₹' + totalProfitSum;
+
+  // Save to LocalStorage
+  localStorage.setItem('ng_inventory', JSON.stringify(inventory));
+}
+
+function saveItem() {
+  const date = document.getElementById('date').value;
+  const product = document.getElementById('product').value;
+  const buyPrice = document.getElementById('buyPrice').value;
+  const transport = document.getElementById('transport').value || 0;
+  const repair = document.getElementById('repair').value || 0;
+  const sellPrice = document.getElementById('sellPrice').value || 0;
+  const status = document.getElementById('status').value;
+
+  if (!date || !buyPrice) {
+    alert('Please enter Date and Buy Price!');
+    return;
+  }
+
+  const itemData = { date, product, buyPrice, transport, repair, sellPrice, status };
+
+  if (editIndex === null) {
+    inventory.push(itemData);
+  } else {
+    inventory[editIndex] = itemData;
+    editIndex = null;
+  }
+
+  resetForm();
+  renderData();
+}
+
+function editItem(index) {
+  const item = inventory[index];
+  document.getElementById('date').value = item.date;
+  document.getElementById('product').value = item.product;
+  document.getElementById('buyPrice').value = item.buyPrice;
+  document.getElementById('transport').value = item.transport;
+  document.getElementById('repair').value = item.repair;
+  document.getElementById('sellPrice').value = item.sellPrice;
+  document.getElementById('status').value = item.status;
+
+  editIndex = index;
+  document.getElementById('formTitle').innerText = 'Edit Purchase';
+  document.getElementById('saveBtn').innerText = 'Update Product';
+  document.getElementById('cancelBtn').style.display = 'inline-block';
+}
+
+function deleteItem(index) {
+  if (confirm('Are you sure you want to delete this entry?')) {
+    inventory.splice(index, 1);
+    renderData();
+  }
+}
+
+function resetForm() {
+  document.getElementById('date').valueAsDate = new Date();
+  document.getElementById('product').selectedIndex = 0;
+  document.getElementById('buyPrice').value = '';
+  document.getElementById('transport').value = '0';
+  document.getElementById('repair').value = '0';
+  document.getElementById('sellPrice').value = '';
+  document.getElementById('status').value = 'In Stock';
+
+  editIndex = null;
+  document.getElementById('formTitle').innerText = 'Add New Purchase';
+  document.getElementById('saveBtn').innerText = 'Save Product';
+  document.getElementById('cancelBtn').style.display = 'none';
+}
+
+// Initial render
+renderData();
+</script>
+
+</body>
+</html>
