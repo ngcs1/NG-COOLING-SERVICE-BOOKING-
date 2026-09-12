@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -357,7 +358,7 @@ th{
   </div>
   <div class="progress-stats">
     <span id="recoveryPercent">Capital Recovered: 0%</span>
-    <span id="stockValue">In-Stock Estimated Value: ₹0</span>
+    <span id="stockValue">In-Stock Capital: ₹0</span>
   </div>
 </div>
 
@@ -410,14 +411,26 @@ th{
   </div>
 
   <div>
-    <label>Product</label>
-    <select id="product">
+    <label>Product Category</label>
+    <select id="product" onchange="toggleOtherProductInput()">
       <option value="AC">AC</option>
       <option value="Fridge">Fridge</option>
       <option value="Washing Machine">Washing Machine</option>
       <option value="Microwave">Microwave</option>
       <option value="Geyser">Geyser</option>
+      <option value="Water Purifier">Water Purifier</option>
+      <option value="Other">Other Item</option>
     </select>
+  </div>
+
+  <div id="otherProductBox" style="display:none;">
+    <label>Item Name (Other)</label>
+    <input type="text" id="otherProduct" placeholder="e.g. Deep Freezer">
+  </div>
+
+  <div>
+    <label>Company / Brand</label>
+    <input type="text" id="company" placeholder="LG, Samsung, Voltas...">
   </div>
 
   <div>
@@ -466,7 +479,7 @@ th{
 <div class="table-box">
   <div class="table-header">
     <h2 style="font-size: 18px;">📦 Inventory Records</h2>
-    <input type="text" class="search" id="search" placeholder="🔍 Search product, investor or status..." onkeyup="renderData()">
+    <input type="text" class="search" id="search" placeholder="🔍 Search product, company, status..." onkeyup="renderData()">
   </div>
 
   <table>
@@ -474,6 +487,7 @@ th{
       <tr>
         <th>Date</th>
         <th>Product</th>
+        <th>Company</th>
         <th>Investor</th>
         <th>Total Cost</th>
         <th>Sell Price</th>
@@ -496,6 +510,16 @@ let inventory = JSON.parse(localStorage.getItem('ng_digital_inventory')) || [];
 let editIndex = null;
 
 document.getElementById('date').valueAsDate = new Date();
+
+function toggleOtherProductInput() {
+  const productSelect = document.getElementById('product').value;
+  const otherBox = document.getElementById('otherProductBox');
+  if (productSelect === 'Other') {
+    otherBox.style.display = 'block';
+  } else {
+    otherBox.style.display = 'none';
+  }
+}
 
 function renderData() {
   const tbody = document.getElementById('inventoryList');
@@ -538,8 +562,12 @@ function renderData() {
       inStockCostSum += totalCost;
     }
 
+    const itemCompany = item.company || '-';
+    const displayProduct = item.product === 'Other' ? (item.otherProduct || 'Other') : item.product;
+
     if (
-      item.product.toLowerCase().includes(searchQuery) || 
+      displayProduct.toLowerCase().includes(searchQuery) || 
+      itemCompany.toLowerCase().includes(searchQuery) ||
       item.status.toLowerCase().includes(searchQuery) ||
       item.investor.toLowerCase().includes(searchQuery)
     ) {
@@ -549,7 +577,8 @@ function renderData() {
       tbody.innerHTML += `
         <tr>
           <td>${item.date}</td>
-          <td><strong>${item.product}</strong></td>
+          <td><strong>${displayProduct}</strong></td>
+          <td>${itemCompany}</td>
           <td>${item.investor}</td>
           <td>₹${totalCost}</td>
           <td>₹${item.sellPrice || 0}</td>
@@ -591,6 +620,8 @@ function renderData() {
 function saveItem() {
   const date = document.getElementById('date').value;
   const product = document.getElementById('product').value;
+  const otherProduct = document.getElementById('otherProduct').value;
+  const company = document.getElementById('company').value;
   const buyPrice = document.getElementById('buyPrice').value;
   const transport = document.getElementById('transport').value || 0;
   const repair = document.getElementById('repair').value || 0;
@@ -603,7 +634,7 @@ function saveItem() {
     return;
   }
 
-  const itemData = { date, product, buyPrice, transport, repair, investor, sellPrice, status };
+  const itemData = { date, product, otherProduct, company, buyPrice, transport, repair, investor, sellPrice, status };
 
   if (editIndex === null) {
     inventory.push(itemData);
@@ -619,13 +650,17 @@ function saveItem() {
 function editItem(index) {
   const item = inventory[index];
   document.getElementById('date').value = item.date;
-  document.getElementById('product').value = item.product;
+  document.getElementById('product').value = item.product || 'AC';
+  document.getElementById('otherProduct').value = item.otherProduct || '';
+  document.getElementById('company').value = item.company || '';
   document.getElementById('buyPrice').value = item.buyPrice;
   document.getElementById('transport').value = item.transport;
   document.getElementById('repair').value = item.repair;
   document.getElementById('investor').value = item.investor;
   document.getElementById('sellPrice').value = item.sellPrice;
   document.getElementById('status').value = item.status;
+
+  toggleOtherProductInput();
 
   editIndex = index;
   document.getElementById('formTitle').innerText = '✏️ Edit Product Record';
@@ -643,12 +678,16 @@ function deleteItem(index) {
 function resetForm() {
   document.getElementById('date').valueAsDate = new Date();
   document.getElementById('product').selectedIndex = 0;
+  document.getElementById('otherProduct').value = '';
+  document.getElementById('company').value = '';
   document.getElementById('buyPrice').value = '';
   document.getElementById('transport').value = '0';
   document.getElementById('repair').value = '0';
   document.getElementById('investor').value = 'Both (50-50)';
   document.getElementById('sellPrice').value = '';
   document.getElementById('status').value = 'In Stock';
+
+  toggleOtherProductInput();
 
   editIndex = null;
   document.getElementById('formTitle').innerText = '➕ Product Entry & Investment';
