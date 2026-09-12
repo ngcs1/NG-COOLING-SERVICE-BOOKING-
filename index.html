@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NG Cooling Solution - Advanced Digital Dashboard</title>
+<title>NG Cooling Solution - 3-Page Digital Dashboard</title>
 
 <style>
 :root {
@@ -53,10 +53,49 @@ header p{
   font-size: 14px;
 }
 
+/* Page Navigation Tabs */
+.nav-tabs {
+  display: flex;
+  justify-content: center;
+  background: #0f172a;
+  border-bottom: 2px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  background: transparent;
+  color: #94a3b8;
+  padding: 14px 24px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-bottom: 3px solid transparent;
+}
+
+.tab-btn:hover {
+  color: #38bdf8;
+}
+
+.tab-btn.active {
+  color: #38bdf8;
+  border-bottom: 3px solid #38bdf8;
+  background: rgba(255,255,255,0.05);
+}
+
 .container{
   max-width:1250px;
   margin:auto;
   padding:20px 15px;
+}
+
+.page-content {
+  display: none;
+}
+
+.page-content.active {
+  display: block;
 }
 
 /* Digital Stats Grid */
@@ -303,6 +342,16 @@ th{
   color:#15803d;
 }
 
+.completed{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+.pending{
+  background:#fee2e2;
+  color:#b91c1c;
+}
+
 .action button{
   padding:6px 12px;
   margin:2px;
@@ -347,189 +396,380 @@ th{
   <p>⚡ Digital Analytics & Partnership Management (50%-50%)</p>
 </header>
 
+<!-- Navigation Tabs -->
+<div class="nav-tabs">
+  <button class="tab-btn active" onclick="switchPage('page1', this)">📦 Page 1: Product Buy & Sell</button>
+  <button class="tab-btn" onclick="switchPage('page2', this)">🛠️ Page 2: Service & Repairing</button>
+  <button class="tab-btn" onclick="switchPage('page3', this)">🧾 Page 3: Customer Bill & Spare Parts Purchase</button>
+</div>
+
 <div class="container">
 
-<!-- Digital System Analytics Banner -->
-<div class="digital-banner">
-  <h2>📊 Digital Investment Recovery Tracker</h2>
-  <div class="progress-bar-bg">
-    <div class="progress-bar-fill" id="progressBar"></div>
+<!-- PAGE 1: BUY & SELL INVENTORY -->
+<div id="page1" class="page-content active">
+  <div class="digital-banner">
+    <h2>📊 Digital Investment Recovery Tracker</h2>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progressBar"></div>
+    </div>
+    <div class="progress-stats">
+      <span id="recoveryPercent">Capital Recovered: 0%</span>
+      <span id="stockValue">In-Stock Capital: ₹0</span>
+    </div>
   </div>
-  <div class="progress-stats">
-    <span id="recoveryPercent">Capital Recovered: 0%</span>
-    <span id="stockValue">In-Stock Capital: ₹0</span>
+
+  <div class="dashboard">
+    <div class="card" style="border-top: 4px solid var(--primary);">
+      <h3>Total Products</h3>
+      <strong id="totalItems">0</strong>
+    </div>
+    <div class="card" style="border-top: 4px solid var(--warning);">
+      <h3>Total Investment</h3>
+      <strong id="totalCost">₹0</strong>
+    </div>
+    <div class="card" style="border-top: 4px solid var(--success);">
+      <h3>Total Sales Received</h3>
+      <strong id="totalSales">₹0</strong>
+    </div>
+    <div class="card" style="border-top: 4px solid #8b5cf6;">
+      <h3>Net Profit / Loss</h3>
+      <strong id="totalProfit">₹0</strong>
+    </div>
+  </div>
+
+  <div class="dashboard-partner">
+    <div class="card partner-nayan">
+      <h3 style="color: var(--nayan-color);">👤 Nayan Gain</h3>
+      <strong id="nayanInvest">Invested: ₹0</strong>
+      <div class="sub-text profit" id="nayanProfit">Profit Share: ₹0</div>
+    </div>
+    <div class="card partner-ashid">
+      <h3 style="color: var(--ashid-color);">👤 Ashid Bose</h3>
+      <strong id="ashidInvest">Invested: ₹0</strong>
+      <div class="sub-text profit" id="ashidProfit">Profit Share: ₹0</div>
+    </div>
+  </div>
+
+  <div class="form-box">
+    <h2 id="formTitle">➕ Product Entry & Investment</h2>
+    <div class="form-grid">
+      <div>
+        <label>Date</label>
+        <input type="date" id="date">
+      </div>
+      <div>
+        <label>Product Category</label>
+        <select id="product" onchange="toggleOtherProductInput()">
+          <option value="AC">AC</option>
+          <option value="Fridge">Fridge</option>
+          <option value="Washing Machine">Washing Machine</option>
+          <option value="Microwave">Microwave</option>
+          <option value="Geyser">Geyser</option>
+          <option value="Water Purifier">Water Purifier</option>
+          <option value="Other">Other Item</option>
+        </select>
+      </div>
+      <div id="otherProductBox" style="display:none;">
+        <label>Item Name (Other)</label>
+        <input type="text" id="otherProduct" placeholder="e.g. Deep Freezer">
+      </div>
+      <div>
+        <label>Company / Brand</label>
+        <input type="text" id="company" placeholder="LG, Samsung, Voltas...">
+      </div>
+      <div>
+        <label>Buy Price (₹)</label>
+        <input type="number" id="buyPrice" placeholder="8000">
+      </div>
+      <div>
+        <label>Transport Cost (₹)</label>
+        <input type="number" id="transport" value="0">
+      </div>
+      <div>
+        <label>Repair / Parts (₹)</label>
+        <input type="number" id="repair" value="0">
+      </div>
+      <div>
+        <label>Invested By</label>
+        <select id="investor" onchange="toggleCustomInvestment()">
+          <option value="Both (50-50)">Both (50% Nayan - 50% Ashid)</option>
+          <option value="Nayan Gain">Nayan Gain Only</option>
+          <option value="Ashid Bose">Ashid Bose Only</option>
+          <option value="Custom">Custom Split</option>
+        </select>
+      </div>
+      <div id="nayanCustomBox" style="display:none;">
+        <label>Nayan Invested (₹)</label>
+        <input type="number" id="nayanCustomAmount" placeholder="e.g. 5000">
+      </div>
+      <div id="ashidCustomBox" style="display:none;">
+        <label>Ashid Invested (₹)</label>
+        <input type="number" id="ashidCustomAmount" placeholder="e.g. 3000">
+      </div>
+      <div>
+        <label>Selling Price (₹)</label>
+        <input type="number" id="sellPrice" placeholder="12000">
+      </div>
+      <div>
+        <label>Status</label>
+        <select id="status">
+          <option value="In Stock">In Stock</option>
+          <option value="Sold">Sold</option>
+        </select>
+      </div>
+    </div>
+    <button class="add-btn" onclick="saveItem()" id="saveBtn">Save Record</button>
+    <button class="cancel-btn" onclick="resetForm()" id="cancelBtn">Cancel</button>
+  </div>
+
+  <div class="table-box">
+    <div class="table-header">
+      <h2 style="font-size: 18px;">📦 Inventory Records</h2>
+      <input type="text" class="search" id="search" placeholder="🔍 Search inventory..." onkeyup="renderData()">
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Product</th>
+          <th>Company</th>
+          <th>Investor Details</th>
+          <th>Total Cost</th>
+          <th>Sell Price</th>
+          <th>Net Profit</th>
+          <th>Nayan Profit Share</th>
+          <th>Ashid Profit Share</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="inventoryList"></tbody>
+    </table>
   </div>
 </div>
 
-<!-- Business Dashboard -->
-<div class="dashboard">
-  <div class="card" style="border-top: 4px solid var(--primary);">
-    <h3>Total Products</h3>
-    <strong id="totalItems">0</strong>
+<!-- PAGE 2: SERVICE & REPAIRING -->
+<div id="page2" class="page-content">
+  <div class="dashboard">
+    <div class="card" style="border-top: 4px solid var(--primary);">
+      <h3>Total Service Calls</h3>
+      <strong id="srvTotalCalls">0</strong>
+    </div>
+    <div class="card" style="border-top: 4px solid var(--success);">
+      <h3>Total Service Income</h3>
+      <strong id="srvTotalIncome">₹0</strong>
+    </div>
+    <div class="card" style="border-top: 4px solid var(--warning);">
+      <h3>Spare Parts & Tech Cost</h3>
+      <strong id="srvTotalCost">₹0</strong>
+    </div>
+    <div class="card" style="border-top: 4px solid #8b5cf6;">
+      <h3>Total Service Net Profit</h3>
+      <strong id="srvTotalProfit">₹0</strong>
+    </div>
   </div>
 
-  <div class="card" style="border-top: 4px solid var(--warning);">
-    <h3>Total Investment</h3>
-    <strong id="totalCost">₹0</strong>
+  <div class="dashboard-partner">
+    <div class="card partner-nayan">
+      <h3 style="color: var(--nayan-color);">👤 Nayan Gain (50% Service Profit)</h3>
+      <strong id="srvNayanProfit" style="color: var(--success);">₹0</strong>
+    </div>
+    <div class="card partner-ashid">
+      <h3 style="color: var(--ashid-color);">👤 Ashid Bose (50% Service Profit)</h3>
+      <strong id="srvAshidProfit" style="color: var(--success);">₹0</strong>
+    </div>
   </div>
 
-  <div class="card" style="border-top: 4px solid var(--success);">
-    <h3>Total Sales Received</h3>
-    <strong id="totalSales">₹0</strong>
+  <div class="form-box">
+    <h2 id="srvFormTitle">🛠️ Service & Repair Work Entry</h2>
+    <div class="form-grid">
+      <div>
+        <label>Date</label>
+        <input type="date" id="srvDate">
+      </div>
+      <div>
+        <label>Customer Name / Phone</label>
+        <input type="text" id="srvCustomer" placeholder="Customer Name or Mobile">
+      </div>
+      <div>
+        <label>Appliance Category</label>
+        <select id="srvCategory">
+          <option value="AC Service/Repair">AC Service / Repair</option>
+          <option value="Fridge Service/Repair">Fridge Repair</option>
+          <option value="Washing Machine Repair">Washing Machine Repair</option>
+          <option value="Microwave Repair">Microwave Repair</option>
+          <option value="Geyser Service">Geyser Service</option>
+          <option value="Water Purifier Service">Water Purifier Service</option>
+          <option value="Other Service">Other Appliance</option>
+        </select>
+      </div>
+      <div>
+        <label>Total Charge to Customer (₹)</label>
+        <input type="number" id="srvCharge" placeholder="e.g. 2500">
+      </div>
+      <div>
+        <label>Spare Parts Cost (₹)</label>
+        <input type="number" id="srvPartsCost" value="0" placeholder="0">
+      </div>
+      <div>
+        <label>Technician / Working Charge (₹)</label>
+        <input type="number" id="srvTechCharge" value="0" placeholder="0">
+      </div>
+      <div>
+        <label>Payment / Work Status</label>
+        <select id="srvStatus">
+          <option value="Completed">Completed</option>
+          <option value="Pending">Pending / In Progress</option>
+        </select>
+      </div>
+    </div>
+    <button class="add-btn" onclick="saveServiceItem()" id="srvSaveBtn">Save Service Record</button>
+    <button class="cancel-btn" onclick="resetServiceForm()" id="srvCancelBtn">Cancel</button>
   </div>
 
-  <div class="card" style="border-top: 4px solid #8b5cf6;">
-    <h3>Net Profit / Loss</h3>
-    <strong id="totalProfit">₹0</strong>
-  </div>
-</div>
-
-<!-- Partner Dashboard -->
-<div class="dashboard-partner">
-  <div class="card partner-nayan">
-    <h3 style="color: var(--nayan-color);">👤 Nayan Gain</h3>
-    <strong id="nayanInvest">Invested: ₹0</strong>
-    <div class="sub-text profit" id="nayanProfit">Profit / Loss: ₹0</div>
-  </div>
-
-  <div class="card partner-ashid">
-    <h3 style="color: var(--ashid-color);">👤 Ashid Bose</h3>
-    <strong id="ashidInvest">Invested: ₹0</strong>
-    <div class="sub-text profit" id="ashidProfit">Profit / Loss: ₹0</div>
-  </div>
-</div>
-
-<!-- Input Form -->
-<div class="form-box">
-<h2 id="formTitle">➕ Product Entry & Investment</h2>
-
-<div class="form-grid">
-  <div>
-    <label>Date</label>
-    <input type="date" id="date">
-  </div>
-
-  <div>
-    <label>Product Category</label>
-    <select id="product" onchange="toggleOtherProductInput()">
-      <option value="AC">AC</option>
-      <option value="Fridge">Fridge</option>
-      <option value="Washing Machine">Washing Machine</option>
-      <option value="Microwave">Microwave</option>
-      <option value="Geyser">Geyser</option>
-      <option value="Water Purifier">Water Purifier</option>
-      <option value="Other">Other Item</option>
-    </select>
-  </div>
-
-  <div id="otherProductBox" style="display:none;">
-    <label>Item Name (Other)</label>
-    <input type="text" id="otherProduct" placeholder="e.g. Deep Freezer">
-  </div>
-
-  <div>
-    <label>Company / Brand</label>
-    <input type="text" id="company" placeholder="LG, Samsung, Voltas...">
-  </div>
-
-  <div>
-    <label>Buy Price (₹)</label>
-    <input type="number" id="buyPrice" placeholder="8000">
-  </div>
-
-  <div>
-    <label>Transport Cost (₹)</label>
-    <input type="number" id="transport" value="0">
-  </div>
-
-  <div>
-    <label>Repair / Parts (₹)</label>
-    <input type="number" id="repair" value="0">
-  </div>
-
-  <div>
-    <label>Invested By</label>
-    <select id="investor" onchange="toggleCustomInvestment()">
-      <option value="Both (50-50)">Both (50% Nayan - 50% Ashid)</option>
-      <option value="Nayan Gain">Nayan Gain Only</option>
-      <option value="Ashid Bose">Ashid Bose Only</option>
-      <option value="Custom">Custom Split (Nayan + Ashid Amount)</option>
-    </select>
-  </div>
-
-  <!-- Custom Investment Input Fields -->
-  <div id="nayanCustomBox" style="display:none;">
-    <label>Nayan Invested (₹)</label>
-    <input type="number" id="nayanCustomAmount" placeholder="e.g. 5000">
-  </div>
-
-  <div id="ashidCustomBox" style="display:none;">
-    <label>Ashid Invested (₹)</label>
-    <input type="number" id="ashidCustomAmount" placeholder="e.g. 3000">
-  </div>
-
-  <div>
-    <label>Selling Price (₹)</label>
-    <input type="number" id="sellPrice" placeholder="12000">
-  </div>
-
-  <div>
-    <label>Status</label>
-    <select id="status">
-      <option value="In Stock">In Stock</option>
-      <option value="Sold">Sold</option>
-    </select>
+  <div class="table-box">
+    <div class="table-header">
+      <h2 style="font-size: 18px;">🛠️ Service & Repair Logs</h2>
+      <input type="text" class="search" id="srvSearch" placeholder="🔍 Search service records..." onkeyup="renderServiceData()">
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Customer Info</th>
+          <th>Appliance Category</th>
+          <th>Bill Amount</th>
+          <th>Spare Parts Cost</th>
+          <th>Tech Charges</th>
+          <th>Net Profit</th>
+          <th>Nayan Profit (50%)</th>
+          <th>Ashid Profit (50%)</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="serviceList"></tbody>
+    </table>
   </div>
 </div>
 
-<button class="add-btn" onclick="saveItem()" id="saveBtn">Save Record</button>
-<button class="cancel-btn" onclick="resetForm()" id="cancelBtn">Cancel</button>
-</div>
-
-<!-- Data Table -->
-<div class="table-box">
-  <div class="table-header">
-    <h2 style="font-size: 18px;">📦 Inventory Records</h2>
-    <input type="text" class="search" id="search" placeholder="🔍 Search product, company, status..." onkeyup="renderData()">
+<!-- PAGE 3: CUSTOMER BILL & SPARE PARTS PURCHASE LOG -->
+<div id="page3" class="page-content">
+  <div class="dashboard">
+    <div class="card" style="border-top: 4px solid var(--primary);">
+      <h3>Total Parts Purchased</h3>
+      <strong id="partTotalItems">0</strong>
+    </div>
+    <div class="card" style="border-top: 4px solid var(--warning);">
+      <h3>Total Parts Spent</h3>
+      <strong id="partTotalSpent">₹0</strong>
+    </div>
+    <div class="card" style="border-top: 4px solid var(--success);">
+      <h3>Nayan Spent on Parts</h3>
+      <strong id="partNayanSpent">₹0</strong>
+    </div>
+    <div class="card" style="border-top: 4px solid #8b5cf6;">
+      <h3>Ashid Spent on Parts</h3>
+      <strong id="partAshidSpent">₹0</strong>
+    </div>
   </div>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Product</th>
-        <th>Company</th>
-        <th>Investor Details</th>
-        <th>Total Cost</th>
-        <th>Sell Price</th>
-        <th>Net Profit</th>
-        <th>Nayan Profit Share</th>
-        <th>Ashid Profit Share</th>
-        <th>Status</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody id="inventoryList">
-    </tbody>
-  </table>
+  <div class="form-box">
+    <h2 id="partFormTitle">🛒 Spare Parts Purchase Entry</h2>
+    <div class="form-grid">
+      <div>
+        <label>Date</label>
+        <input type="date" id="partDate">
+      </div>
+      <div>
+        <label>Part Name / Description</label>
+        <input type="text" id="partName" placeholder="e.g. AC Capacitor, Gas R32">
+      </div>
+      <div>
+        <label>Appliance Category</label>
+        <select id="partCategory">
+          <option value="AC">AC</option>
+          <option value="Fridge">Fridge</option>
+          <option value="Washing Machine">Washing Machine</option>
+          <option value="Microwave">Microwave</option>
+          <option value="Geyser">Geyser</option>
+          <option value="Water Purifier">Water Purifier</option>
+          <option value="General">General/Tools</option>
+        </select>
+      </div>
+      <div>
+        <label>Purchase Amount (₹)</label>
+        <input type="number" id="partAmount" placeholder="e.g. 1500">
+      </div>
+      <div>
+        <label>Purchased / Paid By</label>
+        <select id="partPurchaser">
+          <option value="Both (50-50)">Both (50% Nayan - 50% Ashid)</option>
+          <option value="Nayan Gain">Nayan Gain Only</option>
+          <option value="Ashid Bose">Ashid Bose Only</option>
+        </select>
+      </div>
+      <div>
+        <label>Supplier / Shop Name</label>
+        <input type="text" id="partSupplier" placeholder="e.g. Kolkata Electronics">
+      </div>
+    </div>
+    <button class="add-btn" onclick="savePartItem()" id="partSaveBtn">Save Purchase Record</button>
+    <button class="cancel-btn" onclick="resetPartForm()" id="partCancelBtn">Cancel</button>
+  </div>
+
+  <div class="table-box">
+    <div class="table-header">
+      <h2 style="font-size: 18px;">🛒 Spare Parts Purchase History</h2>
+      <input type="text" class="search" id="partSearch" placeholder="🔍 Search parts..." onkeyup="renderPartData()">
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Part Name</th>
+          <th>Category</th>
+          <th>Total Cost</th>
+          <th>Purchased By</th>
+          <th>Supplier</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="partsList"></tbody>
+    </table>
+  </div>
 </div>
 
 </div>
 
 <script>
+// --- Global Data Structures ---
 let inventory = JSON.parse(localStorage.getItem('ng_digital_inventory')) || [];
+let services = JSON.parse(localStorage.getItem('ng_digital_services')) || [];
+let parts = JSON.parse(localStorage.getItem('ng_digital_parts')) || [];
+
 let editIndex = null;
+let editServiceIndex = null;
+let editPartIndex = null;
 
 document.getElementById('date').valueAsDate = new Date();
+document.getElementById('srvDate').valueAsDate = new Date();
+document.getElementById('partDate').valueAsDate = new Date();
 
+// --- Navigation Tabs Logic ---
+function switchPage(pageId, btn) {
+  document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  
+  document.getElementById(pageId).classList.add('active');
+  btn.classList.add('active');
+}
+
+// --- PAGE 1: Buy & Sell Logic ---
 function toggleOtherProductInput() {
   const productSelect = document.getElementById('product').value;
   const otherBox = document.getElementById('otherProductBox');
-  if (productSelect === 'Other') {
-    otherBox.style.display = 'block';
-  } else {
-    otherBox.style.display = 'none';
-  }
+  otherBox.style.display = (productSelect === 'Other') ? 'block' : 'none';
 }
 
 function toggleCustomInvestment() {
@@ -570,26 +810,21 @@ function renderData() {
     let nayanItemInvest = 0;
     let ashidItemInvest = 0;
 
-    // Custom vs Default Logic Calculation
     if (item.investor === 'Nayan Gain') {
       nayanItemInvest = totalCost;
-      ashidItemInvest = 0;
     } else if (item.investor === 'Ashid Bose') {
       ashidItemInvest = totalCost;
-      nayanItemInvest = 0;
     } else if (item.investor === 'Custom') {
       nayanItemInvest = Number(item.nayanCustomAmount) || 0;
       ashidItemInvest = Number(item.ashidCustomAmount) || 0;
       investorDisplay = `Custom (N: ₹${nayanItemInvest} / A: ₹${ashidItemInvest})`;
     } else {
-      // Both (50-50)
       nayanItemInvest = totalCost / 2;
       ashidItemInvest = totalCost / 2;
     }
 
     nayanTotalInvest += nayanItemInvest;
     ashidTotalInvest += ashidItemInvest;
-
     totalCostSum += totalCost;
 
     if (item.status === 'Sold') {
@@ -634,22 +869,18 @@ function renderData() {
     }
   });
 
-  // Digital Analytics Calculations
   const recoveryPercent = totalCostSum > 0 ? Math.min(Math.round((totalSalesSum / totalCostSum) * 100), 100) : 0;
   document.getElementById('progressBar').style.width = recoveryPercent + '%';
   document.getElementById('recoveryPercent').innerText = `Capital Recovered: ${recoveryPercent}%`;
   document.getElementById('stockValue').innerText = `In-Stock Capital: ₹${inStockCostSum}`;
 
-  // Update Dashboard
   document.getElementById('totalItems').innerText = inventory.length;
   document.getElementById('totalCost').innerText = '₹' + totalCostSum;
   document.getElementById('totalSales').innerText = '₹' + totalSalesSum;
   document.getElementById('totalProfit').innerText = '₹' + totalProfitSum;
 
-  // Update Partner Investment Analytics
   document.getElementById('nayanInvest').innerText = 'Invested: ₹' + nayanTotalInvest;
   document.getElementById('nayanProfit').innerText = 'Profit Share: ₹' + nayanTotalProfit;
-
   document.getElementById('ashidInvest').innerText = 'Invested: ₹' + ashidTotalInvest;
   document.getElementById('ashidProfit').innerText = 'Profit Share: ₹' + ashidTotalProfit;
 
@@ -675,20 +906,7 @@ function saveItem() {
     return;
   }
 
-  const itemData = { 
-    date, 
-    product, 
-    otherProduct, 
-    company, 
-    buyPrice, 
-    transport, 
-    repair, 
-    investor, 
-    nayanCustomAmount,
-    ashidCustomAmount,
-    sellPrice, 
-    status 
-  };
+  const itemData = { date, product, otherProduct, company, buyPrice, transport, repair, investor, nayanCustomAmount, ashidCustomAmount, sellPrice, status };
 
   if (editIndex === null) {
     inventory.push(itemData);
@@ -755,7 +973,255 @@ function resetForm() {
   document.getElementById('cancelBtn').style.display = 'none';
 }
 
+// --- PAGE 2: Service & Repairing Logic ---
+function renderServiceData() {
+  const tbody = document.getElementById('serviceList');
+  const searchQuery = document.getElementById('srvSearch').value.toLowerCase();
+  tbody.innerHTML = '';
+
+  let srvTotalIncome = 0;
+  let srvTotalCost = 0;
+  let srvTotalProfit = 0;
+
+  services.forEach((srv, index) => {
+    const totalCharge = Number(srv.charge) || 0;
+    const partsCost = Number(srv.partsCost) || 0;
+    const techCharge = Number(srv.techCharge) || 0;
+    const totalExp = partsCost + techCharge;
+    const netProfit = srv.status === 'Completed' ? (totalCharge - totalExp) : 0;
+    const profitShare = srv.status === 'Completed' ? netProfit / 2 : 0;
+
+    if (srv.status === 'Completed') {
+      srvTotalIncome += totalCharge;
+      srvTotalCost += totalExp;
+      srvTotalProfit += netProfit;
+    }
+
+    if (
+      (srv.customer && srv.customer.toLowerCase().includes(searchQuery)) ||
+      (srv.category && srv.category.toLowerCase().includes(searchQuery)) ||
+      (srv.status && srv.status.toLowerCase().includes(searchQuery))
+    ) {
+      const statusClass = srv.status === 'Completed' ? 'completed' : 'pending';
+      const profitClass = netProfit >= 0 ? 'profit' : 'loss';
+
+      tbody.innerHTML += `
+        <tr>
+          <td>${srv.date}</td>
+          <td><strong>${srv.customer || 'Guest'}</strong></td>
+          <td>${srv.category}</td>
+          <td>₹${totalCharge}</td>
+          <td>₹${partsCost}</td>
+          <td>₹${techCharge}</td>
+          <td class="${profitClass}">₹${netProfit}</td>
+          <td class="${profitClass}">₹${profitShare}</td>
+          <td class="${profitClass}">₹${profitShare}</td>
+          <td><span class="status ${statusClass}">${srv.status}</span></td>
+          <td class="action">
+            <button class="edit" onclick="editServiceItem(${index})">Edit</button>
+            <button class="delete" onclick="deleteServiceItem(${index})">Delete</button>
+          </td>
+        </tr>
+      `;
+    }
+  });
+
+  document.getElementById('srvTotalCalls').innerText = services.length;
+  document.getElementById('srvTotalIncome').innerText = '₹' + srvTotalIncome;
+  document.getElementById('srvTotalCost').innerText = '₹' + srvTotalCost;
+  document.getElementById('srvTotalProfit').innerText = '₹' + srvTotalProfit;
+
+  const partnerShare = srvTotalProfit / 2;
+  document.getElementById('srvNayanProfit').innerText = 'Profit Share: ₹' + partnerShare;
+  document.getElementById('srvAshidProfit').innerText = 'Profit Share: ₹' + partnerShare;
+
+  localStorage.setItem('ng_digital_services', JSON.stringify(services));
+}
+
+function saveServiceItem() {
+  const date = document.getElementById('srvDate').value;
+  const customer = document.getElementById('srvCustomer').value;
+  const category = document.getElementById('srvCategory').value;
+  const charge = document.getElementById('srvCharge').value;
+  const partsCost = document.getElementById('srvPartsCost').value || 0;
+  const techCharge = document.getElementById('srvTechCharge').value || 0;
+  const status = document.getElementById('srvStatus').value;
+
+  if (!date || !charge) {
+    alert('Date and Total Charge are required!');
+    return;
+  }
+
+  const srvData = { date, customer, category, charge, partsCost, techCharge, status };
+
+  if (editServiceIndex === null) {
+    services.push(srvData);
+  } else {
+    services[editServiceIndex] = srvData;
+    editServiceIndex = null;
+  }
+
+  resetServiceForm();
+  renderServiceData();
+}
+
+function editServiceItem(index) {
+  const srv = services[index];
+  document.getElementById('srvDate').value = srv.date;
+  document.getElementById('srvCustomer').value = srv.customer || '';
+  document.getElementById('srvCategory').value = srv.category;
+  document.getElementById('srvCharge').value = srv.charge;
+  document.getElementById('srvPartsCost').value = srv.partsCost;
+  document.getElementById('srvTechCharge').value = srv.techCharge;
+  document.getElementById('srvStatus').value = srv.status;
+
+  editServiceIndex = index;
+  document.getElementById('srvFormTitle').innerText = '✏️ Edit Service Record';
+  document.getElementById('srvSaveBtn').innerText = 'Update Service Record';
+  document.getElementById('srvCancelBtn').style.display = 'inline-block';
+}
+
+function deleteServiceItem(index) {
+  if (confirm('Delete this service entry?')) {
+    services.splice(index, 1);
+    renderServiceData();
+  }
+}
+
+function resetServiceForm() {
+  document.getElementById('srvDate').valueAsDate = new Date();
+  document.getElementById('srvCustomer').value = '';
+  document.getElementById('srvCategory').selectedIndex = 0;
+  document.getElementById('srvCharge').value = '';
+  document.getElementById('srvPartsCost').value = '0';
+  document.getElementById('srvTechCharge').value = '0';
+  document.getElementById('srvStatus').value = 'Completed';
+
+  editServiceIndex = null;
+  document.getElementById('srvFormTitle').innerText = '🛠️ Service & Repair Work Entry';
+  document.getElementById('srvSaveBtn').innerText = 'Save Service Record';
+  document.getElementById('srvCancelBtn').style.display = 'none';
+}
+
+// --- PAGE 3: Spare Parts Purchase Logic ---
+function renderPartData() {
+  const tbody = document.getElementById('partsList');
+  const searchQuery = document.getElementById('partSearch').value.toLowerCase();
+  tbody.innerHTML = '';
+
+  let partTotalSpentSum = 0;
+  let partNayanSpentSum = 0;
+  let partAshidSpentSum = 0;
+
+  parts.forEach((p, index) => {
+    const cost = Number(p.amount) || 0;
+    partTotalSpentSum += cost;
+
+    if (p.purchaser === 'Nayan Gain') {
+      partNayanSpentSum += cost;
+    } else if (p.purchaser === 'Ashid Bose') {
+      partAshidSpentSum += cost;
+    } else {
+      partNayanSpentSum += cost / 2;
+      partAshidSpentSum += cost / 2;
+    }
+
+    if (
+      (p.name && p.name.toLowerCase().includes(searchQuery)) ||
+      (p.category && p.category.toLowerCase().includes(searchQuery)) ||
+      (p.supplier && p.supplier.toLowerCase().includes(searchQuery))
+    ) {
+      tbody.innerHTML += `
+        <tr>
+          <td>${p.date}</td>
+          <td><strong>${p.name}</strong></td>
+          <td>${p.category}</td>
+          <td>₹${cost}</td>
+          <td>${p.purchaser}</td>
+          <td>${p.supplier || '-'}</td>
+          <td class="action">
+            <button class="edit" onclick="editPartItem(${index})">Edit</button>
+            <button class="delete" onclick="deletePartItem(${index})">Delete</button>
+          </td>
+        </tr>
+      `;
+    }
+  });
+
+  document.getElementById('partTotalItems').innerText = parts.length;
+  document.getElementById('partTotalSpent').innerText = '₹' + partTotalSpentSum;
+  document.getElementById('partNayanSpent').innerText = '₹' + partNayanSpentSum;
+  document.getElementById('partAshidSpent').innerText = '₹' + partAshidSpentSum;
+
+  localStorage.setItem('ng_digital_parts', JSON.stringify(parts));
+}
+
+function savePartItem() {
+  const date = document.getElementById('partDate').value;
+  const name = document.getElementById('partName').value;
+  const category = document.getElementById('partCategory').value;
+  const amount = document.getElementById('partAmount').value;
+  const purchaser = document.getElementById('partPurchaser').value;
+  const supplier = document.getElementById('partSupplier').value;
+
+  if (!date || !name || !amount) {
+    alert('Date, Part Name, and Amount are required!');
+    return;
+  }
+
+  const partData = { date, name, category, amount, purchaser, supplier };
+
+  if (editPartIndex === null) {
+    parts.push(partData);
+  } else {
+    parts[editPartIndex] = partData;
+    editPartIndex = null;
+  }
+
+  resetPartForm();
+  renderPartData();
+}
+
+function editPartItem(index) {
+  const p = parts[index];
+  document.getElementById('partDate').value = p.date;
+  document.getElementById('partName').value = p.name;
+  document.getElementById('partCategory').value = p.category;
+  document.getElementById('partAmount').value = p.amount;
+  document.getElementById('partPurchaser').value = p.purchaser;
+  document.getElementById('partSupplier').value = p.supplier || '';
+
+  editPartIndex = index;
+  document.getElementById('partFormTitle').innerText = '✏️ Edit Spare Part Record';
+  document.getElementById('partSaveBtn').innerText = 'Update Purchase Record';
+  document.getElementById('partCancelBtn').style.display = 'inline-block';
+}
+
+function deletePartItem(index) {
+  if (confirm('Delete this part purchase entry?')) {
+    parts.splice(index, 1);
+    renderPartData();
+  }
+}
+
+function resetPartForm() {
+  document.getElementById('partDate').valueAsDate = new Date();
+  document.getElementById('partName').value = '';
+  document.getElementById('partCategory').selectedIndex = 0;
+  document.getElementById('partAmount').value = '';
+  document.getElementById('partPurchaser').selectedIndex = 0;
+  document.getElementById('partSupplier').value = '';
+
+  editPartIndex = null;
+  document.getElementById('partFormTitle').innerText = '🛒 Spare Parts Purchase Entry';
+  document.getElementById('partSaveBtn').innerText = 'Save Purchase Record';
+  document.getElementById('partCancelBtn').style.display = 'none';
+}
+
+// Initial Render All Pages
 renderData();
+renderServiceData();
+renderPartData();
 </script>
 
 </body>
