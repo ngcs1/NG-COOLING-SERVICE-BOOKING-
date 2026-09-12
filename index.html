@@ -36,7 +36,7 @@ body{
 header{
   background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
   color:white;
-  padding:25px 20px;
+  padding:20px 20px;
   text-align:center;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
@@ -53,10 +53,44 @@ header p{
   font-size: 14px;
 }
 
+/* Page Navigation Tabs */
+.nav-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  background: #0f172a;
+  padding-bottom: 15px;
+}
+
+.tab-btn {
+  background: #334155;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+  background: var(--primary);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+}
+
 .container{
   max-width:1250px;
   margin:auto;
   padding:20px 15px;
+}
+
+.page-content {
+  display: none;
+}
+
+.page-content.active {
+  display: block;
 }
 
 /* Digital Stats Grid */
@@ -331,432 +365,3 @@ th{
   }
   .table-header {
     flex-direction: column;
-    gap: 10px;
-  }
-  .search {
-    width: 100%;
-  }
-}
-</style>
-</head>
-
-<body>
-
-<header>
-  <h1>NG COOLING SOLUTION</h1>
-  <p>⚡ Digital Analytics & Partnership Management (50%-50%)</p>
-</header>
-
-<div class="container">
-
-<!-- Digital System Analytics Banner -->
-<div class="digital-banner">
-  <h2>📊 Digital Investment Recovery Tracker</h2>
-  <div class="progress-bar-bg">
-    <div class="progress-bar-fill" id="progressBar"></div>
-  </div>
-  <div class="progress-stats">
-    <span id="recoveryPercent">Capital Recovered: 0%</span>
-    <span id="stockValue">In-Stock Capital: ₹0</span>
-  </div>
-</div>
-
-<!-- Business Dashboard -->
-<div class="dashboard">
-  <div class="card" style="border-top: 4px solid var(--primary);">
-    <h3>Total Products</h3>
-    <strong id="totalItems">0</strong>
-  </div>
-
-  <div class="card" style="border-top: 4px solid var(--warning);">
-    <h3>Total Investment</h3>
-    <strong id="totalCost">₹0</strong>
-  </div>
-
-  <div class="card" style="border-top: 4px solid var(--success);">
-    <h3>Total Sales Received</h3>
-    <strong id="totalSales">₹0</strong>
-  </div>
-
-  <div class="card" style="border-top: 4px solid #8b5cf6;">
-    <h3>Net Profit / Loss</h3>
-    <strong id="totalProfit">₹0</strong>
-  </div>
-</div>
-
-<!-- Partner Dashboard -->
-<div class="dashboard-partner">
-  <div class="card partner-nayan">
-    <h3 style="color: var(--nayan-color);">👤 Nayan Gain</h3>
-    <strong id="nayanInvest">Invested: ₹0</strong>
-    <div class="sub-text profit" id="nayanProfit">Profit / Loss: ₹0</div>
-  </div>
-
-  <div class="card partner-ashid">
-    <h3 style="color: var(--ashid-color);">👤 Ashid Bose</h3>
-    <strong id="ashidInvest">Invested: ₹0</strong>
-    <div class="sub-text profit" id="ashidProfit">Profit / Loss: ₹0</div>
-  </div>
-</div>
-
-<!-- Input Form -->
-<div class="form-box">
-<h2 id="formTitle">➕ Product Entry & Investment</h2>
-
-<div class="form-grid">
-  <div>
-    <label>Date</label>
-    <input type="date" id="date">
-  </div>
-
-  <div>
-    <label>Product Category</label>
-    <select id="product" onchange="toggleOtherProductInput()">
-      <option value="AC">AC</option>
-      <option value="Fridge">Fridge</option>
-      <option value="Washing Machine">Washing Machine</option>
-      <option value="Microwave">Microwave</option>
-      <option value="Geyser">Geyser</option>
-      <option value="Water Purifier">Water Purifier</option>
-      <option value="Other">Other Item</option>
-    </select>
-  </div>
-
-  <div id="otherProductBox" style="display:none;">
-    <label>Item Name (Other)</label>
-    <input type="text" id="otherProduct" placeholder="e.g. Deep Freezer">
-  </div>
-
-  <div>
-    <label>Company / Brand</label>
-    <input type="text" id="company" placeholder="LG, Samsung, Voltas...">
-  </div>
-
-  <div>
-    <label>Buy Price (₹)</label>
-    <input type="number" id="buyPrice" placeholder="8000">
-  </div>
-
-  <div>
-    <label>Transport Cost (₹)</label>
-    <input type="number" id="transport" value="0">
-  </div>
-
-  <div>
-    <label>Repair / Parts (₹)</label>
-    <input type="number" id="repair" value="0">
-  </div>
-
-  <div>
-    <label>Invested By</label>
-    <select id="investor" onchange="toggleCustomInvestment()">
-      <option value="Both (50-50)">Both (50% Nayan - 50% Ashid)</option>
-      <option value="Nayan Gain">Nayan Gain Only</option>
-      <option value="Ashid Bose">Ashid Bose Only</option>
-      <option value="Custom">Custom Split (Nayan + Ashid Amount)</option>
-    </select>
-  </div>
-
-  <!-- Custom Investment Input Fields -->
-  <div id="nayanCustomBox" style="display:none;">
-    <label>Nayan Invested (₹)</label>
-    <input type="number" id="nayanCustomAmount" placeholder="e.g. 5000">
-  </div>
-
-  <div id="ashidCustomBox" style="display:none;">
-    <label>Ashid Invested (₹)</label>
-    <input type="number" id="ashidCustomAmount" placeholder="e.g. 3000">
-  </div>
-
-  <div>
-    <label>Selling Price (₹)</label>
-    <input type="number" id="sellPrice" placeholder="12000">
-  </div>
-
-  <div>
-    <label>Status</label>
-    <select id="status">
-      <option value="In Stock">In Stock</option>
-      <option value="Sold">Sold</option>
-    </select>
-  </div>
-</div>
-
-<button class="add-btn" onclick="saveItem()" id="saveBtn">Save Record</button>
-<button class="cancel-btn" onclick="resetForm()" id="cancelBtn">Cancel</button>
-</div>
-
-<!-- Data Table -->
-<div class="table-box">
-  <div class="table-header">
-    <h2 style="font-size: 18px;">📦 Inventory Records</h2>
-    <input type="text" class="search" id="search" placeholder="🔍 Search product, company, status..." onkeyup="renderData()">
-  </div>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Product</th>
-        <th>Company</th>
-        <th>Investor Details</th>
-        <th>Total Cost</th>
-        <th>Sell Price</th>
-        <th>Net Profit</th>
-        <th>Nayan Profit Share</th>
-        <th>Ashid Profit Share</th>
-        <th>Status</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody id="inventoryList">
-    </tbody>
-  </table>
-</div>
-
-</div>
-
-<script>
-let inventory = JSON.parse(localStorage.getItem('ng_digital_inventory')) || [];
-let editIndex = null;
-
-document.getElementById('date').valueAsDate = new Date();
-
-function toggleOtherProductInput() {
-  const productSelect = document.getElementById('product').value;
-  const otherBox = document.getElementById('otherProductBox');
-  if (productSelect === 'Other') {
-    otherBox.style.display = 'block';
-  } else {
-    otherBox.style.display = 'none';
-  }
-}
-
-function toggleCustomInvestment() {
-  const investorVal = document.getElementById('investor').value;
-  const nayanBox = document.getElementById('nayanCustomBox');
-  const ashidBox = document.getElementById('ashidCustomBox');
-
-  if (investorVal === 'Custom') {
-    nayanBox.style.display = 'block';
-    ashidBox.style.display = 'block';
-  } else {
-    nayanBox.style.display = 'none';
-    ashidBox.style.display = 'none';
-  }
-}
-
-function renderData() {
-  const tbody = document.getElementById('inventoryList');
-  const searchQuery = document.getElementById('search').value.toLowerCase();
-  tbody.innerHTML = '';
-
-  let totalCostSum = 0;
-  let totalSalesSum = 0;
-  let totalProfitSum = 0;
-  let inStockCostSum = 0;
-
-  let nayanTotalInvest = 0;
-  let ashidTotalInvest = 0;
-  let nayanTotalProfit = 0;
-  let ashidTotalProfit = 0;
-
-  inventory.forEach((item, index) => {
-    const totalCost = Number(item.buyPrice) + Number(item.transport) + Number(item.repair);
-    const profit = item.status === 'Sold' ? Number(item.sellPrice) - totalCost : 0;
-    const partnerProfitShare = item.status === 'Sold' ? profit / 2 : 0;
-
-    let investorDisplay = item.investor;
-    let nayanItemInvest = 0;
-    let ashidItemInvest = 0;
-
-    // Custom vs Default Logic Calculation
-    if (item.investor === 'Nayan Gain') {
-      nayanItemInvest = totalCost;
-      ashidItemInvest = 0;
-    } else if (item.investor === 'Ashid Bose') {
-      ashidItemInvest = totalCost;
-      nayanItemInvest = 0;
-    } else if (item.investor === 'Custom') {
-      nayanItemInvest = Number(item.nayanCustomAmount) || 0;
-      ashidItemInvest = Number(item.ashidCustomAmount) || 0;
-      investorDisplay = `Custom (N: ₹${nayanItemInvest} / A: ₹${ashidItemInvest})`;
-    } else {
-      // Both (50-50)
-      nayanItemInvest = totalCost / 2;
-      ashidItemInvest = totalCost / 2;
-    }
-
-    nayanTotalInvest += nayanItemInvest;
-    ashidTotalInvest += ashidItemInvest;
-
-    totalCostSum += totalCost;
-
-    if (item.status === 'Sold') {
-      totalSalesSum += Number(item.sellPrice);
-      totalProfitSum += profit;
-      nayanTotalProfit += partnerProfitShare;
-      ashidTotalProfit += partnerProfitShare;
-    } else {
-      inStockCostSum += totalCost;
-    }
-
-    const itemCompany = item.company || '-';
-    const displayProduct = item.product === 'Other' ? (item.otherProduct || 'Other') : item.product;
-
-    if (
-      displayProduct.toLowerCase().includes(searchQuery) || 
-      itemCompany.toLowerCase().includes(searchQuery) ||
-      item.status.toLowerCase().includes(searchQuery) ||
-      investorDisplay.toLowerCase().includes(searchQuery)
-    ) {
-      const statusClass = item.status === 'In Stock' ? 'stock' : 'sold';
-      const profitClass = profit >= 0 ? 'profit' : 'loss';
-
-      tbody.innerHTML += `
-        <tr>
-          <td>${item.date}</td>
-          <td><strong>${displayProduct}</strong></td>
-          <td>${itemCompany}</td>
-          <td>${investorDisplay}</td>
-          <td>₹${totalCost}</td>
-          <td>₹${item.sellPrice || 0}</td>
-          <td class="${profitClass}">₹${item.status === 'Sold' ? profit : 0}</td>
-          <td class="${profitClass}">₹${partnerProfitShare}</td>
-          <td class="${profitClass}">₹${partnerProfitShare}</td>
-          <td><span class="status ${statusClass}">${item.status}</span></td>
-          <td class="action">
-            <button class="edit" onclick="editItem(${index})">Edit</button>
-            <button class="delete" onclick="deleteItem(${index})">Delete</button>
-          </td>
-        </tr>
-      `;
-    }
-  });
-
-  // Digital Analytics Calculations
-  const recoveryPercent = totalCostSum > 0 ? Math.min(Math.round((totalSalesSum / totalCostSum) * 100), 100) : 0;
-  document.getElementById('progressBar').style.width = recoveryPercent + '%';
-  document.getElementById('recoveryPercent').innerText = `Capital Recovered: ${recoveryPercent}%`;
-  document.getElementById('stockValue').innerText = `In-Stock Capital: ₹${inStockCostSum}`;
-
-  // Update Dashboard
-  document.getElementById('totalItems').innerText = inventory.length;
-  document.getElementById('totalCost').innerText = '₹' + totalCostSum;
-  document.getElementById('totalSales').innerText = '₹' + totalSalesSum;
-  document.getElementById('totalProfit').innerText = '₹' + totalProfitSum;
-
-  // Update Partner Investment Analytics
-  document.getElementById('nayanInvest').innerText = 'Invested: ₹' + nayanTotalInvest;
-  document.getElementById('nayanProfit').innerText = 'Profit Share: ₹' + nayanTotalProfit;
-
-  document.getElementById('ashidInvest').innerText = 'Invested: ₹' + ashidTotalInvest;
-  document.getElementById('ashidProfit').innerText = 'Profit Share: ₹' + ashidTotalProfit;
-
-  localStorage.setItem('ng_digital_inventory', JSON.stringify(inventory));
-}
-
-function saveItem() {
-  const date = document.getElementById('date').value;
-  const product = document.getElementById('product').value;
-  const otherProduct = document.getElementById('otherProduct').value;
-  const company = document.getElementById('company').value;
-  const buyPrice = document.getElementById('buyPrice').value;
-  const transport = document.getElementById('transport').value || 0;
-  const repair = document.getElementById('repair').value || 0;
-  const investor = document.getElementById('investor').value;
-  const nayanCustomAmount = document.getElementById('nayanCustomAmount').value || 0;
-  const ashidCustomAmount = document.getElementById('ashidCustomAmount').value || 0;
-  const sellPrice = document.getElementById('sellPrice').value || 0;
-  const status = document.getElementById('status').value;
-
-  if (!date || !buyPrice) {
-    alert('Date and Buy Price are required!');
-    return;
-  }
-
-  const itemData = { 
-    date, 
-    product, 
-    otherProduct, 
-    company, 
-    buyPrice, 
-    transport, 
-    repair, 
-    investor, 
-    nayanCustomAmount,
-    ashidCustomAmount,
-    sellPrice, 
-    status 
-  };
-
-  if (editIndex === null) {
-    inventory.push(itemData);
-  } else {
-    inventory[editIndex] = itemData;
-    editIndex = null;
-  }
-
-  resetForm();
-  renderData();
-}
-
-function editItem(index) {
-  const item = inventory[index];
-  document.getElementById('date').value = item.date;
-  document.getElementById('product').value = item.product || 'AC';
-  document.getElementById('otherProduct').value = item.otherProduct || '';
-  document.getElementById('company').value = item.company || '';
-  document.getElementById('buyPrice').value = item.buyPrice;
-  document.getElementById('transport').value = item.transport;
-  document.getElementById('repair').value = item.repair;
-  document.getElementById('investor').value = item.investor;
-  document.getElementById('nayanCustomAmount').value = item.nayanCustomAmount || '';
-  document.getElementById('ashidCustomAmount').value = item.ashidCustomAmount || '';
-  document.getElementById('sellPrice').value = item.sellPrice;
-  document.getElementById('status').value = item.status;
-
-  toggleOtherProductInput();
-  toggleCustomInvestment();
-
-  editIndex = index;
-  document.getElementById('formTitle').innerText = '✏️ Edit Product Record';
-  document.getElementById('saveBtn').innerText = 'Update Record';
-  document.getElementById('cancelBtn').style.display = 'inline-block';
-}
-
-function deleteItem(index) {
-  if (confirm('Delete this product entry?')) {
-    inventory.splice(index, 1);
-    renderData();
-  }
-}
-
-function resetForm() {
-  document.getElementById('date').valueAsDate = new Date();
-  document.getElementById('product').selectedIndex = 0;
-  document.getElementById('otherProduct').value = '';
-  document.getElementById('company').value = '';
-  document.getElementById('buyPrice').value = '';
-  document.getElementById('transport').value = '0';
-  document.getElementById('repair').value = '0';
-  document.getElementById('investor').value = 'Both (50-50)';
-  document.getElementById('nayanCustomAmount').value = '';
-  document.getElementById('ashidCustomAmount').value = '';
-  document.getElementById('sellPrice').value = '';
-  document.getElementById('status').value = 'In Stock';
-
-  toggleOtherProductInput();
-  toggleCustomInvestment();
-
-  editIndex = null;
-  document.getElementById('formTitle').innerText = '➕ Product Entry & Investment';
-  document.getElementById('saveBtn').innerText = 'Save Record';
-  document.getElementById('cancelBtn').style.display = 'none';
-}
-
-renderData();
-</script>
-
-</body>
-</html>
