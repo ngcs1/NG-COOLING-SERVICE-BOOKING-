@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NG Cooling Solution - Buy & Sell</title>
+<title>NG Cooling Solution - Buy & Sell (Partnership)</title>
 
 <style>
 *{
@@ -43,6 +43,13 @@ header p{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:12px;
+  margin-bottom:12px;
+}
+
+.dashboard-partner{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
   margin-bottom:18px;
 }
 
@@ -53,6 +60,14 @@ header p{
   box-shadow:0 2px 8px #0001;
 }
 
+.card.partner-nayan{
+  border-left: 5px solid #0b63ce;
+}
+
+.card.partner-ashid{
+  border-left: 5px solid #7a5af8;
+}
+
 .card h3{
   font-size:14px;
   color:#667085;
@@ -60,8 +75,14 @@ header p{
 
 .card strong{
   display:block;
-  font-size:22px;
+  font-size:20px;
   margin-top:8px;
+}
+
+.card .sub-text{
+  font-size:13px;
+  color:#475467;
+  margin-top:6px;
 }
 
 .form-box{
@@ -126,14 +147,14 @@ button{
 table{
   width:100%;
   border-collapse:collapse;
-  min-width:1000px;
+  min-width:1100px;
 }
 
 th,td{
   padding:11px;
   border-bottom:1px solid #eaecf0;
   text-align:left;
-  font-size:14px;
+  font-size:13px;
 }
 
 th{
@@ -188,7 +209,7 @@ th{
 }
 
 @media(max-width:800px){
-  .dashboard{
+  .dashboard, .dashboard-partner{
     grid-template-columns:repeat(2,1fr);
   }
 
@@ -198,7 +219,7 @@ th{
 }
 
 @media(max-width:450px){
-  .dashboard{
+  .dashboard, .dashboard-partner{
     grid-template-columns:1fr;
   }
 }
@@ -209,21 +230,20 @@ th{
 
 <header>
   <h1>NG COOLING SOLUTION</h1>
-  <p>Buy & Sell Management System</p>
+  <p>Buy & Sell Management System (50%-50% Partnership)</p>
 </header>
 
 <div class="container">
 
-<!-- Dashboard -->
+<!-- Overall Business Dashboard -->
 <div class="dashboard">
-
   <div class="card">
     <h3>Total Items</h3>
     <strong id="totalItems">0</strong>
   </div>
 
   <div class="card">
-    <h3>Total Cost</h3>
+    <h3>Total Investment (Cost)</h3>
     <strong id="totalCost">₹0</strong>
   </div>
 
@@ -233,21 +253,32 @@ th{
   </div>
 
   <div class="card">
-    <h3>Total Profit</h3>
+    <h3>Total Business Profit</h3>
     <strong id="totalProfit">₹0</strong>
   </div>
+</div>
 
+<!-- Partners Dashboard -->
+<div class="dashboard-partner">
+  <div class="card partner-nayan">
+    <h3>👤 Nayan Gain (50% Share)</h3>
+    <strong id="nayanInvest">Invested: ₹0</strong>
+    <div class="sub-text" id="nayanProfit">Profit / Loss Share: ₹0</div>
+  </div>
+
+  <div class="card partner-ashid">
+    <h3>👤 Ashid Bose (50% Share)</h3>
+    <strong id="ashidInvest">Invested: ₹0</strong>
+    <div class="sub-text" id="ashidProfit">Profit / Loss Share: ₹0</div>
+  </div>
 </div>
 
 <!-- Form -->
 <div class="form-box">
-
 <h2 id="formTitle">Add New Purchase</h2>
-
 <br>
 
 <div class="form-grid">
-
   <div>
     <label>Date</label>
     <input type="date" id="date">
@@ -280,6 +311,15 @@ th{
   </div>
 
   <div>
+    <label>Invested By</label>
+    <select id="investor">
+      <option value="Both (50-50)">Both (50% Nayan - 50% Ashid)</option>
+      <option value="Nayan Gain">Nayan Gain Only</option>
+      <option value="Ashid Bose">Ashid Bose Only</option>
+    </select>
+  </div>
+
+  <div>
     <label>Sell Price (₹)</label>
     <input type="number" id="sellPrice" placeholder="12000">
   </div>
@@ -291,30 +331,27 @@ th{
       <option value="Sold">Sold</option>
     </select>
   </div>
-
 </div>
 
 <button class="add-btn" onclick="saveItem()" id="saveBtn">Save Product</button>
 <button class="cancel-btn" onclick="resetForm()" id="cancelBtn">Cancel</button>
-
 </div>
 
 <!-- Table -->
 <div class="table-box">
-
-  <input type="text" class="search" id="search" placeholder="Search by product or status..." onkeyup="renderData()">
+  <input type="text" class="search" id="search" placeholder="Search by product, status, investor..." onkeyup="renderData()">
 
   <table>
     <thead>
       <tr>
         <th>Date</th>
         <th>Product</th>
-        <th>Buy Price</th>
-        <th>Transport</th>
-        <th>Repair</th>
+        <th>Investor</th>
         <th>Total Cost</th>
         <th>Sell Price</th>
-        <th>Profit / Loss</th>
+        <th>Total Profit</th>
+        <th>Nayan Profit (50%)</th>
+        <th>Ashid Profit (50%)</th>
         <th>Status</th>
         <th>Action</th>
       </tr>
@@ -322,16 +359,14 @@ th{
     <tbody id="inventoryList">
     </tbody>
   </table>
-
 </div>
 
 </div>
 
 <script>
-let inventory = JSON.parse(localStorage.getItem('ng_inventory')) || [];
+let inventory = JSON.parse(localStorage.getItem('ng_inventory_partner')) || [];
 let editIndex = null;
 
-// Set today's date in form by default
 document.getElementById('date').valueAsDate = new Date();
 
 function renderData() {
@@ -343,19 +378,45 @@ function renderData() {
   let totalSalesSum = 0;
   let totalProfitSum = 0;
 
+  let nayanTotalInvest = 0;
+  let ashidTotalInvest = 0;
+  let nayanTotalProfit = 0;
+  let ashidTotalProfit = 0;
+
   inventory.forEach((item, index) => {
     const totalCost = Number(item.buyPrice) + Number(item.transport) + Number(item.repair);
     const profit = item.status === 'Sold' ? Number(item.sellPrice) - totalCost : 0;
+    
+    // Profit Share (50% each)
+    const partnerProfitShare = item.status === 'Sold' ? profit / 2 : 0;
 
-    // Accumulate metrics
+    // Investment Share Breakdown
+    if (item.investor === 'Nayan Gain') {
+      nayanTotalInvest += totalCost;
+    } else if (item.investor === 'Ashid Bose') {
+      ashidTotalInvest += totalCost;
+    } else { // Both 50-50
+      nayanTotalInvest += (totalCost / 2);
+      ashidTotalInvest += (totalCost / 2);
+    }
+
+    // Accumulate total metrics
     totalCostSum += totalCost;
+
     if (item.status === 'Sold') {
       totalSalesSum += Number(item.sellPrice);
       totalProfitSum += profit;
+
+      nayanTotalProfit += partnerProfitShare;
+      ashidTotalProfit += partnerProfitShare;
     }
 
-    // Filter for search
-    if (item.product.toLowerCase().includes(searchQuery) || item.status.toLowerCase().includes(searchQuery)) {
+    // Search filter
+    if (
+      item.product.toLowerCase().includes(searchQuery) || 
+      item.status.toLowerCase().includes(searchQuery) ||
+      item.investor.toLowerCase().includes(searchQuery)
+    ) {
       const statusClass = item.status === 'In Stock' ? 'stock' : 'sold';
       const profitClass = profit >= 0 ? 'profit' : 'loss';
 
@@ -363,12 +424,12 @@ function renderData() {
         <tr>
           <td>${item.date}</td>
           <td><strong>${item.product}</strong></td>
-          <td>₹${item.buyPrice}</td>
-          <td>₹${item.transport}</td>
-          <td>₹${item.repair}</td>
-          <td><strong>₹${totalCost}</strong></td>
+          <td>${item.investor}</td>
+          <td>₹${totalCost}</td>
           <td>₹${item.sellPrice || 0}</td>
           <td class="${profitClass}">₹${item.status === 'Sold' ? profit : 0}</td>
+          <td class="${profitClass}">₹${partnerProfitShare}</td>
+          <td class="${profitClass}">₹${partnerProfitShare}</td>
           <td><span class="status ${statusClass}">${item.status}</span></td>
           <td class="action">
             <button class="edit" onclick="editItem(${index})">Edit</button>
@@ -379,14 +440,21 @@ function renderData() {
     }
   });
 
-  // Update Dashboard
+  // Update Overall Dashboard
   document.getElementById('totalItems').innerText = inventory.length;
   document.getElementById('totalCost').innerText = '₹' + totalCostSum;
   document.getElementById('totalSales').innerText = '₹' + totalSalesSum;
   document.getElementById('totalProfit').innerText = '₹' + totalProfitSum;
 
+  // Update Partner Dashboard
+  document.getElementById('nayanInvest').innerText = 'Invested: ₹' + nayanTotalInvest;
+  document.getElementById('nayanProfit').innerText = 'Profit / Loss Share: ₹' + nayanTotalProfit;
+
+  document.getElementById('ashidInvest').innerText = 'Invested: ₹' + ashidTotalInvest;
+  document.getElementById('ashidProfit').innerText = 'Profit / Loss Share: ₹' + ashidTotalProfit;
+
   // Save to LocalStorage
-  localStorage.setItem('ng_inventory', JSON.stringify(inventory));
+  localStorage.setItem('ng_inventory_partner', JSON.stringify(inventory));
 }
 
 function saveItem() {
@@ -395,6 +463,7 @@ function saveItem() {
   const buyPrice = document.getElementById('buyPrice').value;
   const transport = document.getElementById('transport').value || 0;
   const repair = document.getElementById('repair').value || 0;
+  const investor = document.getElementById('investor').value;
   const sellPrice = document.getElementById('sellPrice').value || 0;
   const status = document.getElementById('status').value;
 
@@ -403,7 +472,7 @@ function saveItem() {
     return;
   }
 
-  const itemData = { date, product, buyPrice, transport, repair, sellPrice, status };
+  const itemData = { date, product, buyPrice, transport, repair, investor, sellPrice, status };
 
   if (editIndex === null) {
     inventory.push(itemData);
@@ -423,6 +492,7 @@ function editItem(index) {
   document.getElementById('buyPrice').value = item.buyPrice;
   document.getElementById('transport').value = item.transport;
   document.getElementById('repair').value = item.repair;
+  document.getElementById('investor').value = item.investor || 'Both (50-50)';
   document.getElementById('sellPrice').value = item.sellPrice;
   document.getElementById('status').value = item.status;
 
@@ -445,6 +515,7 @@ function resetForm() {
   document.getElementById('buyPrice').value = '';
   document.getElementById('transport').value = '0';
   document.getElementById('repair').value = '0';
+  document.getElementById('investor').value = 'Both (50-50)';
   document.getElementById('sellPrice').value = '';
   document.getElementById('status').value = 'In Stock';
 
@@ -454,7 +525,7 @@ function resetForm() {
   document.getElementById('cancelBtn').style.display = 'none';
 }
 
-// Initial render
+// Initial Render
 renderData();
 </script>
 
