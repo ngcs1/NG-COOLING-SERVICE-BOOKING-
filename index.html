@@ -387,13 +387,13 @@ th{
 <!-- Partner Dashboard -->
 <div class="dashboard-partner">
   <div class="card partner-nayan">
-    <h3 style="color: var(--nayan-color);">👤 Nayan Gain (50% Share)</h3>
+    <h3 style="color: var(--nayan-color);">👤 Nayan Gain</h3>
     <strong id="nayanInvest">Invested: ₹0</strong>
     <div class="sub-text profit" id="nayanProfit">Profit / Loss: ₹0</div>
   </div>
 
   <div class="card partner-ashid">
-    <h3 style="color: var(--ashid-color);">👤 Ashid Bose (50% Share)</h3>
+    <h3 style="color: var(--ashid-color);">👤 Ashid Bose</h3>
     <strong id="ashidInvest">Invested: ₹0</strong>
     <div class="sub-text profit" id="ashidProfit">Profit / Loss: ₹0</div>
   </div>
@@ -449,11 +449,22 @@ th{
 
   <div>
     <label>Invested By</label>
-    <select id="investor">
+    <select id="investor" onchange="toggleCustomInvestment()">
       <option value="Both (50-50)">Both (50% Nayan - 50% Ashid)</option>
       <option value="Nayan Gain">Nayan Gain Only</option>
       <option value="Ashid Bose">Ashid Bose Only</option>
+      <option value="Custom">Custom Split (Nayan + Ashid Amount)</option>
     </select>
+  </div>
+
+  <div id="nayanCustomBox" style="display:none;">
+    <label>Nayan Invested (₹)</label>
+    <input type="number" id="nayanCustomAmount" placeholder="0">
+  </div>
+
+  <div id="ashidCustomBox" style="display:none;">
+    <label>Ashid Invested (₹)</label>
+    <input type="number" id="ashidCustomAmount" placeholder="0">
   </div>
 
   <div>
@@ -487,12 +498,12 @@ th{
         <th>Date</th>
         <th>Product</th>
         <th>Company</th>
-        <th>Investor</th>
+        <th>Investor Details</th>
         <th>Total Cost</th>
         <th>Sell Price</th>
         <th>Net Profit</th>
-        <th>Nayan (50%)</th>
-        <th>Ashid (50%)</th>
+        <th>Nayan Profit Share</th>
+        <th>Ashid Profit Share</th>
         <th>Status</th>
         <th>Actions</th>
       </tr>
@@ -520,6 +531,20 @@ function toggleOtherProductInput() {
   }
 }
 
+function toggleCustomInvestment() {
+  const investorVal = document.getElementById('investor').value;
+  const nayanBox = document.getElementById('nayanCustomBox');
+  const ashidBox = document.getElementById('ashidCustomBox');
+
+  if (investorVal === 'Custom') {
+    nayanBox.style.display = 'block';
+    ashidBox.style.display = 'block';
+  } else {
+    nayanBox.style.display = 'none';
+    ashidBox.style.display = 'none';
+  }
+}
+
 function renderData() {
   const tbody = document.getElementById('inventoryList');
   const searchQuery = document.getElementById('search').value.toLowerCase();
@@ -540,15 +565,29 @@ function renderData() {
     const profit = item.status === 'Sold' ? Number(item.sellPrice) - totalCost : 0;
     const partnerProfitShare = item.status === 'Sold' ? profit / 2 : 0;
 
-    // Investor Tracking
+    let investorDisplay = item.investor;
+    let nayanItemInvest = 0;
+    let ashidItemInvest = 0;
+
+    // Investor Calculation Logic
     if (item.investor === 'Nayan Gain') {
-      nayanTotalInvest += totalCost;
+      nayanItemInvest = totalCost;
+      ashidItemInvest = 0;
     } else if (item.investor === 'Ashid Bose') {
-      ashidTotalInvest += totalCost;
+      ashidItemInvest = totalCost;
+      nayanItemInvest = 0;
+    } else if (item.investor === 'Custom') {
+      nayanItemInvest = Number(item.nayanCustomAmount) || 0;
+      ashidItemInvest = Number(item.ashidCustomAmount) || 0;
+      investorDisplay = `Custom (N: ₹${nayanItemInvest} / A: ₹${ashidItemInvest})`;
     } else {
-      nayanTotalInvest += (totalCost / 2);
-      ashidTotalInvest += (totalCost / 2);
+      // Default Both (50-50)
+      nayanItemInvest = totalCost / 2;
+      ashidItemInvest = totalCost / 2;
     }
+
+    nayanTotalInvest += nayanItemInvest;
+    ashidTotalInvest += ashidItemInvest;
 
     totalCostSum += totalCost;
 
@@ -568,7 +607,7 @@ function renderData() {
       displayProduct.toLowerCase().includes(searchQuery) || 
       itemCompany.toLowerCase().includes(searchQuery) ||
       item.status.toLowerCase().includes(searchQuery) ||
-      item.investor.toLowerCase().includes(searchQuery)
+      investorDisplay.toLowerCase().includes(searchQuery)
     ) {
       const statusClass = item.status === 'In Stock' ? 'stock' : 'sold';
       const profitClass = profit >= 0 ? 'profit' : 'loss';
@@ -578,7 +617,7 @@ function renderData() {
           <td>${item.date}</td>
           <td><strong>${displayProduct}</strong></td>
           <td>${itemCompany}</td>
-          <td>${item.investor}</td>
+          <td>${investorDisplay}</td>
           <td>₹${totalCost}</td>
           <td>₹${item.sellPrice || 0}</td>
           <td class="${profitClass}">₹${item.status === 'Sold' ? profit : 0}</td>
@@ -625,6 +664,8 @@ function saveItem() {
   const transport = document.getElementById('transport').value || 0;
   const repair = document.getElementById('repair').value || 0;
   const investor = document.getElementById('investor').value;
+  const nayanCustomAmount = document.getElementById('nayanCustomAmount').value || 0;
+  const ashidCustomAmount = document.getElementById('ashidCustomAmount').value || 0;
   const sellPrice = document.getElementById('sellPrice').value || 0;
   const status = document.getElementById('status').value;
 
@@ -633,7 +674,20 @@ function saveItem() {
     return;
   }
 
-  const itemData = { date, product, otherProduct, company, buyPrice, transport, repair, investor, sellPrice, status };
+  const itemData = { 
+    date, 
+    product, 
+    otherProduct, 
+    company, 
+    buyPrice, 
+    transport, 
+    repair, 
+    investor, 
+    nayanCustomAmount,
+    ashidCustomAmount,
+    sellPrice, 
+    status 
+  };
 
   if (editIndex === null) {
     inventory.push(itemData);
@@ -656,10 +710,13 @@ function editItem(index) {
   document.getElementById('transport').value = item.transport;
   document.getElementById('repair').value = item.repair;
   document.getElementById('investor').value = item.investor;
+  document.getElementById('nayanCustomAmount').value = item.nayanCustomAmount || '';
+  document.getElementById('ashidCustomAmount').value = item.ashidCustomAmount || '';
   document.getElementById('sellPrice').value = item.sellPrice;
   document.getElementById('status').value = item.status;
 
   toggleOtherProductInput();
+  toggleCustomInvestment();
 
   editIndex = index;
   document.getElementById('formTitle').innerText = '✏️ Edit Product Record';
@@ -683,10 +740,13 @@ function resetForm() {
   document.getElementById('transport').value = '0';
   document.getElementById('repair').value = '0';
   document.getElementById('investor').value = 'Both (50-50)';
+  document.getElementById('nayanCustomAmount').value = '';
+  document.getElementById('ashidCustomAmount').value = '';
   document.getElementById('sellPrice').value = '';
   document.getElementById('status').value = 'In Stock';
 
   toggleOtherProductInput();
+  toggleCustomInvestment();
 
   editIndex = null;
   document.getElementById('formTitle').innerText = '➕ Product Entry & Investment';
@@ -699,3 +759,5 @@ renderData();
 
 </body>
 </html>
+
+  
