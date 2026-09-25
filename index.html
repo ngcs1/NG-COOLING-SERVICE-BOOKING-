@@ -3,15 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
-      content="width=device-width,initial-scale=1,viewport-fit=cover">
+      content="width=device-width, initial-scale=1.0">
 
-<title>PDF Edit & Share</title>
+<title>PDF Editor</title>
 
-<!-- PDF.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-
-<!-- PDF-LIB -->
-<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 
 <style>
 * {
@@ -20,7 +17,7 @@
 
 body {
   margin: 0;
-  background: #f1f3f6;
+  background: #eef1f5;
   font-family: Arial, sans-serif;
   color: #111827;
 }
@@ -28,8 +25,8 @@ body {
 header {
   background: #111827;
   color: white;
-  padding: 16px;
   text-align: center;
+  padding: 16px;
 }
 
 header h1 {
@@ -40,7 +37,7 @@ header h1 {
 .toolbar {
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 20;
   background: white;
   padding: 10px;
   display: flex;
@@ -55,26 +52,32 @@ button,
   border: 0;
   border-radius: 8px;
   padding: 10px 13px;
-  background: #2563eb;
   color: white;
-  font-weight: 600;
+  background: #2563eb;
   cursor: pointer;
+  font-weight: 600;
 }
 
-button.green {
+.upload input {
+  display: none;
+}
+
+.green {
   background: #16a34a;
 }
 
-button.red {
+.red {
   background: #dc2626;
 }
 
-button.gray {
+.gray {
   background: #4b5563;
 }
 
-input[type=file] {
-  display: none;
+#status {
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
 }
 
 #pages {
@@ -94,70 +97,61 @@ input[type=file] {
   max-width: 100%;
 }
 
-.editCanvas {
+.drawCanvas {
   position: absolute;
   left: 0;
   top: 0;
-  cursor: crosshair;
+}
+
+.textBox {
+  position: absolute;
+  min-width: 80px;
+  min-height: 25px;
+  padding: 3px;
+  border: 1px dashed #2563eb;
+  background: rgba(255,255,255,.75);
+  color: #111;
+  outline: none;
+  font-size: 18px;
+  font-family: Arial;
+  resize: both;
+}
+
+.textBox:focus {
+  border: 2px solid #2563eb;
+}
+
+.pageTools {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 5;
+}
+
+.deleteText {
+  background: #dc2626;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  padding: 4px 7px;
+  cursor: pointer;
 }
 
 .empty {
   text-align: center;
-  padding: 70px 20px;
+  padding: 80px 20px;
   color: #6b7280;
 }
 
-#status {
-  text-align: center;
-  padding: 10px;
-  font-size: 14px;
-}
-
-.passwordBox {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  background: #0008;
-  align-items: center;
-  justify-content: center;
-}
-
-.passwordCard {
-  background: white;
-  width: calc(100% - 40px);
-  max-width: 380px;
-  padding: 25px;
-  border-radius: 15px;
-}
-
-.passwordCard h2 {
-  margin-top: 0;
-}
-
-.passwordCard input {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-
-.passwordActions {
-  display: flex;
-  gap: 8px;
-}
-
 @media(max-width:600px) {
-
   button,
   .upload {
     font-size: 12px;
-    padding: 9px 10px;
+    padding: 8px 10px;
   }
 
   #pages {
-    padding: 10px 4px;
+    padding: 10px 3px;
   }
 }
 </style>
@@ -166,7 +160,7 @@ input[type=file] {
 <body>
 
 <header>
-  <h1>📄 PDF Edit & Share</h1>
+  <h1>📄 PDF Editor</h1>
 </header>
 
 <div class="toolbar">
@@ -180,11 +174,15 @@ input[type=file] {
       multiple>
   </label>
 
-  <button onclick="setTool('draw')">
+  <button onclick="enableText()">
+    ⌨️ Add / Correct Text
+  </button>
+
+  <button onclick="enableDraw()">
     ✏️ Draw
   </button>
 
-  <button onclick="setTool('highlight')">
+  <button onclick="enableHighlight()">
     🟡 Highlight
   </button>
 
@@ -196,7 +194,7 @@ input[type=file] {
     🗑 Delete Page
   </button>
 
-  <button class="green" onclick="exportPDF()">
+  <button class="green" onclick="savePDF()">
     💾 Save PDF
   </button>
 
@@ -207,101 +205,51 @@ input[type=file] {
 </div>
 
 <div id="status">
-  No PDF selected
+  Upload a PDF to start.
 </div>
 
 <div id="pages">
   <div class="empty">
-    Upload one or more PDF files to begin.
+    📄 Choose a PDF file
   </div>
-</div>
-
-<!-- PASSWORD DIALOG -->
-
-<div class="passwordBox" id="passwordBox">
-
-  <div class="passwordCard">
-
-    <h2>🔐 PDF Password</h2>
-
-    <p>
-      This PDF is password protected.
-      Enter the password to continue.
-    </p>
-
-    <input
-      id="passwordInput"
-      type="password"
-      placeholder="Enter PDF password">
-
-    <div class="passwordActions">
-
-      <button onclick="submitPassword()">
-        Unlock
-      </button>
-
-      <button
-        class="gray"
-        onclick="closePassword()">
-        Cancel
-      </button>
-
-    </div>
-
-  </div>
-
 </div>
 
 
 <script>
 
-/* =========================
-   PDF.JS
-========================= */
-
 pdfjsLib.GlobalWorkerOptions.workerSrc =
 "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
 
-/* =========================
-   VARIABLES
-========================= */
-
-let pdfFiles = [];
+let documents = [];
 let pages = [];
 
 let currentTool = null;
-
-let waitingFile = null;
-
-
-/* =========================
-   FILE INPUT
-========================= */
-
-document
-.getElementById("pdfInput")
-.addEventListener("change", async function(e) {
-
-  const files = [...e.target.files];
-
-  if (!files.length)
-    return;
-
-  for (const file of files) {
-
-    await openPDF(file);
-
-  }
-
-});
+let lastPDFBlob = null;
 
 
 /* =========================
    OPEN PDF
 ========================= */
 
-async function openPDF(file, password = null) {
+document
+.getElementById("pdfInput")
+.addEventListener("change", async function(event) {
+
+  const files = [...event.target.files];
+
+  if (!files.length) return;
+
+  for (const file of files) {
+
+    await loadPDF(file);
+
+  }
+
+});
+
+
+async function loadPDF(file) {
 
   try {
 
@@ -310,45 +258,25 @@ async function openPDF(file, password = null) {
     const buffer =
       await file.arrayBuffer();
 
-    const loadingTask =
-      pdfjsLib.getDocument({
-        data: buffer,
-        password: password || undefined
-      });
-
-    loadingTask.onPassword =
-      function(callback, reason) {
-
-        waitingFile = {
-          file,
-          buffer,
-          callback
-        };
-
-        document
-          .getElementById("passwordBox")
-          .style.display = "flex";
-
-        document
-          .getElementById("passwordInput")
-          .focus();
-
-      };
+    /*
+      No password popup.
+      Normal PDFs open directly.
+    */
 
     const pdf =
-      await loadingTask.promise;
+      await pdfjsLib.getDocument({
+        data: buffer
+      }).promise;
 
-    pdfFiles.push({
+    documents.push({
       file,
-      buffer,
       pdf
     });
 
-    await renderDocument(pdf);
+    await renderPDF(pdf);
 
     setStatus(
-      pdfFiles.length +
-      " PDF file(s) loaded"
+      "PDF loaded successfully"
     );
 
   }
@@ -357,12 +285,8 @@ async function openPDF(file, password = null) {
 
     console.error(error);
 
-    setStatus(
-      "Could not open this PDF."
-    );
-
     alert(
-      "The PDF could not be opened. Check the password or file."
+      "This PDF cannot be opened without its required password."
     );
 
   }
@@ -371,60 +295,10 @@ async function openPDF(file, password = null) {
 
 
 /* =========================
-   PASSWORD
+   RENDER
 ========================= */
 
-function submitPassword() {
-
-  const password =
-    document
-      .getElementById("passwordInput")
-      .value;
-
-  if (!waitingFile)
-    return;
-
-  try {
-
-    waitingFile.callback(password);
-
-    document
-      .getElementById("passwordBox")
-      .style.display = "none";
-
-    document
-      .getElementById("passwordInput")
-      .value = "";
-
-    waitingFile = null;
-
-  }
-
-  catch(error) {
-
-    alert("Wrong password.");
-
-  }
-
-}
-
-
-function closePassword() {
-
-  document
-    .getElementById("passwordBox")
-    .style.display = "none";
-
-  waitingFile = null;
-
-}
-
-
-/* =========================
-   RENDER DOCUMENT
-========================= */
-
-async function renderDocument(pdf) {
+async function renderPDF(pdf) {
 
   const container =
     document.getElementById("pages");
@@ -434,6 +308,7 @@ async function renderDocument(pdf) {
 
   if (empty)
     empty.remove();
+
 
   for (
     let pageNumber = 1;
@@ -447,17 +322,19 @@ async function renderDocument(pdf) {
     const scale =
       window.innerWidth < 600
         ? 1.1
-        : 1.4;
+        : 1.5;
 
     const viewport =
       pdfPage.getViewport({
         scale
       });
 
+
     const wrapper =
       document.createElement("div");
 
     wrapper.className = "page";
+
 
     const pdfCanvas =
       document.createElement("canvas");
@@ -471,39 +348,44 @@ async function renderDocument(pdf) {
     pdfCanvas.height =
       viewport.height;
 
-    const context =
+
+    const ctx =
       pdfCanvas.getContext("2d");
 
+
     await pdfPage.render({
-      canvasContext: context,
+      canvasContext: ctx,
       viewport
     }).promise;
 
 
-    const editCanvas =
+    const drawCanvas =
       document.createElement("canvas");
 
-    editCanvas.className =
-      "editCanvas";
+    drawCanvas.className =
+      "drawCanvas";
 
-    editCanvas.width =
+    drawCanvas.width =
       viewport.width;
 
-    editCanvas.height =
+    drawCanvas.height =
       viewport.height;
 
 
     wrapper.appendChild(pdfCanvas);
-    wrapper.appendChild(editCanvas);
+
+    wrapper.appendChild(drawCanvas);
 
     container.appendChild(wrapper);
 
-    setupDrawing(editCanvas);
+
+    setupDrawing(drawCanvas);
+
 
     pages.push({
+      wrapper,
       pdfCanvas,
-      editCanvas,
-      wrapper
+      drawCanvas
     });
 
   }
@@ -512,18 +394,150 @@ async function renderDocument(pdf) {
 
 
 /* =========================
-   DRAW / HIGHLIGHT
+   TEXT MODE
 ========================= */
 
-function setTool(tool) {
+function enableText() {
 
-  currentTool = tool;
+  currentTool = "text";
 
-  if (tool === "draw")
-    setStatus("Drawing mode enabled");
+  setStatus(
+    "Tap/click anywhere on a page to add text."
+  );
 
-  if (tool === "highlight")
-    setStatus("Highlight mode enabled");
+  pages.forEach(page => {
+
+    page.wrapper.onclick =
+      function(event) {
+
+        if (
+          event.target.classList.contains(
+            "textBox"
+          )
+        )
+          return;
+
+        addTextBox(
+          page.wrapper,
+          event
+        );
+
+      };
+
+  });
+
+}
+
+
+function addTextBox(wrapper, event) {
+
+  const rect =
+    wrapper.getBoundingClientRect();
+
+  const box =
+    document.createElement("div");
+
+  box.className = "textBox";
+
+  box.contentEditable = "true";
+
+  box.textContent =
+    "Type here";
+
+  box.style.left =
+    (event.clientX - rect.left) + "px";
+
+  box.style.top =
+    (event.clientY - rect.top) + "px";
+
+
+  wrapper.appendChild(box);
+
+
+  box.focus();
+
+
+  box.addEventListener(
+    "click",
+    function(e) {
+
+      e.stopPropagation();
+
+    }
+  );
+
+
+  const deleteButton =
+    document.createElement("button");
+
+  deleteButton.className =
+    "deleteText";
+
+  deleteButton.textContent =
+    "×";
+
+  deleteButton.style.position =
+    "absolute";
+
+  deleteButton.style.right =
+    "-25px";
+
+  deleteButton.style.top =
+    "0";
+
+
+  box.appendChild(deleteButton);
+
+
+  deleteButton.onclick =
+    function(e) {
+
+      e.stopPropagation();
+
+      box.remove();
+
+    };
+
+}
+
+
+/* =========================
+   DRAWING
+========================= */
+
+function enableDraw() {
+
+  currentTool = "draw";
+
+  removeTextClickHandlers();
+
+  setStatus(
+    "Drawing mode enabled."
+  );
+
+}
+
+
+function enableHighlight() {
+
+  currentTool = "highlight";
+
+  removeTextClickHandlers();
+
+  setStatus(
+    "Highlight mode enabled."
+  );
+
+}
+
+
+function removeTextClickHandlers() {
+
+  pages.forEach(page => {
+
+    page.wrapper.onclick = null;
+
+  });
 
 }
 
@@ -535,17 +549,19 @@ function setupDrawing(canvas) {
 
   let drawing = false;
 
-  function position(e) {
+
+  function getPosition(event) {
 
     const rect =
       canvas.getBoundingClientRect();
 
     const source =
-      e.touches
-        ? e.touches[0]
-        : e;
+      event.touches
+        ? event.touches[0]
+        : event;
 
     return {
+
       x:
         (source.clientX - rect.left)
         * (canvas.width / rect.width),
@@ -553,21 +569,26 @@ function setupDrawing(canvas) {
       y:
         (source.clientY - rect.top)
         * (canvas.height / rect.height)
+
     };
 
   }
 
 
-  function start(e) {
+  function start(event) {
 
-    if (!currentTool)
+    if (
+      currentTool !== "draw" &&
+      currentTool !== "highlight"
+    )
       return;
 
-    e.preventDefault();
+    event.preventDefault();
 
     drawing = true;
 
-    const p = position(e);
+    const p =
+      getPosition(event);
 
     ctx.beginPath();
 
@@ -579,38 +600,48 @@ function setupDrawing(canvas) {
   }
 
 
-  function move(e) {
+  function move(event) {
 
     if (!drawing)
       return;
 
-    e.preventDefault();
+    event.preventDefault();
 
-    const p = position(e);
+    const p =
+      getPosition(event);
+
 
     if (currentTool === "draw") {
 
       ctx.strokeStyle =
         "#111827";
 
-      ctx.lineWidth = 3;
+      ctx.lineWidth =
+        3;
 
-      ctx.globalAlpha = 1;
+      ctx.globalAlpha =
+        1;
 
     }
+
 
     if (currentTool === "highlight") {
 
       ctx.strokeStyle =
         "#ffff00";
 
-      ctx.lineWidth = 22;
+      ctx.lineWidth =
+        22;
 
-      ctx.globalAlpha = 0.35;
+      ctx.globalAlpha =
+        .35;
 
     }
 
-    ctx.lineCap = "round";
+
+    ctx.lineCap =
+      "round";
+
 
     ctx.lineTo(
       p.x,
@@ -651,16 +682,17 @@ function setupDrawing(canvas) {
     stop
   );
 
+
   canvas.addEventListener(
     "touchstart",
     start,
-    {passive:false}
+    { passive:false }
   );
 
   canvas.addEventListener(
     "touchmove",
     move,
-    {passive:false}
+    { passive:false }
   );
 
   canvas.addEventListener(
@@ -677,17 +709,25 @@ function setupDrawing(canvas) {
 
 function clearEdits() {
 
-  pages.forEach(p => {
+  pages.forEach(page => {
 
     const ctx =
-      p.editCanvas.getContext("2d");
+      page.drawCanvas
+        .getContext("2d");
 
     ctx.clearRect(
       0,
       0,
-      p.editCanvas.width,
-      p.editCanvas.height
+      page.drawCanvas.width,
+      page.drawCanvas.height
     );
+
+
+    page.wrapper
+      .querySelectorAll(
+        ".textBox"
+      )
+      .forEach(box => box.remove());
 
   });
 
@@ -703,10 +743,10 @@ function deleteLastPage() {
   if (!pages.length)
     return;
 
-  const last =
+  const page =
     pages.pop();
 
-  last.wrapper.remove();
+  page.wrapper.remove();
 
   setStatus(
     pages.length +
@@ -717,104 +757,197 @@ function deleteLastPage() {
 
 
 /* =========================
-   EXPORT
+   SAVE PDF
 ========================= */
 
-async function exportPDF() {
+async function savePDF() {
 
   if (!pages.length) {
 
-    alert("Open a PDF first.");
+    alert(
+      "Please open a PDF first."
+    );
 
     return;
 
   }
 
-  setStatus("Creating PDF...");
+
+  setStatus(
+    "Creating edited PDF..."
+  );
+
 
   const {
-    PDFDocument
-  } = PDFLib;
-
-  const output =
-    await PDFDocument.create();
+    jsPDF
+  } = window.jspdf;
 
 
-  for (const page of pages) {
-
-    const width =
-      page.pdfCanvas.width;
-
-    const height =
-      page.pdfCanvas.height;
+  const first =
+    pages[0].pdfCanvas;
 
 
-    const combined =
-      document.createElement("canvas");
+  const pdf =
+    new jsPDF({
 
-    combined.width = width;
-    combined.height = height;
+      orientation:
+        first.width >
+        first.height
+          ? "landscape"
+          : "portrait",
 
-    const ctx =
-      combined.getContext("2d");
+      unit: "px",
 
-    ctx.drawImage(
-      page.pdfCanvas,
-      0,
-      0
-    );
+      format: [
+        first.width,
+        first.height
+      ]
 
-    ctx.drawImage(
-      page.editCanvas,
-      0,
-      0
-    );
+    });
 
 
-    const image =
-      await output.embedJpg(
-        combined.toDataURL(
-          "image/jpeg",
-          0.95
-        )
+  pages.forEach(
+    (page, index) => {
+
+      if (index > 0) {
+
+        pdf.addPage([
+          page.pdfCanvas.width,
+          page.pdfCanvas.height
+        ]);
+
+      }
+
+
+      const combined =
+        document.createElement(
+          "canvas"
+        );
+
+
+      combined.width =
+        page.pdfCanvas.width;
+
+      combined.height =
+        page.pdfCanvas.height;
+
+
+      const ctx =
+        combined.getContext("2d");
+
+
+      /*
+        Original PDF
+      */
+
+      ctx.drawImage(
+        page.pdfCanvas,
+        0,
+        0
       );
 
 
-    const newPage =
-      output.addPage([
-        width,
-        height
-      ]);
+      /*
+        Draw / highlight
+      */
+
+      ctx.drawImage(
+        page.drawCanvas,
+        0,
+        0
+      );
 
 
-    newPage.drawImage(
-      image,
-      {
-        x: 0,
-        y: 0,
-        width,
-        height
-      }
-    );
+      /*
+        Text corrections
+      */
 
-  }
+      const textBoxes =
+        page.wrapper
+          .querySelectorAll(
+            ".textBox"
+          );
 
 
-  const bytes =
-    await output.save();
+      textBoxes.forEach(box => {
+
+        const boxRect =
+          box.getBoundingClientRect();
+
+        const pageRect =
+          page.wrapper.getBoundingClientRect();
+
+
+        const x =
+          boxRect.left -
+          pageRect.left;
+
+        const y =
+          boxRect.top -
+          pageRect.top;
+
+
+        ctx.fillStyle =
+          "#ffffff";
+
+
+        ctx.fillRect(
+          x,
+          y,
+          boxRect.width,
+          boxRect.height
+        );
+
+
+        ctx.fillStyle =
+          "#111111";
+
+
+        ctx.font =
+          "18px Arial";
+
+
+        ctx.fillText(
+          box.innerText
+            .replace("×", "")
+            .trim(),
+
+          x + 4,
+          y + 20
+        );
+
+      });
+
+
+      pdf.addImage(
+
+        combined.toDataURL(
+          "image/jpeg",
+          .95
+        ),
+
+        "JPEG",
+
+        0,
+        0,
+
+        page.pdfCanvas.width,
+        page.pdfCanvas.height
+
+      );
+
+    }
+  );
 
 
   const blob =
-    new Blob(
-      [bytes],
-      {
-        type:
-          "application/pdf"
-      }
+    pdf.output(
+      "blob"
     );
 
 
-  window.lastPDFBlob = blob;
+  lastPDFBlob =
+    blob;
 
 
   downloadBlob(
@@ -824,7 +957,7 @@ async function exportPDF() {
 
 
   setStatus(
-    "PDF saved successfully"
+    "Edited PDF saved."
   );
 
 }
@@ -834,26 +967,34 @@ async function exportPDF() {
    DOWNLOAD
 ========================= */
 
-function downloadBlob(blob, filename) {
+function downloadBlob(
+  blob,
+  filename
+) {
 
   const url =
     URL.createObjectURL(blob);
 
-  const a =
+  const link =
     document.createElement("a");
 
-  a.href = url;
+  link.href =
+    url;
 
-  a.download = filename;
+  link.download =
+    filename;
 
-  document.body.appendChild(a);
+  document.body.appendChild(
+    link
+  );
 
-  a.click();
+  link.click();
 
-  a.remove();
+  link.remove();
 
   setTimeout(
-    () => URL.revokeObjectURL(url),
+    () =>
+      URL.revokeObjectURL(url),
     1000
   );
 
@@ -861,24 +1002,25 @@ function downloadBlob(blob, filename) {
 
 
 /* =========================
-   ANDROID + IPHONE SHARE
+   SHARE
 ========================= */
 
 async function sharePDF() {
 
-  if (!window.lastPDFBlob) {
+  if (!lastPDFBlob) {
 
-    await exportPDF();
+    await savePDF();
 
   }
 
-  if (!window.lastPDFBlob)
+
+  if (!lastPDFBlob)
     return;
 
 
   const file =
     new File(
-      [window.lastPDFBlob],
+      [lastPDFBlob],
       "edited-pdf.pdf",
       {
         type:
@@ -903,14 +1045,14 @@ async function sharePDF() {
           "Edited PDF",
 
         text:
-          "Sharing edited PDF",
+          "Edited PDF",
 
         files: [file]
 
       });
 
       setStatus(
-        "Share sheet opened"
+        "Share menu opened."
       );
 
     }
@@ -918,8 +1060,7 @@ async function sharePDF() {
     catch(error) {
 
       console.log(
-        "Share cancelled",
-        error
+        "Share cancelled"
       );
 
     }
@@ -929,7 +1070,7 @@ async function sharePDF() {
   else {
 
     alert(
-      "Direct file sharing is not supported in this browser. The PDF has been downloaded. Open it from Files/Downloads and use Android or iPhone Share → WhatsApp."
+      "Your browser does not support direct file sharing. The PDF was downloaded. Open it from Downloads/Files and choose WhatsApp."
     );
 
   }
@@ -941,11 +1082,12 @@ async function sharePDF() {
    STATUS
 ========================= */
 
-function setStatus(message) {
+function setStatus(text) {
 
   document
     .getElementById("status")
-    .textContent = message;
+    .textContent =
+      text;
 
 }
 
