@@ -4,1676 +4,966 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
 
-<title>PDF Editor</title>
-
-<!-- PDF.JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-
-<!-- jsPDF -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<title>Photo Text Remover</title>
 
 <style>
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  background: #eef1f5;
-  font-family: Arial, sans-serif;
-  color: #111827;
+    margin: 0;
+    background: #111827;
+    color: white;
+    font-family: Arial, sans-serif;
 }
 
-/* HEADER */
-
 header {
-  background: #111827;
-  color: white;
-  padding: 16px;
-  text-align: center;
+    text-align: center;
+    padding: 16px;
+    background: #030712;
 }
 
 header h1 {
-  margin: 0;
-  font-size: 22px;
+    margin: 0;
+    font-size: 22px;
 }
 
-/* TOOLBAR */
-
 .toolbar {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-
-  background: white;
-
-  padding: 10px;
-
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-
-  justify-content: center;
-
-  box-shadow: 0 2px 10px #0002;
+    background: #1f2937;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 20;
 }
 
 button,
 .upload {
-  border: 0;
-
-  border-radius: 8px;
-
-  padding: 10px 13px;
-
-  background: #2563eb;
-
-  color: white;
-
-  cursor: pointer;
-
-  font-weight: 600;
+    border: 0;
+    padding: 10px 13px;
+    border-radius: 8px;
+    color: white;
+    background: #2563eb;
+    cursor: pointer;
+    font-weight: 600;
 }
 
 button:hover,
 .upload:hover {
-  opacity: .85;
-}
-
-.green {
-  background: #16a34a;
-}
-
-.red {
-  background: #dc2626;
-}
-
-.gray {
-  background: #4b5563;
+    opacity: .85;
 }
 
 .upload input {
-  display: none;
+    display: none;
 }
 
-/* STATUS */
-
-#status {
-  text-align: center;
-
-  padding: 10px;
-
-  font-size: 14px;
+.red {
+    background: #dc2626;
 }
 
-/* PDF AREA */
+.green {
+    background: #16a34a;
+}
 
-#pages {
-  padding: 20px 10px;
+.gray {
+    background: #4b5563;
+}
+
+.orange {
+    background: #ea580c;
+}
+
+#workspace {
+    padding: 20px 10px 80px;
+    display: flex;
+    justify-content: center;
+}
+
+#canvasBox {
+    position: relative;
+    display: none;
+}
+
+#photoCanvas {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    background: white;
+    box-shadow: 0 5px 30px #0008;
+    touch-action: none;
+}
+
+#brushCursor {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    border: 2px solid white;
+    border-radius: 50%;
+    pointer-events: none;
+    display: none;
+    z-index: 100;
+}
+
+.controls {
+    background: #1f2937;
+    padding: 12px;
+    text-align: center;
+}
+
+.controls label {
+    margin: 5px;
+}
+
+input[type="range"] {
+    width: 120px;
+}
+
+input[type="color"] {
+    width: 45px;
+    height: 35px;
+    border: 0;
 }
 
 .empty {
-  text-align: center;
-
-  padding: 80px 20px;
-
-  color: #6b7280;
+    text-align: center;
+    color: #9ca3af;
+    padding: 100px 20px;
 }
 
-/* PAGE */
-
-.page {
-  position: relative;
-
-  width: fit-content;
-
-  margin: 0 auto 25px;
-
-  background: white;
-
-  box-shadow:
-    0 4px 18px #0002;
+#status {
+    text-align: center;
+    color: #d1d5db;
+    padding: 8px;
 }
 
-.pdfCanvas {
-  display: block;
-
-  max-width: 100%;
-}
-
-.drawCanvas {
-  position: absolute;
-
-  left: 0;
-  top: 0;
-}
-
-/* TEXT */
-
-.textBox {
-  position: absolute;
-
-  min-width: 90px;
-
-  min-height: 30px;
-
-  padding: 4px;
-
-  background: rgba(
-    255,
-    255,
-    255,
-    .90
-  );
-
-  border: 2px dashed #2563eb;
-
-  color: #111;
-
-  font-size: 18px;
-
-  outline: none;
-
-  resize: both;
-
-  z-index: 10;
-}
-
-.textBox:focus {
-  border: 2px solid #2563eb;
-}
-
-.deleteText {
-  position: absolute;
-
-  right: -25px;
-
-  top: 0;
-
-  border: 0;
-
-  background: #dc2626;
-
-  color: white;
-
-  border-radius: 5px;
-
-  padding: 3px 7px;
-
-  cursor: pointer;
-}
-
-/* PASSWORD MODAL */
-
-#passwordModal {
-  position: fixed;
-
-  inset: 0;
-
-  z-index: 999;
-
-  display: none;
-
-  align-items: center;
-
-  justify-content: center;
-
-  background: rgba(0,0,0,.65);
-}
-
-.passwordCard {
-  width: calc(100% - 40px);
-
-  max-width: 380px;
-
-  background: white;
-
-  border-radius: 16px;
-
-  padding: 25px;
-
-  box-shadow:
-    0 15px 40px #0005;
-}
-
-.passwordCard h2 {
-  margin-top: 0;
-}
-
-.passwordCard input {
-  width: 100%;
-
-  padding: 13px;
-
-  margin: 12px 0;
-
-  border: 1px solid #ccc;
-
-  border-radius: 8px;
-
-  font-size: 16px;
-}
-
-.passwordButtons {
-  display: flex;
-
-  gap: 8px;
-}
-
-.passwordButtons button {
-  flex: 1;
-}
-
-/* MOBILE */
-
-@media(max-width:600px) {
-
-  button,
-  .upload {
-    font-size: 12px;
-
-    padding: 8px 10px;
-  }
-
-  #pages {
-    padding: 10px 3px;
-  }
-
+.textInput {
+    position: fixed;
+    display: none;
+    z-index: 200;
+    padding: 10px;
+    background: white;
+    color: black;
+    border-radius: 8px;
+    border: 2px solid #2563eb;
 }
 
 </style>
 </head>
 
-
 <body>
 
 <header>
-
-<h1>
-📄 PDF Editor
-</h1>
-
+    <h1>📸 Photo Text Remover</h1>
 </header>
-
-
-<!-- TOOLBAR -->
 
 <div class="toolbar">
 
-<label class="upload">
+    <label class="upload">
+        🖼️ Open Photo
+        <input
+            type="file"
+            id="imageInput"
+            accept="image/*">
+    </label>
 
-📂 Open PDF
+    <button onclick="setTool('erase')">
+        🧹 Remove
+    </button>
 
-<input
-  id="pdfInput"
-  type="file"
-  accept="application/pdf"
-  multiple>
+    <button onclick="setTool('cover')">
+        🎨 Cover
+    </button>
 
-</label>
+    <button onclick="setTool('text')">
+        ✍️ Add Text
+    </button>
 
+    <button class="gray"
+            onclick="undo()">
+        ↩️ Undo
+    </button>
 
-<button onclick="textMode()">
-⌨️ Text
-</button>
+    <button class="gray"
+            onclick="resetImage()">
+        🔄 Reset
+    </button>
 
+    <button class="green"
+            onclick="downloadImage()">
+        📥 Download
+    </button>
 
-<button onclick="drawMode()">
-✏️ Draw
-</button>
-
-
-<button onclick="highlightMode()">
-🟡 Highlight
-</button>
-
-
-<button class="gray"
-        onclick="clearEdits()">
-
-🧹 Clear
-
-</button>
-
-
-<button class="red"
-        onclick="deleteLastPage()">
-
-🗑️ Delete Page
-
-</button>
-
-
-<button class="green"
-        onclick="savePDF()">
-
-💾 Save PDF
-
-</button>
-
-
-<button onclick="sharePDF()">
-
-📤 Share
-
-</button>
+    <button class="orange"
+            onclick="shareImage()">
+        📤 Share
+    </button>
 
 </div>
 
+<div class="controls">
+
+    <label>
+        Brush:
+        <input
+            id="brushSize"
+            type="range"
+            min="5"
+            max="150"
+            value="35">
+    </label>
+
+    <label>
+        Color:
+        <input
+            id="brushColor"
+            type="color"
+            value="#ffffff">
+    </label>
+
+</div>
 
 <div id="status">
+    Upload a photo to start.
+</div>
 
-No PDF opened.
+<div id="workspace">
+
+    <div id="canvasBox">
+
+        <canvas id="photoCanvas"></canvas>
+
+    </div>
+
+    <div class="empty"
+         id="emptyMessage">
+
+        🖼️ Upload a photo to begin.
+
+    </div>
 
 </div>
 
-
-<div id="pages">
-
-<div class="empty">
-
-📄 Upload a PDF to begin.
-
-</div>
-
-</div>
-
-
-<!-- PASSWORD MODAL -->
-
-<div id="passwordModal">
-
-<div class="passwordCard">
-
-<h2>
-🔐 PDF Password
-</h2>
-
-<p>
-This PDF is password protected.
-Enter the correct password to open it.
-</p>
-
-<input
-  id="passwordInput"
-  type="password"
-  placeholder="Enter password">
-
-<div class="passwordButtons">
-
-<button onclick="submitPassword()">
-
-🔓 Open PDF
-
-</button>
-
-
-<button
-  class="gray"
-  onclick="cancelPassword()">
-
-Cancel
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
+<div id="brushCursor"></div>
 
 <script>
 
-/* =================================
-   PDF.JS CONFIG
-================================= */
+const canvas =
+    document.getElementById("photoCanvas");
 
-pdfjsLib.GlobalWorkerOptions.workerSrc =
-"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+const ctx =
+    canvas.getContext("2d");
+
+const imageInput =
+    document.getElementById("imageInput");
+
+const canvasBox =
+    document.getElementById("canvasBox");
+
+const emptyMessage =
+    document.getElementById("emptyMessage");
+
+const statusText =
+    document.getElementById("status");
+
+const brushSize =
+    document.getElementById("brushSize");
+
+const brushColor =
+    document.getElementById("brushColor");
+
+let image = null;
+
+let originalImage = null;
+
+let tool = "erase";
+
+let drawing = false;
+
+let history = [];
+
+let lastBlob = null;
 
 
-/* =================================
-   VARIABLES
-================================= */
+/* =========================
+   OPEN IMAGE
+========================= */
 
-let pages = [];
+imageInput.addEventListener(
+    "change",
+    function(event) {
 
-let currentTool = null;
+        const file =
+            event.target.files[0];
 
-let passwordRequest = null;
+        if (!file) return;
 
-let lastPDFBlob = null;
+        const reader =
+            new FileReader();
 
+        reader.onload =
+            function(e) {
 
-/* =================================
-   FILE INPUT
-================================= */
+                const img =
+                    new Image();
 
-document
-.getElementById("pdfInput")
-.addEventListener(
-  "change",
-  async function(event) {
+                img.onload =
+                    function() {
 
-    const files =
-      [...event.target.files];
+                        image = img;
 
-    if (!files.length)
-      return;
+                        originalImage =
+                            img;
 
+                        canvas.width =
+                            img.naturalWidth;
 
-    for (const file of files) {
+                        canvas.height =
+                            img.naturalHeight;
 
-      await openPDF(file);
+                        ctx.drawImage(
+                            img,
+                            0,
+                            0
+                        );
+
+                        history = [];
+
+                        saveHistory();
+
+                        canvasBox.style.display =
+                            "block";
+
+                        emptyMessage.style.display =
+                            "none";
+
+                        setStatus(
+                            "Photo loaded."
+                        );
+
+                    };
+
+                img.src =
+                    e.target.result;
+
+            };
+
+        reader.readAsDataURL(file);
 
     }
-
-  }
 );
 
 
-/* =================================
-   OPEN PDF
-================================= */
+/* =========================
+   TOOLS
+========================= */
 
-async function openPDF(file) {
+function setTool(selectedTool) {
 
-  try {
+    tool =
+        selectedTool;
 
-    setStatus(
-      "Opening " +
-      file.name +
-      "..."
-    );
+    if (tool === "erase") {
 
-
-    const buffer =
-      await file.arrayBuffer();
-
-
-    const loadingTask =
-      pdfjsLib.getDocument({
-
-        data: buffer,
-
-        /*
-          Password callback is only
-          triggered if the PDF needs one.
-        */
-
-        password: undefined
-
-      });
-
-
-    loadingTask.onPassword =
-      function(
-        callback,
-        reason
-      ) {
-
-        /*
-          Save callback so that
-          the entered password can
-          be supplied to PDF.js.
-        */
-
-        passwordRequest = {
-          callback: callback,
-          reason: reason
-        };
-
-
-        document
-        .getElementById(
-          "passwordModal"
-        )
-        .style.display = "flex";
-
-
-        document
-        .getElementById(
-          "passwordInput"
-        )
-        .value = "";
-
-
-        document
-        .getElementById(
-          "passwordInput"
-        )
-        .focus();
-
-      };
-
-
-    const pdf =
-      await loadingTask.promise;
-
-
-    await renderPDF(pdf);
-
-
-    setStatus(
-      "PDF opened successfully."
-    );
-
-  }
-
-  catch(error) {
-
-    console.error(error);
-
-    setStatus(
-      "Could not open PDF."
-    );
-
-    alert(
-      "The PDF could not be opened. If it is password protected, enter the correct password."
-    );
-
-  }
-
-}
-
-
-/* =================================
-   PASSWORD SUBMIT
-================================= */
-
-function submitPassword() {
-
-  if (!passwordRequest)
-    return;
-
-
-  const password =
-    document
-    .getElementById(
-      "passwordInput"
-    )
-    .value;
-
-
-  if (!password) {
-
-    alert(
-      "Please enter the password."
-    );
-
-    return;
-
-  }
-
-
-  /*
-    Give password to PDF.js.
-  */
-
-  passwordRequest
-    .callback(password);
-
-
-  /*
-    Hide modal.
-  */
-
-  document
-  .getElementById(
-    "passwordModal"
-  )
-  .style.display = "none";
-
-
-  passwordRequest = null;
-
-}
-
-
-/* =================================
-   CANCEL PASSWORD
-================================= */
-
-function cancelPassword() {
-
-  document
-  .getElementById(
-    "passwordModal"
-  )
-  .style.display = "none";
-
-
-  passwordRequest = null;
-
-}
-
-
-/* =================================
-   RENDER PDF
-================================= */
-
-async function renderPDF(pdf) {
-
-  const container =
-    document.getElementById(
-      "pages"
-    );
-
-
-  const empty =
-    container.querySelector(
-      ".empty"
-    );
-
-
-  if (empty)
-    empty.remove();
-
-
-  /*
-    Render every page.
-  */
-
-  for (
-    let pageNumber = 1;
-
-    pageNumber <= pdf.numPages;
-
-    pageNumber++
-  ) {
-
-    const pdfPage =
-      await pdf.getPage(
-        pageNumber
-      );
-
-
-    const scale =
-      window.innerWidth < 600
-        ? 1.1
-        : 1.5;
-
-
-    const viewport =
-      pdfPage.getViewport({
-        scale: scale
-      });
-
-
-    /*
-      Page wrapper
-    */
-
-    const wrapper =
-      document.createElement(
-        "div"
-      );
-
-
-    wrapper.className =
-      "page";
-
-
-    /*
-      Original PDF canvas
-    */
-
-    const pdfCanvas =
-      document.createElement(
-        "canvas"
-      );
-
-
-    pdfCanvas.className =
-      "pdfCanvas";
-
-
-    pdfCanvas.width =
-      viewport.width;
-
-    pdfCanvas.height =
-      viewport.height;
-
-
-    const context =
-      pdfCanvas.getContext(
-        "2d"
-      );
-
-
-    await pdfPage.render({
-
-      canvasContext:
-        context,
-
-      viewport:
-        viewport
-
-    }).promise;
-
-
-    /*
-      Drawing canvas
-    */
-
-    const drawCanvas =
-      document.createElement(
-        "canvas"
-      );
-
-
-    drawCanvas.className =
-      "drawCanvas";
-
-
-    drawCanvas.width =
-      viewport.width;
-
-    drawCanvas.height =
-      viewport.height;
-
-
-    wrapper.appendChild(
-      pdfCanvas
-    );
-
-
-    wrapper.appendChild(
-      drawCanvas
-    );
-
-
-    container.appendChild(
-      wrapper
-    );
-
-
-    setupDrawing(
-      drawCanvas
-    );
-
-
-    pages.push({
-
-      wrapper:
-        wrapper,
-
-      pdfCanvas:
-        pdfCanvas,
-
-      drawCanvas:
-        drawCanvas
-
-    });
-
-  }
-
-}
-
-
-/* =================================
-   TEXT MODE
-================================= */
-
-function textMode() {
-
-  currentTool =
-    "text";
-
-
-  setStatus(
-    "Tap anywhere on the PDF to type."
-  );
-
-
-  pages.forEach(
-    page => {
-
-      page.wrapper.onclick =
-        function(event) {
-
-          /*
-            Don't create another
-            text box when clicking
-            an existing one.
-          */
-
-          if (
-            event.target
-              .classList
-              .contains("textBox")
-          )
-            return;
-
-
-          addTextBox(
-            page.wrapper,
-            event
-          );
-
-        };
+        setStatus(
+            "Paint over the text you want to remove."
+        );
 
     }
-  );
 
-}
+    if (tool === "cover") {
 
-
-/* =================================
-   ADD TEXT BOX
-================================= */
-
-function addTextBox(
-  wrapper,
-  event
-) {
-
-  const rect =
-    wrapper.getBoundingClientRect();
-
-
-  const box =
-    document.createElement(
-      "div"
-    );
-
-
-  box.className =
-    "textBox";
-
-
-  box.contentEditable =
-    "true";
-
-
-  box.innerText =
-    "Type correction";
-
-
-  box.style.left =
-    (
-      event.clientX -
-      rect.left
-    ) + "px";
-
-
-  box.style.top =
-    (
-      event.clientY -
-      rect.top
-    ) + "px";
-
-
-  wrapper.appendChild(
-    box
-  );
-
-
-  box.focus();
-
-
-  /*
-    Delete button
-  */
-
-  const deleteButton =
-    document.createElement(
-      "button"
-    );
-
-
-  deleteButton.className =
-    "deleteText";
-
-
-  deleteButton.innerText =
-    "×";
-
-
-  box.appendChild(
-    deleteButton
-  );
-
-
-  deleteButton.onclick =
-    function(event) {
-
-      event.stopPropagation();
-
-      box.remove();
-
-    };
-
-
-  box.onclick =
-    function(event) {
-
-      event.stopPropagation();
-
-    };
-
-}
-
-
-/* =================================
-   DRAW MODE
-================================= */
-
-function drawMode() {
-
-  currentTool =
-    "draw";
-
-
-  removeTextHandlers();
-
-
-  setStatus(
-    "Drawing mode enabled."
-  );
-
-}
-
-
-/* =================================
-   HIGHLIGHT MODE
-================================= */
-
-function highlightMode() {
-
-  currentTool =
-    "highlight";
-
-
-  removeTextHandlers();
-
-
-  setStatus(
-    "Highlight mode enabled."
-  );
-
-}
-
-
-/* =================================
-   REMOVE TEXT HANDLERS
-================================= */
-
-function removeTextHandlers() {
-
-  pages.forEach(
-    page => {
-
-      page.wrapper.onclick =
-        null;
+        setStatus(
+            "Choose a color and paint over the text."
+        );
 
     }
-  );
+
+    if (tool === "text") {
+
+        setStatus(
+            "Tap the photo where you want to add text."
+        );
+
+    }
 
 }
 
 
-/* =================================
-   DRAWING ENGINE
-================================= */
+/* =========================
+   CANVAS POSITION
+========================= */
 
-function setupDrawing(canvas) {
-
-  const ctx =
-    canvas.getContext(
-      "2d"
-    );
-
-
-  let drawing =
-    false;
-
-
-  function getPosition(
-    event
-  ) {
+function getCanvasPosition(event) {
 
     const rect =
-      canvas.getBoundingClientRect();
+        canvas.getBoundingClientRect();
 
+    let clientX;
+    let clientY;
 
-    const source =
-      event.touches
-        ? event.touches[0]
-        : event;
+    if (event.touches) {
 
+        clientX =
+            event.touches[0].clientX;
+
+        clientY =
+            event.touches[0].clientY;
+
+    } else {
+
+        clientX =
+            event.clientX;
+
+        clientY =
+            event.clientY;
+
+    }
 
     return {
 
-      x:
-        (
-          source.clientX -
-          rect.left
-        )
-        *
-        (
-          canvas.width /
-          rect.width
-        ),
+        x:
+            (clientX - rect.left)
+            *
+            (canvas.width / rect.width),
 
-      y:
-        (
-          source.clientY -
-          rect.top
-        )
-        *
-        (
-          canvas.height /
-          rect.height
-        )
+        y:
+            (clientY - rect.top)
+            *
+            (canvas.height / rect.height)
 
     };
 
-  }
+}
 
 
-  function start(event) {
+/* =========================
+   DRAW START
+========================= */
 
-    if (
-      currentTool !== "draw" &&
-      currentTool !== "highlight"
-    )
-      return;
+function startDrawing(event) {
 
+    if (!image) return;
+
+    if (tool === "text") {
+
+        event.preventDefault();
+
+        addText(event);
+
+        return;
+
+    }
 
     event.preventDefault();
-
 
     drawing = true;
 
+    saveHistory();
 
-    const p =
-      getPosition(event);
+    draw(event);
 
-
-    ctx.beginPath();
-
-
-    ctx.moveTo(
-      p.x,
-      p.y
-    );
-
-  }
+}
 
 
-  function move(event) {
+/* =========================
+   DRAW
+========================= */
 
-    if (!drawing)
-      return;
+function draw(event) {
 
+    if (!drawing) return;
 
     event.preventDefault();
 
+    const p =
+        getCanvasPosition(event);
+
+    const size =
+        Number(
+            brushSize.value
+        );
+
+
+    if (tool === "erase") {
+
+        /*
+         * Simple background reconstruction:
+         * use nearby sampled color.
+         */
+
+        const sampleSize =
+            Math.max(
+                2,
+                Math.floor(size / 4)
+            );
+
+        let sx =
+            Math.max(
+                0,
+                Math.min(
+                    canvas.width - 1,
+                    Math.floor(p.x)
+                )
+            );
+
+        let sy =
+            Math.max(
+                0,
+                Math.min(
+                    canvas.height - 1,
+                    Math.floor(p.y)
+                )
+            );
+
+        const pixel =
+            ctx.getImageData(
+                sx,
+                sy,
+                1,
+                1
+            ).data;
+
+        ctx.fillStyle =
+            `rgb(
+                ${pixel[0]},
+                ${pixel[1]},
+                ${pixel[2]}
+            )`;
+
+        ctx.beginPath();
+
+        ctx.arc(
+            p.x,
+            p.y,
+            size / 2,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+
+    }
+
+
+    if (tool === "cover") {
+
+        ctx.fillStyle =
+            brushColor.value;
+
+        ctx.beginPath();
+
+        ctx.arc(
+            p.x,
+            p.y,
+            size / 2,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+
+    }
+
+}
+
+
+/* =========================
+   STOP
+========================= */
+
+function stopDrawing() {
+
+    if (!drawing) return;
+
+    drawing = false;
+
+}
+
+
+/* =========================
+   MOUSE
+========================= */
+
+canvas.addEventListener(
+    "mousedown",
+    startDrawing
+);
+
+canvas.addEventListener(
+    "mousemove",
+    draw
+);
+
+canvas.addEventListener(
+    "mouseup",
+    stopDrawing
+);
+
+canvas.addEventListener(
+    "mouseleave",
+    stopDrawing
+);
+
+
+/* =========================
+   TOUCH
+========================= */
+
+canvas.addEventListener(
+    "touchstart",
+    startDrawing,
+    {
+        passive: false
+    }
+);
+
+canvas.addEventListener(
+    "touchmove",
+    draw,
+    {
+        passive: false
+    }
+);
+
+canvas.addEventListener(
+    "touchend",
+    stopDrawing
+);
+
+
+/* =========================
+   TEXT
+========================= */
+
+function addText(event) {
+
+    const text =
+        prompt(
+            "Enter text:"
+        );
+
+    if (!text) return;
 
     const p =
-      getPosition(event);
+        getCanvasPosition(event);
 
+    saveHistory();
 
-    if (
-      currentTool === "draw"
-    ) {
+    ctx.fillStyle =
+        "#111111";
 
-      ctx.strokeStyle =
-        "#111827";
+    ctx.font =
+        `${Math.max(
+            20,
+            Number(brushSize.value)
+        )}px Arial`;
 
-      ctx.lineWidth =
-        3;
-
-      ctx.globalAlpha =
-        1;
-
-    }
-
-
-    if (
-      currentTool === "highlight"
-    ) {
-
-      ctx.strokeStyle =
-        "yellow";
-
-      ctx.lineWidth =
-        22;
-
-      ctx.globalAlpha =
-        .35;
-
-    }
-
-
-    ctx.lineCap =
-      "round";
-
-
-    ctx.lineTo(
-      p.x,
-      p.y
+    ctx.fillText(
+        text,
+        p.x,
+        p.y
     );
 
-
-    ctx.stroke();
-
-  }
-
-
-  function stop() {
-
-    drawing =
-      false;
-
-    ctx.closePath();
-
-  }
-
-
-  canvas.addEventListener(
-    "mousedown",
-    start
-  );
-
-
-  canvas.addEventListener(
-    "mousemove",
-    move
-  );
-
-
-  canvas.addEventListener(
-    "mouseup",
-    stop
-  );
-
-
-  canvas.addEventListener(
-    "mouseleave",
-    stop
-  );
-
-
-  /*
-    Android/iPhone touch
-  */
-
-  canvas.addEventListener(
-    "touchstart",
-    start,
-    {
-      passive:false
-    }
-  );
-
-
-  canvas.addEventListener(
-    "touchmove",
-    move,
-    {
-      passive:false
-    }
-  );
-
-
-  canvas.addEventListener(
-    "touchend",
-    stop
-  );
+    setStatus(
+        "Text added."
+    );
 
 }
 
 
-/* =================================
-   CLEAR EDITS
-================================= */
+/* =========================
+   HISTORY
+========================= */
 
-function clearEdits() {
+function saveHistory() {
 
-  pages.forEach(
-    page => {
+    if (!canvas.width)
+        return;
 
-      const ctx =
-        page.drawCanvas
-          .getContext("2d");
-
-
-      ctx.clearRect(
-        0,
-        0,
-        page.drawCanvas.width,
-        page.drawCanvas.height
-      );
-
-
-      page.wrapper
-        .querySelectorAll(
-          ".textBox"
+    history.push(
+        canvas.toDataURL(
+            "image/png"
         )
-        .forEach(
-          box =>
-            box.remove()
-        );
-
-    }
-  );
-
-}
-
-
-/* =================================
-   DELETE LAST PAGE
-================================= */
-
-function deleteLastPage() {
-
-  if (!pages.length)
-    return;
-
-
-  const last =
-    pages.pop();
-
-
-  last.wrapper.remove();
-
-
-  setStatus(
-    pages.length +
-    " page(s) remaining."
-  );
-
-}
-
-
-/* =================================
-   SAVE PDF
-================================= */
-
-async function savePDF() {
-
-  if (!pages.length) {
-
-    alert(
-      "Please open a PDF first."
     );
 
-    return;
+    if (history.length > 20) {
 
-  }
-
-
-  setStatus(
-    "Creating edited PDF..."
-  );
-
-
-  const {
-    jsPDF
-  } =
-    window.jspdf;
-
-
-  const first =
-    pages[0].pdfCanvas;
-
-
-  const pdf =
-    new jsPDF({
-
-      orientation:
-        first.width >
-        first.height
-          ? "landscape"
-          : "portrait",
-
-      unit:
-        "px",
-
-      format: [
-        first.width,
-        first.height
-      ]
-
-    });
-
-
-  pages.forEach(
-    (page, index) => {
-
-      if (index > 0) {
-
-        pdf.addPage([
-          page.pdfCanvas.width,
-          page.pdfCanvas.height
-        ]);
-
-      }
-
-
-      const combined =
-        document.createElement(
-          "canvas"
-        );
-
-
-      combined.width =
-        page.pdfCanvas.width;
-
-
-      combined.height =
-        page.pdfCanvas.height;
-
-
-      const ctx =
-        combined.getContext(
-          "2d"
-        );
-
-
-      /*
-        Original PDF
-      */
-
-      ctx.drawImage(
-        page.pdfCanvas,
-        0,
-        0
-      );
-
-
-      /*
-        Draw/highlight
-      */
-
-      ctx.drawImage(
-        page.drawCanvas,
-        0,
-        0
-      );
-
-
-      /*
-        Text
-      */
-
-      const textBoxes =
-        page.wrapper
-          .querySelectorAll(
-            ".textBox"
-          );
-
-
-      textBoxes.forEach(
-        box => {
-
-          const boxRect =
-            box.getBoundingClientRect();
-
-
-          const pageRect =
-            page.wrapper
-              .getBoundingClientRect();
-
-
-          const x =
-            boxRect.left -
-            pageRect.left;
-
-
-          const y =
-            boxRect.top -
-            pageRect.top;
-
-
-          /*
-            White background
-            hides old text.
-          */
-
-          ctx.fillStyle =
-            "white";
-
-
-          ctx.fillRect(
-            x,
-            y,
-            boxRect.width,
-            boxRect.height
-          );
-
-
-          ctx.fillStyle =
-            "#111";
-
-
-          ctx.font =
-            "18px Arial";
-
-
-          const text =
-            box.innerText
-              .replace("×", "")
-              .trim();
-
-
-          ctx.fillText(
-            text,
-            x + 4,
-            y + 20
-          );
-
-        }
-      );
-
-
-      pdf.addImage(
-
-        combined.toDataURL(
-          "image/jpeg",
-          .95
-        ),
-
-        "JPEG",
-
-        0,
-        0,
-
-        page.pdfCanvas.width,
-        page.pdfCanvas.height
-
-      );
+        history.shift();
 
     }
-  );
-
-
-  lastPDFBlob =
-    pdf.output(
-      "blob"
-    );
-
-
-  downloadBlob(
-    lastPDFBlob,
-    "edited-pdf.pdf"
-  );
-
-
-  setStatus(
-    "PDF saved successfully."
-  );
 
 }
 
 
-/* =================================
+/* =========================
+   UNDO
+========================= */
+
+function undo() {
+
+    if (history.length <= 1) {
+
+        setStatus(
+            "Nothing to undo."
+        );
+
+        return;
+
+    }
+
+    history.pop();
+
+    const previous =
+        history[
+            history.length - 1
+        ];
+
+    const img =
+        new Image();
+
+    img.onload =
+        function() {
+
+            ctx.clearRect(
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+            ctx.drawImage(
+                img,
+                0,
+                0
+            );
+
+        };
+
+    img.src =
+        previous;
+
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+function resetImage() {
+
+    if (!originalImage)
+        return;
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    ctx.drawImage(
+        originalImage,
+        0,
+        0
+    );
+
+    history = [];
+
+    saveHistory();
+
+    setStatus(
+        "Photo reset."
+    );
+
+}
+
+
+/* =========================
    DOWNLOAD
-================================= */
+========================= */
 
-function downloadBlob(
-  blob,
-  filename
-) {
+function downloadImage() {
 
-  const url =
-    URL.createObjectURL(
-      blob
+    if (!image) {
+
+        alert(
+            "Upload a photo first."
+        );
+
+        return;
+
+    }
+
+    canvas.toBlob(
+        function(blob) {
+
+            lastBlob =
+                blob;
+
+            const url =
+                URL.createObjectURL(
+                    blob
+                );
+
+            const link =
+                document.createElement(
+                    "a"
+                );
+
+            link.href =
+                url;
+
+            link.download =
+                "edited-photo.png";
+
+            document.body.appendChild(
+                link
+            );
+
+            link.click();
+
+            link.remove();
+
+            setTimeout(
+                function() {
+
+                    URL.revokeObjectURL(
+                        url
+                    );
+
+                },
+                1000
+            );
+
+            setStatus(
+                "Photo downloaded."
+            );
+
+        },
+        "image/png"
     );
-
-
-  const link =
-    document.createElement(
-      "a"
-    );
-
-
-  link.href =
-    url;
-
-
-  link.download =
-    filename;
-
-
-  document.body.appendChild(
-    link
-  );
-
-
-  link.click();
-
-
-  link.remove();
-
-
-  setTimeout(
-    function() {
-
-      URL.revokeObjectURL(
-        url
-      );
-
-    },
-    1000
-  );
 
 }
 
 
-/* =================================
+/* =========================
    SHARE
-================================= */
+========================= */
 
-async function sharePDF() {
+async function shareImage() {
 
-  /*
-    If user has not saved yet,
-    create the PDF first.
-  */
+    if (!image) {
 
-  if (!lastPDFBlob) {
+        alert(
+            "Upload a photo first."
+        );
 
-    await savePDF();
-
-  }
-
-
-  if (!lastPDFBlob)
-    return;
-
-
-  const file =
-    new File(
-      [
-        lastPDFBlob
-      ],
-
-      "edited-pdf.pdf",
-
-      {
-        type:
-          "application/pdf"
-      }
-    );
-
-
-  /*
-    Android + iPhone
-  */
-
-  if (
-    navigator.share &&
-    navigator.canShare &&
-    navigator.canShare({
-      files: [file]
-    })
-  ) {
-
-    try {
-
-      await navigator.share({
-
-        title:
-          "Edited PDF",
-
-        text:
-          "Edited PDF",
-
-        files: [
-          file
-        ]
-
-      });
-
-
-      setStatus(
-        "Share menu opened."
-      );
+        return;
 
     }
 
-    catch(error) {
 
-      console.log(
-        "Sharing cancelled."
-      );
+    canvas.toBlob(
+        async function(blob) {
 
-    }
+            lastBlob =
+                blob;
 
-  }
+            const file =
+                new File(
+                    [
+                        blob
+                    ],
+                    "edited-photo.png",
+                    {
+                        type:
+                            "image/png"
+                    }
+                );
 
-  else {
 
-    alert(
-      "Direct file sharing is unavailable in this browser. The PDF has been downloaded. Open it from Files/Downloads and choose WhatsApp."
+            /*
+             * Android + iPhone
+             */
+
+            if (
+                navigator.share &&
+                navigator.canShare &&
+                navigator.canShare({
+                    files: [file]
+                })
+            ) {
+
+                try {
+
+                    await navigator.share({
+
+                        title:
+                            "Edited Photo",
+
+                        text:
+                            "Edited photo",
+
+                        files:
+                            [file]
+
+                    });
+
+                    setStatus(
+                        "Share menu opened."
+                    );
+
+                }
+
+                catch(error) {
+
+                    console.log(
+                        "Share cancelled."
+                    );
+
+                }
+
+            }
+
+            else {
+
+                /*
+                 * Fallback
+                 */
+
+                downloadImage();
+
+                alert(
+                    "Direct sharing isn't supported by this browser. The edited photo was downloaded. Open it and choose WhatsApp."
+                );
+
+            }
+
+        },
+        "image/png"
     );
-
-  }
 
 }
 
 
-/* =================================
+/* =========================
    STATUS
-================================= */
+========================= */
 
-function setStatus(
-  message
-) {
+function setStatus(message) {
 
-  document
-    .getElementById(
-      "status"
-    )
-    .textContent =
-      message;
+    statusText.textContent =
+        message;
 
 }
 
