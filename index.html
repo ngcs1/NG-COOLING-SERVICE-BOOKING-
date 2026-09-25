@@ -2,15 +2,20 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
 <title>PDF Editor</title>
 
+<!-- PDF.JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+<!-- jsPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
+
 * {
   box-sizing: border-box;
 }
@@ -22,11 +27,13 @@ body {
   color: #111827;
 }
 
+/* HEADER */
+
 header {
   background: #111827;
   color: white;
-  text-align: center;
   padding: 16px;
+  text-align: center;
 }
 
 header h1 {
@@ -34,32 +41,46 @@ header h1 {
   font-size: 22px;
 }
 
+/* TOOLBAR */
+
 .toolbar {
   position: sticky;
   top: 0;
-  z-index: 20;
+  z-index: 50;
+
   background: white;
+
   padding: 10px;
+
   display: flex;
-  gap: 7px;
   flex-wrap: wrap;
+  gap: 7px;
+
   justify-content: center;
+
   box-shadow: 0 2px 10px #0002;
 }
 
 button,
 .upload {
   border: 0;
+
   border-radius: 8px;
+
   padding: 10px 13px;
-  color: white;
+
   background: #2563eb;
+
+  color: white;
+
   cursor: pointer;
+
   font-weight: 600;
 }
 
-.upload input {
-  display: none;
+button:hover,
+.upload:hover {
+  opacity: .85;
 }
 
 .green {
@@ -74,209 +95,471 @@ button,
   background: #4b5563;
 }
 
+.upload input {
+  display: none;
+}
+
+/* STATUS */
+
 #status {
   text-align: center;
+
   padding: 10px;
+
   font-size: 14px;
 }
+
+/* PDF AREA */
 
 #pages {
   padding: 20px 10px;
 }
 
+.empty {
+  text-align: center;
+
+  padding: 80px 20px;
+
+  color: #6b7280;
+}
+
+/* PAGE */
+
 .page {
   position: relative;
+
   width: fit-content;
+
   margin: 0 auto 25px;
+
   background: white;
-  box-shadow: 0 4px 18px #0002;
+
+  box-shadow:
+    0 4px 18px #0002;
 }
 
 .pdfCanvas {
   display: block;
+
   max-width: 100%;
 }
 
 .drawCanvas {
   position: absolute;
+
   left: 0;
   top: 0;
 }
 
+/* TEXT */
+
 .textBox {
   position: absolute;
-  min-width: 80px;
-  min-height: 25px;
-  padding: 3px;
-  border: 1px dashed #2563eb;
-  background: rgba(255,255,255,.75);
+
+  min-width: 90px;
+
+  min-height: 30px;
+
+  padding: 4px;
+
+  background: rgba(
+    255,
+    255,
+    255,
+    .90
+  );
+
+  border: 2px dashed #2563eb;
+
   color: #111;
-  outline: none;
+
   font-size: 18px;
-  font-family: Arial;
+
+  outline: none;
+
   resize: both;
+
+  z-index: 10;
 }
 
 .textBox:focus {
   border: 2px solid #2563eb;
 }
 
-.pageTools {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  z-index: 5;
-}
-
 .deleteText {
-  background: #dc2626;
-  color: white;
+  position: absolute;
+
+  right: -25px;
+
+  top: 0;
+
   border: 0;
+
+  background: #dc2626;
+
+  color: white;
+
   border-radius: 5px;
-  padding: 4px 7px;
+
+  padding: 3px 7px;
+
   cursor: pointer;
 }
 
-.empty {
-  text-align: center;
-  padding: 80px 20px;
-  color: #6b7280;
+/* PASSWORD MODAL */
+
+#passwordModal {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 999;
+
+  display: none;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: rgba(0,0,0,.65);
 }
 
+.passwordCard {
+  width: calc(100% - 40px);
+
+  max-width: 380px;
+
+  background: white;
+
+  border-radius: 16px;
+
+  padding: 25px;
+
+  box-shadow:
+    0 15px 40px #0005;
+}
+
+.passwordCard h2 {
+  margin-top: 0;
+}
+
+.passwordCard input {
+  width: 100%;
+
+  padding: 13px;
+
+  margin: 12px 0;
+
+  border: 1px solid #ccc;
+
+  border-radius: 8px;
+
+  font-size: 16px;
+}
+
+.passwordButtons {
+  display: flex;
+
+  gap: 8px;
+}
+
+.passwordButtons button {
+  flex: 1;
+}
+
+/* MOBILE */
+
 @media(max-width:600px) {
+
   button,
   .upload {
     font-size: 12px;
+
     padding: 8px 10px;
   }
 
   #pages {
     padding: 10px 3px;
   }
+
 }
+
 </style>
 </head>
+
 
 <body>
 
 <header>
-  <h1>📄 PDF Editor</h1>
+
+<h1>
+📄 PDF Editor
+</h1>
+
 </header>
+
+
+<!-- TOOLBAR -->
 
 <div class="toolbar">
 
-  <label class="upload">
-    📂 Open PDF
-    <input
-      id="pdfInput"
-      type="file"
-      accept="application/pdf"
-      multiple>
-  </label>
+<label class="upload">
 
-  <button onclick="enableText()">
-    ⌨️ Add / Correct Text
-  </button>
+📂 Open PDF
 
-  <button onclick="enableDraw()">
-    ✏️ Draw
-  </button>
+<input
+  id="pdfInput"
+  type="file"
+  accept="application/pdf"
+  multiple>
 
-  <button onclick="enableHighlight()">
-    🟡 Highlight
-  </button>
+</label>
 
-  <button class="gray" onclick="clearEdits()">
-    🧹 Clear
-  </button>
 
-  <button class="red" onclick="deleteLastPage()">
-    🗑 Delete Page
-  </button>
+<button onclick="textMode()">
+⌨️ Text
+</button>
 
-  <button class="green" onclick="savePDF()">
-    💾 Save PDF
-  </button>
 
-  <button onclick="sharePDF()">
-    📤 Share
-  </button>
+<button onclick="drawMode()">
+✏️ Draw
+</button>
+
+
+<button onclick="highlightMode()">
+🟡 Highlight
+</button>
+
+
+<button class="gray"
+        onclick="clearEdits()">
+
+🧹 Clear
+
+</button>
+
+
+<button class="red"
+        onclick="deleteLastPage()">
+
+🗑️ Delete Page
+
+</button>
+
+
+<button class="green"
+        onclick="savePDF()">
+
+💾 Save PDF
+
+</button>
+
+
+<button onclick="sharePDF()">
+
+📤 Share
+
+</button>
 
 </div>
+
 
 <div id="status">
-  Upload a PDF to start.
+
+No PDF opened.
+
 </div>
 
+
 <div id="pages">
-  <div class="empty">
-    📄 Choose a PDF file
-  </div>
+
+<div class="empty">
+
+📄 Upload a PDF to begin.
+
+</div>
+
+</div>
+
+
+<!-- PASSWORD MODAL -->
+
+<div id="passwordModal">
+
+<div class="passwordCard">
+
+<h2>
+🔐 PDF Password
+</h2>
+
+<p>
+This PDF is password protected.
+Enter the correct password to open it.
+</p>
+
+<input
+  id="passwordInput"
+  type="password"
+  placeholder="Enter password">
+
+<div class="passwordButtons">
+
+<button onclick="submitPassword()">
+
+🔓 Open PDF
+
+</button>
+
+
+<button
+  class="gray"
+  onclick="cancelPassword()">
+
+Cancel
+
+</button>
+
+</div>
+
+</div>
+
 </div>
 
 
 <script>
 
+/* =================================
+   PDF.JS CONFIG
+================================= */
+
 pdfjsLib.GlobalWorkerOptions.workerSrc =
 "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
 
-let documents = [];
+/* =================================
+   VARIABLES
+================================= */
+
 let pages = [];
 
 let currentTool = null;
+
+let passwordRequest = null;
+
 let lastPDFBlob = null;
 
 
-/* =========================
-   OPEN PDF
-========================= */
+/* =================================
+   FILE INPUT
+================================= */
 
 document
 .getElementById("pdfInput")
-.addEventListener("change", async function(event) {
+.addEventListener(
+  "change",
+  async function(event) {
 
-  const files = [...event.target.files];
+    const files =
+      [...event.target.files];
 
-  if (!files.length) return;
+    if (!files.length)
+      return;
 
-  for (const file of files) {
 
-    await loadPDF(file);
+    for (const file of files) {
+
+      await openPDF(file);
+
+    }
 
   }
+);
 
-});
 
+/* =================================
+   OPEN PDF
+================================= */
 
-async function loadPDF(file) {
+async function openPDF(file) {
 
   try {
 
-    setStatus("Opening " + file.name + "...");
+    setStatus(
+      "Opening " +
+      file.name +
+      "..."
+    );
+
 
     const buffer =
       await file.arrayBuffer();
 
-    /*
-      No password popup.
-      Normal PDFs open directly.
-    */
+
+    const loadingTask =
+      pdfjsLib.getDocument({
+
+        data: buffer,
+
+        /*
+          Password callback is only
+          triggered if the PDF needs one.
+        */
+
+        password: undefined
+
+      });
+
+
+    loadingTask.onPassword =
+      function(
+        callback,
+        reason
+      ) {
+
+        /*
+          Save callback so that
+          the entered password can
+          be supplied to PDF.js.
+        */
+
+        passwordRequest = {
+          callback: callback,
+          reason: reason
+        };
+
+
+        document
+        .getElementById(
+          "passwordModal"
+        )
+        .style.display = "flex";
+
+
+        document
+        .getElementById(
+          "passwordInput"
+        )
+        .value = "";
+
+
+        document
+        .getElementById(
+          "passwordInput"
+        )
+        .focus();
+
+      };
+
 
     const pdf =
-      await pdfjsLib.getDocument({
-        data: buffer
-      }).promise;
+      await loadingTask.promise;
 
-    documents.push({
-      file,
-      pdf
-    });
 
     await renderPDF(pdf);
 
+
     setStatus(
-      "PDF loaded successfully"
+      "PDF opened successfully."
     );
 
   }
@@ -285,8 +568,12 @@ async function loadPDF(file) {
 
     console.error(error);
 
+    setStatus(
+      "Could not open PDF."
+    );
+
     alert(
-      "This PDF cannot be opened without its required password."
+      "The PDF could not be opened. If it is password protected, enter the correct password."
     );
 
   }
@@ -294,53 +581,156 @@ async function loadPDF(file) {
 }
 
 
-/* =========================
-   RENDER
-========================= */
+/* =================================
+   PASSWORD SUBMIT
+================================= */
+
+function submitPassword() {
+
+  if (!passwordRequest)
+    return;
+
+
+  const password =
+    document
+    .getElementById(
+      "passwordInput"
+    )
+    .value;
+
+
+  if (!password) {
+
+    alert(
+      "Please enter the password."
+    );
+
+    return;
+
+  }
+
+
+  /*
+    Give password to PDF.js.
+  */
+
+  passwordRequest
+    .callback(password);
+
+
+  /*
+    Hide modal.
+  */
+
+  document
+  .getElementById(
+    "passwordModal"
+  )
+  .style.display = "none";
+
+
+  passwordRequest = null;
+
+}
+
+
+/* =================================
+   CANCEL PASSWORD
+================================= */
+
+function cancelPassword() {
+
+  document
+  .getElementById(
+    "passwordModal"
+  )
+  .style.display = "none";
+
+
+  passwordRequest = null;
+
+}
+
+
+/* =================================
+   RENDER PDF
+================================= */
 
 async function renderPDF(pdf) {
 
   const container =
-    document.getElementById("pages");
+    document.getElementById(
+      "pages"
+    );
+
 
   const empty =
-    container.querySelector(".empty");
+    container.querySelector(
+      ".empty"
+    );
+
 
   if (empty)
     empty.remove();
 
 
+  /*
+    Render every page.
+  */
+
   for (
     let pageNumber = 1;
+
     pageNumber <= pdf.numPages;
+
     pageNumber++
   ) {
 
     const pdfPage =
-      await pdf.getPage(pageNumber);
+      await pdf.getPage(
+        pageNumber
+      );
+
 
     const scale =
       window.innerWidth < 600
         ? 1.1
         : 1.5;
 
+
     const viewport =
       pdfPage.getViewport({
-        scale
+        scale: scale
       });
 
 
+    /*
+      Page wrapper
+    */
+
     const wrapper =
-      document.createElement("div");
+      document.createElement(
+        "div"
+      );
 
-    wrapper.className = "page";
 
+    wrapper.className =
+      "page";
+
+
+    /*
+      Original PDF canvas
+    */
 
     const pdfCanvas =
-      document.createElement("canvas");
+      document.createElement(
+        "canvas"
+      );
+
 
     pdfCanvas.className =
       "pdfCanvas";
+
 
     pdfCanvas.width =
       viewport.width;
@@ -349,21 +739,36 @@ async function renderPDF(pdf) {
       viewport.height;
 
 
-    const ctx =
-      pdfCanvas.getContext("2d");
+    const context =
+      pdfCanvas.getContext(
+        "2d"
+      );
 
 
     await pdfPage.render({
-      canvasContext: ctx,
-      viewport
+
+      canvasContext:
+        context,
+
+      viewport:
+        viewport
+
     }).promise;
 
 
+    /*
+      Drawing canvas
+    */
+
     const drawCanvas =
-      document.createElement("canvas");
+      document.createElement(
+        "canvas"
+      );
+
 
     drawCanvas.className =
       "drawCanvas";
+
 
     drawCanvas.width =
       viewport.width;
@@ -372,20 +777,37 @@ async function renderPDF(pdf) {
       viewport.height;
 
 
-    wrapper.appendChild(pdfCanvas);
-
-    wrapper.appendChild(drawCanvas);
-
-    container.appendChild(wrapper);
+    wrapper.appendChild(
+      pdfCanvas
+    );
 
 
-    setupDrawing(drawCanvas);
+    wrapper.appendChild(
+      drawCanvas
+    );
+
+
+    container.appendChild(
+      wrapper
+    );
+
+
+    setupDrawing(
+      drawCanvas
+    );
 
 
     pages.push({
-      wrapper,
-      pdfCanvas,
-      drawCanvas
+
+      wrapper:
+        wrapper,
+
+      pdfCanvas:
+        pdfCanvas,
+
+      drawCanvas:
+        drawCanvas
+
     });
 
   }
@@ -393,123 +815,162 @@ async function renderPDF(pdf) {
 }
 
 
-/* =========================
+/* =================================
    TEXT MODE
-========================= */
+================================= */
 
-function enableText() {
+function textMode() {
 
-  currentTool = "text";
+  currentTool =
+    "text";
+
 
   setStatus(
-    "Tap/click anywhere on a page to add text."
+    "Tap anywhere on the PDF to type."
   );
 
-  pages.forEach(page => {
 
-    page.wrapper.onclick =
-      function(event) {
+  pages.forEach(
+    page => {
 
-        if (
-          event.target.classList.contains(
-            "textBox"
+      page.wrapper.onclick =
+        function(event) {
+
+          /*
+            Don't create another
+            text box when clicking
+            an existing one.
+          */
+
+          if (
+            event.target
+              .classList
+              .contains("textBox")
           )
-        )
-          return;
+            return;
 
-        addTextBox(
-          page.wrapper,
-          event
-        );
 
-      };
+          addTextBox(
+            page.wrapper,
+            event
+          );
 
-  });
+        };
+
+    }
+  );
 
 }
 
 
-function addTextBox(wrapper, event) {
+/* =================================
+   ADD TEXT BOX
+================================= */
+
+function addTextBox(
+  wrapper,
+  event
+) {
 
   const rect =
     wrapper.getBoundingClientRect();
 
+
   const box =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
-  box.className = "textBox";
 
-  box.contentEditable = "true";
+  box.className =
+    "textBox";
 
-  box.textContent =
-    "Type here";
+
+  box.contentEditable =
+    "true";
+
+
+  box.innerText =
+    "Type correction";
+
 
   box.style.left =
-    (event.clientX - rect.left) + "px";
+    (
+      event.clientX -
+      rect.left
+    ) + "px";
+
 
   box.style.top =
-    (event.clientY - rect.top) + "px";
+    (
+      event.clientY -
+      rect.top
+    ) + "px";
 
 
-  wrapper.appendChild(box);
+  wrapper.appendChild(
+    box
+  );
 
 
   box.focus();
 
 
-  box.addEventListener(
-    "click",
-    function(e) {
-
-      e.stopPropagation();
-
-    }
-  );
-
+  /*
+    Delete button
+  */
 
   const deleteButton =
-    document.createElement("button");
+    document.createElement(
+      "button"
+    );
+
 
   deleteButton.className =
     "deleteText";
 
-  deleteButton.textContent =
+
+  deleteButton.innerText =
     "×";
 
-  deleteButton.style.position =
-    "absolute";
 
-  deleteButton.style.right =
-    "-25px";
-
-  deleteButton.style.top =
-    "0";
-
-
-  box.appendChild(deleteButton);
+  box.appendChild(
+    deleteButton
+  );
 
 
   deleteButton.onclick =
-    function(e) {
+    function(event) {
 
-      e.stopPropagation();
+      event.stopPropagation();
 
       box.remove();
+
+    };
+
+
+  box.onclick =
+    function(event) {
+
+      event.stopPropagation();
 
     };
 
 }
 
 
-/* =========================
-   DRAWING
-========================= */
+/* =================================
+   DRAW MODE
+================================= */
 
-function enableDraw() {
+function drawMode() {
 
-  currentTool = "draw";
+  currentTool =
+    "draw";
 
-  removeTextClickHandlers();
+
+  removeTextHandlers();
+
 
   setStatus(
     "Drawing mode enabled."
@@ -518,11 +979,18 @@ function enableDraw() {
 }
 
 
-function enableHighlight() {
+/* =================================
+   HIGHLIGHT MODE
+================================= */
 
-  currentTool = "highlight";
+function highlightMode() {
 
-  removeTextClickHandlers();
+  currentTool =
+    "highlight";
+
+
+  removeTextHandlers();
+
 
   setStatus(
     "Highlight mode enabled."
@@ -531,44 +999,77 @@ function enableHighlight() {
 }
 
 
-function removeTextClickHandlers() {
+/* =================================
+   REMOVE TEXT HANDLERS
+================================= */
 
-  pages.forEach(page => {
+function removeTextHandlers() {
 
-    page.wrapper.onclick = null;
+  pages.forEach(
+    page => {
 
-  });
+      page.wrapper.onclick =
+        null;
+
+    }
+  );
 
 }
 
 
+/* =================================
+   DRAWING ENGINE
+================================= */
+
 function setupDrawing(canvas) {
 
   const ctx =
-    canvas.getContext("2d");
+    canvas.getContext(
+      "2d"
+    );
 
-  let drawing = false;
+
+  let drawing =
+    false;
 
 
-  function getPosition(event) {
+  function getPosition(
+    event
+  ) {
 
     const rect =
       canvas.getBoundingClientRect();
+
 
     const source =
       event.touches
         ? event.touches[0]
         : event;
 
+
     return {
 
       x:
-        (source.clientX - rect.left)
-        * (canvas.width / rect.width),
+        (
+          source.clientX -
+          rect.left
+        )
+        *
+        (
+          canvas.width /
+          rect.width
+        ),
 
       y:
-        (source.clientY - rect.top)
-        * (canvas.height / rect.height)
+        (
+          source.clientY -
+          rect.top
+        )
+        *
+        (
+          canvas.height /
+          rect.height
+        )
 
     };
 
@@ -583,14 +1084,19 @@ function setupDrawing(canvas) {
     )
       return;
 
+
     event.preventDefault();
 
+
     drawing = true;
+
 
     const p =
       getPosition(event);
 
+
     ctx.beginPath();
+
 
     ctx.moveTo(
       p.x,
@@ -605,13 +1111,17 @@ function setupDrawing(canvas) {
     if (!drawing)
       return;
 
+
     event.preventDefault();
+
 
     const p =
       getPosition(event);
 
 
-    if (currentTool === "draw") {
+    if (
+      currentTool === "draw"
+    ) {
 
       ctx.strokeStyle =
         "#111827";
@@ -625,10 +1135,12 @@ function setupDrawing(canvas) {
     }
 
 
-    if (currentTool === "highlight") {
+    if (
+      currentTool === "highlight"
+    ) {
 
       ctx.strokeStyle =
-        "#ffff00";
+        "yellow";
 
       ctx.lineWidth =
         22;
@@ -648,6 +1160,7 @@ function setupDrawing(canvas) {
       p.y
     );
 
+
     ctx.stroke();
 
   }
@@ -655,7 +1168,8 @@ function setupDrawing(canvas) {
 
   function stop() {
 
-    drawing = false;
+    drawing =
+      false;
 
     ctx.closePath();
 
@@ -667,15 +1181,18 @@ function setupDrawing(canvas) {
     start
   );
 
+
   canvas.addEventListener(
     "mousemove",
     move
   );
 
+
   canvas.addEventListener(
     "mouseup",
     stop
   );
+
 
   canvas.addEventListener(
     "mouseleave",
@@ -683,17 +1200,27 @@ function setupDrawing(canvas) {
   );
 
 
+  /*
+    Android/iPhone touch
+  */
+
   canvas.addEventListener(
     "touchstart",
     start,
-    { passive:false }
+    {
+      passive:false
+    }
   );
+
 
   canvas.addEventListener(
     "touchmove",
     move,
-    { passive:false }
+    {
+      passive:false
+    }
   );
+
 
   canvas.addEventListener(
     "touchend",
@@ -703,62 +1230,71 @@ function setupDrawing(canvas) {
 }
 
 
-/* =========================
-   CLEAR
-========================= */
+/* =================================
+   CLEAR EDITS
+================================= */
 
 function clearEdits() {
 
-  pages.forEach(page => {
+  pages.forEach(
+    page => {
 
-    const ctx =
-      page.drawCanvas
-        .getContext("2d");
-
-    ctx.clearRect(
-      0,
-      0,
-      page.drawCanvas.width,
-      page.drawCanvas.height
-    );
+      const ctx =
+        page.drawCanvas
+          .getContext("2d");
 
 
-    page.wrapper
-      .querySelectorAll(
-        ".textBox"
-      )
-      .forEach(box => box.remove());
+      ctx.clearRect(
+        0,
+        0,
+        page.drawCanvas.width,
+        page.drawCanvas.height
+      );
 
-  });
+
+      page.wrapper
+        .querySelectorAll(
+          ".textBox"
+        )
+        .forEach(
+          box =>
+            box.remove()
+        );
+
+    }
+  );
 
 }
 
 
-/* =========================
+/* =================================
    DELETE LAST PAGE
-========================= */
+================================= */
 
 function deleteLastPage() {
 
   if (!pages.length)
     return;
 
-  const page =
+
+  const last =
     pages.pop();
 
-  page.wrapper.remove();
+
+  last.wrapper.remove();
+
 
   setStatus(
     pages.length +
-    " page(s) remaining"
+    " page(s) remaining."
   );
 
 }
 
 
-/* =========================
+/* =================================
    SAVE PDF
-========================= */
+================================= */
 
 async function savePDF() {
 
@@ -780,7 +1316,8 @@ async function savePDF() {
 
   const {
     jsPDF
-  } = window.jspdf;
+  } =
+    window.jspdf;
 
 
   const first =
@@ -796,7 +1333,8 @@ async function savePDF() {
           ? "landscape"
           : "portrait",
 
-      unit: "px",
+      unit:
+        "px",
 
       format: [
         first.width,
@@ -828,12 +1366,15 @@ async function savePDF() {
       combined.width =
         page.pdfCanvas.width;
 
+
       combined.height =
         page.pdfCanvas.height;
 
 
       const ctx =
-        combined.getContext("2d");
+        combined.getContext(
+          "2d"
+        );
 
 
       /*
@@ -848,7 +1389,7 @@ async function savePDF() {
 
 
       /*
-        Draw / highlight
+        Draw/highlight
       */
 
       ctx.drawImage(
@@ -859,7 +1400,7 @@ async function savePDF() {
 
 
       /*
-        Text corrections
+        Text
       */
 
       const textBoxes =
@@ -869,54 +1410,67 @@ async function savePDF() {
           );
 
 
-      textBoxes.forEach(box => {
+      textBoxes.forEach(
+        box => {
 
-        const boxRect =
-          box.getBoundingClientRect();
-
-        const pageRect =
-          page.wrapper.getBoundingClientRect();
+          const boxRect =
+            box.getBoundingClientRect();
 
 
-        const x =
-          boxRect.left -
-          pageRect.left;
-
-        const y =
-          boxRect.top -
-          pageRect.top;
+          const pageRect =
+            page.wrapper
+              .getBoundingClientRect();
 
 
-        ctx.fillStyle =
-          "#ffffff";
+          const x =
+            boxRect.left -
+            pageRect.left;
 
 
-        ctx.fillRect(
-          x,
-          y,
-          boxRect.width,
-          boxRect.height
-        );
+          const y =
+            boxRect.top -
+            pageRect.top;
 
 
-        ctx.fillStyle =
-          "#111111";
+          /*
+            White background
+            hides old text.
+          */
+
+          ctx.fillStyle =
+            "white";
 
 
-        ctx.font =
-          "18px Arial";
+          ctx.fillRect(
+            x,
+            y,
+            boxRect.width,
+            boxRect.height
+          );
 
 
-        ctx.fillText(
-          box.innerText
-            .replace("×", "")
-            .trim(),
+          ctx.fillStyle =
+            "#111";
 
-          x + 4,
-          y + 20
-        );
 
-      });
+          ctx.font =
+            "18px Arial";
+
+
+          const text =
+            box.innerText
+              .replace("×", "")
+              .trim();
+
+
+          ctx.fillText(
+            text,
+            x + 4,
+            y + 20
+          );
+
+        }
+      );
 
 
       pdf.addImage(
@@ -940,32 +1494,28 @@ async function savePDF() {
   );
 
 
-  const blob =
+  lastPDFBlob =
     pdf.output(
       "blob"
     );
 
 
-  lastPDFBlob =
-    blob;
-
-
   downloadBlob(
-    blob,
+    lastPDFBlob,
     "edited-pdf.pdf"
   );
 
 
   setStatus(
-    "Edited PDF saved."
+    "PDF saved successfully."
   );
 
 }
 
 
-/* =========================
+/* =================================
    DOWNLOAD
-========================= */
+================================= */
 
 function downloadBlob(
   blob,
@@ -973,39 +1523,60 @@ function downloadBlob(
 ) {
 
   const url =
-    URL.createObjectURL(blob);
+    URL.createObjectURL(
+      blob
+    );
+
 
   const link =
-    document.createElement("a");
+    document.createElement(
+      "a"
+    );
+
 
   link.href =
     url;
 
+
   link.download =
     filename;
+
 
   document.body.appendChild(
     link
   );
 
+
   link.click();
+
 
   link.remove();
 
+
   setTimeout(
-    () =>
-      URL.revokeObjectURL(url),
+    function() {
+
+      URL.revokeObjectURL(
+        url
+      );
+
+    },
     1000
   );
 
 }
 
 
-/* =========================
+/* =================================
    SHARE
-========================= */
+================================= */
 
 async function sharePDF() {
+
+  /*
+    If user has not saved yet,
+    create the PDF first.
+  */
 
   if (!lastPDFBlob) {
 
@@ -1020,14 +1591,22 @@ async function sharePDF() {
 
   const file =
     new File(
-      [lastPDFBlob],
+      [
+        lastPDFBlob
+      ],
+
       "edited-pdf.pdf",
+
       {
         type:
           "application/pdf"
       }
     );
 
+
+  /*
+    Android + iPhone
+  */
 
   if (
     navigator.share &&
@@ -1047,9 +1626,12 @@ async function sharePDF() {
         text:
           "Edited PDF",
 
-        files: [file]
+        files: [
+          file
+        ]
 
       });
+
 
       setStatus(
         "Share menu opened."
@@ -1060,7 +1642,7 @@ async function sharePDF() {
     catch(error) {
 
       console.log(
-        "Share cancelled"
+        "Sharing cancelled."
       );
 
     }
@@ -1070,7 +1652,7 @@ async function sharePDF() {
   else {
 
     alert(
-      "Your browser does not support direct file sharing. The PDF was downloaded. Open it from Downloads/Files and choose WhatsApp."
+      "Direct file sharing is unavailable in this browser. The PDF has been downloaded. Open it from Files/Downloads and choose WhatsApp."
     );
 
   }
@@ -1078,16 +1660,20 @@ async function sharePDF() {
 }
 
 
-/* =========================
+/* =================================
    STATUS
-========================= */
+================================= */
 
-function setStatus(text) {
+function setStatus(
+  message
+) {
 
   document
-    .getElementById("status")
+    .getElementById(
+      "status"
+    )
     .textContent =
-      text;
+      message;
 
 }
 
