@@ -1,972 +1,712 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#075985">
+<title>N.G Cooling Solution | Partner Billing App</title>
 
-<meta name="viewport"
-      content="width=device-width,
-               initial-scale=1.0,
-               maximum-scale=1.0,
-               user-scalable=no">
-
-<title>Photo Text Remover</title>
+<!-- PDF generator -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <style>
-
-* {
-    box-sizing: border-box;
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+  background:#eef6fa;color:#123;
 }
-
-body {
-    margin: 0;
-    background: #111827;
-    color: white;
-    font-family: Arial, sans-serif;
+button,input,textarea,select{font:inherit}
+button{cursor:pointer;border:0}
+.header{
+  position:sticky;top:0;z-index:20;
+  background:linear-gradient(135deg,#075985,#0284c7,#16a34a);
+  color:#fff;padding:14px 16px;box-shadow:0 3px 14px #0002;
 }
-
-header {
-    text-align: center;
-    padding: 16px;
-    background: #030712;
+.header-inner{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{font-weight:900;font-size:19px}
+.logo small{display:block;font-size:11px;font-weight:500;opacity:.9;margin-top:3px}
+.header-btn{
+  background:#fff;color:#075985;padding:9px 12px;border-radius:10px;font-weight:800
 }
-
-header h1 {
-    margin: 0;
-    font-size: 22px;
+.container{max-width:1100px;margin:0 auto;padding:18px 14px 90px}
+.hero{
+  background:linear-gradient(135deg,#075985,#0284c7);
+  color:#fff;border-radius:20px;padding:22px;margin-bottom:16px;
+  box-shadow:0 8px 24px #0759852b;
 }
-
-.toolbar {
-    background: #1f2937;
-    padding: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-    justify-content: center;
-    position: sticky;
-    top: 0;
-    z-index: 20;
+.hero h1{font-size:24px;margin-bottom:6px}
+.hero p{opacity:.92;font-size:14px;line-height:1.5}
+.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+.card{
+  background:#fff;border-radius:18px;padding:18px;margin-bottom:16px;
+  box-shadow:0 4px 18px #0f172a12;border:1px solid #dbeafe;
 }
-
-button,
-.upload {
-    border: 0;
-    padding: 10px 13px;
-    border-radius: 8px;
-    color: white;
-    background: #2563eb;
-    cursor: pointer;
-    font-weight: 600;
+.card h2{font-size:17px;color:#075985;margin-bottom:14px}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.field label{display:block;font-size:12px;font-weight:800;color:#475569;margin-bottom:6px}
+.field input,.field textarea,.field select{
+  width:100%;border:1px solid #cbd5e1;border-radius:10px;padding:11px 12px;
+  outline:none;background:#fff;
 }
+.field textarea{min-height:76px;resize:vertical}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:#0284c7;box-shadow:0 0 0 3px #0284c71c}
+.full{grid-column:1/-1}
 
-button:hover,
-.upload:hover {
-    opacity: .85;
+.item-head,.item-row{
+  display:grid;grid-template-columns:2.2fr .7fr 1fr 1fr 42px;gap:8px;align-items:center
 }
-
-.upload input {
-    display: none;
+.item-head{font-size:11px;color:#64748b;font-weight:800;margin-bottom:7px}
+.item-row{margin-bottom:8px}
+.item-row input{padding:10px 8px;border:1px solid #cbd5e1;border-radius:9px;width:100%}
+.amount{background:#f1f5f9;padding:10px 8px;border-radius:9px;text-align:right;font-weight:800}
+.remove{background:#fee2e2;color:#b91c1c;border-radius:9px;height:38px;font-size:18px}
+.add{
+  margin-top:5px;background:#e0f2fe;color:#075985;padding:10px 14px;border-radius:10px;font-weight:800
 }
-
-.red {
-    background: #dc2626;
+.summary{background:#f8fafc;border-radius:14px;padding:14px}
+.sum-row{display:flex;justify-content:space-between;padding:7px 0;color:#475569}
+.total{font-size:21px;font-weight:900;color:#075985;border-top:1px dashed #94a3b8;margin-top:5px;padding-top:12px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.action{
+  padding:13px;border-radius:11px;font-weight:900;color:#fff
 }
-
-.green {
-    background: #16a34a;
+.whatsapp{background:#16a34a}
+.pdf{background:#075985}
+.print{background:#475569}
+.save{background:#7c3aed}
+.clear{background:#dc2626}
+.full-action{grid-column:1/-1}
+.history-item{
+  border:1px solid #e2e8f0;border-radius:12px;padding:12px;margin-bottom:8px;
+  display:flex;justify-content:space-between;gap:10px;align-items:center
 }
-
-.gray {
-    background: #4b5563;
+.history-item b{color:#075985}
+.history-item small{display:block;color:#64748b;margin-top:4px}
+.history-actions{display:flex;gap:6px}
+.mini{padding:7px 9px;border-radius:8px;font-size:12px;font-weight:800}
+.load{background:#e0f2fe;color:#075985}
+.del{background:#fee2e2;color:#b91c1c}
+.note{font-size:12px;color:#64748b;line-height:1.5;margin-top:8px}
+.bottom{
+  position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e2e8f0;
+  display:flex;justify-content:center;z-index:30;box-shadow:0 -4px 15px #0001
 }
-
-.orange {
-    background: #ea580c;
+.bottom-inner{max-width:700px;width:100%;display:grid;grid-template-columns:repeat(4,1fr)}
+.bottom button{background:#fff;padding:9px 5px;color:#475569;font-size:12px}
+.bottom button span{display:block;font-size:19px;margin-bottom:2px}
+.toast{
+  position:fixed;left:50%;bottom:75px;transform:translateX(-50%);
+  background:#0f172a;color:#fff;padding:11px 16px;border-radius:10px;
+  opacity:0;pointer-events:none;transition:.25s;z-index:100;font-size:13px
 }
+.toast.show{opacity:1}
 
-#workspace {
-    padding: 20px 10px 80px;
-    display: flex;
-    justify-content: center;
+@media(max-width:780px){
+  .grid{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  .item-head{display:none}
+  .item-row{grid-template-columns:1fr 65px 90px 100px 40px}
+  .item-row:before{content:"Item";grid-column:1/-1;font-size:11px;color:#64748b;font-weight:800}
+  .item-row input:first-child{grid-column:1/-1}
 }
-
-#canvasBox {
-    position: relative;
-    display: none;
+@media(max-width:500px){
+  .container{padding:12px 10px 85px}
+  .hero h1{font-size:21px}
+  .card{padding:14px}
+  .actions{grid-template-columns:1fr}
+  .full-action{grid-column:auto}
+  .item-row{grid-template-columns:1fr 65px 85px 40px}
+  .item-row input:nth-child(3){display:none}
+  .item-row .amount{display:none}
 }
-
-#photoCanvas {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    background: white;
-    box-shadow: 0 5px 30px #0008;
-    touch-action: none;
-}
-
-#brushCursor {
-    position: fixed;
-    width: 30px;
-    height: 30px;
-    border: 2px solid white;
-    border-radius: 50%;
-    pointer-events: none;
-    display: none;
-    z-index: 100;
-}
-
-.controls {
-    background: #1f2937;
-    padding: 12px;
-    text-align: center;
-}
-
-.controls label {
-    margin: 5px;
-}
-
-input[type="range"] {
-    width: 120px;
-}
-
-input[type="color"] {
-    width: 45px;
-    height: 35px;
-    border: 0;
-}
-
-.empty {
-    text-align: center;
-    color: #9ca3af;
-    padding: 100px 20px;
-}
-
-#status {
-    text-align: center;
-    color: #d1d5db;
-    padding: 8px;
-}
-
-.textInput {
-    position: fixed;
-    display: none;
-    z-index: 200;
-    padding: 10px;
-    background: white;
-    color: black;
-    border-radius: 8px;
-    border: 2px solid #2563eb;
-}
-
 </style>
 </head>
 
 <body>
 
-<header>
-    <h1>📸 Photo Text Remover</h1>
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      N.G COOLING SOLUTION
+      <small>Partner Billing App • Home Appliances Service & Repair</small>
+    </div>
+    <button class="header-btn" onclick="newBill()">＋ New Bill</button>
+  </div>
 </header>
 
-<div class="toolbar">
+<main class="container">
 
-    <label class="upload">
-        🖼️ Open Photo
-        <input
-            type="file"
-            id="imageInput"
-            accept="image/*">
-    </label>
+  <section class="hero">
+    <h1>📄 Professional Partner Billing</h1>
+    <p>Customer bill তৈরি করুন • A4 PDF Invoice বানান • Customer WhatsApp-এ bill পাঠান</p>
+  </section>
 
-    <button onclick="setTool('erase')">
-        🧹 Remove
-    </button>
+  <div class="grid">
 
-    <button onclick="setTool('cover')">
-        🎨 Cover
-    </button>
+    <div>
+      <section class="card">
+        <h2>👤 Customer Details</h2>
+        <div class="form-grid">
+          <div class="field">
+            <label>Customer Name *</label>
+            <input id="customerName" placeholder="Customer-এর নাম">
+          </div>
+          <div class="field">
+            <label>Customer WhatsApp Number *</label>
+            <input id="customerPhone" type="tel" inputmode="numeric" maxlength="10" placeholder="10 digit mobile number">
+          </div>
+          <div class="field full">
+            <label>📍 Customer Address</label>
+            <textarea id="customerAddress" placeholder="Customer-এর সম্পূর্ণ ঠিকানা"></textarea>
+          </div>
+        </div>
+      </section>
 
-    <button onclick="setTool('text')">
-        ✍️ Add Text
-    </button>
+      <section class="card">
+        <h2>👨‍🔧 Partner / Invoice Details</h2>
+        <div class="form-grid">
+          <div class="field">
+            <label>Partner / Technician Name</label>
+            <input id="partnerName" placeholder="Partner Name">
+          </div>
+          <div class="field">
+            <label>Invoice Date</label>
+            <input id="invoiceDate" type="date" readonly title="Automatic Date">
+          </div>
+          <div class="field">
+            <label>Invoice Time</label>
+            <input id="invoiceTime" type="time" readonly title="Automatic Time">
+          </div>
+          <div class="field">
+            <label>Payment Type</label>
+            <select id="paymentType">
+              <option>Cash</option>
+              <option>UPI</option>
+              <option>Card</option>
+              <option>Bank Transfer</option>
+              <option>Due</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Received Amount (₹)</label>
+            <input id="received" type="number" min="0" value="0" oninput="calculate()">
+          </div>
+        </div>
+      </section>
 
-    <button class="gray"
-            onclick="undo()">
-        ↩️ Undo
-    </button>
-
-    <button class="gray"
-            onclick="resetImage()">
-        🔄 Reset
-    </button>
-
-    <button class="green"
-            onclick="downloadImage()">
-        📥 Download
-    </button>
-
-    <button class="orange"
-            onclick="shareImage()">
-        📤 Share
-    </button>
-
-</div>
-
-<div class="controls">
-
-    <label>
-        Brush:
-        <input
-            id="brushSize"
-            type="range"
-            min="5"
-            max="150"
-            value="35">
-    </label>
-
-    <label>
-        Color:
-        <input
-            id="brushColor"
-            type="color"
-            value="#ffffff">
-    </label>
-
-</div>
-
-<div id="status">
-    Upload a photo to start.
-</div>
-
-<div id="workspace">
-
-    <div id="canvasBox">
-
-        <canvas id="photoCanvas"></canvas>
-
+      <section class="card">
+        <h2>🔧 Service / Parts</h2>
+        <div class="item-head">
+          <div>ITEM NAME</div><div>QTY</div><div>PRICE / UNIT</div><div>AMOUNT</div><div></div>
+        </div>
+        <div id="items"></div>
+        <button class="add" onclick="addItem()">＋ Add Service / Part</button>
+      </section>
     </div>
 
-    <div class="empty"
-         id="emptyMessage">
+    <div>
+      <section class="card">
+        <h2>💰 Bill Summary</h2>
+        <div class="summary">
+          <div class="sum-row"><span>Sub Total</span><b id="subtotal">₹0.00</b></div>
+          <div class="sum-row">
+            <span>Discount</span>
+            <input id="discount" type="number" min="0" value="0"
+                   style="width:110px;padding:7px;border:1px solid #cbd5e1;border-radius:8px;text-align:right"
+                   oninput="calculate()">
+          </div>
+          <div class="sum-row total"><span>Total</span><span id="total">₹0.00</span></div>
+          <div class="sum-row"><span>Received</span><b id="receivedView">₹0.00</b></div>
+          <div class="sum-row"><span>Balance / Due</span><b id="balance">₹0.00</b></div>
+        </div>
+        <p class="note">Payment status bill-এ Paid / Partial / Due হিসেবে দেখানো হবে।</p>
+      </section>
 
-        🖼️ Upload a photo to begin.
+      <section class="card">
+        <h2>📲 Bill Actions</h2>
+        <div class="actions">
+          <button class="action whatsapp full-action" onclick="sendWhatsApp()">💬 Send Bill to Customer WhatsApp</button>
+          <button class="action pdf" onclick="generatePDF()">📥 Generate PDF Bill</button>
+          <button class="action print" onclick="printInvoice()">🖨️ Print Bill</button>
+          <button class="action save" onclick="saveBill()">💾 Save Bill</button>
+          <button class="action clear" onclick="newBill()">🗑️ New / Clear</button>
+        </div>
+        <p class="note">
+          WhatsApp button Customer-এর WhatsApp chat খুলবে এবং bill message ready করে দেবে।
+          WhatsApp-এর Send button চাপলে message যাবে। Background-এ automatic send করতে WhatsApp Business API প্রয়োজন।
+        </p>
+      </section>
 
+      <section class="card" id="historyCard">
+        <h2>📋 Recent Bills</h2>
+        <div id="history"></div>
+      </section>
     </div>
 
+  </div>
+</main>
+
+<div class="bottom">
+  <div class="bottom-inner">
+    <button onclick="window.scrollTo({top:0,behavior:'smooth'})"><span>🏠</span>Home</button>
+    <button onclick="document.getElementById('customerName').focus();window.scrollTo({top:0,behavior:'smooth'})"><span>➕</span>New Bill</button>
+    <button onclick="document.getElementById('historyCard').scrollIntoView({behavior:'smooth'})"><span>📋</span>History</button>
+    <button onclick="sendWhatsApp()"><span>💬</span>WhatsApp</button>
+  </div>
 </div>
 
-<div id="brushCursor"></div>
+<div id="toast" class="toast"></div>
+
+<!-- Hidden A4 invoice used for PDF -->
+<div id="invoiceForPDF" style="position:absolute;left:-100000px;top:0;width:794px;background:#fff;color:#111;padding:30px;font-family:Arial,sans-serif;">
+  <div id="invoiceHTML"></div>
+</div>
 
 <script>
+const BUSINESS_NAME = "N.G COOLING SOLUTION";
+const BUSINESS_TAGLINE = "Home Appliances Service & Repair";
+const BUSINESS_PHONE = "7439160014";
+const STORAGE_KEY = "ng_partner_bills_v1";
+let billNo = "";
+let itemCounter = 0;
 
-const canvas =
-    document.getElementById("photoCanvas");
+function pad(n){ return String(n).padStart(2,"0"); }
 
-const ctx =
-    canvas.getContext("2d");
-
-const imageInput =
-    document.getElementById("imageInput");
-
-const canvasBox =
-    document.getElementById("canvasBox");
-
-const emptyMessage =
-    document.getElementById("emptyMessage");
-
-const statusText =
-    document.getElementById("status");
-
-const brushSize =
-    document.getElementById("brushSize");
-
-const brushColor =
-    document.getElementById("brushColor");
-
-let image = null;
-
-let originalImage = null;
-
-let tool = "erase";
-
-let drawing = false;
-
-let history = [];
-
-let lastBlob = null;
-
-
-/* =========================
-   OPEN IMAGE
-========================= */
-
-imageInput.addEventListener(
-    "change",
-    function(event) {
-
-        const file =
-            event.target.files[0];
-
-        if (!file) return;
-
-        const reader =
-            new FileReader();
-
-        reader.onload =
-            function(e) {
-
-                const img =
-                    new Image();
-
-                img.onload =
-                    function() {
-
-                        image = img;
-
-                        originalImage =
-                            img;
-
-                        canvas.width =
-                            img.naturalWidth;
-
-                        canvas.height =
-                            img.naturalHeight;
-
-                        ctx.drawImage(
-                            img,
-                            0,
-                            0
-                        );
-
-                        history = [];
-
-                        saveHistory();
-
-                        canvasBox.style.display =
-                            "block";
-
-                        emptyMessage.style.display =
-                            "none";
-
-                        setStatus(
-                            "Photo loaded."
-                        );
-
-                    };
-
-                img.src =
-                    e.target.result;
-
-            };
-
-        reader.readAsDataURL(file);
-
-    }
-);
-
-
-/* =========================
-   TOOLS
-========================= */
-
-function setTool(selectedTool) {
-
-    tool =
-        selectedTool;
-
-    if (tool === "erase") {
-
-        setStatus(
-            "Paint over the text you want to remove."
-        );
-
-    }
-
-    if (tool === "cover") {
-
-        setStatus(
-            "Choose a color and paint over the text."
-        );
-
-    }
-
-    if (tool === "text") {
-
-        setStatus(
-            "Tap the photo where you want to add text."
-        );
-
-    }
-
+function today(){
+  const d = new Date();
+  return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+}
+function nowTime(){
+  const d = new Date();
+  return pad(d.getHours())+":"+pad(d.getMinutes());
 }
 
-
-/* =========================
-   CANVAS POSITION
-========================= */
-
-function getCanvasPosition(event) {
-
-    const rect =
-        canvas.getBoundingClientRect();
-
-    let clientX;
-    let clientY;
-
-    if (event.touches) {
-
-        clientX =
-            event.touches[0].clientX;
-
-        clientY =
-            event.touches[0].clientY;
-
-    } else {
-
-        clientX =
-            event.clientX;
-
-        clientY =
-            event.clientY;
-
-    }
-
-    return {
-
-        x:
-            (clientX - rect.left)
-            *
-            (canvas.width / rect.width),
-
-        y:
-            (clientY - rect.top)
-            *
-            (canvas.height / rect.height)
-
-    };
-
+function updateAutomaticDateTime(){
+  const dateEl = document.getElementById("invoiceDate");
+  const timeEl = document.getElementById("invoiceTime");
+  if(dateEl) dateEl.value = today();
+  if(timeEl) timeEl.value = nowTime();
 }
 
-
-/* =========================
-   DRAW START
-========================= */
-
-function startDrawing(event) {
-
-    if (!image) return;
-
-    if (tool === "text") {
-
-        event.preventDefault();
-
-        addText(event);
-
-        return;
-
-    }
-
-    event.preventDefault();
-
-    drawing = true;
-
-    saveHistory();
-
-    draw(event);
-
+function nextBillNo(){
+  let last = Number(localStorage.getItem("ng_last_bill_no") || 0) + 1;
+  localStorage.setItem("ng_last_bill_no", String(last));
+  return "NG-" + new Date().getFullYear() + "-" + String(last).padStart(4,"0");
 }
 
-
-/* =========================
-   DRAW
-========================= */
-
-function draw(event) {
-
-    if (!drawing) return;
-
-    event.preventDefault();
-
-    const p =
-        getCanvasPosition(event);
-
-    const size =
-        Number(
-            brushSize.value
-        );
-
-
-    if (tool === "erase") {
-
-        /*
-         * Simple background reconstruction:
-         * use nearby sampled color.
-         */
-
-        const sampleSize =
-            Math.max(
-                2,
-                Math.floor(size / 4)
-            );
-
-        let sx =
-            Math.max(
-                0,
-                Math.min(
-                    canvas.width - 1,
-                    Math.floor(p.x)
-                )
-            );
-
-        let sy =
-            Math.max(
-                0,
-                Math.min(
-                    canvas.height - 1,
-                    Math.floor(p.y)
-                )
-            );
-
-        const pixel =
-            ctx.getImageData(
-                sx,
-                sy,
-                1,
-                1
-            ).data;
-
-        ctx.fillStyle =
-            `rgb(
-                ${pixel[0]},
-                ${pixel[1]},
-                ${pixel[2]}
-            )`;
-
-        ctx.beginPath();
-
-        ctx.arc(
-            p.x,
-            p.y,
-            size / 2,
-            0,
-            Math.PI * 2
-        );
-
-        ctx.fill();
-
-    }
-
-
-    if (tool === "cover") {
-
-        ctx.fillStyle =
-            brushColor.value;
-
-        ctx.beginPath();
-
-        ctx.arc(
-            p.x,
-            p.y,
-            size / 2,
-            0,
-            Math.PI * 2
-        );
-
-        ctx.fill();
-
-    }
-
+function money(n){
+  return "₹" + Number(n || 0).toLocaleString("en-IN",{minimumFractionDigits:2,maximumFractionDigits:2});
 }
 
-
-/* =========================
-   STOP
-========================= */
-
-function stopDrawing() {
-
-    if (!drawing) return;
-
-    drawing = false;
-
+function escapeHTML(s){
+  return String(s ?? "").replace(/[&<>"']/g,m=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+  }[m]));
 }
 
-
-/* =========================
-   MOUSE
-========================= */
-
-canvas.addEventListener(
-    "mousedown",
-    startDrawing
-);
-
-canvas.addEventListener(
-    "mousemove",
-    draw
-);
-
-canvas.addEventListener(
-    "mouseup",
-    stopDrawing
-);
-
-canvas.addEventListener(
-    "mouseleave",
-    stopDrawing
-);
-
-
-/* =========================
-   TOUCH
-========================= */
-
-canvas.addEventListener(
-    "touchstart",
-    startDrawing,
-    {
-        passive: false
-    }
-);
-
-canvas.addEventListener(
-    "touchmove",
-    draw,
-    {
-        passive: false
-    }
-);
-
-canvas.addEventListener(
-    "touchend",
-    stopDrawing
-);
-
-
-/* =========================
-   TEXT
-========================= */
-
-function addText(event) {
-
-    const text =
-        prompt(
-            "Enter text:"
-        );
-
-    if (!text) return;
-
-    const p =
-        getCanvasPosition(event);
-
-    saveHistory();
-
-    ctx.fillStyle =
-        "#111111";
-
-    ctx.font =
-        `${Math.max(
-            20,
-            Number(brushSize.value)
-        )}px Arial`;
-
-    ctx.fillText(
-        text,
-        p.x,
-        p.y
-    );
-
-    setStatus(
-        "Text added."
-    );
-
+function addItem(name="",qty=1,rate=0){
+  itemCounter++;
+  const id = itemCounter;
+  const row = document.createElement("div");
+  row.className = "item-row";
+  row.dataset.id = id;
+  row.innerHTML = `
+    <input class="item-name" placeholder="Service / Part name" value="${escapeHTML(name)}" oninput="calculate()">
+    <input class="item-qty" type="number" min="1" value="${qty}" oninput="calculate()">
+    <input class="item-rate" type="number" min="0" value="${rate}" oninput="calculate()">
+    <div class="amount item-amount">₹0.00</div>
+    <button class="remove" onclick="this.parentElement.remove();calculate()">×</button>
+  `;
+  document.getElementById("items").appendChild(row);
+  calculate();
 }
 
-
-/* =========================
-   HISTORY
-========================= */
-
-function saveHistory() {
-
-    if (!canvas.width)
-        return;
-
-    history.push(
-        canvas.toDataURL(
-            "image/png"
-        )
-    );
-
-    if (history.length > 20) {
-
-        history.shift();
-
-    }
-
+function getItems(){
+  return [...document.querySelectorAll(".item-row")].map(row=>{
+    const name = row.querySelector(".item-name").value.trim();
+    const qty = Number(row.querySelector(".item-qty").value || 0);
+    const rate = Number(row.querySelector(".item-rate").value || 0);
+    return {name,qty,rate,amount:qty*rate};
+  }).filter(x=>x.name || x.rate);
 }
 
+function calculate(){
+  let subtotal=0;
+  document.querySelectorAll(".item-row").forEach(row=>{
+    const qty=Number(row.querySelector(".item-qty").value||0);
+    const rate=Number(row.querySelector(".item-rate").value||0);
+    const amount=qty*rate;
+    subtotal+=amount;
+    row.querySelector(".item-amount").textContent=money(amount);
+  });
+  const discount=Math.max(0,Number(document.getElementById("discount").value||0));
+  const total=Math.max(0,subtotal-discount);
+  const received=Math.max(0,Number(document.getElementById("received").value||0));
+  const balance=Math.max(0,total-received);
 
-/* =========================
-   UNDO
-========================= */
-
-function undo() {
-
-    if (history.length <= 1) {
-
-        setStatus(
-            "Nothing to undo."
-        );
-
-        return;
-
-    }
-
-    history.pop();
-
-    const previous =
-        history[
-            history.length - 1
-        ];
-
-    const img =
-        new Image();
-
-    img.onload =
-        function() {
-
-            ctx.clearRect(
-                0,
-                0,
-                canvas.width,
-                canvas.height
-            );
-
-            ctx.drawImage(
-                img,
-                0,
-                0
-            );
-
-        };
-
-    img.src =
-        previous;
-
+  document.getElementById("subtotal").textContent=money(subtotal);
+  document.getElementById("total").textContent=money(total);
+  document.getElementById("receivedView").textContent=money(received);
+  document.getElementById("balance").textContent=money(balance);
 }
 
+function collectData(){
+  const items=getItems();
+  const subtotal=items.reduce((s,x)=>s+x.amount,0);
+  const discount=Math.max(0,Number(document.getElementById("discount").value||0));
+  const total=Math.max(0,subtotal-discount);
+  const received=Math.max(0,Number(document.getElementById("received").value||0));
+  const balance=Math.max(0,total-received);
 
-/* =========================
-   RESET
-========================= */
+  let status="DUE";
+  if(received>=total && total>0) status="PAID";
+  else if(received>0) status="PARTIAL";
 
-function resetImage() {
-
-    if (!originalImage)
-        return;
-
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-    ctx.drawImage(
-        originalImage,
-        0,
-        0
-    );
-
-    history = [];
-
-    saveHistory();
-
-    setStatus(
-        "Photo reset."
-    );
-
+  return {
+    billNo,
+    customerName:document.getElementById("customerName").value.trim(),
+    customerPhone:document.getElementById("customerPhone").value.trim(),
+    customerAddress:document.getElementById("customerAddress").value.trim(),
+    partnerName:document.getElementById("partnerName").value.trim(),
+    date:document.getElementById("invoiceDate").value,
+    time:document.getElementById("invoiceTime").value,
+    paymentType:document.getElementById("paymentType").value,
+    items,subtotal,discount,total,received,balance,status,
+    createdAt:new Date().toISOString()
+  };
 }
 
-
-/* =========================
-   DOWNLOAD
-========================= */
-
-function downloadImage() {
-
-    if (!image) {
-
-        alert(
-            "Upload a photo first."
-        );
-
-        return;
-
-    }
-
-    canvas.toBlob(
-        function(blob) {
-
-            lastBlob =
-                blob;
-
-            const url =
-                URL.createObjectURL(
-                    blob
-                );
-
-            const link =
-                document.createElement(
-                    "a"
-                );
-
-            link.href =
-                url;
-
-            link.download =
-                "edited-photo.png";
-
-            document.body.appendChild(
-                link
-            );
-
-            link.click();
-
-            link.remove();
-
-            setTimeout(
-                function() {
-
-                    URL.revokeObjectURL(
-                        url
-                    );
-
-                },
-                1000
-            );
-
-            setStatus(
-                "Photo downloaded."
-            );
-
-        },
-        "image/png"
-    );
-
+function validate(d){
+  if(!d.customerName){ alert("Customer Name দিন।"); return false; }
+  if(!/^[0-9]{10}$/.test(d.customerPhone)){ alert("Customer WhatsApp Number 10 digit দিন।"); return false; }
+  if(!d.items.length){ alert("কমপক্ষে 1টি Service / Part যোগ করুন।"); return false; }
+  return true;
 }
 
-
-/* =========================
-   SHARE
-========================= */
-
-async function shareImage() {
-
-    if (!image) {
-
-        alert(
-            "Upload a photo first."
-        );
-
-        return;
-
-    }
-
-
-    canvas.toBlob(
-        async function(blob) {
-
-            lastBlob =
-                blob;
-
-            const file =
-                new File(
-                    [
-                        blob
-                    ],
-                    "edited-photo.png",
-                    {
-                        type:
-                            "image/png"
-                    }
-                );
-
-
-            /*
-             * Android + iPhone
-             */
-
-            if (
-                navigator.share &&
-                navigator.canShare &&
-                navigator.canShare({
-                    files: [file]
-                })
-            ) {
-
-                try {
-
-                    await navigator.share({
-
-                        title:
-                            "Edited Photo",
-
-                        text:
-                            "Edited photo",
-
-                        files:
-                            [file]
-
-                    });
-
-                    setStatus(
-                        "Share menu opened."
-                    );
-
-                }
-
-                catch(error) {
-
-                    console.log(
-                        "Share cancelled."
-                    );
-
-                }
-
-            }
-
-            else {
-
-                /*
-                 * Fallback
-                 */
-
-                downloadImage();
-
-                alert(
-                    "Direct sharing isn't supported by this browser. The edited photo was downloaded. Open it and choose WhatsApp."
-                );
-
-            }
-
-        },
-        "image/png"
-    );
-
+function amountInWords(num){
+  num=Math.floor(Number(num)||0);
+  if(num===0) return "Zero Rupees Only";
+  const ones=["","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"];
+  const tens=["","","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"];
+  function two(n){return n<20?ones[n]:tens[Math.floor(n/10)]+(n%10?" "+ones[n%10]:"");}
+  function three(n){return n<100?two(n):ones[Math.floor(n/100)]+" Hundred"+(n%100?" "+two(n%100):"");}
+  let parts=[];
+  const crore=Math.floor(num/10000000); num%=10000000;
+  const lakh=Math.floor(num/100000); num%=100000;
+  const thousand=Math.floor(num/1000); num%=1000;
+  if(crore)parts.push(three(crore)+" Crore");
+  if(lakh)parts.push(three(lakh)+" Lakh");
+  if(thousand)parts.push(three(thousand)+" Thousand");
+  if(num)parts.push(three(num));
+  return parts.join(" ")+" Rupees Only";
 }
 
+function invoiceMarkup(d){
+  const rows=d.items.map((x,i)=>`
+    <tr>
+      <td>${i+1}</td>
+      <td><b>${escapeHTML(x.name || "Service / Part")}</b>${i===0?`<br><span style="font-size:10px;color:#555">Service / Part work</span>`:""}</td>
+      <td>${escapeHTML("")}</td>
+      <td style="text-align:center">${x.qty}</td>
+      <td style="text-align:right">${money(x.rate)}</td>
+      <td style="text-align:right">${money(x.amount)}</td>
+    </tr>`).join("");
 
-/* =========================
-   STATUS
-========================= */
+  return `
+  <div style="border:1px solid #ddd;padding:20px;background:#fff;">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid #333;padding-bottom:13px;">
+      <div style="font-size:12px;color:#555;line-height:1.55">
+        <div style="font-size:26px;font-weight:900;color:#087ea8">${BUSINESS_NAME}</div>
+        <div style="font-size:13px;font-weight:700">${BUSINESS_TAGLINE}</div>
+        <div>WhatsApp / Phone: ${BUSINESS_PHONE}</div>
+      </div>
+      <div style="text-align:right;font-size:12px;line-height:1.6">
+        <b style="font-size:22px;color:#087ea8">Tax Invoice</b><br>
+        Invoice No: <b>${escapeHTML(d.billNo)}</b><br>
+        Date: ${escapeHTML(d.date)}<br>
+        Time: ${escapeHTML(d.time)}
+      </div>
+    </div>
 
-function setStatus(message) {
+    <div style="display:flex;justify-content:space-between;margin:16px 0 12px;font-size:12px;line-height:1.6">
+      <div style="width:58%">
+        <b style="font-size:14px">Bill To</b><br>
+        <b>${escapeHTML(d.customerName)}</b><br>
+        ${escapeHTML(d.customerAddress || "Address not provided")}<br>
+        WhatsApp: ${escapeHTML(d.customerPhone)}
+      </div>
+      <div style="width:35%;text-align:right">
+        <b>Invoice Details</b><br>
+        Invoice No: ${escapeHTML(d.billNo)}<br>
+        Invoice Date: ${escapeHTML(d.date)}<br>
+        Partner: ${escapeHTML(d.partnerName || "-")}
+      </div>
+    </div>
 
-    statusText.textContent =
-        message;
+    <table style="width:100%;border-collapse:collapse;font-size:11px">
+      <thead>
+        <tr style="background:#119bd0;color:#fff">
+          <th style="padding:8px;text-align:left">#</th>
+          <th style="padding:8px;text-align:left">Item Name</th>
+          <th style="padding:8px;text-align:left">HSN/SAC</th>
+          <th style="padding:8px;text-align:center">Quantity</th>
+          <th style="padding:8px;text-align:right">Price / Unit</th>
+          <th style="padding:8px;text-align:right">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rows}
+        <tr style="border-top:1px solid #aaa">
+          <td></td><td><b>SERVICE CHARGE</b></td><td></td><td style="text-align:center">1</td>
+          <td style="text-align:right">${money(0)}</td><td style="text-align:right">${money(0)}</td>
+        </tr>
+      </tbody>
+    </table>
 
+    <div style="display:flex;gap:12px;margin-top:15px">
+      <div style="width:55%">
+        <div style="background:#119bd0;color:#fff;font-weight:800;padding:7px">Invoice Amount in Words</div>
+        <div style="border:1px solid #ddd;padding:10px;font-size:11px">${amountInWords(d.total)}</div>
+
+        <div style="background:#119bd0;color:#fff;font-weight:800;padding:7px;margin-top:10px">Payment Type</div>
+        <div style="border:1px solid #ddd;padding:10px;font-size:11px">${escapeHTML(d.paymentType)} — ${d.status}</div>
+
+        <div style="background:#119bd0;color:#fff;font-weight:800;padding:7px;margin-top:10px">Terms and Conditions</div>
+        <div style="border:1px solid #ddd;padding:10px;font-size:10px;line-height:1.5">
+          Thank you for doing business with us.<br>
+          Selected repair / part replacement work-এর ক্ষেত্রে 90 Days Warranty applicable, যেখানে applicable.
+        </div>
+      </div>
+
+      <div style="width:45%">
+        <div style="background:#119bd0;color:#fff;font-weight:800;padding:7px">Amounts</div>
+        <table style="width:100%;border-collapse:collapse;font-size:11px">
+          <tr><td style="padding:7px">Sub Total</td><td style="padding:7px;text-align:right">${money(d.subtotal)}</td></tr>
+          <tr><td style="padding:7px">Discount</td><td style="padding:7px;text-align:right">${money(d.discount)}</td></tr>
+          <tr><td style="padding:7px;font-weight:900">Total</td><td style="padding:7px;text-align:right;font-weight:900">${money(d.total)}</td></tr>
+          <tr><td style="padding:7px">Received</td><td style="padding:7px;text-align:right">${money(d.received)}</td></tr>
+          <tr><td style="padding:7px">Balance</td><td style="padding:7px;text-align:right">${money(d.balance)}</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div style="height:85px;text-align:right;padding-top:35px;font-size:11px">
+      For: <b>${BUSINESS_NAME}</b><br><br>
+      __________________________<br>
+      Authorized Signatory
+    </div>
+
+    <div style="border-top:1px dashed #999;margin-top:10px;padding-top:13px">
+      <div style="text-align:center;font-size:17px;font-weight:900;color:#119bd0;margin-bottom:10px">Acknowledgment</div>
+      <div style="display:flex;justify-content:space-between;font-size:10px;line-height:1.6">
+        <div style="width:35%">
+          <b>Invoice To</b><br>
+          ${escapeHTML(d.customerName)}<br>
+          ${escapeHTML(d.customerAddress || "-")}<br>
+          WhatsApp: ${escapeHTML(d.customerPhone)}
+        </div>
+        <div style="width:35%">
+          <b>${BUSINESS_NAME}</b><br>
+          Invoice No: ${escapeHTML(d.billNo)}<br>
+          Invoice Date: ${escapeHTML(d.date)}<br>
+          Invoice Amount: ${money(d.total)}
+        </div>
+        <div style="width:25%;text-align:center;padding-top:20px">
+          __________________<br>
+          Receiver's Seal & Sign
+        </div>
+      </div>
+    </div>
+  </div>`;
 }
 
+function prepareInvoice(){
+  const d=collectData();
+  document.getElementById("invoiceHTML").innerHTML=invoiceMarkup(d);
+  return d;
+}
+
+async function generatePDF(){
+  const d=prepareInvoice();
+  if(!validate(d)) return;
+
+  const el=document.getElementById("invoiceForPDF");
+  el.style.left="0";
+  el.style.position="fixed";
+  el.style.zIndex="-1";
+
+  const opt={
+    margin:[8,8,8,8],
+    filename:(d.billNo || "NG-Bill")+".pdf",
+    image:{type:"jpeg",quality:0.98},
+    html2canvas:{scale:2,useCORS:true,backgroundColor:"#ffffff"},
+    jsPDF:{unit:"mm",format:"a4",orientation:"portrait"},
+    pagebreak:{mode:["css","legacy"]}
+  };
+
+  try{
+    await html2pdf().set(opt).from(el).save();
+    toast("PDF Bill তৈরি হয়েছে ✅");
+  }catch(e){
+    alert("PDF তৈরি করতে সমস্যা হয়েছে। Internet connection/check করুন।");
+  }finally{
+    el.style.left="-100000px";
+    el.style.position="absolute";
+    el.style.zIndex="";
+  }
+}
+
+function printInvoice(){
+  const d=prepareInvoice();
+  if(!validate(d)) return;
+  const w=window.open("","_blank");
+  w.document.write(`
+    <html><head><title>${escapeHTML(d.billNo)}</title>
+    <style>@page{size:A4;margin:8mm}body{margin:0;background:#fff;font-family:Arial,sans-serif}</style>
+    </head><body>${document.getElementById("invoiceHTML").innerHTML}</body></html>
+  `);
+  w.document.close();
+  setTimeout(()=>w.print(),500);
+}
+
+function normalizeWhatsApp(phone){
+  const p=String(phone).replace(/\D/g,"");
+  if(p.length===10) return "91"+p;
+  if(p.length===12 && p.startsWith("91")) return p;
+  return "";
+}
+
+function sendWhatsApp(){
+  const d=collectData();
+  if(!validate(d)) return;
+  const phone=normalizeWhatsApp(d.customerPhone);
+  if(!phone){alert("সঠিক 10 digit Customer WhatsApp Number দিন।");return;}
+
+  const lines=[
+    `Hello ${d.customerName},`,
+    ``,
+    `N.G COOLING SOLUTION`,
+    `Home Appliances Service & Repair`,
+    `Bill No: ${d.billNo}`,
+    `Date: ${d.date}`,
+    ``,
+    `Service / Parts:`,
+    ...d.items.map((x,i)=>`${i+1}. ${x.name} x${x.qty} = ${money(x.amount)}`),
+    ``,
+    `Sub Total: ${money(d.subtotal)}`,
+    `Discount: ${money(d.discount)}`,
+    `TOTAL: ${money(d.total)}`,
+    `Received: ${money(d.received)}`,
+    `Balance: ${money(d.balance)}`,
+    `Payment: ${d.paymentType}`,
+    ``,
+    `Business WhatsApp: ${BUSINESS_PHONE}`,
+    `Thank you for choosing N.G Cooling Solution.`
+  ];
+
+  const url=`https://wa.me/${phone}?text=${encodeURIComponent(lines.join("\n"))}`;
+  window.open(url,"_blank");
+}
+
+function saveBill(){
+  const d=collectData();
+  if(!validate(d)) return;
+
+  let bills=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");
+  const index=bills.findIndex(x=>x.billNo===d.billNo);
+  if(index>=0)bills[index]=d; else bills.unshift(d);
+  bills=bills.slice(0,50);
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(bills));
+  renderHistory();
+  toast("Bill Saved ✅");
+}
+
+function loadBill(no){
+  const bills=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");
+  const d=bills.find(x=>x.billNo===no);
+  if(!d)return;
+
+  billNo=d.billNo;
+  document.getElementById("customerName").value=d.customerName;
+  document.getElementById("customerPhone").value=d.customerPhone;
+  document.getElementById("customerAddress").value=d.customerAddress;
+  document.getElementById("partnerName").value=d.partnerName;
+  document.getElementById("invoiceDate").value=d.date;
+  document.getElementById("invoiceTime").value=d.time;
+  document.getElementById("paymentType").value=d.paymentType;
+  document.getElementById("received").value=d.received;
+  document.getElementById("discount").value=d.discount;
+
+  document.getElementById("items").innerHTML="";
+  d.items.forEach(x=>addItem(x.name,x.qty,x.rate));
+  calculate();
+  window.scrollTo({top:0,behavior:"smooth"});
+  toast("Bill Loaded");
+}
+
+function deleteBill(no){
+  if(!confirm("এই bill history থেকে delete করবেন?"))return;
+  let bills=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");
+  bills=bills.filter(x=>x.billNo!==no);
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(bills));
+  renderHistory();
+  toast("Deleted");
+}
+
+function renderHistory(){
+  const el=document.getElementById("history");
+  const bills=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");
+  if(!bills.length){
+    el.innerHTML=`<p class="note">এখনও কোনো saved bill নেই।</p>`;
+    return;
+  }
+  el.innerHTML=bills.map(b=>`
+    <div class="history-item">
+      <div>
+        <b>${escapeHTML(b.billNo)}</b> — ${escapeHTML(b.customerName)}<br>
+        <small>${escapeHTML(b.date)} • ${money(b.total)} • ${escapeHTML(b.status)}</small>
+      </div>
+      <div class="history-actions">
+        <button class="mini load" onclick="loadBill('${escapeHTML(b.billNo)}')">Open</button>
+        <button class="mini del" onclick="deleteBill('${escapeHTML(b.billNo)}')">×</button>
+      </div>
+    </div>
+  `).join("");
+}
+
+function newBill(){
+  if(confirm("New Bill শুরু করবেন? বর্তমান unsaved data মুছে যাবে।")){
+    billNo=nextBillNo();
+    document.getElementById("customerName").value="";
+    document.getElementById("customerPhone").value="";
+    document.getElementById("customerAddress").value="";
+    document.getElementById("partnerName").value="";
+    updateAutomaticDateTime();
+    document.getElementById("paymentType").value="Cash";
+    document.getElementById("received").value=0;
+    document.getElementById("discount").value=0;
+    document.getElementById("items").innerHTML="";
+    addItem("Service Charge",1,0);
+    calculate();
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+}
+
+function toast(msg){
+  const t=document.getElementById("toast");
+  t.textContent=msg;t.classList.add("show");
+  clearTimeout(window.__toast);
+  window.__toast=setTimeout(()=>t.classList.remove("show"),2200);
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  billNo=nextBillNo();
+  updateAutomaticDateTime();
+  setInterval(updateAutomaticDateTime, 30000);
+  addItem("Service Charge",1,0);
+  renderHistory();
+  calculate();
+});
 </script>
 
 </body>
