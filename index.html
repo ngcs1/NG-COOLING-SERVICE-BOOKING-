@@ -4,161 +4,1011 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#123b78">
+
 <title>Neelam Beauty Hub | Beauty • Style • Care</title>
+
+<meta name="description" content="Explore Neelam Beauty Hub beauty services, makeup, hair styling, facial and online appointment booking.">
+
 <style>
-:root{--pink:#1687e8;--purple:#123b78;--ink:#142b49;--muted:#65758c;--glass:rgba(255,255,255,.94)}
-*{box-sizing:border-box;margin:0;padding:0;scroll-behavior:smooth}
-body{font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:var(--ink);background:linear-gradient(135deg,#f4f9ff,#eaf3ff 48%,#ffffff);line-height:1.6}
-header{position:sticky;top:0;z-index:20;background:rgba(255,252,245,.94);backdrop-filter:blur(16px);border-bottom:1px solid #d7e6f8}
-.nav{max-width:1180px;margin:auto;padding:13px 20px;display:flex;align-items:center;justify-content:space-between;gap:18px}
-.logo{font-size:21px;font-weight:900;letter-spacing:-.6px;background:linear-gradient(100deg,#123b78,#1687e8);-webkit-background-clip:text;background-clip:text;color:transparent}
-.logo small{display:block;font-size:10px;letter-spacing:2.5px;color:#71829a}
-nav{display:flex;gap:20px;flex-wrap:wrap}nav a{color:#4d4057;text-decoration:none;font-weight:700;font-size:13px}nav a:hover{color:var(--pink)}
-.hero{max-width:1180px;margin:24px auto 0;width:calc(100% - 32px);min-height:570px;border-radius:30px;overflow:hidden;display:flex;align-items:center;background:linear-gradient(90deg,rgba(7,28,67,.86),rgba(14,72,135,.42)),url("https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1800&q=85") center/cover;box-shadow:0 25px 70px #123b7826}
-.hero-content{max-width:760px;padding:clamp(28px,6vw,76px);color:white}
-.badge{display:inline-block;background:#fffdf7fff24;border:1px solid #ffffff75;padding:8px 14px;border-radius:99px;font-size:12px;font-weight:800;letter-spacing:.5px;margin-bottom:20px;backdrop-filter:blur(8px)}
-h1{font-size:clamp(38px,6vw,68px);line-height:1.05;letter-spacing:-2px;margin-bottom:20px}
-.hero p{font-size:17px;max-width:590px;color:#f2f8ff;margin-bottom:25px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:13px 21px;font-weight:800;text-decoration:none;cursor:pointer;transition:.2s}
-.btn:hover{transform:translateY(-2px);filter:brightness(1.04)}
-.primary{color:white;background:linear-gradient(100deg,var(--pink),var(--purple));box-shadow:0 9px 24px #123b7840}
-.light{color:#123b78;background:#fffdf7;margin-left:7px}
-.quick{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;padding:17px 12px}
-.quick a{color:#123b78;background:#fffdf7;border:1px solid #d8c69f;border-radius:99px;padding:9px 14px;text-decoration:none;font-weight:800;font-size:12px;box-shadow:0 5px 16px #123b780b}
-section.content{max-width:1180px;margin:auto;padding:64px 20px}
-.section-title{text-align:center;margin-bottom:30px}
-.eyebrow{font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:var(--pink)}
-.section-title h2{font-size:clamp(28px,4vw,40px);line-height:1.2;margin:7px 0 8px;letter-spacing:-1px}
-.section-title p{color:var(--muted)}
-.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
-.gallery img{width:100%;height:270px;object-fit:cover;border-radius:20px;box-shadow:0 12px 30px #39204412;transition:.25s}
-.gallery img:hover{transform:translateY(-4px);box-shadow:0 16px 34px #244d3b24}
-.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
-.service-card,.contact-card,.location-box,.booking-area{background:var(--glass);border:1px solid #e0ebf8;backdrop-filter:blur(12px);border-radius:22px;padding:23px;box-shadow:0 12px 35px #50205c0c}
-.service-card h3{font-size:18px;margin-bottom:12px;color:#123b78}
-.service-row{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #e1eaf6;font-size:14px}
-.service-row:last-child{border-bottom:0}.price{font-weight:900;color:#2b1738;white-space:nowrap}
-.booking-area{padding:clamp(18px,4vw,35px)}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px}
-.form-group{display:flex;flex-direction:column}.full{grid-column:1/-1}
-label{font-weight:800;font-size:13px;margin-bottom:7px}
-input,select,textarea{width:100%;padding:13px 14px;border:1px solid #d6e2f2;border-radius:12px;font:inherit;background:#fffdf7;color:var(--ink);outline:none}
-input:focus,select:focus,textarea:focus{border-color:var(--pink);box-shadow:0 0 0 3px #1687e81c}
-textarea{min-height:95px;resize:vertical}.auto-price{background:#f5efe1;color:#123b78;font-weight:900}
-.slot-title{font-weight:900;margin:22px 0 10px}.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
-.slot{padding:12px 5px;border-radius:12px;border:1px solid #ded2b5;background:#fffdf7df7;color:#123b78;font-weight:800;font-size:12px;cursor:pointer}
-.slot.selected,.slot:hover{background:linear-gradient(100deg,var(--pink),var(--purple));color:white;border-color:transparent}
-.booking-summary{display:none;margin-top:20px;background:#edf5ff;border-radius:15px;padding:18px}
-.location-box{text-align:center}.map{width:100%;height:330px;border:0;border-radius:17px;margin-top:20px}
-.contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:17px}.contact-card{text-align:center}.contact-card h3{color:#123b78;margin-bottom:7px}.contact-card p{color:var(--muted)}
-footer{margin-top:25px;text-align:center;background:#0b2147;color:#fff;padding:35px 16px}footer strong{color:#8ed0ff}
-.floating{position:fixed;right:18px;bottom:18px;width:58px;height:58px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#168a54;color:white;text-decoration:none;font-size:25px;box-shadow:0 8px 25px #0003;z-index:30}
-@media(max-width:850px){.nav{flex-direction:column;gap:8px}nav{justify-content:center;gap:13px}.hero{min-height:500px}.service-grid{grid-template-columns:repeat(2,1fr)}.gallery{grid-template-columns:repeat(2,1fr)}.slots{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:560px){.nav{padding:12px}.logo{text-align:center}nav a{font-size:12px}.hero{width:calc(100% - 20px);min-height:500px;border-radius:23px}.hero-content{padding:26px 22px}.hero p{font-size:15px}.light{margin-left:0}.service-grid,.contact-grid,.form-grid{grid-template-columns:1fr}.full{grid-column:auto}.gallery img{height:170px}.slots{grid-template-columns:repeat(2,1fr)}section.content{padding:45px 14px}.map{height:260px}}
+:root{
+  --blue:#123b78;
+  --bright:#1687e8;
+  --light:#eaf3ff;
+  --ink:#142b49;
+  --muted:#65758c;
+  --white:#ffffff;
+  --border:#d8e6f8;
+  --glass:rgba(255,255,255,.96);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  color:var(--ink);
+  background:linear-gradient(135deg,#f4f9ff,#eaf3ff 48%,#fff);
+  line-height:1.6;
+}
+
+a{
+  -webkit-tap-highlight-color:transparent;
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+
+.nav{
+  max-width:1180px;
+  margin:auto;
+  padding:13px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:950;
+  letter-spacing:-.7px;
+  background:linear-gradient(100deg,var(--blue),var(--bright));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  line-height:1.2;
+}
+
+.logo small{
+  display:block;
+  font-size:10px;
+  letter-spacing:2.5px;
+  color:#71829a;
+  margin-top:5px;
+}
+
+nav{
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+nav a{
+  color:#354966;
+  text-decoration:none;
+  font-weight:800;
+  font-size:13px;
+}
+
+nav a:hover{
+  color:var(--bright);
+}
+
+.hero{
+  max-width:1180px;
+  width:calc(100% - 32px);
+  min-height:570px;
+  margin:24px auto 0;
+  border-radius:30px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  background:
+    linear-gradient(90deg,rgba(5,25,62,.88),rgba(18,59,120,.45)),
+    url("https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1800&q=85")
+    center/cover;
+  box-shadow:0 25px 70px rgba(18,59,120,.18);
+}
+
+.hero-content{
+  max-width:760px;
+  padding:clamp(28px,6vw,76px);
+  color:white;
+}
+
+.badge{
+  display:inline-block;
+  background:rgba(255,255,255,.13);
+  border:1px solid rgba(255,255,255,.5);
+  padding:8px 14px;
+  border-radius:99px;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:20px;
+}
+
+h1{
+  font-size:clamp(38px,6vw,68px);
+  line-height:1.05;
+  letter-spacing:-2px;
+  margin-bottom:20px;
+}
+
+.hero p{
+  font-size:17px;
+  max-width:590px;
+  color:#f2f8ff;
+  margin-bottom:25px;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  border:0;
+  border-radius:999px;
+  padding:13px 21px;
+  font-weight:850;
+  text-decoration:none;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+}
+
+.primary{
+  color:white;
+  background:linear-gradient(100deg,var(--bright),var(--blue));
+  box-shadow:0 9px 24px rgba(18,59,120,.25);
+}
+
+.light{
+  color:var(--blue);
+  background:white;
+  margin-left:7px;
+}
+
+.quick{
+  display:flex;
+  justify-content:center;
+  gap:9px;
+  flex-wrap:wrap;
+  padding:18px 12px;
+}
+
+.quick a{
+  color:var(--blue);
+  background:white;
+  border:1px solid var(--border);
+  border-radius:99px;
+  padding:9px 14px;
+  text-decoration:none;
+  font-weight:850;
+  font-size:12px;
+  box-shadow:0 5px 16px rgba(18,59,120,.05);
+}
+
+section.content{
+  max-width:1180px;
+  margin:auto;
+  padding:64px 20px;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.eyebrow{
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--bright);
+}
+
+.section-title h2{
+  font-size:clamp(28px,4vw,40px);
+  line-height:1.2;
+  margin:7px 0 8px;
+  letter-spacing:-1px;
+}
+
+.section-title p{
+  color:var(--muted);
+}
+
+/* GALLERY */
+
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.gallery-item{
+  position:relative;
+  overflow:hidden;
+  border-radius:20px;
+  background:#dceaff;
+  box-shadow:0 12px 30px rgba(18,59,120,.10);
+}
+
+.gallery img{
+  display:block;
+  width:100%;
+  height:270px;
+  object-fit:cover;
+  transition:transform .35s;
+}
+
+.gallery-item:hover img{
+  transform:scale(1.06);
+}
+
+.gallery-caption{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  padding:25px 12px 12px;
+  color:white;
+  font-size:13px;
+  font-weight:850;
+  background:linear-gradient(transparent,rgba(4,25,60,.82));
+}
+
+/* SERVICES */
+
+.service-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:17px;
+}
+
+.service-card,
+.contact-card,
+.location-box,
+.booking-area{
+  background:var(--glass);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:23px;
+  box-shadow:0 12px 35px rgba(18,59,120,.06);
+}
+
+.service-card h3{
+  font-size:18px;
+  margin-bottom:12px;
+  color:var(--blue);
+}
+
+.service-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  padding:10px 0;
+  border-bottom:1px solid #e1eaf6;
+  font-size:14px;
+}
+
+.service-row:last-child{
+  border-bottom:0;
+}
+
+.price{
+  font-weight:950;
+  color:var(--blue);
+  white-space:nowrap;
+}
+
+/* BOOKING */
+
+.booking-area{
+  padding:clamp(18px,4vw,35px);
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:17px;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+
+.full{
+  grid-column:1/-1;
+}
+
+label{
+  font-weight:850;
+  font-size:13px;
+  margin-bottom:7px;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  padding:13px 14px;
+  border:1px solid #d6e2f2;
+  border-radius:12px;
+  font:inherit;
+  background:white;
+  color:var(--ink);
+  outline:none;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+  border-color:var(--bright);
+  box-shadow:0 0 0 3px rgba(22,135,232,.12);
+}
+
+textarea{
+  min-height:95px;
+  resize:vertical;
+}
+
+.auto-price{
+  background:#edf5ff;
+  color:var(--blue);
+  font-weight:950;
+}
+
+.slot-title{
+  font-weight:950;
+  margin:22px 0 10px;
+}
+
+.slots{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:9px;
+}
+
+.slot{
+  padding:12px 5px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:white;
+  color:var(--blue);
+  font-weight:850;
+  font-size:12px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.slot.selected,
+.slot:hover{
+  background:linear-gradient(100deg,var(--bright),var(--blue));
+  color:white;
+  border-color:transparent;
+}
+
+.booking-summary{
+  display:none;
+  margin-top:20px;
+  background:#edf5ff;
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:18px;
+}
+
+.booking-summary h3{
+  color:var(--blue);
+  margin-bottom:8px;
+}
+
+.note{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:12px;
+}
+
+/* LOCATION & CONTACT */
+
+.location-box{
+  text-align:center;
+}
+
+.map{
+  width:100%;
+  height:330px;
+  border:0;
+  border-radius:17px;
+  margin-top:20px;
+}
+
+.contact-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:17px;
+}
+
+.contact-card{
+  text-align:center;
+}
+
+.contact-card h3{
+  color:var(--blue);
+  margin-bottom:7px;
+}
+
+.contact-card p{
+  color:var(--muted);
+  margin-bottom:12px;
+}
+
+.contact-link{
+  display:inline-flex;
+  padding:10px 17px;
+  border-radius:999px;
+  color:white;
+  background:var(--blue);
+  text-decoration:none;
+  font-weight:850;
+}
+
+footer{
+  margin-top:25px;
+  text-align:center;
+  background:#0b2147;
+  color:white;
+  padding:35px 16px;
+}
+
+footer strong{
+  color:#8ed0ff;
+}
+
+.floating{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  width:58px;
+  height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:#168a54;
+  color:white;
+  text-decoration:none;
+  font-size:25px;
+  box-shadow:0 8px 25px #0003;
+  z-index:150;
+}
+
+@media(max-width:850px){
+  .nav{
+    flex-direction:column;
+    gap:10px;
+  }
+
+  nav{
+    gap:13px;
+  }
+
+  .hero{
+    min-height:500px;
+  }
+
+  .service-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .gallery{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .slots{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+
+@media(max-width:560px){
+  .nav{
+    padding:12px;
+  }
+
+  .logo{
+    text-align:center;
+    font-size:20px;
+  }
+
+  nav a{
+    font-size:12px;
+  }
+
+  .hero{
+    width:calc(100% - 20px);
+    min-height:500px;
+    border-radius:23px;
+  }
+
+  .hero-content{
+    padding:26px 22px;
+  }
+
+  .hero p{
+    font-size:15px;
+  }
+
+  .light{
+    margin-left:0;
+    margin-top:8px;
+  }
+
+  .service-grid,
+  .contact-grid,
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .full{
+    grid-column:auto;
+  }
+
+  .gallery img{
+    height:170px;
+  }
+
+  .slots{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  section.content{
+    padding:45px 14px;
+  }
+
+  .map{
+    height:260px;
+  }
+
+  .service-card,
+  .contact-card{
+    padding:18px;
+  }
+}
 </style>
 </head>
+
 <body>
-<header><div class="nav">
-  <div class="logo">Neelam Beauty Hub<small>BEAUTY • STYLE • CARE</small></div>
-  <nav><a href="#home">Home</a><a href="#services">Services</a><a href="#gallery">Gallery</a><a href="#booking">Booking</a><a href="#location-section">Location</a></nav>
-</div></header>
+
+<header>
+  <div class="nav">
+
+    <a class="logo" href="#home" style="text-decoration:none">
+      Neelam Beauty Hub
+      <small>BEAUTY • STYLE • CARE</small>
+    </a>
+
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#services">Services</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#booking">Booking</a>
+      <a href="#location-section">Location</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+  </div>
+</header>
+
 <main>
-<section class="hero" id="home"><div class="hero-content">
-  <span class="badge">✦ YOUR BEAUTY, YOUR STYLE — 2026</span>
-  <h1>Feel Beautiful.<br>Shine Brighter.</h1>
-  <p>Welcome to Neelam Beauty Hub. Discover your look, explore our beauty services, and request an appointment online with a few easy steps.</p>
-  <a class="btn primary" href="#booking">✦ Book Appointment</a>
-  <a class="btn light" href="#services">Explore Services</a>
-</div></section>
-<div class="quick"><a href="#home">⌂ Home</a><a href="#services">✦ Services & Prices</a><a href="#gallery">▧ Work Photos</a><a href="#booking">▣ Book Now</a><a href="#location-section">⌖ Location</a></div>
-<section class="content" id="gallery"><div class="section-title"><span class="eyebrow">Our Portfolio</span><h2>Beauty & Style Gallery</h2><p>Inspiration for your next look.</p></div>
-<div class="gallery">
-<img loading="lazy" alt="Beauty salon interior" src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=90">
-<img loading="lazy" alt="Hair styling" src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=90">
-<img loading="lazy" alt="Beauty makeup" src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=1200&q=90">
-<img loading="lazy" alt="Makeup artist" src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?auto=format&fit=crop&w=1200&q=90">
-<img loading="lazy" alt="Nail styling" src="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=1200&q=90">
-<img loading="lazy" alt="Beauty care" src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=1200&q=90">
-<img loading="lazy" alt="Professional salon styling" src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=900&q=90">
-<img loading="lazy" alt="Hair salon work" src="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d1?auto=format&fit=crop&w=900&q=90">
-<img loading="lazy" alt="Professional makeup look" src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=90">
-<img loading="lazy" alt="Hair treatment and care" src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=900&q=90">
-<img loading="lazy" alt="Nail art and manicure" src="https://images.unsplash.com/photo-1610992015732-2449b76344bc?auto=format&fit=crop&w=900&q=90">
-<img loading="lazy" alt="Beauty salon makeup tools" src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=1200&q=90">
-<img loading="lazy" alt="Hairdresser at work" src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1200&q=90">
-<img loading="lazy" alt="Salon hair styling chair" src="https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?auto=format&fit=crop&w=1200&q=90">
-<img loading="lazy" alt="Professional beauty makeup" src="https://images.unsplash.com/photo-1526045478516-99145907023c?auto=format&fit=crop&w=1200&q=90">
-<img loading="lazy" alt="Beauty and skincare products" src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&w=1200&q=90">
-<img loading="lazy" alt="Salon hair treatment" src="https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=1200&q=90">
-</div></section>
-<section class="content" id="services"><div class="section-title"><span class="eyebrow">Service Menu</span><h2>Services & Prices</h2><p>Choose the service that suits you.</p></div>
-<div class="service-grid" id="serviceCards"></div></section>
-<section class="content" id="booking"><div class="section-title"><span class="eyebrow">Reserve Your Time</span><h2>Book an Appointment</h2><p>Select a service, date and preferred one-hour time slot.</p></div>
-<div class="booking-area"><form id="bookingForm"><div class="form-grid">
-<div class="form-group"><label for="name">Customer Name *</label><input id="name" required placeholder="Enter your name" autocomplete="name"></div>
-<div class="form-group"><label for="mobile">Mobile Number *</label><input id="mobile" type="tel" inputmode="numeric" maxlength="10" pattern="[0-9]{10}" required placeholder="10-digit mobile number" autocomplete="tel"></div>
-<div class="form-group"><label for="service">Select Service *</label><select id="service" required><option value="">Select a service</option></select></div>
-<div class="form-group"><label for="price">Service Price</label><input id="price" class="auto-price" readonly value="Select service first"></div>
-<div class="form-group"><label for="date">Appointment Date *</label><input id="date" type="date" required></div>
-<div class="form-group"><label for="location">Your Area / Location *</label><input id="location" required placeholder="Enter your area or address"></div>
-<div class="form-group full"><div class="slot-title">Select Time Slot *</div><div class="slots" id="slots"></div><input type="hidden" id="selectedTime" required></div>
-<div class="form-group full"><label for="request">Special Request (optional)</label><textarea id="request" placeholder="Tell us any special request"></textarea></div>
-</div><button class="btn primary" type="submit" style="width:100%;margin-top:23px">Prepare Appointment Request</button>
-<p style="font-size:12px;color:#766b80;margin-top:12px">Your request will be prepared for WhatsApp. The appointment is not confirmed until the salon confirms availability.</p>
-</form><div class="booking-summary" id="summary"><h3>Appointment Request Ready</h3><p id="summaryText"></p></div></div></section>
-<section class="content" id="location-section"><div class="section-title"><span class="eyebrow">Find Us</span><h2>Our Location</h2><p>Ghaziabad, Uttar Pradesh</p></div>
-<div class="location-box"><h3>📍 Neelam Beauty Hub</h3><p>JC9Q+6MX, Ghaziabad, Uttar Pradesh, India</p><a class="btn primary" style="margin-top:15px" href="https://www.google.com/maps/search/?api=1&query=JC9Q%2B6MX%2C%20Ghaziabad%2C%20Uttar%20Pradesh" target="_blank" rel="noopener">Open Directions in Maps</a><iframe class="map" title="Map to Neelam Beauty Hub" src="https://www.google.com/maps?q=JC9Q%2B6MX%2C%20Ghaziabad%2C%20Uttar%20Pradesh&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div></section>
-<section class="content" id="contact"><div class="section-title"><span class="eyebrow">Get in Touch</span><h2>Contact & Appointment Help</h2><p>Use the booking form to prepare your appointment request.</p></div>
-<div class="contact-grid"><div class="contact-card"><h3>💬 WhatsApp Booking</h3><p>Send your service and appointment request through the booking form.</p></div><div class="contact-card"><h3>🔒 Privacy-Friendly Contact</h3><p>Personal phone number is not displayed on this website. Contact details can be shared privately when needed.</p></div></div></section>
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+  <div class="hero-content">
+
+    <span class="badge">✦ YOUR BEAUTY, YOUR STYLE — 2026</span>
+
+    <h1>Feel Beautiful.<br>Shine Brighter.</h1>
+
+    <p>
+      Welcome to Neelam Beauty Hub. Explore our beauty services,
+      discover your style and request your appointment online
+      in just a few easy steps.
+    </p>
+
+    <a class="btn primary" href="#booking">
+      ✦ Book Appointment
+    </a>
+
+    <a class="btn light" href="#services">
+      Explore Services
+    </a>
+
+  </div>
+</section>
+
+<div class="quick">
+  <a href="#home">⌂ Home</a>
+  <a href="#services">✦ Services & Prices</a>
+  <a href="#gallery">▧ Work Photos</a>
+  <a href="#booking">▣ Book Now</a>
+  <a href="#location-section">⌖ Location</a>
+</div>
+
+<!-- GALLERY -->
+
+<section class="content" id="gallery">
+
+  <div class="section-title">
+    <span class="eyebrow">Our Portfolio</span>
+    <h2>Beauty & Style Gallery</h2>
+    <p>Inspiration for your next look.</p>
+  </div>
+
+  <div class="gallery">
+
+    <div class="gallery-item">
+      <img loading="lazy"
+      src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=900&q=85"
+      alt="Beauty salon interior">
+      <div class="gallery-caption">Beauty Salon</div>
+    </div>
+
+    <div class="gallery-item">
+      <img loading="lazy"
+      src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=900&q=85"
+      alt="Hair styling">
+      <div class="gallery-caption">Hair Styling</div>
+    </div>
+
+    <div class="gallery-item">
+      <img loading="lazy"
+      src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=900&q=85"
+      alt="Makeup and beauty">
+      <div class="gallery-caption">Makeup & Beauty</div>
+    </div>
+
+    <div class="gallery-item">
+      <img loading="lazy"
+      src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?auto=format&fit=crop&w=900&q=85"
+      alt="Professional makeup look">
+      <div class="gallery-caption">Professional Makeup</div>
+    </div>
+
+    <div class="gallery-item">
+      <img loading="lazy"
+      src="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=900&q=85"
+      alt="Nail styling">
+      <div class="gallery-caption">Nail Care</div>
+    </div>
+
+    <div class="gallery-item">
+      <img loading="lazy"
+      src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=900&q=85"
+      alt="Beauty care">
+      <div class="gallery-caption">Beauty Care</div>
+    </div>
+
+    <div class="gallery-item">
+      <img loading="lazy"
+      src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=900&q=85"
+      alt="Salon styling">
+      <div class="gallery-caption">Salon Styling</div>
+    </div>
+
+    <div class="gallery-item">
+      <img loading="lazy"
+      src="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d1?auto=format&fit=crop&w=900&q=85"
+      alt="Hair salon">
+      <div class="gallery-caption">Hair Salon</div>
+    </div>
+
+    <div class="gallery-item">
+      <img loading="lazy"
+      src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=900&q=85"
+      alt="Hair treatment">
+      <div class="gallery-caption">Hair Treatment</div>
+    </div>
+
+    <div class="gallery-item">
+      <img loading="lazy"
+      src="https://images.unsplash.com/photo-1610992015732-2449b76344bc?auto=format&fit=crop&w=900&q=85"
+      alt="Nail art">
+      <div class="gallery-caption">Nail Art</div>
+    </div>
+
+    <div class="gallery-item">
+      <img loading="lazy"
+      src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=900&q=85"
+      alt="Beauty products">
+      <div class="gallery-caption">Beauty Products</div>
+    </div>
+
+    <div class="gallery-item">
+      <img loading="lazy"
+      src="https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?auto=format&fit=crop&w=900&q=85"
+      alt="Salon interior">
+      <div class="gallery-caption">Salon Experience</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SERVICES -->
+
+<section class="content" id="services">
+
+  <div class="section-title">
+    <span class="eyebrow">Service Menu</span>
+    <h2>Services & Prices</h2>
+    <p>Select your preferred beauty service.</p>
+  </div>
+
+  <div class="service-grid" id="serviceCards"></div>
+
+</section>
+
+<!-- BOOKING -->
+
+<section class="content" id="booking">
+
+  <div class="section-title">
+    <span class="eyebrow">Reserve Your Time</span>
+    <h2>Book an Appointment</h2>
+    <p>Fill in your details and send your booking request through WhatsApp.</p>
+  </div>
+
+  <div class="booking-area">
+
+    <form id="bookingForm">
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label for="name">Customer Name *</label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            required
+            maxlength="80"
+            autocomplete="name"
+            placeholder="Enter your full name">
+        </div>
+
+        <div class="form-group">
+          <label for="mobile">Customer Mobile Number *</label>
+          <input
+            id="mobile"
+            name="mobile"
+            type="tel"
+            inputmode="numeric"
+            maxlength="10"
+            pattern="[0-9]{10}"
+            required
+            autocomplete="tel"
+            placeholder="10-digit mobile number">
+        </div>
+
+        <div class="form-group">
+          <label for="service">Select Beauty Service *</label>
+          <select id="service" name="service" required>
+            <option value="">Select a service</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="price">Service Price</label>
+          <input
+            id="price"
+            class="auto-price"
+            readonly
+            value="Select service first">
+        </div>
+
+        <div class="form-group">
+          <label for="date">Appointment Date *</label>
+          <input id="date" name="date" type="date" required>
+        </div>
+
+        <div class="form-group">
+          <label for="location">Customer Area / Address *</label>
+          <input
+            id="location"
+            name="location"
+            type="text"
+            required
+            maxlength="200"
+            autocomplete="street-address"
+            placeholder="Enter your area or address">
+        </div>
+
+        <div class="form-group full">
+
+          <label for="request">Special Request (Optional)</label>
+
+          <textarea
+            id="request"
+            name="request"
+            maxlength="1000"
+            placeholder="Enter any special requirements"></textarea>
+
+        </div>
+
+        <div class="form-group full">
+
+          <div class="slot-title">Select Appointment Time *</div>
+
+          <div class="slots" id="slots"></div>
+
+          <input
+            type="hidden"
+            id="selectedTime"
+            name="selectedTime"
+            required>
+
+        </div>
+
+      </div>
+
+      <button
+        class="btn primary"
+        type="submit"
+        style="width:100%;margin-top:23px">
+
+        💬 Send Booking Request on WhatsApp
+
+      </button>
+
+      <p class="note">
+        Your booking request will be sent to Neelam Beauty Hub on WhatsApp.
+        Please press Send in WhatsApp. Your appointment is confirmed only
+        after the salon confirms availability.
+      </p>
+
+    </form>
+
+    <div class="booking-summary" id="summary" aria-live="polite">
+
+      <h3>Appointment Request Prepared</h3>
+
+      <p id="summaryText"></p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- LOCATION -->
+
+<section class="content" id="location-section">
+
+  <div class="section-title">
+    <span class="eyebrow">Find Us</span>
+    <h2>Our Location</h2>
+    <p>Ghaziabad, Uttar Pradesh</p>
+  </div>
+
+  <div class="location-box">
+
+    <h3>📍 Neelam Beauty Hub</h3>
+
+    <p>JC9Q+6MX, Ghaziabad, Uttar Pradesh, India</p>
+
+    <a
+      class="btn primary"
+      style="margin-top:15px"
+      href="https://www.google.com/maps/search/?api=1&query=JC9Q%2B6MX%2C%20Ghaziabad%2C%20Uttar%20Pradesh"
+      target="_blank"
+      rel="noopener noreferrer">
+
+      Open Directions in Maps
+
+    </a>
+
+    <iframe
+      class="map"
+      title="Neelam Beauty Hub location map"
+      src="https://www.google.com/maps?q=JC9Q%2B6MX%2C%20Ghaziabad%2C%20Uttar%20Pradesh&output=embed"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+
+  </div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section class="content" id="contact">
+
+  <div class="section-title">
+    <span class="eyebrow">Get in Touch</span>
+    <h2>Contact Neelam Beauty Hub</h2>
+    <p>Questions about services or appointments? Contact us on WhatsApp.</p>
+  </div>
+
+  <div class="contact-grid">
+
+    <div class="contact-card">
+
+      <h3>💬 WhatsApp Booking</h3>
+
+      <p>Send an appointment request directly to our WhatsApp.</p>
+
+      <a
+        class="contact-link"
+        href="https://wa.me/917703889909"
+        target="_blank"
+        rel="noopener noreferrer">
+
+        Chat on WhatsApp
+
+      </a>
+
+    </div>
+
+    <div class="contact-card">
+
+      <h3>💄 Beauty Services</h3>
+
+      <p>
+        Hair services, facial, threading, manicure, pedicure
+        and makeup appointments.
+      </p>
+
+      <a class="contact-link" href="#services">
+        Explore Services
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
 </main>
-<footer><h3>Neelam Beauty Hub</h3><p>Beauty • Style • Care | Ghaziabad</p><br><p>© 2026 Neelam Beauty Hub. All rights reserved.</p></footer>
-<a class="floating" href="#booking" aria-label="Book an appointment">✦</a>
+
+<footer>
+
+  <h3>Neelam Beauty Hub</h3>
+
+  <p>Beauty • Style • Care | Ghaziabad</p>
+
+  <p style="margin-top:10px">
+    WhatsApp Appointment Booking Available
+  </p>
+
+  <br>
+
+  <p>© 2026 Neelam Beauty Hub. All rights reserved.</p>
+
+</footer>
+
+<a
+  class="floating"
+  href="https://wa.me/917703889909"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Chat with Neelam Beauty Hub on WhatsApp">
+
+  ✆
+
+</a>
+
 <script>
-const services=[
-["Hair Services",[["Hair Cut",150],["Hair Wash",100],["Hair Spa",500],["Hair Styling",300],["Hair Colour",700]]],
-["Facial & Skin",[["Cleanup",299],["Basic Facial",399],["Fruit Facial",499],["Gold Facial",799],["Bleach",250]]],
-["Manicure & Pedicure",[["Basic Manicure",299],["Basic Pedicure",399],["Luxury Manicure",599],["Luxury Pedicure",699]]],
-["Threading",[["Eyebrow",50],["Upper Lips",30],["Chin",40],["Full Face Threading",200]]],
-["Makeup",[["Light Makeup",1000],["Party Makeup",1500],["Engagement Makeup",3000],["Bridal Makeup",7000]]]
-];
-const icons=["✂️","✨","💅","🧵","💄"];
-const money=n=>"₹"+Number(n).toLocaleString("en-IN");
-const cards=document.getElementById("serviceCards"),select=document.getElementById("service");
-services.forEach((group,i)=>{
- const card=document.createElement("article");card.className="service-card";
- card.innerHTML=`<h3>${icons[i]} ${group[0]}</h3>`+group[1].map(([name,cost])=>`<div class="service-row"><span>${name}</span><span class="price">${money(cost)}</span></div>`).join("");
- cards.appendChild(card);
- group[1].forEach(([name,cost])=>{const opt=document.createElement("option");opt.value=name;opt.dataset.price=cost;opt.textContent=`${name} — ${money(cost)}`;select.appendChild(opt);});
-});
-select.addEventListener("change",()=>{const opt=select.options[select.selectedIndex];document.getElementById("price").value=opt.dataset.price?money(opt.dataset.price):"Select service first";});
-const dateInput=document.getElementById("date");
-const localToday=()=>{const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,10)};
-dateInput.min=localToday();
-let selectedTime="";
-const slotRoot=document.getElementById("slots");
-for(let hour=7;hour<=20;hour++){
- const startSuffix=hour<12?"AM":"PM",endHour=(hour+1)%12||12;
- const startHour=hour%12||12;
- const start=`${startHour}:00 ${startSuffix}`,end=`${endHour}:00 ${hour+1<12?"AM":"PM"}`;
- const b=document.createElement("button");b.type="button";b.className="slot";b.textContent=`${start} – ${end}`;b.dataset.time=`${start} - ${end}`;
- b.addEventListener("click",()=>{document.querySelectorAll(".slot").forEach(x=>x.classList.remove("selected"));b.classList.add("selected");selectedTime=b.dataset.time;document.getElementById("selectedTime").value=selectedTime;});
- slotRoot.appendChild(b);
-}
-document.getElementById("bookingForm").addEventListener("submit",e=>{
- e.preventDefault();
- const name=document.getElementById("name").value.trim(),mobile=document.getElementById("mobile").value.trim(),serviceName=select.value,servicePrice=document.getElementById("price").value,date=dateInput.value,locationText=document.getElementById("location").value.trim(),request=document.getElementById("request").value.trim();
- if(!/^[0-9]{10}$/.test(mobile)){alert("Please enter a valid 10-digit mobile number.");return;}
- if(!selectedTime){alert("Please select an appointment time slot.");return;}
- if(date<localToday()){alert("Please choose today or a future date.");return;}
- const id="NBH"+Date.now().toString().slice(-8);
- const formattedDate=new Date(date+"T00:00:00").toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});
- document.getElementById("summary").style.display="block";
- document.getElementById("summaryText").textContent=`Request ID: ${id} · ${serviceName} · ${formattedDate} · ${selectedTime}. Next, send your request using your preferred messaging app or share it with the salon.`;
- const message=`🌸 *NEELAM BEAUTY HUB — APPOINTMENT REQUEST* 🌸\n\n🔖 Request ID: ${id}\n👤 Customer: ${name}\n📱 Customer Mobile: ${mobile}\n✦ Service: ${serviceName}\n💰 Price: ${servicePrice}\n📅 Date: ${formattedDate}\n⏰ Time: ${selectedTime}\n📍 Customer Location: ${locationText}\n📝 Special Request: ${request||"None"}\n\nPlease confirm availability. Thank you.`;
- // Salon phone number is intentionally not embedded or displayed. Open WhatsApp share chooser instead.
- const shareURL="https://wa.me/?text="+encodeURIComponent(message);
- window.open(shareURL,"_blank","noopener");
-});
-</script>
-</body>
-</html>
+"use strict";
+
+/* =================================
+   WHATSAPP BOOKING SETTINGS
+================================= */
+
+const WHATSAPP_NUMBER = "
