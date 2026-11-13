@@ -1,1014 +1,1892 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#123b78">
-
-<title>Neelam Beauty Hub | Beauty • Style • Care</title>
-
-<meta name="description" content="Explore Neelam Beauty Hub beauty services, makeup, hair styling, facial and online appointment booking.">
-
-<style>
-:root{
-  --blue:#123b78;
-  --bright:#1687e8;
-  --light:#eaf3ff;
-  --ink:#142b49;
-  --muted:#65758c;
-  --white:#ffffff;
-  --border:#d8e6f8;
-  --glass:rgba(255,255,255,.96);
-}
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  scroll-behavior:smooth;
-}
-
-body{
-  font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
-  color:var(--ink);
-  background:linear-gradient(135deg,#f4f9ff,#eaf3ff 48%,#fff);
-  line-height:1.6;
-}
-
-a{
-  -webkit-tap-highlight-color:transparent;
-}
-
-header{
-  position:sticky;
-  top:0;
-  z-index:100;
-  background:rgba(255,255,255,.95);
-  backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
-}
-
-.nav{
-  max-width:1180px;
-  margin:auto;
-  padding:13px 20px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:18px;
-}
-
-.logo{
-  font-size:22px;
-  font-weight:950;
-  letter-spacing:-.7px;
-  background:linear-gradient(100deg,var(--blue),var(--bright));
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-  line-height:1.2;
-}
-
-.logo small{
-  display:block;
-  font-size:10px;
-  letter-spacing:2.5px;
-  color:#71829a;
-  margin-top:5px;
-}
-
-nav{
-  display:flex;
-  gap:18px;
-  flex-wrap:wrap;
-  justify-content:center;
-}
-
-nav a{
-  color:#354966;
-  text-decoration:none;
-  font-weight:800;
-  font-size:13px;
-}
-
-nav a:hover{
-  color:var(--bright);
-}
-
-.hero{
-  max-width:1180px;
-  width:calc(100% - 32px);
-  min-height:570px;
-  margin:24px auto 0;
-  border-radius:30px;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  background:
-    linear-gradient(90deg,rgba(5,25,62,.88),rgba(18,59,120,.45)),
-    url("https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1800&q=85")
-    center/cover;
-  box-shadow:0 25px 70px rgba(18,59,120,.18);
-}
-
-.hero-content{
-  max-width:760px;
-  padding:clamp(28px,6vw,76px);
-  color:white;
-}
-
-.badge{
-  display:inline-block;
-  background:rgba(255,255,255,.13);
-  border:1px solid rgba(255,255,255,.5);
-  padding:8px 14px;
-  border-radius:99px;
-  font-size:12px;
-  font-weight:800;
-  margin-bottom:20px;
-}
-
-h1{
-  font-size:clamp(38px,6vw,68px);
-  line-height:1.05;
-  letter-spacing:-2px;
-  margin-bottom:20px;
-}
-
-.hero p{
-  font-size:17px;
-  max-width:590px;
-  color:#f2f8ff;
-  margin-bottom:25px;
-}
-
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  border:0;
-  border-radius:999px;
-  padding:13px 21px;
-  font-weight:850;
-  text-decoration:none;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.btn:hover{
-  transform:translateY(-2px);
-}
-
-.primary{
-  color:white;
-  background:linear-gradient(100deg,var(--bright),var(--blue));
-  box-shadow:0 9px 24px rgba(18,59,120,.25);
-}
-
-.light{
-  color:var(--blue);
-  background:white;
-  margin-left:7px;
-}
-
-.quick{
-  display:flex;
-  justify-content:center;
-  gap:9px;
-  flex-wrap:wrap;
-  padding:18px 12px;
-}
-
-.quick a{
-  color:var(--blue);
-  background:white;
-  border:1px solid var(--border);
-  border-radius:99px;
-  padding:9px 14px;
-  text-decoration:none;
-  font-weight:850;
-  font-size:12px;
-  box-shadow:0 5px 16px rgba(18,59,120,.05);
-}
-
-section.content{
-  max-width:1180px;
-  margin:auto;
-  padding:64px 20px;
-}
-
-.section-title{
-  text-align:center;
-  margin-bottom:30px;
-}
-
-.eyebrow{
-  font-size:11px;
-  font-weight:950;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  color:var(--bright);
-}
-
-.section-title h2{
-  font-size:clamp(28px,4vw,40px);
-  line-height:1.2;
-  margin:7px 0 8px;
-  letter-spacing:-1px;
-}
-
-.section-title p{
-  color:var(--muted);
-}
-
-/* GALLERY */
-
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-}
-
-.gallery-item{
-  position:relative;
-  overflow:hidden;
-  border-radius:20px;
-  background:#dceaff;
-  box-shadow:0 12px 30px rgba(18,59,120,.10);
-}
-
-.gallery img{
-  display:block;
-  width:100%;
-  height:270px;
-  object-fit:cover;
-  transition:transform .35s;
-}
-
-.gallery-item:hover img{
-  transform:scale(1.06);
-}
-
-.gallery-caption{
-  position:absolute;
-  bottom:0;
-  left:0;
-  right:0;
-  padding:25px 12px 12px;
-  color:white;
-  font-size:13px;
-  font-weight:850;
-  background:linear-gradient(transparent,rgba(4,25,60,.82));
-}
-
-/* SERVICES */
-
-.service-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:17px;
-}
-
-.service-card,
-.contact-card,
-.location-box,
-.booking-area{
-  background:var(--glass);
-  border:1px solid var(--border);
-  border-radius:22px;
-  padding:23px;
-  box-shadow:0 12px 35px rgba(18,59,120,.06);
-}
-
-.service-card h3{
-  font-size:18px;
-  margin-bottom:12px;
-  color:var(--blue);
-}
-
-.service-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  padding:10px 0;
-  border-bottom:1px solid #e1eaf6;
-  font-size:14px;
-}
-
-.service-row:last-child{
-  border-bottom:0;
-}
-
-.price{
-  font-weight:950;
-  color:var(--blue);
-  white-space:nowrap;
-}
-
-/* BOOKING */
-
-.booking-area{
-  padding:clamp(18px,4vw,35px);
-}
-
-.form-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:17px;
-}
-
-.form-group{
-  display:flex;
-  flex-direction:column;
-  min-width:0;
-}
-
-.full{
-  grid-column:1/-1;
-}
-
-label{
-  font-weight:850;
-  font-size:13px;
-  margin-bottom:7px;
-}
-
-input,
-select,
-textarea{
-  width:100%;
-  padding:13px 14px;
-  border:1px solid #d6e2f2;
-  border-radius:12px;
-  font:inherit;
-  background:white;
-  color:var(--ink);
-  outline:none;
-}
-
-input:focus,
-select:focus,
-textarea:focus{
-  border-color:var(--bright);
-  box-shadow:0 0 0 3px rgba(22,135,232,.12);
-}
-
-textarea{
-  min-height:95px;
-  resize:vertical;
-}
-
-.auto-price{
-  background:#edf5ff;
-  color:var(--blue);
-  font-weight:950;
-}
-
-.slot-title{
-  font-weight:950;
-  margin:22px 0 10px;
-}
-
-.slots{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:9px;
-}
-
-.slot{
-  padding:12px 5px;
-  border-radius:12px;
-  border:1px solid var(--border);
-  background:white;
-  color:var(--blue);
-  font-weight:850;
-  font-size:12px;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.slot.selected,
-.slot:hover{
-  background:linear-gradient(100deg,var(--bright),var(--blue));
-  color:white;
-  border-color:transparent;
-}
-
-.booking-summary{
-  display:none;
-  margin-top:20px;
-  background:#edf5ff;
-  border:1px solid var(--border);
-  border-radius:15px;
-  padding:18px;
-}
-
-.booking-summary h3{
-  color:var(--blue);
-  margin-bottom:8px;
-}
-
-.note{
-  font-size:12px;
-  color:var(--muted);
-  margin-top:12px;
-}
-
-/* LOCATION & CONTACT */
-
-.location-box{
-  text-align:center;
-}
-
-.map{
-  width:100%;
-  height:330px;
-  border:0;
-  border-radius:17px;
-  margin-top:20px;
-}
-
-.contact-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:17px;
-}
-
-.contact-card{
-  text-align:center;
-}
-
-.contact-card h3{
-  color:var(--blue);
-  margin-bottom:7px;
-}
-
-.contact-card p{
-  color:var(--muted);
-  margin-bottom:12px;
-}
-
-.contact-link{
-  display:inline-flex;
-  padding:10px 17px;
-  border-radius:999px;
-  color:white;
-  background:var(--blue);
-  text-decoration:none;
-  font-weight:850;
-}
-
-footer{
-  margin-top:25px;
-  text-align:center;
-  background:#0b2147;
-  color:white;
-  padding:35px 16px;
-}
-
-footer strong{
-  color:#8ed0ff;
-}
-
-.floating{
-  position:fixed;
-  right:18px;
-  bottom:18px;
-  width:58px;
-  height:58px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:50%;
-  background:#168a54;
-  color:white;
-  text-decoration:none;
-  font-size:25px;
-  box-shadow:0 8px 25px #0003;
-  z-index:150;
-}
-
-@media(max-width:850px){
-  .nav{
-    flex-direction:column;
-    gap:10px;
-  }
-
-  nav{
-    gap:13px;
-  }
-
-  .hero{
-    min-height:500px;
-  }
-
-  .service-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .gallery{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .slots{
-    grid-template-columns:repeat(3,1fr);
-  }
-}
-
-@media(max-width:560px){
-  .nav{
-    padding:12px;
-  }
-
-  .logo{
-    text-align:center;
-    font-size:20px;
-  }
-
-  nav a{
-    font-size:12px;
-  }
-
-  .hero{
-    width:calc(100% - 20px);
-    min-height:500px;
-    border-radius:23px;
-  }
-
-  .hero-content{
-    padding:26px 22px;
-  }
-
-  .hero p{
-    font-size:15px;
-  }
-
-  .light{
-    margin-left:0;
-    margin-top:8px;
-  }
-
-  .service-grid,
-  .contact-grid,
-  .form-grid{
-    grid-template-columns:1fr;
-  }
-
-  .full{
-    grid-column:auto;
-  }
-
-  .gallery img{
-    height:170px;
-  }
-
-  .slots{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  section.content{
-    padding:45px 14px;
-  }
-
-  .map{
-    height:260px;
-  }
-
-  .service-card,
-  .contact-card{
-    padding:18px;
-  }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>PCB BUGS | Professional PCB Repair Training Institute - South Dumdum</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Poppins, Hind Siliguri (Bengali) & Playfair Display -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,600&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pcb: {
+                            dark: '#060d1f',
+                            card: '#0f1c3f',
+                            surface: '#152859',
+                            green: '#00e676',
+                            greenHover: '#00c853',
+                            accent: '#ffb300'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'Hind Siliguri', 'sans-serif'],
+                        bengali: ['Hind Siliguri', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Neon Glow & Circuit Board Pattern */
+        .glow-green {
+            box-shadow: 0 0 22px rgba(0, 230, 118, 0.30);
+        }
+        .glow-green-lg {
+            box-shadow: 0 0 42px rgba(0, 230, 118, 0.45);
+        }
+        .bg-grid {
+            background-image: radial-gradient(rgba(0, 230, 118, 0.14) 1px, transparent 1px);
+            background-size: 22px 22px;
+        }
+        /* Hide scrollbars cleanly for mobile horizontal swipe carousels */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* Smooth pulse ring for WhatsApp floating button */
+        @keyframes pulseRing {
+            0% { transform: scale(0.95); opacity: 0.75; }
+            70% { transform: scale(1.28); opacity: 0; }
+            100% { transform: scale(1.28); opacity: 0; }
+        }
+        .wa-pulse::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 9999px;
+            border: 2px solid #00e676;
+            animation: pulseRing 2s infinite;
+        }
+        /* Print Styles for ID Card, Certificate & Booking Slip */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printableArea, #printableArea * {
+                visibility: visible;
+            }
+            #printableArea {
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 100%;
+                background: #060d1f !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
 </head>
+<body class="bg-pcb-dark text-gray-100 font-sans antialiased pb-24 md:pb-0 selection:bg-emerald-500 selection:text-pcb-dark overflow-x-hidden">
 
-<body>
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 text-white text-[11px] sm:text-sm py-2 px-3 text-center font-medium sticky top-0 z-50 shadow-md">
+        <span data-i18n="topBanner">🚀 <strong>Online Admission Open!</strong> 1 Year Practical Training (8th / 10th Pass, Boys &amp; Girls Both). Call / WhatsApp: <a href="https://wa.me/919804265067" target="_blank" rel="noopener noreferrer" class="underline font-extrabold tracking-wide">09804265067</a></span>
+    </div>
 
-<header>
-  <div class="nav">
+    <!-- Sticky Mobile-First App Header -->
+    <nav class="bg-pcb-card/95 backdrop-blur-md border-b border-gray-800/90 sticky top-[33px] sm:top-[37px] z-40 transition-all">
+        <div class="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
+            <!-- Brand Logo -->
+            <a href="#home" class="flex items-center space-x-2.5 flex-shrink-0">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500 flex items-center justify-center text-emerald-400 font-black text-xl glow-green">
+                    <i class="fa-solid fa-microchip"></i>
+                </div>
+                <div>
+                    <span class="text-lg sm:text-2xl font-black tracking-wider text-white leading-none block">PCB <span class="text-emerald-400">BUGS</span></span>
+                    <span class="block text-[9px] sm:text-[10px] text-gray-400 tracking-widest uppercase mt-0.5">Training Institute</span>
+                </div>
+            </a>
 
-    <a class="logo" href="#home" style="text-decoration:none">
-      Neelam Beauty Hub
-      <small>BEAUTY • STYLE • CARE</small>
-    </a>
+            <!-- Desktop Navigation Links -->
+            <div class="hidden lg:flex items-center space-x-5 text-sm font-medium">
+                <a href="#courses" data-i18n="navCourses" class="hover:text-emerald-400 transition">Courses &amp; Fees</a>
+                <a href="#gallery" data-i18n="navGallery" class="hover:text-emerald-400 transition">Lab &amp; Students</a>
+                <a href="#simulator" data-i18n="navSim" class="hover:text-emerald-400 transition">Free Lab Demo</a>
+                <a href="#credentials" data-i18n="navCred" class="hover:text-emerald-400 transition">ID &amp; Certificate</a>
+                <a href="#location" data-i18n="navLoc" class="hover:text-emerald-400 transition">Location</a>
+            </div>
 
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#services">Services</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#booking">Booking</a>
-      <a href="#location-section">Location</a>
-      <a href="#contact">Contact</a>
+            <!-- Right Controls: Language Switcher + Call + Book CTA -->
+            <div class="flex items-center space-x-2">
+                <!-- Bilingual Toggle Pill (English / বাংলা) -->
+                <div class="bg-pcb-dark border border-emerald-500/40 rounded-xl p-1 flex items-center text-xs font-bold" role="group" aria-label="Language Switcher">
+                    <button type="button" id="langEnBtn" onclick="setLanguage('en')" class="px-2.5 py-1.5 rounded-lg bg-emerald-500 text-pcb-dark transition">EN</button>
+                    <button type="button" id="langBnBtn" onclick="setLanguage('bn')" class="px-2.5 py-1.5 rounded-lg text-gray-300 hover:text-white font-bengali transition">বাংলা</button>
+                </div>
+
+                <!-- Direct Call Button -->
+                <a href="tel:09804265067" aria-label="Call 09804265067" class="w-10 h-10 sm:w-auto sm:px-3.5 sm:py-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-400 flex items-center justify-center space-x-1.5 text-xs font-bold active:scale-95 transition">
+                    <i class="fa-solid fa-phone"></i>
+                    <span class="hidden sm:inline">09804265067</span>
+                </a>
+
+                <!-- Desktop Book CTA -->
+                <a href="#booking" class="hidden md:flex bg-emerald-500 hover:bg-emerald-400 text-pcb-dark font-bold px-4 py-2.5 rounded-xl transition shadow-lg glow-green items-center space-x-2 text-xs sm:text-sm">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    <span data-i18n="navBook">Book Slot</span>
+                </a>
+
+                <!-- Mobile Drawer Toggle -->
+                <button id="menuBtn" type="button" aria-label="Toggle Menu" class="lg:hidden w-10 h-10 text-gray-100 focus:outline-none rounded-xl bg-gray-800/90 border border-gray-700 flex items-center justify-center active:scale-95 transition">
+                    <i id="menuIcon" class="fa-solid fa-bars text-base"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Slide-Down Drawer -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-pcb-card border-b border-gray-800 px-4 py-4 space-y-1.5 shadow-2xl">
+            <a href="#home" class="flex items-center space-x-3 hover:text-emerald-400 py-2.5 px-3 rounded-xl hover:bg-pcb-dark/60 font-medium text-sm mobile-link">
+                <i class="fa-solid fa-house text-emerald-400 w-5"></i><span data-i18n="mHome">Home</span>
+            </a>
+            <a href="#courses" class="flex items-center space-x-3 hover:text-emerald-400 py-2.5 px-3 rounded-xl hover:bg-pcb-dark/60 font-medium text-sm mobile-link">
+                <i class="fa-solid fa-microchip text-emerald-400 w-5"></i><span data-i18n="mCourses">Courses, Syllabus &amp; Fee Estimator</span>
+            </a>
+            <a href="#gallery" class="flex items-center space-x-3 hover:text-emerald-400 py-2.5 px-3 rounded-xl hover:bg-pcb-dark/60 font-medium text-sm mobile-link">
+                <i class="fa-solid fa-images text-emerald-400 w-5"></i><span data-i18n="mGallery">Training Room &amp; Students Photos</span>
+            </a>
+            <a href="#simulator" class="flex items-center space-x-3 hover:text-emerald-400 py-2.5 px-3 rounded-xl hover:bg-pcb-dark/60 font-medium text-sm mobile-link">
+                <i class="fa-solid fa-gauge-high text-emerald-400 w-5"></i><span data-i18n="mSim">Free PCB Fault Diagnostic Simulator</span>
+            </a>
+            <a href="#credentials" class="flex items-center space-x-3 hover:text-emerald-400 py-2.5 px-3 rounded-xl hover:bg-pcb-dark/60 font-medium text-sm mobile-link">
+                <i class="fa-solid fa-id-card text-emerald-400 w-5"></i><span data-i18n="mCred">Student ID Card &amp; Certificate</span>
+            </a>
+            <a href="#faq" class="flex items-center space-x-3 hover:text-emerald-400 py-2.5 px-3 rounded-xl hover:bg-pcb-dark/60 font-medium text-sm mobile-link">
+                <i class="fa-solid fa-circle-question text-emerald-400 w-5"></i><span data-i18n="mFaq">Student Reviews &amp; FAQs</span>
+            </a>
+            <a href="#location" class="flex items-center space-x-3 hover:text-emerald-400 py-2.5 px-3 rounded-xl hover:bg-pcb-dark/60 font-medium text-sm mobile-link">
+                <i class="fa-solid fa-location-dot text-emerald-400 w-5"></i><span data-i18n="mLoc">South Dumdum Center Location</span>
+            </a>
+            <div class="pt-2">
+                <a href="#booking" class="block bg-emerald-500 text-pcb-dark text-center font-extrabold py-3.5 rounded-xl mobile-link glow-green text-sm">
+                    <i class="fa-solid fa-calendar-check mr-1.5"></i> <span data-i18n="mBookBtn">Book Admission Slot Online</span>
+                </a>
+            </div>
+        </div>
     </nav>
 
-  </div>
-</header>
+    <!-- 1. HERO SECTION -->
+    <header id="home" class="relative bg-grid py-10 sm:py-16 lg:py-20 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-pcb-dark/60 via-pcb-dark/90 to-pcb-dark pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            <!-- Left Column: Institute Intro & Key Specs -->
+            <div class="lg:col-span-6 space-y-5 text-center lg:text-left">
+                <div class="inline-flex items-center space-x-2 bg-emerald-500/10 border border-emerald-500/30 px-3.5 py-1.5 rounded-full text-emerald-400 text-xs sm:text-sm font-semibold">
+                    <i class="fa-solid fa-award"></i>
+                    <span data-i18n="heroBadge">Learn Skills. Build Your Future. • South Dumdum</span>
+                </div>
 
-<main>
+                <h1 data-i18n="heroTitle" class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight text-white">
+                    Become a Professional <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">PCB Repair Technician</span>
+                </h1>
 
-<!-- HERO -->
+                <div class="bg-pcb-card/90 border-l-4 border-emerald-400 px-4 py-3 rounded-r-2xl inline-block lg:block">
+                    <p data-i18n="heroQuote" class="text-base sm:text-xl text-emerald-300 font-semibold font-bengali">
+                        "আমাদের এখানে হাতে-কলমে PCB Repair Training দেওয়া হয়।"
+                    </p>
+                </div>
 
-<section class="hero" id="home">
-  <div class="hero-content">
+                <p data-i18n="heroDesc" class="text-gray-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                    Master <strong class="text-white">Inverter &amp; Non-Inverter AC, Microwave Oven, and Refrigerator</strong> motherboards with 100% practical lab training on Digital Storage Oscilloscopes (DSO), Hot Air Stations, and live PCBs.
+                </p>
 
-    <span class="badge">✦ YOUR BEAUTY, YOUR STYLE — 2026</span>
+                <!-- 4 Core Program Badges -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 pt-1">
+                    <div class="bg-pcb-card border border-gray-800 p-3 rounded-2xl text-center">
+                        <i class="fa-solid fa-clock text-emerald-400 mb-1 text-base sm:text-lg"></i>
+                        <div data-i18n="specDurLabel" class="text-[11px] text-gray-400">Duration</div>
+                        <div data-i18n="specDurVal" class="text-xs sm:text-sm font-bold text-white">1 Year Course</div>
+                    </div>
+                    <div class="bg-pcb-card border border-gray-800 p-3 rounded-2xl text-center">
+                        <i class="fa-solid fa-business-time text-emerald-400 mb-1 text-base sm:text-lg"></i>
+                        <div data-i18n="specTimeLabel" class="text-[11px] text-gray-400">Class Time</div>
+                        <div class="text-xs sm:text-sm font-bold text-white">12 PM – 5 PM</div>
+                    </div>
+                    <div class="bg-pcb-card border border-gray-800 p-3 rounded-2xl text-center">
+                        <i class="fa-solid fa-graduation-cap text-emerald-400 mb-1 text-base sm:text-lg"></i>
+                        <div data-i18n="specEligLabel" class="text-[11px] text-gray-400">Eligibility</div>
+                        <div data-i18n="specEligVal" class="text-xs sm:text-sm font-bold text-white">8th / 10th Pass</div>
+                    </div>
+                    <div class="bg-pcb-card border border-gray-800 p-3 rounded-2xl text-center">
+                        <i class="fa-solid fa-users text-emerald-400 mb-1 text-base sm:text-lg"></i>
+                        <div data-i18n="specBatchLabel" class="text-[11px] text-gray-400">Batch</div>
+                        <div data-i18n="specBatchVal" class="text-xs sm:text-sm font-bold text-white">Boys &amp; Girls</div>
+                    </div>
+                </div>
 
-    <h1>Feel Beautiful.<br>Shine Brighter.</h1>
+                <!-- Primary Action Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-2">
+                    <a href="#booking" class="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-400 active:scale-[0.99] text-pcb-dark font-extrabold px-7 py-4 rounded-2xl shadow-xl glow-green-lg transition flex items-center justify-center space-x-2.5 text-sm sm:text-base">
+                        <i class="fa-solid fa-calendar-check text-lg"></i>
+                        <span data-i18n="heroCtaBook">Book Training Slot Online</span>
+                    </a>
+                    <a href="#simulator" class="w-full sm:w-auto bg-pcb-card hover:bg-pcb-surface active:scale-[0.99] border border-emerald-500/50 text-emerald-300 font-bold px-6 py-4 rounded-2xl transition flex items-center justify-center space-x-2.5 text-sm sm:text-base">
+                        <i class="fa-solid fa-bolt text-amber-400 text-lg"></i>
+                        <span data-i18n="heroCtaDemo">Try Free PCB Lab Demo</span>
+                    </a>
+                </div>
+            </div>
 
-    <p>
-      Welcome to Neelam Beauty Hub. Explore our beauty services,
-      discover your style and request your appointment online
-      in just a few easy steps.
-    </p>
+            <!-- Right Column: Featured Training Room & Students Photo Card -->
+            <div class="lg:col-span-6 relative">
+                <div class="relative rounded-3xl overflow-hidden border-2 border-emerald-500/60 glow-green-lg bg-pcb-card group">
+                    <div class="aspect-video w-full overflow-hidden bg-pcb-dark relative">
+                        <img 
+                            id="heroClassroomImg"
+                            src="146815.png" 
+                            alt="PCB BUGS Training Room and Students Practical Class in South Dumdum" 
+                            onerror="handleHeroFallback(this)"
+                            onclick="openLightbox(this.src, 'PCB BUGS Training Room & Students Practical Class — South Dumdum')"
+                            class="w-full h-full object-cover object-center transform group-hover:scale-105 transition duration-500 cursor-pointer"
+                        >
+                        <!-- Live Tag -->
+                        <div class="absolute top-3 left-3 bg-pcb-dark/85 backdrop-blur-md border border-emerald-500/40 text-emerald-300 text-[11px] font-bold px-3 py-1 rounded-full flex items-center space-x-1.5 pointer-events-none">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                            <span data-i18n="heroPhotoBadge">Training Room &amp; Students</span>
+                        </div>
+                    </div>
 
-    <a class="btn primary" href="#booking">
-      ✦ Book Appointment
+                    <!-- Card Bottom Action Bar -->
+                    <div class="bg-pcb-dark/95 backdrop-blur-md p-3.5 sm:p-4 border-t border-gray-800 flex flex-wrap items-center justify-between gap-2.5">
+                        <div class="flex items-center space-x-2.5">
+                            <div class="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-500 flex items-center justify-center text-emerald-400 flex-shrink-0">
+                                <i class="fa-solid fa-chalkboard-user"></i>
+                            </div>
+                            <div>
+                                <div class="text-[10px] text-gray-400 uppercase tracking-wider">South Dumdum Lab</div>
+                                <div data-i18n="heroPhotoSub" class="text-xs sm:text-sm font-bold text-white">100% Practical Class</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <label class="cursor-pointer bg-gray-800 hover:bg-gray-700 active:scale-95 text-gray-200 px-3 py-2 rounded-xl text-xs font-semibold transition border border-gray-700 flex items-center min-h-[38px]">
+                                <i class="fa-solid fa-camera mr-1.5 text-emerald-400"></i>
+                                <span>Set Photo</span>
+                                <input type="file" accept="image/*" class="hidden" onchange="replaceMainPhoto(event)">
+                            </label>
+                            <button type="button" onclick="openLightbox(document.getElementById('heroClassroomImg').src, 'PCB BUGS Training Room & Students Practical Class — South Dumdum')" class="bg-emerald-500/20 hover:bg-emerald-500 text-emerald-300 hover:text-pcb-dark px-3.5 py-2 rounded-xl text-xs font-bold transition border border-emerald-500 flex items-center min-h-[38px]">
+                                <i class="fa-solid fa-expand mr-1.5"></i> <span data-i18n="btnFullscreen">Full Screen</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating Badge -->
+                <div class="hidden sm:block absolute -top-3 -right-3 bg-amber-500 text-pcb-dark font-black text-xs px-3.5 py-2 rounded-2xl shadow-lg border border-amber-300 rotate-3">
+                    🔥 Job Oriented Course
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. INTERACTIVE COURSE SYLLABUS & FEE / EMI CALCULATOR SECTION -->
+    <section id="courses" class="py-14 sm:py-16 bg-pcb-card/35 border-t border-b border-gray-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-10 space-y-2.5">
+                <div class="text-emerald-400 font-semibold text-xs sm:text-sm tracking-wider uppercase" data-i18n="coursesTag">Comprehensive 1-Year Curriculum</div>
+                <h2 data-i18n="coursesTitle" class="text-2xl sm:text-4xl font-extrabold text-white">Courses, Syllabus &amp; Fee Estimator</h2>
+                <p data-i18n="coursesDesc" class="text-gray-400 text-xs sm:text-base">
+                    যেকোনো মডিউলে ক্লিক করে সপ্তাহভিত্তিক সিলেবাস, প্র্যাকটিক্যাল টুলস এবং সহজ মাসিক কিস্তির (EMI) হিসাব দেখুন।
+                </p>
+            </div>
+
+            <!-- 4 Module Cards (Swipeable on Mobile) -->
+            <div class="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-5 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-3">
+                
+                <!-- Module 1 -->
+                <div class="min-w-[82%] sm:min-w-[48%] md:min-w-0 snap-center bg-pcb-card border border-gray-800 hover:border-emerald-500/70 rounded-3xl p-6 transition duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="w-13 h-13 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl group-hover:scale-110 transition">
+                                <i class="fa-solid fa-snowflake"></i>
+                            </div>
+                            <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md">Module 01</span>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold text-white mb-2">Inverter AC PCB Repair</h3>
+                        <p class="text-gray-400 text-xs sm:text-sm leading-relaxed mb-4">
+                            SMPS power supply, IPM module testing, microcontroller fault tracing, communication error (E1/E5) troubleshooting &amp; compressor drive repair.
+                        </p>
+                    </div>
+                    <div class="space-y-2.5 pt-2">
+                        <button type="button" onclick="openSyllabusModal('inverter')" class="w-full bg-emerald-500/15 hover:bg-emerald-500 text-emerald-300 hover:text-pcb-dark font-bold py-3 rounded-xl transition text-xs sm:text-sm flex items-center justify-center space-x-2 border border-emerald-500/40">
+                            <i class="fa-solid fa-list-check"></i>
+                            <span data-i18n="btnSyllabus">View Syllabus &amp; Tools</span>
+                        </button>
+                        <button type="button" onclick="selectCourseAndScroll('Inverter AC PCB Repair')" class="w-full bg-gray-800 hover:bg-gray-700 text-gray-200 font-semibold py-2.5 rounded-xl transition text-xs flex items-center justify-center space-x-1.5 border border-gray-700">
+                            <span data-i18n="btnBookModule">Book This Course</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Module 2 -->
+                <div class="min-w-[82%] sm:min-w-[48%] md:min-w-0 snap-center bg-pcb-card border border-gray-800 hover:border-emerald-500/70 rounded-3xl p-6 transition duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="w-13 h-13 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl group-hover:scale-110 transition">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                            <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md">Module 02</span>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold text-white mb-2">Non-Inverter AC PCB Repair</h3>
+                        <p class="text-gray-400 text-xs sm:text-sm leading-relaxed mb-4">
+                            Relay switching circuits, step-down transformer voltage testing, NTC sensor calibration, swing motor IC &amp; display panel repair.
+                        </p>
+                    </div>
+                    <div class="space-y-2.5 pt-2">
+                        <button type="button" onclick="openSyllabusModal('noninverter')" class="w-full bg-emerald-500/15 hover:bg-emerald-500 text-emerald-300 hover:text-pcb-dark font-bold py-3 rounded-xl transition text-xs sm:text-sm flex items-center justify-center space-x-2 border border-emerald-500/40">
+                            <i class="fa-solid fa-list-check"></i>
+                            <span data-i18n="btnSyllabus">View Syllabus &amp; Tools</span>
+                        </button>
+                        <button type="button" onclick="selectCourseAndScroll('Non-Inverter AC PCB Repair')" class="w-full bg-gray-800 hover:bg-gray-700 text-gray-200 font-semibold py-2.5 rounded-xl transition text-xs flex items-center justify-center space-x-1.5 border border-gray-700">
+                            <span data-i18n="btnBookModule">Book This Course</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Module 3 -->
+                <div class="min-w-[82%] sm:min-w-[48%] md:min-w-0 snap-center bg-pcb-card border border-gray-800 hover:border-emerald-500/70 rounded-3xl p-6 transition duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="w-13 h-13 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl group-hover:scale-110 transition">
+                                <i class="fa-solid fa-fire-burner"></i>
+                            </div>
+                            <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md">Module 03</span>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold text-white mb-2">Microwave Oven PCB Repair</h3>
+                        <p class="text-gray-400 text-xs sm:text-sm leading-relaxed mb-4">
+                            Touch membrane &amp; tactile keypad repair, door micro-switch interlock logic, HV transformer safety checks &amp; SMPS repair.
+                        </p>
+                    </div>
+                    <div class="space-y-2.5 pt-2">
+                        <button type="button" onclick="openSyllabusModal('microwave')" class="w-full bg-emerald-500/15 hover:bg-emerald-500 text-emerald-300 hover:text-pcb-dark font-bold py-3 rounded-xl transition text-xs sm:text-sm flex items-center justify-center space-x-2 border border-emerald-500/40">
+                            <i class="fa-solid fa-list-check"></i>
+                            <span data-i18n="btnSyllabus">View Syllabus &amp; Tools</span>
+                        </button>
+                        <button type="button" onclick="selectCourseAndScroll('Microwave Oven PCB Repair')" class="w-full bg-gray-800 hover:bg-gray-700 text-gray-200 font-semibold py-2.5 rounded-xl transition text-xs flex items-center justify-center space-x-1.5 border border-gray-700">
+                            <span data-i18n="btnBookModule">Book This Course</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Module 4 -->
+                <div class="min-w-[82%] sm:min-w-[48%] md:min-w-0 snap-center bg-pcb-card border border-gray-800 hover:border-emerald-500/70 rounded-3xl p-6 transition duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="w-13 h-13 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl group-hover:scale-110 transition">
+                                <i class="fa-solid fa-box-archive"></i>
+                            </div>
+                            <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md">Module 04</span>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold text-white mb-2">Refrigerator PCB Repair</h3>
+                        <p class="text-gray-400 text-xs sm:text-sm leading-relaxed mb-4">
+                            Single &amp; double door frost-free inverter fridge control boards, BLDC compressor driver testing, defrost heater &amp; sensor circuits.
+                        </p>
+                    </div>
+                    <div class="space-y-2.5 pt-2">
+                        <button type="button" onclick="openSyllabusModal('refrigerator')" class="w-full bg-emerald-500/15 hover:bg-emerald-500 text-emerald-300 hover:text-pcb-dark font-bold py-3 rounded-xl transition text-xs sm:text-sm flex items-center justify-center space-x-2 border border-emerald-500/40">
+                            <i class="fa-solid fa-list-check"></i>
+                            <span data-i18n="btnSyllabus">View Syllabus &amp; Tools</span>
+                        </button>
+                        <button type="button" onclick="selectCourseAndScroll('Refrigerator PCB Repair')" class="w-full bg-gray-800 hover:bg-gray-700 text-gray-200 font-semibold py-2.5 rounded-xl transition text-xs flex items-center justify-center space-x-1.5 border border-gray-700">
+                            <span data-i18n="btnBookModule">Book This Course</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Interactive Fee & Easy Monthly Installment (EMI) Estimator Card -->
+            <div class="mt-10 bg-pcb-card border border-emerald-500/40 rounded-3xl p-5 sm:p-8 shadow-xl">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                    <div class="lg:col-span-7 space-y-4">
+                        <div class="inline-flex items-center space-x-2 bg-amber-500/15 border border-amber-400/40 text-amber-300 px-3 py-1 rounded-full text-xs font-bold">
+                            <i class="fa-solid fa-calculator"></i>
+                            <span data-i18n="emiTag">Easy Student Fee &amp; Monthly Installment Estimator</span>
+                        </div>
+                        <h3 data-i18n="emiTitle" class="text-xl sm:text-2xl font-extrabold text-white">Plan Your 1-Year Practical Training Budget</h3>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                            <div>
+                                <label for="emiTrack" class="block text-xs font-semibold text-gray-300 mb-1.5">Choose Training Track</label>
+                                <select id="emiTrack" onchange="calculateEMI()" class="w-full bg-pcb-dark border border-gray-700 rounded-xl px-3.5 py-3 text-white text-xs sm:text-sm focus:outline-none focus:border-emerald-500">
+                                    <option value="24000">Complete 4-in-1 Master Diploma (1 Year) — ₹24,000</option>
+                                    <option value="16000">Inverter + Non-Inverter AC PCB Track — ₹16,000</option>
+                                    <option value="14000">Home Appliance (Fridge + Microwave PCB) — ₹14,000</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="emiMonths" class="block text-xs font-semibold text-gray-300 mb-1.5">Installment Plan (0% Interest)</label>
+                                <select id="emiMonths" onchange="calculateEMI()" class="w-full bg-pcb-dark border border-gray-700 rounded-xl px-3.5 py-3 text-white text-xs sm:text-sm focus:outline-none focus:border-emerald-500">
+                                    <option value="12">12 Monthly Installments (Easiest)</option>
+                                    <option value="6">6 Monthly Installments</option>
+                                    <option value="3">3 Quarterly Installments</option>
+                                    <option value="1">One-Time Full Payment (10% Scholarship)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs text-gray-300 mb-1">
+                                <span>Admission Down Payment</span>
+                                <span id="downPaymentDisplay" class="font-bold text-emerald-400">₹3,000</span>
+                            </div>
+                            <input type="range" id="downPaymentSlider" min="2000" max="10000" step="500" value="3000" oninput="calculateEMI()" class="w-full accent-emerald-400 cursor-pointer">
+                        </div>
+                    </div>
+
+                    <!-- Result Box -->
+                    <div class="lg:col-span-5 bg-pcb-dark border border-emerald-500/40 rounded-2xl p-5 text-center space-y-3">
+                        <div class="text-xs text-gray-400 uppercase tracking-wider">Estimated Monthly Installment</div>
+                        <div id="monthlyEmiResult" class="text-3xl sm:text-4xl font-black text-emerald-400">₹1,750 <span class="text-sm font-medium text-gray-400">/ mo</span></div>
+                        <div id="emiBreakdownText" class="text-xs text-gray-300">
+                            Total Fee: ₹24,000 • Down Payment: ₹3,000 • 12 Months @ 0% Interest
+                        </div>
+                        <button type="button" onclick="applyEmiToBooking()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-pcb-dark font-extrabold py-3 rounded-xl text-xs sm:text-sm transition shadow-lg">
+                            Lock This Fee Plan &amp; Book Slot
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. TRAINING ROOM & STUDENTS PHOTO GALLERY (#gallery) -->
+    <section id="gallery" class="py-14 sm:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+                <div class="space-y-2">
+                    <div class="inline-flex items-center space-x-2 text-emerald-400 font-semibold text-xs sm:text-sm tracking-wider uppercase">
+                        <i class="fa-solid fa-camera-retro"></i>
+                        <span data-i18n="galTag">Live Classroom &amp; Lab Showcase</span>
+                    </div>
+                    <h2 data-i18n="galTitle" class="text-2xl sm:text-4xl font-extrabold text-white">Training Room &amp; Students Photo Gallery</h2>
+                    <p data-i18n="galDesc" class="text-gray-400 text-xs sm:text-base max-w-2xl">
+                        আমাদের প্র্যাকটিক্যাল ক্লাসরুম, ডিজিটাল অসিলোস্কোপ ল্যাব এবং ছাত্র-ছাত্রীদের হাতে-কলমে প্রশিক্ষণের ছবি দেখুন। (Swipe left/right on mobile)
+                    </p>
+                </div>
+
+                <!-- Owner Multi-Photo Upload Button (Persisted in localStorage) -->
+                <div class="flex flex-wrap items-center gap-2">
+                    <label class="cursor-pointer bg-emerald-500 hover:bg-emerald-400 active:scale-95 text-pcb-dark font-bold px-4 py-3 rounded-2xl text-xs sm:text-sm shadow-lg glow-green transition flex items-center space-x-2">
+                        <i class="fa-solid fa-cloud-arrow-up text-base"></i>
+                        <span data-i18n="btnAddPhotos">+ Add Student / Lab Photos</span>
+                        <input type="file" accept="image/*" multiple class="hidden" onchange="addGalleryPhotos(event)">
+                    </label>
+                    <button type="button" id="clearCustomPhotosBtn" onclick="clearSavedGalleryPhotos()" class="hidden bg-gray-800 hover:bg-red-900/70 text-gray-300 hover:text-white px-3 py-3 rounded-2xl text-xs font-semibold border border-gray-700 transition" title="Reset uploaded photos">
+                        <i class="fa-solid fa-rotate-left"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Interactive Category Filter Tabs -->
+            <div class="flex items-center space-x-2 overflow-x-auto no-scrollbar pb-4 mb-4">
+                <button type="button" id="allPhotosTab" onclick="filterGallery('all', this)" class="gallery-tab whitespace-nowrap px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-emerald-500 text-pcb-dark transition">
+                    All Photos (4)
+                </button>
+                <button type="button" onclick="filterGallery('room', this)" class="gallery-tab whitespace-nowrap px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-pcb-card text-gray-300 border border-gray-800 hover:border-emerald-500/50 transition">
+                    Full Classroom &amp; Lab
+                </button>
+                <button type="button" onclick="filterGallery('soldering', this)" class="gallery-tab whitespace-nowrap px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-pcb-card text-gray-300 border border-gray-800 hover:border-emerald-500/50 transition">
+                    Live Soldering Practical
+                </button>
+                <button type="button" onclick="filterGallery('oscilloscope', this)" class="gallery-tab whitespace-nowrap px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-pcb-card text-gray-300 border border-gray-800 hover:border-emerald-500/50 transition">
+                    Oscilloscope &amp; Signal Testing
+                </button>
+                <button type="button" onclick="filterGallery('batch', this)" class="gallery-tab whitespace-nowrap px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-pcb-card text-gray-300 border border-gray-800 hover:border-emerald-500/50 transition">
+                    Boys &amp; Girls Batch
+                </button>
+            </div>
+
+            <!-- Swipeable Mobile Carousel / Desktop Grid -->
+            <div id="galleryGrid" class="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-2">
+                
+                <!-- Card 1: Full Classroom & Lab -->
+                <div data-category="room" class="gallery-card min-w-[82%] sm:min-w-[48%] md:min-w-0 snap-center bg-pcb-card border border-gray-800 hover:border-emerald-500/60 rounded-3xl overflow-hidden flex flex-col justify-between group transition">
+                    <div class="aspect-video w-full overflow-hidden bg-pcb-dark relative">
+                        <img 
+                            src="146815.png" 
+                            alt="Full Classroom and Lab at PCB BUGS South Dumdum" 
+                            onerror="handleCardFallback(this, 'Full+Classroom+%26+Lab')"
+                            onclick="openLightbox(this.src, 'Full Classroom & Lab — PCB BUGS South Dumdum, West Bengal')"
+                            class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500 cursor-pointer"
+                        >
+                        <span class="absolute top-2.5 left-2.5 bg-pcb-dark/85 text-emerald-400 text-[10px] font-bold px-2.5 py-1 rounded-lg border border-emerald-500/30">
+                            Full Classroom &amp; Lab
+                        </span>
+                    </div>
+                    <div class="p-4 flex items-center justify-between gap-2">
+                        <div>
+                            <h3 class="text-sm font-bold text-white">Main Training Hall</h3>
+                            <p class="text-[11px] text-gray-400">JCG8+QM, South Dumdum</p>
+                        </div>
+                        <button type="button" onclick="openLightbox(this.closest('.gallery-card').querySelector('img').src, 'Full Classroom & Lab — PCB BUGS South Dumdum, West Bengal')" aria-label="Zoom Photo" class="w-9 h-9 rounded-xl bg-gray-800 hover:bg-emerald-500 text-emerald-400 hover:text-pcb-dark flex items-center justify-center transition flex-shrink-0">
+                            <i class="fa-solid fa-expand text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 2: Live Soldering Practical -->
+                <div data-category="soldering" class="gallery-card min-w-[82%] sm:min-w-[48%] md:min-w-0 snap-center bg-pcb-card border border-gray-800 hover:border-emerald-500/60 rounded-3xl overflow-hidden flex flex-col justify-between group transition">
+                    <div class="aspect-video w-full overflow-hidden bg-pcb-dark relative">
+                        <img 
+                            src="146815.png" 
+                            alt="Live Soldering Practical Supervision" 
+                            onerror="handleCardFallback(this, 'Live+Soldering+Practical')"
+                            onclick="openLightbox(this.src, 'Live Soldering Practical — 1-on-1 SMD & IPM Rework Guidance')"
+                            class="w-full h-full object-cover object-center scale-125 group-hover:scale-135 transition duration-500 cursor-pointer"
+                        >
+                        <span class="absolute top-2.5 left-2.5 bg-pcb-dark/85 text-amber-300 text-[10px] font-bold px-2.5 py-1 rounded-lg border border-amber-400/30">
+                            Live Soldering Practical
+                        </span>
+                    </div>
+                    <div class="p-4 flex items-center justify-between gap-2">
+                        <div>
+                            <h3 class="text-sm font-bold text-white">1-on-1 SMD Soldering</h3>
+                            <p class="text-[11px] text-gray-400">Hands-on instructor supervision</p>
+                        </div>
+                        <button type="button" onclick="openLightbox(this.closest('.gallery-card').querySelector('img').src, 'Live Soldering Practical — 1-on-1 SMD & IPM Rework Guidance')" aria-label="Zoom Photo" class="w-9 h-9 rounded-xl bg-gray-800 hover:bg-emerald-500 text-emerald-400 hover:text-pcb-dark flex items-center justify-center transition flex-shrink-0">
+                            <i class="fa-solid fa-expand text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 3: Oscilloscope & Signal Testing -->
+                <div data-category="oscilloscope" class="gallery-card min-w-[82%] sm:min-w-[48%] md:min-w-0 snap-center bg-pcb-card border border-gray-800 hover:border-emerald-500/60 rounded-3xl overflow-hidden flex flex-col justify-between group transition">
+                    <div class="aspect-video w-full overflow-hidden bg-pcb-dark relative">
+                        <img 
+                            src="146815.png" 
+                            alt="Oscilloscope and Signal Testing Bench" 
+                            onerror="handleCardFallback(this, 'Oscilloscope+%26+Signal+Testing')"
+                            onclick="openLightbox(this.src, 'Oscilloscope & Signal Testing — Digital Waveform & PWM Analysis')"
+                            class="w-full h-full object-cover object-left-bottom scale-125 group-hover:scale-135 transition duration-500 cursor-pointer"
+                        >
+                        <span class="absolute top-2.5 left-2.5 bg-pcb-dark/85 text-emerald-400 text-[10px] font-bold px-2.5 py-1 rounded-lg border border-emerald-500/30">
+                            Oscilloscope &amp; Testing
+                        </span>
+                    </div>
+                    <div class="p-4 flex items-center justify-between gap-2">
+                        <div>
+                            <h3 class="text-sm font-bold text-white">DSO Signal Diagnosis</h3>
+                            <p class="text-[11px] text-gray-400">Digital Oscilloscope &amp; Multimeter</p>
+                        </div>
+                        <button type="button" onclick="openLightbox(this.closest('.gallery-card').querySelector('img').src, 'Oscilloscope & Signal Testing — Digital Waveform & PWM Analysis')" aria-label="Zoom Photo" class="w-9 h-9 rounded-xl bg-gray-800 hover:bg-emerald-500 text-emerald-400 hover:text-pcb-dark flex items-center justify-center transition flex-shrink-0">
+                            <i class="fa-solid fa-expand text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 4: Boys & Girls Batch -->
+                <div data-category="batch" class="gallery-card min-w-[82%] sm:min-w-[48%] md:min-w-0 snap-center bg-pcb-card border border-gray-800 hover:border-emerald-500/60 rounded-3xl overflow-hidden flex flex-col justify-between group transition">
+                    <div class="aspect-video w-full overflow-hidden bg-pcb-dark relative">
+                        <img 
+                            src="146815.png" 
+                            alt="Boys and Girls Practical Training Batch" 
+                            onerror="handleCardFallback(this, 'Boys+%26+Girls+Batch')"
+                            onclick="openLightbox(this.src, 'Boys & Girls Batch — Individual Lab Workstations at PCB BUGS')"
+                            class="w-full h-full object-cover object-right-bottom scale-125 group-hover:scale-135 transition duration-500 cursor-pointer"
+                        >
+                        <span class="absolute top-2.5 left-2.5 bg-pcb-dark/85 text-amber-300 text-[10px] font-bold px-2.5 py-1 rounded-lg border border-amber-400/30">
+                            Boys &amp; Girls Batch
+                        </span>
+                    </div>
+                    <div class="p-4 flex items-center justify-between gap-2">
+                        <div>
+                            <h3 class="text-sm font-bold text-white">Boys &amp; Girls Batch</h3>
+                            <p class="text-[11px] text-gray-400">Safe, supportive &amp; practical lab</p>
+                        </div>
+                        <button type="button" onclick="openLightbox(this.closest('.gallery-card').querySelector('img').src, 'Boys & Girls Batch — Individual Lab Workstations at PCB BUGS')" aria-label="Zoom Photo" class="w-9 h-9 rounded-xl bg-gray-800 hover:bg-emerald-500 text-emerald-400 hover:text-pcb-dark flex items-center justify-center transition flex-shrink-0">
+                            <i class="fa-solid fa-expand text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. INTERACTIVE PCB FAULT DIAGNOSTIC MINI-SIMULATOR ("Try Free PCB Lab Demo") -->
+    <section id="simulator" class="py-14 sm:py-16 bg-pcb-card/45 border-t border-b border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-8 space-y-2">
+                <div class="inline-flex items-center space-x-2 bg-amber-500/15 border border-amber-400/40 px-3.5 py-1 rounded-full text-amber-300 text-xs font-bold">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span data-i18n="simTag">Interactive Virtual Lab Experience</span>
+                </div>
+                <h2 data-i18n="simTitle" class="text-2xl sm:text-4xl font-extrabold text-white">Try Free PCB Fault Diagnostic Simulator</h2>
+                <p data-i18n="simDesc" class="text-gray-400 text-xs sm:text-base">
+                    একটি আসল খারাপ বোর্ডের সমস্যা বেছে নিন এবং ডিজিটাল মাল্টিমিটার দিয়ে ভোল্টেজ টেস্ট করে ফল্ট খুঁজে বের করুন!
+                </p>
+            </div>
+
+            <div class="bg-pcb-dark border-2 border-emerald-500/40 rounded-3xl p-5 sm:p-8 shadow-2xl grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <!-- Step 1: Select Appliance Symptom -->
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="text-xs font-bold uppercase tracking-wider text-emerald-400">Step 1: Select Fault Symptom</div>
+                    <div class="space-y-2.5" id="symptomButtons">
+                        <button type="button" onclick="loadFaultScenario('ac_e1', this)" class="sim-scenario-btn w-full text-left p-3.5 rounded-2xl bg-emerald-500/20 border-2 border-emerald-500 text-white transition flex items-center justify-between">
+                            <div>
+                                <div class="text-xs font-bold text-emerald-400">Inverter AC Outdoor PCB</div>
+                                <div class="text-sm font-extrabold">E1 Communication Error</div>
+                            </div>
+                            <i class="fa-solid fa-snowflake text-emerald-400 text-lg"></i>
+                        </button>
+                        <button type="button" onclick="loadFaultScenario('mw_pad', this)" class="sim-scenario-btn w-full text-left p-3.5 rounded-2xl bg-pcb-card border border-gray-800 hover:border-emerald-500/50 text-gray-200 transition flex items-center justify-between">
+                            <div>
+                                <div class="text-xs font-bold text-amber-400">Microwave Oven Control Board</div>
+                                <div class="text-sm font-extrabold">Touch Pad Dead / No Beep</div>
+                            </div>
+                            <i class="fa-solid fa-fire-burner text-amber-400 text-lg"></i>
+                        </button>
+                        <button type="button" onclick="loadFaultScenario('fridge_comp', this)" class="sim-scenario-btn w-full text-left p-3.5 rounded-2xl bg-pcb-card border border-gray-800 hover:border-emerald-500/50 text-gray-200 transition flex items-center justify-between">
+                            <div>
+                                <div class="text-xs font-bold text-sky-400">Inverter Refrigerator PCB</div>
+                                <div class="text-sm font-extrabold">Compressor Not Starting</div>
+                            </div>
+                            <i class="fa-solid fa-box-archive text-sky-400 text-lg"></i>
+                        </button>
+                    </div>
+
+                    <!-- Virtual Digital Multimeter Display -->
+                    <div class="bg-gray-900 border-2 border-amber-500/50 rounded-2xl p-4 space-y-2">
+                        <div class="flex items-center justify-between text-[11px] text-gray-400">
+                            <span class="font-bold text-amber-300"><i class="fa-solid fa-gauge mr-1"></i> DIGITAL MULTIMETER (DC/OHM)</span>
+                            <span id="meterStatusBadge" class="px-2 py-0.5 rounded bg-gray-800 text-gray-300">READY</span>
+                        </div>
+                        <div class="bg-emerald-950/80 border border-emerald-500/30 rounded-xl px-4 py-3 font-mono flex items-baseline justify-between">
+                            <span id="meterReading" class="text-2xl sm:text-3xl font-black text-emerald-400 tracking-wider">00.00 V</span>
+                            <span id="meterExpected" class="text-[11px] text-gray-400">Tap a test point →</span>
+                        </div>
+                        <p id="meterDiagnosticTip" class="text-xs text-gray-300 leading-relaxed pt-1">
+                            Tap any glowing test point (TP1, TP2, TP3) on the circuit board to probe voltage and locate the faulty component.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 2: Interactive SVG PCB Test Points -->
+                <div class="lg:col-span-7 bg-pcb-card border border-gray-800 rounded-2xl p-4 sm:p-5 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span id="boardTitleDisplay" class="text-xs sm:text-sm font-bold text-white">Board: Split Inverter AC Main PCB</span>
+                        <span class="text-[11px] text-emerald-400 font-semibold">Tap TP1 / TP2 / TP3</span>
+                    </div>
+
+                    <!-- Interactive Circuit Diagram SVG -->
+                    <div class="relative rounded-2xl overflow-hidden bg-[#061812] border border-emerald-500/40 p-3">
+                        <svg viewBox="0 0 500 240" class="w-full h-auto select-none" aria-label="Interactive PCB Test Points">
+                            <!-- PCB Traces -->
+                            <g stroke="#00e676" stroke-opacity="0.28" stroke-width="2.5" fill="none">
+                                <path d="M 40 60 H 160 V 110 H 260" />
+                                <path d="M 40 180 H 190 V 140 H 330" />
+                                <path d="M 260 110 H 430 V 70" />
+                                <path d="M 330 140 H 440 V 185" />
+                            </g>
+                            <!-- Main IC Block -->
+                            <rect x="205" y="78" width="90" height="84" rx="10" fill="#0f1c3f" stroke="#00e676" stroke-width="2" />
+                            <text x="250" y="116" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="bold">MCU / IPM</text>
+                            <text x="250" y="133" text-anchor="middle" fill="#00e676" font-size="9">CONTROLLER</text>
+
+                            <!-- SMPS Section -->
+                            <rect x="35" y="42" width="85" height="55" rx="8" fill="#142552" stroke="#38bdf8" stroke-width="1.5" />
+                            <text x="77" y="73" text-anchor="middle" fill="#bae6fd" font-size="10" font-weight="bold">SMPS 12V/5V</text>
+
+                            <!-- Optocoupler / Driver Section -->
+                            <rect x="365" y="45" width="95" height="55" rx="8" fill="#142552" stroke="#fbbf24" stroke-width="1.5" />
+                            <text x="412" y="76" text-anchor="middle" fill="#fde68a" font-size="10" font-weight="bold">COMM / DRIVER</text>
+
+                            <!-- Probe Buttons (TP1, TP2, TP3) -->
+                            <g class="cursor-pointer" onclick="probePoint(0)">
+                                <circle cx="135" cy="60" r="18" fill="#00e676" fill-opacity="0.22" />
+                                <circle cx="135" cy="60" r="11" fill="#00e676" />
+                                <text x="135" y="64" text-anchor="middle" fill="#060d1f" font-size="10" font-weight="900">TP1</text>
+                            </g>
+                            <g class="cursor-pointer" onclick="probePoint(1)">
+                                <circle cx="250" cy="182" r="18" fill="#ffb300" fill-opacity="0.25" />
+                                <circle cx="250" cy="182" r="11" fill="#ffb300" />
+                                <text x="250" y="186" text-anchor="middle" fill="#060d1f" font-size="10" font-weight="900">TP2</text>
+                            </g>
+                            <g class="cursor-pointer" onclick="probePoint(2)">
+                                <circle cx="385" cy="140" r="18" fill="#ef4444" fill-opacity="0.28" />
+                                <circle cx="385" cy="140" r="11" fill="#ef4444" />
+                                <text x="385" y="144" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="900">TP3</text>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <!-- Quick Touch Buttons for Mobile Ease -->
+                    <div class="grid grid-cols-3 gap-2.5">
+                        <button type="button" onclick="probePoint(0)" id="tpBtn0" class="py-2.5 px-2 rounded-xl bg-pcb-dark hover:bg-emerald-500/20 border border-emerald-500/40 text-xs font-bold text-emerald-300 transition">
+                            Probe TP1 (Supply)
+                        </button>
+                        <button type="button" onclick="probePoint(1)" id="tpBtn1" class="py-2.5 px-2 rounded-xl bg-pcb-dark hover:bg-amber-500/20 border border-amber-500/40 text-xs font-bold text-amber-300 transition">
+                            Probe TP2 (Logic)
+                        </button>
+                        <button type="button" onclick="probePoint(2)" id="tpBtn2" class="py-2.5 px-2 rounded-xl bg-pcb-dark hover:bg-red-500/20 border border-red-500/40 text-xs font-bold text-red-300 transition">
+                            Probe TP3 (Output)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. STUDENT LAB ID CARD & 1-YEAR COMPLETION CERTIFICATE LIVE GENERATOR (#credentials) -->
+    <section id="credentials" class="py-14 sm:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-10 space-y-2.5">
+                <div class="text-emerald-400 font-semibold text-xs sm:text-sm tracking-wider uppercase" data-i18n="credTag">Official Student Credentials</div>
+                <h2 data-i18n="credTitle" class="text-2xl sm:text-4xl font-extrabold text-white">Live Student Lab ID Card &amp; Certificate Preview</h2>
+                <p data-i18n="credDesc" class="text-gray-400 text-xs sm:text-base">
+                    আপনার নাম, বাবার নাম, মোবাইল নম্বর এবং ছবি দিয়ে আপনার অফিশিয়াল স্টুডেন্ট ল্যাব আইডি কার্ড ও ১ বছরের সার্টিফিকেট প্রিভিউ ও প্রিন্ট করুন।
+                </p>
+            </div>
+
+            <!-- Interactive Live Input Controls -->
+            <div class="bg-pcb-card border border-gray-800 rounded-3xl p-5 sm:p-6 mb-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
+                    <div>
+                        <label for="credStudentName" class="block text-xs font-semibold text-gray-300 mb-1.5">Student Name</label>
+                        <input type="text" id="credStudentName" placeholder="e.g. Rahul Mondal" oninput="updateLiveCredentials()" class="w-full bg-pcb-dark border border-gray-700 rounded-xl px-3.5 py-2.5 text-white text-sm focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label for="credFatherName" class="block text-xs font-semibold text-gray-300 mb-1.5">Father's Name</label>
+                        <input type="text" id="credFatherName" placeholder="e.g. Subhash Mondal" oninput="updateLiveCredentials()" class="w-full bg-pcb-dark border border-gray-700 rounded-xl px-3.5 py-2.5 text-white text-sm focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label for="credPhoneBlood" class="block text-xs font-semibold text-gray-300 mb-1.5">Phone / Blood Group</label>
+                        <input type="text" id="credPhoneBlood" placeholder="e.g. 9804265067 • O+" oninput="updateLiveCredentials()" class="w-full bg-pcb-dark border border-gray-700 rounded-xl px-3.5 py-2.5 text-white text-sm focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 mb-1.5">Student Photo</label>
+                        <label class="cursor-pointer w-full bg-pcb-dark hover:bg-gray-800 border border-emerald-500/40 rounded-xl px-3.5 py-2.5 text-emerald-300 text-xs font-bold flex items-center justify-center space-x-2 transition">
+                            <i class="fa-solid fa-user-plus"></i>
+                            <span>Upload Photo</span>
+                            <input type="file" accept="image/*" class="hidden" onchange="uploadStudentIdPhoto(event)">
+                        </label>
+                    </div>
+                    <div>
+                        <button type="button" onclick="printCredentials()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-pcb-dark font-extrabold py-2.5 px-4 rounded-xl text-xs sm:text-sm transition shadow-lg flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-print"></i>
+                            <span>Print / Save PDF</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Printable Area: Side-by-Side Student Lab ID Card + 1-Year Completion Certificate -->
+            <div id="printableArea" class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                
+                <!-- Official Student Lab ID Card (5 Cols) -->
+                <div class="lg:col-span-5 bg-gradient-to-b from-pcb-card via-[#0b1633] to-pcb-dark border-2 border-emerald-500/60 rounded-3xl p-6 shadow-2xl flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute -right-8 -top-8 w-28 h-28 rounded-full bg-emerald-500/10 pointer-events-none"></div>
+                    
+                    <!-- ID Header -->
+                    <div class="flex items-center justify-between border-b border-gray-800 pb-4">
+                        <div class="flex items-center space-x-2.5">
+                            <div class="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-500 flex items-center justify-center text-emerald-400">
+                                <i class="fa-solid fa-microchip"></i>
+                            </div>
+                            <div>
+                                <div class="text-base font-black text-white leading-none">PCB <span class="text-emerald-400">BUGS</span></div>
+                                <div class="text-[9px] text-gray-400 uppercase tracking-widest mt-0.5">Student Lab ID Card</div>
+                            </div>
+                        </div>
+                        <span class="bg-emerald-500 text-pcb-dark text-[10px] font-black px-2.5 py-1 rounded-lg">2026–27 BATCH</span>
+                    </div>
+
+                    <!-- Student Photo & Details -->
+                    <div class="my-5 flex flex-col sm:flex-row lg:flex-col items-center text-center sm:text-left lg:text-center gap-4">
+                        <div class="w-24 h-24 rounded-2xl border-2 border-emerald-400 overflow-hidden bg-pcb-dark flex items-center justify-center flex-shrink-0 shadow-lg">
+                            <img id="idCardAvatar" src="https://placehold.co/200x200/0f1c3f/00e676?text=STUDENT" alt="Student Photo" class="w-full h-full object-cover">
+                        </div>
+                        <div class="space-y-1">
+                            <h3 id="idCardName" class="text-lg sm:text-xl font-extrabold text-white">[Student Name]</h3>
+                            <p class="text-xs text-emerald-400 font-semibold">1-Year Practical PCB Repair Trainee</p>
+                            <div class="text-xs text-gray-300 pt-1 space-y-0.5">
+                                <div><span class="text-gray-400">S/O or D/O:</span> <strong id="idCardFather">[Father's Name]</strong></div>
+                                <div><span class="text-gray-400">Contact / Blood:</span> <strong id="idCardContact">09804265067 • O+</strong></div>
+                                <div><span class="text-gray-400">Timing:</span> <strong>12:00 PM – 5:00 PM</strong></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ID Footer -->
+                    <div class="border-t border-gray-800 pt-3 flex items-center justify-between text-[10px] text-gray-400">
+                        <span>Center: JCG8+QM, South Dumdum</span>
+                        <span class="text-emerald-400 font-bold">ID: PCBB-LAB-01</span>
+                    </div>
+                </div>
+
+                <!-- 1-Year Course Completion Certificate (7 Cols) -->
+                <div class="lg:col-span-7 bg-gradient-to-br from-gray-900 via-pcb-card to-gray-900 border-2 border-amber-500/60 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden flex flex-col justify-between">
+                    <div class="absolute top-0 right-0 bg-amber-500 text-pcb-dark text-[10px] font-extrabold px-3.5 py-1.5 rounded-bl-2xl">
+                        CERTIFICATE PREVIEW
+                    </div>
+
+                    <div class="text-center space-y-1.5 pt-2">
+                        <div class="text-emerald-400 font-black text-lg tracking-widest">PCB BUGS</div>
+                        <div class="text-[10px] text-gray-400 uppercase tracking-widest">Professional PCB Repair Training Institute • South Dumdum</div>
+                        <h3 class="text-2xl sm:text-3xl font-serif font-bold text-amber-300 pt-1">Certificate of Completion</h3>
+                        <p class="text-xs text-gray-400">This is proudly awarded to</p>
+                    </div>
+
+                    <div class="text-center my-4 space-y-1">
+                        <div id="certNameDisplay" class="text-2xl sm:text-3xl font-extrabold text-white underline decoration-emerald-400 decoration-2 underline-offset-8 break-words">[Student Name]</div>
+                        <div class="text-xs text-gray-400 pt-2">Son / Daughter of <span id="certFatherDisplay" class="text-gray-200 font-semibold">[Father's Name]</span></div>
+                    </div>
+
+                    <p class="text-center text-xs sm:text-sm text-gray-300 max-w-xl mx-auto leading-relaxed">
+                        For successfully completing the <strong>1-Year Practical Training Program</strong> in <strong>Inverter AC, Non-Inverter AC, Microwave Oven &amp; Refrigerator PCB Repairing</strong> with hands-on proficiency at South Dumdum Center, West Bengal.
+                    </p>
+
+                    <div class="flex justify-between items-center mt-6 pt-4 border-t border-gray-800 text-[11px] text-gray-400">
+                        <div>
+                            <div class="font-bold text-gray-200">Chief Technical Instructor</div>
+                            <div>PCB BUGS Training Institute</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-10 h-10 rounded-full border border-amber-400/60 flex items-center justify-center text-amber-300 mx-auto">
+                                <i class="fa-solid fa-award"></i>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-bold text-gray-200">JCG8+QM, South Dumdum</div>
+                            <div>Helpline: 09804265067</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. STUDENT REVIEWS CAROUSEL & EXPANDABLE FAQ ACCORDION (#faq) -->
+    <section id="faq" class="py-14 sm:py-16 bg-pcb-card/40 border-t border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
+            
+            <!-- Mobile Swipeable Student Reviews -->
+            <div>
+                <div class="text-center max-w-2xl mx-auto mb-8 space-y-2">
+                    <div class="text-emerald-400 font-semibold text-xs sm:text-sm tracking-wider uppercase" data-i18n="revTag">Student Success Stories</div>
+                    <h2 data-i18n="revTitle" class="text-2xl sm:text-3xl font-extrabold text-white">What Our Dumdum &amp; Kolkata Students Say</h2>
+                </div>
+
+                <div class="flex md:grid md:grid-cols-3 gap-5 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-2">
+                    <!-- Review 1 -->
+                    <div class="min-w-[84%] sm:min-w-[48%] md:min-w-0 snap-center bg-pcb-dark border border-gray-800 rounded-3xl p-6 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="text-amber-400 text-xs space-x-0.5">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <span class="text-[10px] bg-emerald-500/15 text-emerald-400 px-2.5 py-0.5 rounded-full font-bold">Own Service Shop</span>
+                        </div>
+                        <p class="text-gray-300 text-xs sm:text-sm leading-relaxed">
+                            "আমি ১০ম পাশ করার পর PCB BUGS-এ ভর্তি হই। স্যাররা একদম হাতে-কলমে Inverter AC IPM ও SMPS রিপেয়ার শিখিয়েছেন। এখন আমি Nagerbazar-এ নিজের রিপেয়ারিং শপ চালাচ্ছি।"
+                        </p>
+                        <div class="pt-2 border-t border-gray-800 flex items-center space-x-3">
+                            <div class="w-9 h-9 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">SD</div>
+                            <div>
+                                <div class="text-xs font-bold text-white">Subham Das</div>
+                                <div class="text-[11px] text-gray-400">Nagerbazar, Dumdum</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="min-w-[84%] sm:min-w-[48%] md:min-w-0 snap-center bg-pcb-dark border border-gray-800 rounded-3xl p-6 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="text-amber-400 text-xs space-x-0.5">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <span class="text-[10px] bg-emerald-500/15 text-emerald-400 px-2.5 py-0.5 rounded-full font-bold">Girls Batch</span>
+                        </div>
+                        <p class="text-gray-300 text-xs sm:text-sm leading-relaxed">
+                            "Girls batch-এর জন্য খুবই সুরক্ষিত পরিবেশ। Oscilloscope আর Hot Air Gun ব্যবহার করে কীভাবে ফ্রিজ ও মাইক্রোওয়েভ বোর্ডের ফল্ট ধরতে হয় তা প্রথম সপ্তাহ থেকেই প্র্যাকটিস করানো হয়।"
+                        </p>
+                        <div class="pt-2 border-t border-gray-800 flex items-center space-x-3">
+                            <div class="w-9 h-9 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">PR</div>
+                            <div>
+                                <div class="text-xs font-bold text-white">Priyanka Roy</div>
+                                <div class="text-[11px] text-gray-400">Birati, North 24 Parganas</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="min-w-[84%] sm:min-w-[48%] md:min-w-0 snap-center bg-pcb-dark border border-gray-800 rounded-3xl p-6 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="text-amber-400 text-xs space-x-0.5">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <span class="text-[10px] bg-emerald-500/15 text-emerald-400 px-2.5 py-0.5 rounded-full font-bold">Service Engineer</span>
+                        </div>
+                        <p class="text-gray-300 text-xs sm:text-sm leading-relaxed">
+                            "দুপুর ১২টা থেকে বিকেল ৫টা পর্যন্ত টানা প্র্যাকটিক্যাল ক্লাস হয়। থিওরির চেয়ে লাইভ খারাপ PCB বোর্ড রিপেয়ার করার ওপর বেশি জোর দেওয়া হয়, যা জব ইন্টারভিউতে দারুণ কাজে লাগে।"
+                        </p>
+                        <div class="pt-2 border-t border-gray-800 flex items-center space-x-3">
+                            <div class="w-9 h-9 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">AK</div>
+                            <div>
+                                <div class="text-xs font-bold text-white">Arindam Karmakar</div>
+                                <div class="text-[11px] text-gray-400">Madhyamgram, Kolkata</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expandable FAQ Accordion -->
+            <div class="max-w-3xl mx-auto space-y-4">
+                <div class="text-center space-y-1.5 mb-6">
+                    <h3 data-i18n="faqTitle" class="text-xl sm:text-3xl font-extrabold text-white">Frequently Asked Questions (FAQs)</h3>
+                    <p class="text-xs sm:text-sm text-gray-400">Common questions about admission, tool kits, PG/Hostel &amp; job placement</p>
+                </div>
+
+                <!-- FAQ 1 -->
+                <div class="bg-pcb-dark border border-gray-800 rounded-2xl overflow-hidden">
+                    <button type="button" onclick="toggleFaq(this)" class="w-full px-5 py-4 text-left flex items-center justify-between gap-3 font-bold text-sm sm:text-base text-white">
+                        <span>1. Who can join this 1-Year PCB Repair Training Course?</span>
+                        <i class="fa-solid fa-chevron-down text-emerald-400 transition-transform duration-200"></i>
+                    </button>
+                    <div class="faq-answer hidden px-5 pb-4 text-xs sm:text-sm text-gray-300 leading-relaxed border-t border-gray-800/70 pt-3">
+                        Any student who has passed <strong>8th or 10th standard</strong> (both <strong>Boys &amp; Girls</strong>) can join. No prior electronics background is required—we start from basic component testing (Resistor, Capacitor, Diode, MOSFET, IGBT) up to advanced Inverter Microcontroller &amp; IPM board repair.
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="bg-pcb-dark border border-gray-800 rounded-2xl overflow-hidden">
+                    <button type="button" onclick="toggleFaq(this)" class="w-full px-5 py-4 text-left flex items-center justify-between gap-3 font-bold text-sm sm:text-base text-white">
+                        <span>2. Are lab tools &amp; damaged PCBs provided during class?</span>
+                        <i class="fa-solid fa-chevron-down text-emerald-400 transition-transform duration-200"></i>
+                    </button>
+                    <div class="faq-answer hidden px-5 pb-4 text-xs sm:text-sm text-gray-300 leading-relaxed border-t border-gray-800/70 pt-3">
+                        Yes! During the 12:00 PM – 5:00 PM practical sessions, every student gets access to Digital Storage Oscilloscopes (DSO), SMD Hot Air Rework Stations, Soldering Irons, DC Power Supplies, LCR Meters, and real defective AC, Microwave, and Refrigerator PCBs.
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="bg-pcb-dark border border-gray-800 rounded-2xl overflow-hidden">
+                    <button type="button" onclick="toggleFaq(this)" class="w-full px-5 py-4 text-left flex items-center justify-between gap-3 font-bold text-sm sm:text-base text-white">
+                        <span>3. Is Hostel / PG facility available near South Dumdum Center?</span>
+                        <i class="fa-solid fa-chevron-down text-emerald-400 transition-transform duration-200"></i>
+                    </button>
+                    <div class="faq-answer hidden px-5 pb-4 text-xs sm:text-sm text-gray-300 leading-relaxed border-t border-gray-800/70 pt-3">
+                        Yes, we assist outstation students from all districts of West Bengal with affordable, verified Boys &amp; Girls PG / Mess accommodations within walking distance of our South Dumdum (JCG8+QM) training center.
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="bg-pcb-dark border border-gray-800 rounded-2xl overflow-hidden">
+                    <button type="button" onclick="toggleFaq(this)" class="w-full px-5 py-4 text-left flex items-center justify-between gap-3 font-bold text-sm sm:text-base text-white">
+                        <span>4. Do you provide Job Placement &amp; Own Repair Shop Guidance?</span>
+                        <i class="fa-solid fa-chevron-down text-emerald-400 transition-transform duration-200"></i>
+                    </button>
+                    <div class="faq-answer hidden px-5 pb-4 text-xs sm:text-sm text-gray-300 leading-relaxed border-t border-gray-800/70 pt-3">
+                        100%. After completing the 1-year practical course and receiving your official PCB BUGS Certificate, we connect students with authorized appliance service centers across Kolkata &amp; West Bengal, and provide wholesale spare-parts supplier contacts for starting your own PCB repair shop.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 7. SMART ONLINE SLOT BOOKING WITH INSTANT SLIP & WHATSAPP INTEGRATION (#booking) -->
+    <section id="booking" class="py-14 sm:py-16 bg-grid relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="bg-pcb-card border-2 border-emerald-500/40 rounded-3xl p-5 sm:p-10 shadow-2xl glow-green">
+                
+                <div class="text-center mb-7 space-y-2">
+                    <div class="inline-flex items-center space-x-2 bg-emerald-500/10 border border-emerald-500/30 px-3.5 py-1 rounded-full text-emerald-400 text-xs font-bold">
+                        <i class="fa-solid fa-ticket"></i>
+                        <span data-i18n="bookTag">Smart Online Admission Booking</span>
+                    </div>
+                    <h2 data-i18n="bookTitle" class="text-2xl sm:text-3xl font-extrabold text-white">Generate Instant Slot Slip &amp; Confirm via WhatsApp</h2>
+                    <p data-i18n="bookDesc" class="text-gray-400 text-xs sm:text-sm">
+                        ফর্মটি পূরণ করলে আপনার জন্য একটি ইউনিক Registration ID সহ Admission Slip তৈরি হবে এবং সরাসরি WhatsApp (09804265067)-এ পাঠানো যাবে।
+                    </p>
+                </div>
+
+                <form id="bookingForm" onsubmit="handleSmartBooking(event)" class="space-y-5">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div>
+                            <label for="fullName" class="block text-xs font-semibold text-gray-300 mb-2">Student Full Name *</label>
+                            <input type="text" id="fullName" required placeholder="Enter student full name" oninput="syncNameFromBooking(this.value)" class="w-full bg-pcb-dark border border-gray-700 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-emerald-500 text-sm">
+                        </div>
+                        <div>
+                            <label for="mobileNumber" class="block text-xs font-semibold text-gray-300 mb-2">WhatsApp Mobile Number *</label>
+                            <input type="tel" id="mobileNumber" required placeholder="e.g. 9804265067" class="w-full bg-pcb-dark border border-gray-700 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-emerald-500 text-sm">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div>
+                            <label for="selectedCourse" class="block text-xs font-semibold text-gray-300 mb-2">Select Training Course *</label>
+                            <select id="selectedCourse" required class="w-full bg-pcb-dark border border-gray-700 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-emerald-500 text-sm">
+                                <option value="All 4 Complete Master Courses (1 Year)">All 4 Complete Master Courses (1 Year)</option>
+                                <option value="Inverter AC PCB Repair">Inverter AC PCB Repair</option>
+                                <option value="Non-Inverter AC PCB Repair">Non-Inverter AC PCB Repair</option>
+                                <option value="Microwave Oven PCB Repair">Microwave Oven PCB Repair</option>
+                                <option value="Refrigerator PCB Repair">Refrigerator PCB Repair</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="userLocation" class="block text-xs font-semibold text-gray-300 mb-2">Your Area / District *</label>
+                            <input type="text" id="userLocation" required placeholder="e.g. DumDum, Barasat, South Dumdum" class="w-full bg-pcb-dark border border-gray-700 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-emerald-500 text-sm">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="userNotes" class="block text-xs font-semibold text-gray-300 mb-2">Qualification &amp; Fee Plan Preference (Class: 12 PM – 5 PM)</label>
+                        <textarea id="userNotes" rows="2" placeholder="e.g. 10th Pass, Interested in Monthly Installment Plan..." class="w-full bg-pcb-dark border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500 text-sm"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 active:scale-[0.99] text-pcb-dark font-extrabold py-4 rounded-2xl shadow-xl glow-green transition flex items-center justify-center space-x-3 text-sm sm:text-base">
+                        <i class="fa-brands fa-whatsapp text-xl"></i>
+                        <span data-i18n="bookSubmitBtn">Generate Slot Slip &amp; Send to WhatsApp</span>
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Map Section -->
+    <section id="location" class="py-14 sm:py-16 bg-pcb-card/60 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div class="space-y-5">
+                <div class="text-emerald-400 font-semibold text-xs sm:text-sm tracking-wider uppercase" data-i18n="locTag">Find Our Center</div>
+                <h2 data-i18n="locTitle" class="text-2xl sm:text-3xl font-extrabold text-white">Training Center Location</h2>
+                <p data-i18n="locDesc" class="text-gray-300 leading-relaxed text-xs sm:text-base">
+                    Visit our training institute directly for live counseling, practical lab inspection, and admission slot booking.
+                </p>
+                <div class="bg-pcb-dark border border-gray-800 p-5 sm:p-6 rounded-2xl space-y-4">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-400">Address / Plus Code</div>
+                            <div class="text-sm sm:text-base font-bold text-white">JCG8+QM, South Dumdum, West Bengal</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-400">Practical Class Timing &amp; Eligibility</div>
+                            <div class="text-sm sm:text-base font-bold text-white">12:00 PM – 5:00 PM • 8th/10th Pass (Boys &amp; Girls)</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-400">Helpline &amp; WhatsApp</div>
+                            <a href="tel:09804265067" class="text-sm sm:text-base font-bold text-emerald-400 hover:underline">09804265067</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Google Maps Embed -->
+            <div class="rounded-3xl overflow-hidden border-2 border-emerald-500/40 h-72 sm:h-96 bg-gray-900 shadow-xl">
+                <iframe title="PCB BUGS South Dumdum Location Map" width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=JCG8%2BQM,+South+Dumdum,+West+Bengal&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-pcb-dark border-t border-gray-800 py-10 text-center text-sm text-gray-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-3">
+            <div class="text-xl font-black text-white">PCB <span class="text-emerald-400">BUGS</span></div>
+            <p class="text-xs text-gray-500">Professional PCB Repair Training Institute — Learn Skills, Build Your Future!</p>
+            <div class="flex justify-center space-x-5 text-lg pt-2">
+                <a href="https://wa.me/919804265067" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="w-10 h-10 rounded-full bg-pcb-card border border-gray-800 flex items-center justify-center text-emerald-400 hover:text-white transition"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="tel:09804265067" aria-label="Call Helpline" class="w-10 h-10 rounded-full bg-pcb-card border border-gray-800 flex items-center justify-center text-emerald-400 hover:text-white transition"><i class="fa-solid fa-phone"></i></a>
+            </div>
+            <div class="text-xs text-gray-600 pt-4 border-t border-gray-900">
+                © 2026 PCB BUGS Training Institute. All rights reserved. JCG8+QM, South Dumdum, West Bengal.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Quick-Help Button -->
+    <a href="https://wa.me/919804265067?text=Hi%20PCB%20BUGS,%20I%20want%20to%20join%20PCB%20Repair%20Training." target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp" class="wa-pulse fixed bottom-20 md:bottom-6 right-4 md:right-6 z-40 w-13 h-13 sm:w-14 sm:h-14 p-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-pcb-dark shadow-2xl flex items-center justify-center transition transform hover:scale-105">
+        <i class="fa-brands fa-whatsapp text-2xl sm:text-3xl"></i>
     </a>
 
-    <a class="btn light" href="#services">
-      Explore Services
-    </a>
+    <!-- 8. MOBILE-FIRST 5-TAB FIXED BOTTOM NAVIGATION BAR -->
+    <nav aria-label="Mobile Bottom Navigation" class="md:hidden fixed bottom-0 left-0 right-0 bg-pcb-card/95 backdrop-blur-lg border-t border-gray-800 z-50 px-1.5 py-2 flex justify-around items-center shadow-2xl">
+        <a href="#home" class="flex flex-col items-center justify-center text-gray-300 hover:text-emerald-400 text-[10px] font-medium min-w-[54px] py-1">
+            <i class="fa-solid fa-house text-base mb-1 text-emerald-400"></i>
+            <span data-i18n="tabHome">Home</span>
+        </a>
+        <a href="#courses" class="flex flex-col items-center justify-center text-gray-300 hover:text-emerald-400 text-[10px] font-medium min-w-[54px] py-1">
+            <i class="fa-solid fa-microchip text-base mb-1"></i>
+            <span data-i18n="tabCourses">Courses</span>
+        </a>
+        <a href="#gallery" class="flex flex-col items-center justify-center text-gray-300 hover:text-emerald-400 text-[10px] font-medium min-w-[54px] py-1">
+            <i class="fa-solid fa-images text-base mb-1"></i>
+            <span data-i18n="tabPhotos">Photos</span>
+        </a>
+        <a href="#simulator" class="flex flex-col items-center justify-center text-gray-300 hover:text-emerald-400 text-[10px] font-medium min-w-[54px] py-1">
+            <i class="fa-solid fa-bolt text-base mb-1 text-amber-400"></i>
+            <span data-i18n="tabLab">Lab Demo</span>
+        </a>
+        <a href="#booking" class="bg-emerald-500 text-pcb-dark font-extrabold px-3 py-2 rounded-xl text-xs flex items-center space-x-1 glow-green active:scale-95 transition">
+            <i class="fa-solid fa-calendar-plus"></i>
+            <span data-i18n="tabBook">Book</span>
+        </a>
+    </nav>
 
-  </div>
-</section>
+    <!-- COURSE SYLLABUS & TOOLS MODAL -->
+    <div id="syllabusModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6" onclick="if(event.target === this) closeSyllabusModal()">
+        <div class="bg-pcb-card border-2 border-emerald-500/60 rounded-3xl max-w-2xl w-full max-h-[88vh] overflow-y-auto p-5 sm:p-8 shadow-2xl space-y-5 relative">
+            <button type="button" onclick="closeSyllabusModal()" aria-label="Close Syllabus" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-gray-800 hover:bg-red-600 text-white flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div>
+                <span id="sylModuleBadge" class="text-xs font-bold text-emerald-400 bg-emerald-500/15 px-3 py-1 rounded-full">Module Details</span>
+                <h3 id="sylModalTitle" class="text-xl sm:text-2xl font-extrabold text-white mt-2">Course Syllabus</h3>
+            </div>
 
-<div class="quick">
-  <a href="#home">⌂ Home</a>
-  <a href="#services">✦ Services & Prices</a>
-  <a href="#gallery">▧ Work Photos</a>
-  <a href="#booking">▣ Book Now</a>
-  <a href="#location-section">⌖ Location</a>
-</div>
+            <div class="space-y-2.5">
+                <div class="text-xs font-bold uppercase tracking-wider text-amber-300">Week-by-Week Practical Breakdown</div>
+                <div id="sylWeeksList" class="space-y-2"></div>
+            </div>
 
-<!-- GALLERY -->
+            <div class="space-y-2">
+                <div class="text-xs font-bold uppercase tracking-wider text-emerald-400">Lab Instruments &amp; Tools Covered</div>
+                <div id="sylToolsList" class="flex flex-wrap gap-2"></div>
+            </div>
 
-<section class="content" id="gallery">
-
-  <div class="section-title">
-    <span class="eyebrow">Our Portfolio</span>
-    <h2>Beauty & Style Gallery</h2>
-    <p>Inspiration for your next look.</p>
-  </div>
-
-  <div class="gallery">
-
-    <div class="gallery-item">
-      <img loading="lazy"
-      src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=900&q=85"
-      alt="Beauty salon interior">
-      <div class="gallery-caption">Beauty Salon</div>
-    </div>
-
-    <div class="gallery-item">
-      <img loading="lazy"
-      src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=900&q=85"
-      alt="Hair styling">
-      <div class="gallery-caption">Hair Styling</div>
-    </div>
-
-    <div class="gallery-item">
-      <img loading="lazy"
-      src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=900&q=85"
-      alt="Makeup and beauty">
-      <div class="gallery-caption">Makeup & Beauty</div>
-    </div>
-
-    <div class="gallery-item">
-      <img loading="lazy"
-      src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?auto=format&fit=crop&w=900&q=85"
-      alt="Professional makeup look">
-      <div class="gallery-caption">Professional Makeup</div>
-    </div>
-
-    <div class="gallery-item">
-      <img loading="lazy"
-      src="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=900&q=85"
-      alt="Nail styling">
-      <div class="gallery-caption">Nail Care</div>
-    </div>
-
-    <div class="gallery-item">
-      <img loading="lazy"
-      src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=900&q=85"
-      alt="Beauty care">
-      <div class="gallery-caption">Beauty Care</div>
-    </div>
-
-    <div class="gallery-item">
-      <img loading="lazy"
-      src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=900&q=85"
-      alt="Salon styling">
-      <div class="gallery-caption">Salon Styling</div>
-    </div>
-
-    <div class="gallery-item">
-      <img loading="lazy"
-      src="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d1?auto=format&fit=crop&w=900&q=85"
-      alt="Hair salon">
-      <div class="gallery-caption">Hair Salon</div>
-    </div>
-
-    <div class="gallery-item">
-      <img loading="lazy"
-      src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=900&q=85"
-      alt="Hair treatment">
-      <div class="gallery-caption">Hair Treatment</div>
-    </div>
-
-    <div class="gallery-item">
-      <img loading="lazy"
-      src="https://images.unsplash.com/photo-1610992015732-2449b76344bc?auto=format&fit=crop&w=900&q=85"
-      alt="Nail art">
-      <div class="gallery-caption">Nail Art</div>
-    </div>
-
-    <div class="gallery-item">
-      <img loading="lazy"
-      src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=900&q=85"
-      alt="Beauty products">
-      <div class="gallery-caption">Beauty Products</div>
-    </div>
-
-    <div class="gallery-item">
-      <img loading="lazy"
-      src="https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?auto=format&fit=crop&w=900&q=85"
-      alt="Salon interior">
-      <div class="gallery-caption">Salon Experience</div>
-    </div>
-
-  </div>
-</section>
-
-<!-- SERVICES -->
-
-<section class="content" id="services">
-
-  <div class="section-title">
-    <span class="eyebrow">Service Menu</span>
-    <h2>Services & Prices</h2>
-    <p>Select your preferred beauty service.</p>
-  </div>
-
-  <div class="service-grid" id="serviceCards"></div>
-
-</section>
-
-<!-- BOOKING -->
-
-<section class="content" id="booking">
-
-  <div class="section-title">
-    <span class="eyebrow">Reserve Your Time</span>
-    <h2>Book an Appointment</h2>
-    <p>Fill in your details and send your booking request through WhatsApp.</p>
-  </div>
-
-  <div class="booking-area">
-
-    <form id="bookingForm">
-
-      <div class="form-grid">
-
-        <div class="form-group">
-          <label for="name">Customer Name *</label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            required
-            maxlength="80"
-            autocomplete="name"
-            placeholder="Enter your full name">
+            <div class="pt-2 flex flex-col sm:flex-row gap-3">
+                <button type="button" id="sylBookBtn" class="flex-1 bg-emerald-500 hover:bg-emerald-400 text-pcb-dark font-extrabold py-3.5 rounded-xl transition text-sm">
+                    Enroll in This Module
+                </button>
+                <button type="button" onclick="closeSyllabusModal()" class="sm:w-auto bg-gray-800 hover:bg-gray-700 text-gray-200 font-bold py-3.5 px-6 rounded-xl transition text-sm">
+                    Close
+                </button>
+            </div>
         </div>
-
-        <div class="form-group">
-          <label for="mobile">Customer Mobile Number *</label>
-          <input
-            id="mobile"
-            name="mobile"
-            type="tel"
-            inputmode="numeric"
-            maxlength="10"
-            pattern="[0-9]{10}"
-            required
-            autocomplete="tel"
-            placeholder="10-digit mobile number">
-        </div>
-
-        <div class="form-group">
-          <label for="service">Select Beauty Service *</label>
-          <select id="service" name="service" required>
-            <option value="">Select a service</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="price">Service Price</label>
-          <input
-            id="price"
-            class="auto-price"
-            readonly
-            value="Select service first">
-        </div>
-
-        <div class="form-group">
-          <label for="date">Appointment Date *</label>
-          <input id="date" name="date" type="date" required>
-        </div>
-
-        <div class="form-group">
-          <label for="location">Customer Area / Address *</label>
-          <input
-            id="location"
-            name="location"
-            type="text"
-            required
-            maxlength="200"
-            autocomplete="street-address"
-            placeholder="Enter your area or address">
-        </div>
-
-        <div class="form-group full">
-
-          <label for="request">Special Request (Optional)</label>
-
-          <textarea
-            id="request"
-            name="request"
-            maxlength="1000"
-            placeholder="Enter any special requirements"></textarea>
-
-        </div>
-
-        <div class="form-group full">
-
-          <div class="slot-title">Select Appointment Time *</div>
-
-          <div class="slots" id="slots"></div>
-
-          <input
-            type="hidden"
-            id="selectedTime"
-            name="selectedTime"
-            required>
-
-        </div>
-
-      </div>
-
-      <button
-        class="btn primary"
-        type="submit"
-        style="width:100%;margin-top:23px">
-
-        💬 Send Booking Request on WhatsApp
-
-      </button>
-
-      <p class="note">
-        Your booking request will be sent to Neelam Beauty Hub on WhatsApp.
-        Please press Send in WhatsApp. Your appointment is confirmed only
-        after the salon confirms availability.
-      </p>
-
-    </form>
-
-    <div class="booking-summary" id="summary" aria-live="polite">
-
-      <h3>Appointment Request Prepared</h3>
-
-      <p id="summaryText"></p>
-
     </div>
 
-  </div>
-
-</section>
-
-<!-- LOCATION -->
-
-<section class="content" id="location-section">
-
-  <div class="section-title">
-    <span class="eyebrow">Find Us</span>
-    <h2>Our Location</h2>
-    <p>Ghaziabad, Uttar Pradesh</p>
-  </div>
-
-  <div class="location-box">
-
-    <h3>📍 Neelam Beauty Hub</h3>
-
-    <p>JC9Q+6MX, Ghaziabad, Uttar Pradesh, India</p>
-
-    <a
-      class="btn primary"
-      style="margin-top:15px"
-      href="https://www.google.com/maps/search/?api=1&query=JC9Q%2B6MX%2C%20Ghaziabad%2C%20Uttar%20Pradesh"
-      target="_blank"
-      rel="noopener noreferrer">
-
-      Open Directions in Maps
-
-    </a>
-
-    <iframe
-      class="map"
-      title="Neelam Beauty Hub location map"
-      src="https://www.google.com/maps?q=JC9Q%2B6MX%2C%20Ghaziabad%2C%20Uttar%20Pradesh&output=embed"
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
-
-  </div>
-
-</section>
-
-<!-- CONTACT -->
-
-<section class="content" id="contact">
-
-  <div class="section-title">
-    <span class="eyebrow">Get in Touch</span>
-    <h2>Contact Neelam Beauty Hub</h2>
-    <p>Questions about services or appointments? Contact us on WhatsApp.</p>
-  </div>
-
-  <div class="contact-grid">
-
-    <div class="contact-card">
-
-      <h3>💬 WhatsApp Booking</h3>
-
-      <p>Send an appointment request directly to our WhatsApp.</p>
-
-      <a
-        class="contact-link"
-        href="https://wa.me/917703889909"
-        target="_blank"
-        rel="noopener noreferrer">
-
-        Chat on WhatsApp
-
-      </a>
-
+    <!-- FULL-SCREEN LIGHTBOX MODAL -->
+    <div id="lightboxModal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-6" onclick="if(event.target === this) closeLightbox()">
+        <div class="relative max-w-5xl w-full bg-pcb-card border-2 border-emerald-500 rounded-3xl p-3 sm:p-4 shadow-2xl">
+            <button type="button" onclick="closeLightbox()" aria-label="Close Fullscreen Photo" class="absolute -top-3.5 -right-3.5 text-white bg-gray-800 hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold transition shadow-lg border border-gray-700 z-10">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <img id="lightboxImage" src="" alt="Enlarged Training Room View" class="w-full max-h-[78vh] object-contain rounded-2xl bg-pcb-dark">
+            <div id="lightboxCaption" class="text-center text-xs sm:text-sm font-semibold text-emerald-300 pt-3 pb-1 px-2">
+                PCB BUGS Training Room &amp; Students — South Dumdum, West Bengal
+            </div>
+        </div>
     </div>
 
-    <div class="contact-card">
+    <!-- INSTANT ADMISSION BOOKING SLIP MODAL -->
+    <div id="bookingModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4" onclick="if(event.target === this) closeBookingModal()">
+        <div class="bg-pcb-card border-2 border-emerald-500 rounded-3xl p-6 sm:p-8 max-w-md w-full space-y-4 glow-green relative">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-3">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-microchip text-emerald-400 text-lg"></i>
+                    <span class="font-black text-white text-sm tracking-wider">PCB BUGS ADMISSION SLIP</span>
+                </div>
+                <span id="slipRegId" class="bg-emerald-500/20 border border-emerald-500 text-emerald-300 font-mono text-xs font-bold px-2.5 py-1 rounded-lg">PCBB-2026-0000</span>
+            </div>
 
-      <h3>💄 Beauty Services</h3>
+            <div id="slipDetailsBox" class="bg-pcb-dark border border-gray-800 rounded-2xl p-4 space-y-2 text-xs text-gray-200">
+                <!-- Populated dynamically -->
+            </div>
 
-      <p>
-        Hair services, facial, threading, manicure, pedicure
-        and makeup appointments.
-      </p>
+            <div id="copyToast" class="hidden text-center text-xs font-bold text-emerald-400 bg-emerald-500/15 py-1.5 rounded-lg">
+                ✓ Booking Slip copied to clipboard!
+            </div>
 
-      <a class="contact-link" href="#services">
-        Explore Services
-      </a>
+            <div class="grid grid-cols-2 gap-2.5 pt-1">
+                <button type="button" onclick="copyBookingSlip()" class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 rounded-xl text-xs transition flex items-center justify-center space-x-1.5 border border-gray-700">
+                    <i class="fa-regular fa-copy"></i>
+                    <span>Copy Slip</span>
+                </button>
+                <a id="slipWhatsappLink" href="https://wa.me/919804265067" target="_blank" rel="noopener noreferrer" class="bg-emerald-500 hover:bg-emerald-400 text-pcb-dark font-extrabold py-3 rounded-xl text-xs transition flex items-center justify-center space-x-1.5">
+                    <i class="fa-brands fa-whatsapp text-base"></i>
+                    <span>Open WhatsApp</span>
+                </a>
+            </div>
 
+            <button type="button" onclick="closeBookingModal()" class="w-full text-gray-400 hover:text-white text-xs font-semibold pt-1">
+                Close Window
+            </button>
+        </div>
     </div>
 
-  </div>
+    <!-- JavaScript Application Logic -->
+    <script>
+        /* =========================================================
+           1. BILINGUAL DICTIONARY (ENGLISH / বাংলা)
+           ========================================================= */
+        const translations = {
+            en: {
+                topBanner: '🚀 <strong>Online Admission Open!</strong> 1 Year Practical Training (8th / 10th Pass, Boys &amp; Girls Both). Call / WhatsApp: <a href="https://wa.me/919804265067" target="_blank" rel="noopener noreferrer" class="underline font-extrabold tracking-wide">09804265067</a>',
+                navCourses: 'Courses & Fees',
+                navGallery: 'Lab & Students',
+                navSim: 'Free Lab Demo',
+                navCred: 'ID & Certificate',
+                navLoc: 'Location',
+                navBook: 'Book Slot',
+                mHome: 'Home',
+                mCourses: 'Courses, Syllabus & Fee Estimator',
+                mGallery: 'Training Room & Students Photos',
+                mSim: 'Free PCB Fault Diagnostic Simulator',
+                mCred: 'Student ID Card & Certificate',
+                mFaq: 'Student Reviews & FAQs',
+                mLoc: 'South Dumdum Center Location',
+                mBookBtn: 'Book Admission Slot Online',
+                heroBadge: 'Learn Skills. Build Your Future. • South Dumdum',
+                heroTitle: 'Become a Professional <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">PCB Repair Technician</span>',
+                heroQuote: '"আমাদের এখানে হাতে-কলমে PCB Repair Training দেওয়া হয়।"',
+                heroDesc: 'Master <strong class="text-white">Inverter &amp; Non-Inverter AC, Microwave Oven, and Refrigerator</strong> motherboards with 100% practical lab training on Digital Storage Oscilloscopes (DSO), Hot Air Stations, and live PCBs.',
+                specDurLabel: 'Duration',
+                specDurVal: '1 Year Course',
+                specTimeLabel: 'Class Time',
+                specEligLabel: 'Eligibility',
+                specEligVal: '8th / 10th Pass',
+                specBatchLabel: 'Batch',
+                specBatchVal: 'Boys & Girls',
+                heroCtaBook: 'Book Training Slot Online',
+                heroCtaDemo: 'Try Free PCB Lab Demo',
+                heroPhotoBadge: 'Training Room & Students',
+                heroPhotoSub: '100% Practical Class',
+                btnFullscreen: 'Full Screen',
+                coursesTag: 'Comprehensive 1-Year Curriculum',
+                coursesTitle: 'Courses, Syllabus & Fee Estimator',
+                coursesDesc: 'Click any module to inspect week-by-week syllabus, lab tools, and calculate your easy monthly installment (EMI) plan.',
+                btnSyllabus: 'View Syllabus & Tools',
+                btnBookModule: 'Book This Course',
+                emiTag: 'Easy Student Fee & Monthly Installment Estimator',
+                emiTitle: 'Plan Your 1-Year Practical Training Budget',
+                galTag: 'Live Classroom & Lab Showcase',
+                galTitle: 'Training Room & Students Photo Gallery',
+                galDesc: 'Explore our practical classroom, Digital Oscilloscope benches, and boys & girls batches learning hands-on PCB repair.',
+                btnAddPhotos: '+ Add Student / Lab Photos',
+                simTag: 'Interactive Virtual Lab Experience',
+                simTitle: 'Try Free PCB Fault Diagnostic Simulator',
+                simDesc: 'Pick a real defective PCB symptom and probe voltage points with the virtual multimeter to see how we teach fault tracing!',
+                credTag: 'Official Student Credentials',
+                credTitle: 'Live Student Lab ID Card & Certificate Preview',
+                credDesc: 'Enter your name, father’s name, phone/blood group, and photo to preview and print your official PCB BUGS Lab ID Card & 1-Year Certificate.',
+                revTag: 'Student Success Stories',
+                revTitle: 'What Our Dumdum & Kolkata Students Say',
+                faqTitle: 'Frequently Asked Questions (FAQs)',
+                bookTag: 'Smart Online Admission Booking',
+                bookTitle: 'Generate Instant Slot Slip & Confirm via WhatsApp',
+                bookDesc: 'Fill out the form to generate your unique Registration ID slip and confirm directly via WhatsApp (09804265067).',
+                bookSubmitBtn: 'Generate Slot Slip & Send to WhatsApp',
+                locTag: 'Find Our Center',
+                locTitle: 'Training Center Location',
+                locDesc: 'Visit our training institute directly for live counseling, practical lab inspection, and admission slot booking.',
+                tabHome: 'Home',
+                tabCourses: 'Courses',
+                tabPhotos: 'Photos',
+                tabLab: 'Lab Demo',
+                tabBook: 'Book'
+            },
+            bn: {
+                topBanner: '🚀 <strong>অনলাইন অ্যাডমিশন চলছে!</strong> ১ বছরের প্র্যাকটিক্যাল ট্রেনিং (৮ম / ১০ম পাশ, ছেলে ও মেয়ে উভয়ই)। কল / হোয়াটসঅ্যাপ: <a href="https://wa.me/919804265067" target="_blank" rel="noopener noreferrer" class="underline font-extrabold tracking-wide">09804265067</a>',
+                navCourses: 'কোর্স ও ফি',
+                navGallery: 'ল্যাব ও স্টুডেন্ট ফটো',
+                navSim: 'ফ্রি ল্যাব ডেমো',
+                navCred: 'আইডি ও সার্টিফিকেট',
+                navLoc: 'লোকেশন',
+                navBook: 'স্লট বুক করুন',
+                mHome: 'হোম পেজ',
+                mCourses: 'কোর্স সিলেবাস ও মাসিক কিস্তি (EMI)',
+                mGallery: 'ট্রেনিং রুম ও ছাত্র-ছাত্রীদের ছবি',
+                mSim: 'ফ্রি PCB ফল্ট টেস্টিং ডেমো',
+                mCred: 'স্টুডেন্ট আইডি কার্ড ও সার্টিফিকেট',
+                mFaq: 'ছাত্র-ছাত্রীদের মতামত ও প্রশ্নোত্তর',
+                mLoc: 'সাউথ দমদম সেন্টার লোকেশন',
+                mBookBtn: 'অনলাইনে অ্যাডমিশন স্লট বুক করুন',
+                heroBadge: 'কাজ শিখুন, ভবিষ্যৎ গড়ুন • সাউথ দমদম',
+                heroTitle: 'হয়ে উঠুন একজন দক্ষ <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">PCB Repair Technician</span>',
+                heroQuote: '"আমাদের এখানে হাতে-কলমে PCB Repair Training দেওয়া হয়।"',
+                heroDesc: 'ডিজিটাল অসিলোস্কোপ (DSO), হট এয়ার স্টেশন এবং লাইভ মাদারবোর্ডের মাধ্যমে <strong class="text-white">Inverter ও Non-Inverter AC, Microwave Oven এবং Refrigerator</strong> PCB রিপেয়ারিং শিখুন ১০০% প্র্যাকটিক্যাল ক্লাসে।',
+                specDurLabel: 'কোর্সের সময়কাল',
+                specDurVal: '১ বছরের কোর্স',
+                specTimeLabel: 'ক্লাসের সময়',
+                specEligLabel: 'যোগ্যতা',
+                specEligVal: '৮ম / ১০ম পাশ',
+                specBatchLabel: 'ব্যাচ',
+                specBatchVal: 'ছেলে ও মেয়ে উভয়ই',
+                heroCtaBook: 'অনলাইনে স্লট বুক করুন',
+                heroCtaDemo: 'ফ্রি PCB ল্যাব ডেমো দেখুন',
+                heroPhotoBadge: 'ট্রেনিং রুম ও ছাত্র-ছাত্রী',
+                heroPhotoSub: '১০০% প্র্যাকটিক্যাল ক্লাস',
+                btnFullscreen: 'বড় করে দেখুন',
+                coursesTag: '১ বছরের সম্পূর্ণ প্র্যাকটিক্যাল সিলেবাস',
+                coursesTitle: 'ট্রেনিং কোর্স, সিলেবাস ও মাসিক ফি ক্যালকুলেটর',
+                coursesDesc: 'যেকোনো মডিউলে ক্লিক করে সপ্তাহভিত্তিক সিলেবাস, ল্যাব টুলস এবং সহজ মাসিক কিস্তির (EMI) হিসাব দেখে নিন।',
+                btnSyllabus: 'সিলেবাস ও টুলস দেখুন',
+                btnBookModule: 'এই কোর্সটি বুক করুন',
+                emiTag: 'সহজ স্টুডেন্ট ফি ও মাসিক কিস্তি (EMI) ক্যালকুলেটর',
+                emiTitle: 'আপনার ১ বছরের ট্রেনিং বাজেট হিসাব করুন',
+                galTag: 'লাইভ ক্লাসরুম ও ল্যাব গ্যালারি',
+                galTitle: 'ট্রেনিং রুম ও ছাত্র-ছাত্রীদের ফটো গ্যালারি',
+                galDesc: 'আমাদের প্র্যাকটিক্যাল ক্লাসরুম, ডিজিটাল অসিলোস্কোপ বেঞ্চ এবং ছেলে ও মেয়েদের ব্যাচের হাতে-কলমে কাজের ছবি দেখুন।',
+                btnAddPhotos: '+ স্টুডেন্ট / ল্যাব ফটো যোগ করুন',
+                simTag: 'ইন্টার‍্যাক্টিভ ভার্চুয়াল ল্যাব অভিজ্ঞতা',
+                simTitle: 'ফ্রি PCB ফল্ট ডায়াগনস্টিক সিমুলেটর ট্রাই করুন',
+                simDesc: 'একটি খারাপ বোর্ডের সমস্যা বেছে নিন এবং ডিজিটাল মাল্টিমিটার দিয়ে ভোল্টেজ টেস্ট করে ফল্ট খুঁজে বের করুন!',
+                credTag: 'অফিশিয়াল স্টুডেন্ট আইডি ও সার্টিফিকেট',
+                credTitle: 'লাইভ স্টুডেন্ট ল্যাব আইডি কার্ড ও সার্টিফিকেট প্রিভিউ',
+                credDesc: 'আপনার নাম, বাবার নাম, ফোন/ব্লাড গ্রুপ ও ছবি দিয়ে আপনার অফিশিয়াল স্টুডেন্ট আইডি কার্ড ও ১ বছরের সার্টিফিকেট প্রিভিউ ও প্রিন্ট করুন।',
+                revTag: 'সফল ছাত্র-ছাত্রীদের অভিজ্ঞতা',
+                revTitle: 'দমদম ও কলকাতার ছাত্র-ছাত্রীরা কী বলছেন',
+                faqTitle: 'সাধারণ জিজ্ঞাসিত প্রশ্নাবলী (FAQs)',
+                bookTag: 'স্মার্ট অনলাইন অ্যাডমিশন বুকিং',
+                bookTitle: 'ইনস্ট্যান্ট স্লট স্লিপ তৈরি করুন ও WhatsApp-এ পাঠান',
+                bookDesc: 'ফর্মটি পূরণ করলে আপনার ইউনিক Registration ID সহ স্লিপ তৈরি হবে এবং সরাসরি WhatsApp (09804265067)-এ পাঠাতে পারবেন।',
+                bookSubmitBtn: 'স্লট স্লিপ তৈরি করুন ও WhatsApp-এ পাঠান',
+                locTag: 'আমাদের ঠিকানা',
+                locTitle: 'ট্রেনিং সেন্টার লোকেশন',
+                locDesc: 'সরাসরি কাউন্সেলিং, প্র্যাকটিক্যাল ল্যাব পরিদর্শন এবং অ্যাডমিশন স্লট বুকিংয়ের জন্য আমাদের ইনস্টিটিউটে আসুন।',
+                tabHome: 'হোম',
+                tabCourses: 'কোর্স',
+                tabPhotos: 'ফটো',
+                tabLab: 'ল্যাব ডেমো',
+                tabBook: 'বুকিং'
+            }
+        };
 
-</section>
+        let currentLang = 'en';
 
-</main>
+        function setLanguage(lang) {
+            currentLang = lang;
+            const enBtn = document.getElementById('langEnBtn');
+            const bnBtn = document.getElementById('langBnBtn');
 
-<footer>
+            if (lang === 'en') {
+                enBtn.className = 'px-2.5 py-1.5 rounded-lg bg-emerald-500 text-pcb-dark transition';
+                bnBtn.className = 'px-2.5 py-1.5 rounded-lg text-gray-300 hover:text-white font-bengali transition';
+            } else {
+                bnBtn.className = 'px-2.5 py-1.5 rounded-lg bg-emerald-500 text-pcb-dark font-bengali transition';
+                enBtn.className = 'px-2.5 py-1.5 rounded-lg text-gray-300 hover:text-white transition';
+            }
 
-  <h3>Neelam Beauty Hub</h3>
+            const dict = translations[lang];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key]) {
+                    el.innerHTML = dict[key];
+                }
+            });
+        }
 
-  <p>Beauty • Style • Care | Ghaziabad</p>
+        /* =========================================================
+           MOBILE DRAWER & FAQ ACCORDION
+           ========================================================= */
+        const menuBtn = document.getElementById('menuBtn');
+        const menuIcon = document.getElementById('menuIcon');
+        const mobileMenu = document.getElementById('mobileMenu');
 
-  <p style="margin-top:10px">
-    WhatsApp Appointment Booking Available
-  </p>
+        menuBtn.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.toggle('hidden');
+            menuIcon.className = isHidden ? 'fa-solid fa-bars text-base' : 'fa-solid fa-xmark text-base';
+        });
 
-  <br>
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.className = 'fa-solid fa-bars text-base';
+            });
+        });
 
-  <p>© 2026 Neelam Beauty Hub. All rights reserved.</p>
+        function toggleFaq(btn) {
+            const answer = btn.nextElementSibling;
+            const icon = btn.querySelector('i');
+            const isHidden = answer.classList.toggle('hidden');
+            icon.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
 
-</footer>
+        /* =========================================================
+           2. SYLLABUS MODAL & FEE / EMI CALCULATOR
+           ========================================================= */
+        const syllabusData = {
+            inverter: {
+                badge: 'Module 01 • Inverter Air Conditioner',
+                title: 'Inverter AC PCB Repair Syllabus',
+                courseName: 'Inverter AC PCB Repair',
+                weeks: [
+                    { week: 'Weeks 1–3', topic: 'SMD Component Identification, Cold/Hot Testing & SMPS 15V/12V/5V Power Supply Repair' },
+                    { week: 'Weeks 4–6', topic: 'Indoor-Outdoor Serial Communication Circuit (Optocoupler, Zener & E1/E5 Error Tracing)' },
+                    { week: 'Weeks 7–10', topic: 'IPM (Intelligent Power Module) 6-Pulse PWM Drive, Bootstrap Capacitors & DSO Waveform Checks' },
+                    { week: 'Weeks 11–13', topic: 'PFC (Power Factor Correction) Circuit, EEV Valve Drive & Live Daikin/LG/Voltas Board Practice' }
+                ],
+                tools: ['Digital Storage Oscilloscope (DSO)', 'SMD Hot Air Rework Station', 'IPM & IGBT Tester', 'LCR Meter', 'Variable DC Power Supply']
+            },
+            noninverter: {
+                badge: 'Module 02 • Fixed-Speed Air Conditioner',
+                title: 'Non-Inverter AC PCB Repair Syllabus',
+                courseName: 'Non-Inverter AC PCB Repair',
+                weeks: [
+                    { week: 'Weeks 1–2', topic: 'Linear Transformer & SMPS Step-Down Power Supply, Bridge Rectifier & 7805/7812 Regulators' },
+                    { week: 'Weeks 3–5', topic: 'Compressor Relay Driver (ULN2003), Zero-Crossing Detection & Indoor Blower Speed Control' },
+                    { week: 'Weeks 6–8', topic: 'Room & Coil NTC Thermistor Calibration, Stepper Swing Motor & IR Receiver Display Board Repair' }
+                ],
+                tools: ['Digital Multimeter', 'Temperature-Controlled Soldering Iron', 'AC Load Test Lamp Box', 'Universal PCB Simulator']
+            },
+            microwave: {
+                badge: 'Module 03 • Solo, Grill & Convection Microwave',
+                title: 'Microwave Oven PCB Repair Syllabus',
+                courseName: 'Microwave Oven PCB Repair',
+                weeks: [
+                    { week: 'Weeks 1–2', topic: 'High-Voltage Safety Protocol, Door Interlock Micro-Switch Logic & Primary/Secondary Relay Checks' },
+                    { week: 'Weeks 3–5', topic: 'Membrane Touch Pad Carbon Track Restoration & Tactile Switch Matrix Conversion' },
+                    { week: 'Weeks 6–8', topic: '7-Segment LED/VFD Display Driver, Buzzer Circuit, Convection Heater Relay & SMPS Faults' }
+                ],
+                tools: ['Conductive Silver Ink Pen', 'Digital Multimeter', 'Desoldering Pump & Wick', 'Isolation Transformer']
+            },
+            refrigerator: {
+                badge: 'Module 04 • Single & Frost-Free Inverter Fridge',
+                title: 'Refrigerator PCB Repair Syllabus',
+                courseName: 'Refrigerator PCB Repair',
+                weeks: [
+                    { week: 'Weeks 1–3', topic: 'Frost-Free Main Control Board Architecture, Defrost Heater & Bi-Metal/Sensor Circuit Repair' },
+                    { week: 'Weeks 4–6', topic: 'Inverter BLDC Compressor Driver Board, Shunt Resistor Current Sense & UVW Phase Testing' },
+                    { week: 'Weeks 7–9', topic: 'Damper Motor Control, Door Switch Reed Sensor & Samsung/LG/Whirlpool Live PCB Troubleshooting' }
+                ],
+                tools: ['BLDC Compressor Checker', 'DSO Oscilloscope', 'SMD Rework Station', 'Digital Clamp & Multimeter']
+            }
+        };
 
-<a
-  class="floating"
-  href="https://wa.me/917703889909"
-  target="_blank"
-  rel="noopener noreferrer"
-  aria-label="Chat with Neelam Beauty Hub on WhatsApp">
+        function openSyllabusModal(key) {
+            const data = syllabusData[key];
+            if (!data) return;
+            document.getElementById('sylModuleBadge').textContent = data.badge;
+            document.getElementById('sylModalTitle').textContent = data.title;
 
-  ✆
+            const weeksContainer = document.getElementById('sylWeeksList');
+            weeksContainer.innerHTML = data.weeks.map(item => `
+                <div class="bg-pcb-dark border border-gray-800 rounded-xl p-3 flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3">
+                    <span class="text-xs font-extrabold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-lg whitespace-nowrap self-start">${item.week}</span>
+                    <span class="text-xs sm:text-sm text-gray-200">${item.topic}</span>
+                </div>
+            `).join('');
 
-</a>
+            const toolsContainer = document.getElementById('sylToolsList');
+            toolsContainer.innerHTML = data.tools.map(tool => `
+                <span class="text-xs font-semibold bg-pcb-dark border border-emerald-500/40 text-emerald-300 px-3 py-1.5 rounded-xl">
+                    <i class="fa-solid fa-screwdriver-wrench mr-1 text-[10px]"></i>${tool}
+                </span>
+            `).join('');
 
-<script>
-"use strict";
+            const bookBtn = document.getElementById('sylBookBtn');
+            bookBtn.onclick = function() {
+                closeSyllabusModal();
+                selectCourseAndScroll(data.courseName);
+            };
 
-/* =================================
-   WHATSAPP BOOKING SETTINGS
-================================= */
+            document.getElementById('syllabusModal').classList.remove('hidden');
+        }
 
-const WHATSAPP_NUMBER = "
+        function closeSyllabusModal() {
+            document.getElementById('syllabusModal').classList.add('hidden');
+        }
+
+        function selectCourseAndScroll(courseName) {
+            document.getElementById('selectedCourse').value = courseName;
+            document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Fee & EMI Estimator
+        function calculateEMI() {
+            const baseFee = parseInt(document.getElementById('emiTrack').value, 10);
+            const months = parseInt(document.getElementById('emiMonths').value, 10);
+            const downPayment = parseInt(document.getElementById('downPaymentSlider').value, 10);
+
+            document.getElementById('downPaymentDisplay').textContent = `₹${downPayment.toLocaleString('en-IN')}`;
+
+            if (months === 1) {
+                const discounted = Math.round(baseFee * 0.9);
+                document.getElementById('monthlyEmiResult').innerHTML = `₹${discounted.toLocaleString('en-IN')} <span class="text-sm font-medium text-amber-300">One-Time</span>`;
+                document.getElementById('emiBreakdownText').textContent = `10% Scholarship Applied! Save ₹${(baseFee - discounted).toLocaleString('en-IN')} on Full Payment`;
+            } else {
+                const remaining = Math.max(0, baseFee - downPayment);
+                const monthly = Math.round(remaining / months);
+                document.getElementById('monthlyEmiResult').innerHTML = `₹${monthly.toLocaleString('en-IN')} <span class="text-sm font-medium text-gray-400">/ mo</span>`;
+                document.getElementById('emiBreakdownText').textContent = `Total Fee: ₹${baseFee.toLocaleString('en-IN')} • Down Payment: ₹${downPayment.toLocaleString('en-IN')} • ${months} Months @ 0% Interest`;
+            }
+        }
+
+        function applyEmiToBooking() {
+            const trackText = document.getElementById('emiTrack').selectedOptions[0].text.split('—')[0].trim();
+            const emiText = document.getElementById('monthlyEmiResult').textContent.trim();
+            document.getElementById('userNotes').value = `Preferred Track: ${trackText} | Plan: ${emiText}`;
+            document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        /* =========================================================
+           3. TRAINING ROOM & STUDENTS PHOTO GALLERY (WITH LOCALSTORAGE)
+           ========================================================= */
+        const GALLERY_STORAGE_KEY = 'pcbbugs_custom_gallery_v1';
+
+        function handleHeroFallback(imgElement) {
+            imgElement.onerror = null;
+            imgElement.src = 'https://placehold.co/960x540/0f1c3f/00e676?text=PCB+BUGS+Training+Room+%26+Students+(146815.png)';
+        }
+
+        function handleCardFallback(imgElement, label) {
+            imgElement.onerror = null;
+            imgElement.src = `https://placehold.co/640x360/0f1c3f/00e676?text=${label}`;
+        }
+
+        function replaceMainPhoto(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const dataUrl = e.target.result;
+                document.getElementById('heroClassroomImg').src = dataUrl;
+                document.querySelectorAll('#galleryGrid .gallery-card:not([data-custom="true"]) img').forEach(img => {
+                    img.src = dataUrl;
+                });
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function createGalleryCardElement(photoObj) {
+            const card = document.createElement('div');
+            card.setAttribute('data-category', 'batch');
+            card.setAttribute('data-custom', 'true');
+            card.className = 'gallery-card min-w-[82%] sm:min-w-[48%] md:min-w-0 snap-center bg-pcb-card border border-emerald-500/50 rounded-3xl overflow-hidden flex flex-col justify-between group transition';
+            card.innerHTML = `
+                <div class="aspect-video w-full overflow-hidden bg-pcb-dark relative">
+                    <img src="${photoObj.src}" alt="${photoObj.title}" class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-500 cursor-pointer">
+                    <span class="absolute top-2.5 left-2.5 bg-emerald-500 text-pcb-dark text-[10px] font-extrabold px-2.5 py-1 rounded-lg">
+                        Student / Lab Upload
+                    </span>
+                </div>
+                <div class="p-4 flex items-center justify-between gap-2">
+                    <div class="truncate">
+                        <h3 class="text-sm font-bold text-white truncate">${photoObj.title}</h3>
+                        <p class="text-[11px] text-gray-400">PCB BUGS South Dumdum</p>
+                    </div>
+                    <button type="button" aria-label="Zoom Photo" class="zoom-custom-btn w-9 h-9 rounded-xl bg-gray-800 hover:bg-emerald-500 text-emerald-400 hover:text-pcb-dark flex items-center justify-center transition flex-shrink-0">
+                        <i class="fa-solid fa-expand text-xs"></i>
+                    </button>
+                </div>
+            `;
+            card.querySelector('img').onclick = () => openLightbox(photoObj.src, photoObj.title);
+            card.querySelector('.zoom-custom-btn').onclick = () => openLightbox(photoObj.src, photoObj.title);
+            return card;
+        }
+
+        function addGalleryPhotos(event) {
+            const files = Array.from(event.target.files);
+            if (!files.length) return;
+            const grid = document.getElementById('galleryGrid');
+            let savedList = [];
+            try {
+                savedList = JSON.parse(localStorage.getItem(GALLERY_STORAGE_KEY) || '[]');
+            } catch (err) {
+                savedList = [];
+            }
+
+            files.forEach((file, idx) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // Compress slightly via canvas so localStorage holds multiple photos reliably
+                    const tempImg = new Image();
+                    tempImg.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        const maxW = 800;
+                        const scale = Math.min(1, maxW / tempImg.width);
+                        canvas.width = tempImg.width * scale;
+                        canvas.height = tempImg.height * scale;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(tempImg, 0, 0, canvas.width, canvas.height);
+                        const compressedUrl = canvas.toDataURL('image/jpeg', 0.82);
+
+                        const title = file.name.replace(/\.[^/.]+$/, '') || `Practical Batch ${idx + 1}`;
+                        const photoObj = { src: compressedUrl, title: title };
+                        grid.prepend(createGalleryCardElement(photoObj));
+
+                        try {
+                            savedList.unshift(photoObj);
+                            localStorage.setItem(GALLERY_STORAGE_KEY, JSON.stringify(savedList.slice(0, 12)));
+                            document.getElementById('clearCustomPhotosBtn').classList.remove('hidden');
+                        } catch (storageErr) {
+                            // Ignore quota limit if too many large files
+                        }
+                        updateAllTabCount();
+                    };
+                    tempImg.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function loadSavedGalleryPhotos() {
+            try {
+                const savedList = JSON.parse(localStorage.getItem(GALLERY_STORAGE_KEY) || '[]');
+                if (savedList.length > 0) {
+                    const grid = document.getElementById('galleryGrid');
+                    savedList.slice().reverse().forEach(photoObj => {
+                        grid.prepend(createGalleryCardElement(photoObj));
+                    });
+                    document.getElementById('clearCustomPhotosBtn').classList.remove('hidden');
+                    updateAllTabCount();
+                }
+            } catch (e) {}
+        }
+
+        function clearSavedGalleryPhotos() {
+            localStorage.removeItem(GALLERY_STORAGE_KEY);
+            document.querySelectorAll('#galleryGrid .gallery-card[data-custom="true"]').forEach(el => el.remove());
+            document.getElementById('clearCustomPhotosBtn').classList.add('hidden');
+            updateAllTabCount();
+        }
+
+        function updateAllTabCount() {
+            const total = document.querySelectorAll('#galleryGrid .gallery-card').length;
+            const tab = document.getElementById('allPhotosTab');
+            if (tab) tab.textContent = `All Photos (${total})`;
+        }
+
+        function filterGallery(category, btnElement) {
+            document.querySelectorAll('.gallery-tab').forEach(btn => {
+                btn.classList.remove('bg-emerald-500', 'text-pcb-dark', 'font-bold');
+                btn.classList.add('bg-pcb-card', 'text-gray-300', 'font-semibold', 'border', 'border-gray-800');
+            });
+            btnElement.classList.remove('bg-pcb-card', 'text-gray-300', 'font-semibold', 'border', 'border-gray-800');
+            btnElement.classList.add('bg-emerald-500', 'text-pcb-dark', 'font-bold');
+
+            document.querySelectorAll('#galleryGrid .gallery-card').forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                if (category === 'all' || cardCat === category) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        /* =========================================================
+           5. INTERACTIVE PCB FAULT DIAGNOSTIC SIMULATOR
+           ========================================================= */
+        const faultScenarios = {
+            ac_e1: {
+                boardTitle: 'Board: Split Inverter AC Outdoor Main PCB (E1 Error)',
+                points: [
+                    { label: 'TP1: SMPS 12V Rail', reading: '12.04 V', expected: 'Expected: 12.0V', status: 'OK', tip: 'TP1 is healthy! SMPS is generating clean 12V DC supply for relays and optocouplers.' },
+                    { label: 'TP2: MCU 5V Vcc', reading: '05.01 V', expected: 'Expected: 5.0V', status: 'OK', tip: 'TP2 is healthy! Microcontroller is receiving regulated 5.0V from the 7805 regulator.' },
+                    { label: 'TP3: Serial Comm Loop', reading: '00.12 V', expected: 'Expected: 24V–56V Pulse', status: 'FAULT FOUND!', tip: 'FAULT DETECTED at TP3! Open 15kΩ pull-up resistor & shorted PC817 Optocoupler in the communication loop caused the E1 error.' }
+                ]
+            },
+            mw_pad: {
+                boardTitle: 'Board: Convection Microwave Control PCB (Touch Dead)',
+                points: [
+                    { label: 'TP1: SMPS 5V Logic', reading: '05.00 V', expected: 'Expected: 5.0V', status: 'OK', tip: 'TP1 is normal! Power supply is working properly and display lights up.' },
+                    { label: 'TP2: Keypad Scan Line', reading: '00.00 V', expected: 'Expected: 3.3V–5V Scan', status: 'FAULT FOUND!', tip: 'FAULT DETECTED at TP2! Moisture oxidation broke the silver carbon trace on the membrane ribbon connector.' },
+                    { label: 'TP3: Door Interlock Sense', reading: '04.95 V', expected: 'Expected: 5.0V Closed', status: 'OK', tip: 'TP3 is normal! Primary and monitor door switches are closing properly.' }
+                ]
+            },
+            fridge_comp: {
+                boardTitle: 'Board: Frost-Free Inverter Refrigerator PCB',
+                points: [
+                    { label: 'TP1: DC Bus 310V', reading: '312.5 V', expected: 'Expected: 310V DC', status: 'OK', tip: 'TP1 is normal! Main bridge rectifier and bulk filter capacitor are charged to 312.5V DC.' },
+                    { label: 'TP2: IPM 15V Gate Supply', reading: '06.20 V', expected: 'Expected: 15.0V', status: 'FAULT FOUND!', tip: 'FAULT DETECTED at TP2! Leaky 15V Zener diode & dried 47µF/25V SMD capacitor dropped gate voltage below IPM UVLO threshold.' },
+                    { label: 'TP3: UVW Phase Output', reading: '00.00 V', expected: 'Expected: 110V–220V PWM', status: 'LOCKED', tip: 'TP3 has 0V output because the IPM went into Under-Voltage Lockout (UVLO) protection due to the low 6.2V at TP2.' }
+                ]
+            }
+        };
+
+        let activeScenarioKey = 'ac_e1';
+
+        function loadFaultScenario(key, btnEl) {
+            activeScenarioKey = key;
+            document.querySelectorAll('.sim-scenario-btn').forEach(btn => {
+                btn.className = 'sim-scenario-btn w-full text-left p-3.5 rounded-2xl bg-pcb-card border border-gray-800 hover:border-emerald-500/50 text-gray-200 transition flex items-center justify-between';
+            });
+            btnEl.className = 'sim-scenario-btn w-full text-left p-3.5 rounded-2xl bg-emerald-500/20 border-2 border-emerald-500 text-white transition flex items-center justify-between';
+
+            const scenario = faultScenarios[key];
+            document.getElementById('boardTitleDisplay').textContent = scenario.boardTitle;
+            document.getElementById('meterReading').textContent = '00.00 V';
+            document.getElementById('meterExpected').textContent = 'Tap TP1, TP2 or TP3 →';
+            document.getElementById('meterStatusBadge').textContent = 'READY';
+            document.getElementById('meterStatusBadge').className = 'px-2 py-0.5 rounded bg-gray-800 text-gray-300';
+            document.getElementById('meterDiagnosticTip').textContent = 'Board loaded! Tap TP1, TP2, or TP3 to measure live circuit voltage.';
+        }
+
+        function probePoint(idx) {
+            const point = faultScenarios[activeScenarioKey].points[idx];
+            document.getElementById('meterReading').textContent = point.reading;
+            document.getElementById('meterExpected').textContent = point.expected;
+            const badge = document.getElementById('meterStatusBadge');
+            badge.textContent = point.status;
+
+            if (point.status.includes('FAULT')) {
+                badge.className = 'px-2 py-0.5 rounded bg-red-600 text-white font-extrabold animate-pulse';
+                document.getElementById('meterReading').className = 'text-2xl sm:text-3xl font-black text-red-400 tracking-wider';
+            } else if (point.status === 'LOCKED') {
+                badge.className = 'px-2 py-0.5 rounded bg-amber-500 text-pcb-dark font-extrabold';
+                document.getElementById('meterReading').className = 'text-2xl sm:text-3xl font-black text-amber-400 tracking-wider';
+            } else {
+                badge.className = 'px-2 py-0.5 rounded bg-emerald-500 text-pcb-dark font-extrabold';
+                document.getElementById('meterReading').className = 'text-2xl sm:text-3xl font-black text-emerald-400 tracking-wider';
+            }
+            document.getElementById('meterDiagnosticTip').textContent = point.tip;
+        }
+
+        /* =========================================================
+           4. LIVE STUDENT ID CARD & CERTIFICATE GENERATOR
+           ========================================================= */
+        function updateLiveCredentials() {
+            const nameVal = document.getElementById('credStudentName').value.trim();
+            const fatherVal = document.getElementById('credFatherName').value.trim();
+            const contactVal = document.getElementById('credPhoneBlood').value.trim();
+
+            const displayName = nameVal || '[Student Name]';
+            const displayFather = fatherVal || "[Father's Name]";
+            const displayContact = contactVal || '09804265067 • O+';
+
+            document.getElementById('idCardName').textContent = displayName;
+            document.getElementById('idCardFather').textContent = displayFather;
+            document.getElementById('idCardContact').textContent = displayContact;
+
+            document.getElementById('certNameDisplay').textContent = displayName;
+            document.getElementById('certFatherDisplay').textContent = displayFather;
+
+            // Keep booking form name synced if user hasn't typed there yet
+            const bookingName = document.getElementById('fullName');
+            if (bookingName && nameVal) bookingName.value = nameVal;
+        }
+
+        function syncNameFromBooking(val) {
+            document.getElementById('credStudentName').value = val;
+            updateLiveCredentials();
+        }
+
+        function uploadStudentIdPhoto(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('idCardAvatar').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function printCredentials() {
+            window.print();
+        }
+
+        /* =========================================================
+           LIGHTBOX CONTROLS
+           ========================================================= */
+        function openLightbox(src, captionText) {
+            const modal = document.getElementById('lightboxModal');
+            document.getElementById('lightboxImage').src = src;
+            document.getElementById('lightboxCaption').textContent = captionText || 'PCB BUGS Training Room & Students — South Dumdum';
+            modal.classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightboxModal').classList.add('hidden');
+        }
+
+        /* =========================================================
+           7. SMART ONLINE BOOKING WITH UNIQUE SLIP & WHATSAPP
+           ========================================================= */
+        let lastGeneratedSlipText = '';
+
+        function handleSmartBooking(event) {
+            event.preventDefault();
+            const name = document.getElementById('fullName').value.trim();
+            const mobile = document.getElementById('mobileNumber').value.trim();
+            const course = document.getElementById('selectedCourse').value;
+            const location = document.getElementById('userLocation').value.trim();
+            const notes = document.getElementById('userNotes').value.trim();
+
+            const randomDigits = Math.floor(1000 + Math.random() * 9000);
+            const regId = `PCBB-2026-${randomDigits}`;
+            const dateStr = new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+
+            document.getElementById('slipRegId').textContent = regId;
+            document.getElementById('slipDetailsBox').innerHTML = `
+                <div class="flex justify-between"><span class="text-gray-400">Reg ID:</span> <strong class="text-emerald-400 font-mono">${regId}</strong></div>
+                <div class="flex justify-between"><span class="text-gray-400">Date:</span> <strong>${dateStr}</strong></div>
+                <div class="flex justify-between"><span class="text-gray-400">Student:</span> <strong>${name}</strong></div>
+                <div class="flex justify-between"><span class="text-gray-400">Mobile:</span> <strong>${mobile}</strong></div>
+                <div class="flex justify-between"><span class="text-gray-400">Course:</span> <strong class="text-right">${course}</strong></div>
+                <div class="flex justify-between"><span class="text-gray-400">Area:</span> <strong>${location}</strong></div>
+                <div class="pt-1 border-t border-gray-800 text-[11px] text-amber-300">Center: JCG8+QM, South Dumdum • Timing: 12 PM – 5 PM</div>
+            `;
+
+            lastGeneratedSlipText =
+                `*PCB BUGS - Online Admission Slot Slip*\n` +
+                `🆔 *Reg ID:* ${regId}\n` +
+                `📅 *Date:* ${dateStr}\n` +
+                `👤 *Student Name:* ${name}\n` +
+                `📱 *Mobile:* ${mobile}\n` +
+                `📚 *Course:* ${course}\n` +
+                `📍 *Location:* ${location}\n` +
+                `💬 *Notes:* ${notes || 'None'}\n\n` +
+                `Please confirm my practical training slot at South Dumdum Center.`;
+
+            const whatsappUrl = `https://wa.me/919804265067?text=${encodeURIComponent(lastGeneratedSlipText)}`;
+            document.getElementById('slipWhatsappLink').href = whatsappUrl;
+            document.getElementById('copyToast').classList.add('hidden');
+            document.getElementById('bookingModal').classList.remove('hidden');
+
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
+            }, 850);
+        }
+
+        function copyBookingSlip() {
+            if (!lastGeneratedSlipText) return;
+            const tempArea = document.createElement('textarea');
+            tempArea.value = lastGeneratedSlipText.replace(/\*/g, '');
+            document.body.appendChild(tempArea);
+            tempArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempArea);
+            document.getElementById('copyToast').classList.remove('hidden');
+        }
+
+        function closeBookingModal() {
+            document.getElementById('bookingModal').classList.add('hidden');
+        }
+
+        // Escape Key Closes Any Active Modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeLightbox();
+                closeBookingModal();
+                closeSyllabusModal();
+            }
+        });
+
+        // Initialize on Page Load
+        window.addEventListener('DOMContentLoaded', () => {
+            calculateEMI();
+            loadSavedGalleryPhotos();
+        });
+    </script>
+</body>
+</html>
